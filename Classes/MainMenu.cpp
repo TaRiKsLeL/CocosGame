@@ -1,110 +1,135 @@
-
 #include "MainMenu.h"
+#include "SettingsMenu.h"
 #include "SimpleAudioEngine.h"
+#include "GameScene.h"
+#include <map> 
 
+using namespace std;
 USING_NS_CC;
 
 Scene* MainMenu::createScene()
 {
-    return MainMenu::create();
+	return MainMenu::create();
 }
 
-// Print useful error message instead of segfaulting when files are not there.
-static void problemLoading(const char* filename)
-{
-    printf("Error while loading: %s\n", filename);
-    printf("Depending on how you compiled you might have to add 'Resources/' in front of filenames in HelloWorldScene.cpp\n");
-}
 
-// on "init" you need to initialize your instance
+typedef void (MainMenu::* BtmCallBack)(Ref*);
+
+MenuItemImage* bufferBtmImage;
+Menu* menu;
+
+map <int, BtmCallBack> scenesCallMap;
+vector < BtmCallBack>* btnCallbacks;
+vector < MenuItemImage*>* btnImages;
+
+
 bool MainMenu::init()
 {
-    //////////////////////////////
-    // 1. super init first
-    if ( !Scene::init() )
-    {
-        return false;
-    }
 
-    auto visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+	if (!Scene::init())
+	{
+		return false;
+	}
 
-    /////////////////////////////
-    // 2. add a menu item with "X" image, which is clicked to quit the program
-    //    you may modify it.
+	auto visibleSize = Director::getInstance()->getVisibleSize();
+	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-    // add a "close" icon to exit the progress. it's an autorelease object
-    auto closeItem = MenuItemImage::create(
-                                           "CloseNormal.png",
-                                           "CloseSelected.png",
-                                           CC_CALLBACK_1(MainMenu::menuCloseCallback, this));
+	void (MainMenu:: * pointer)(Ref*);
 
-    if (closeItem == nullptr ||
-        closeItem->getContentSize().width <= 0 ||
-        closeItem->getContentSize().height <= 0)
-    {
-        problemLoading("'CloseNormal.png' and 'CloseSelected.png'");
-    }
-    else
-    {
-        float x = origin.x + visibleSize.width - closeItem->getContentSize().width/2;
-        float y = origin.y + closeItem->getContentSize().height/2;
-        closeItem->setPosition(Vec2(x,y));
-    }
+	btnCallbacks = new vector < BtmCallBack>();
+	btnImages = new vector < MenuItemImage*>();
 
-    // create menu, it's an autorelease object
-    auto menu = Menu::create(closeItem, NULL);
-    menu->setPosition(Vec2::ZERO);
-    this->addChild(menu, 1);
 
-    /////////////////////////////
-    // 3. add your codes below...
+	bufferBtmImage = MenuItemImage::create(
+		"exitBtn.png",
+		"exitBtn.png"
+	);
+	btnImages->push_back(bufferBtmImage);
 
-    // add a label shows "Hello World"
-    // create and initialize a label
+	
+	bufferBtmImage = MenuItemImage::create(
+		"continueBtn.png",
+		"continueBtn.png"
+	);
+	btnImages->push_back(bufferBtmImage);
 
-    auto label = Label::createWithTTF("Hello World", "fonts/Marker Felt.ttf", 24);
-    if (label == nullptr)
-    {
-        problemLoading("'fonts/Marker Felt.ttf'");
-    }
-    else
-    {
-        // position the label on the center of the screen
-        label->setPosition(Vec2(origin.x + visibleSize.width/2,
-                                origin.y + visibleSize.height - label->getContentSize().height));
 
-        // add the label as a child to this layer
-        this->addChild(label, 1);
-    }
+	bufferBtmImage = MenuItemImage::create(
+		"newGameBtn.png",
+		"newGameBtn.png"
+	);
+	btnImages->push_back(bufferBtmImage);
 
-    // add "HelloWorld" splash screen"
-    auto sprite = Sprite::create("HelloWorld.png");
-    if (sprite == nullptr)
-    {
-        problemLoading("'HelloWorld.png'");
-    }
-    else
-    {
-        // position the sprite on the center of the screen
-        sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
 
-        // add the sprite as a child to this layer
-        this->addChild(sprite, 0);
-    }
-    return true;
+	bufferBtmImage = MenuItemImage::create(
+		"settingsBtn.png",
+		"settingsBtn.png"
+	);
+	btnImages->push_back(bufferBtmImage);
+
+	
+	btnCallbacks->push_back(&MainMenu::mainMenuCallback);
+	btnCallbacks->push_back(&MainMenu::settingsCallback);
+	btnCallbacks->push_back(&MainMenu::menuCloseCallback);
+	btnCallbacks->push_back(&MainMenu::menuCloseCallback);
+
+	menu = Menu::create();
+
+	for (int i = 0; i < btnCallbacks->size(); i++)
+	{
+		bufferBtmImage = btnImages->at(i);
+
+		scenesCallMap.insert(pair< int, BtmCallBack >(bufferBtmImage->_ID, btnCallbacks->at(i)));
+
+		bufferBtmImage->setCallback([&](Ref* sender) {
+			void (MainMenu:: * tmpFunc)(Ref*) = scenesCallMap.at(sender->_ID);
+			(this->*tmpFunc)(sender);
+			});
+
+		bufferBtmImage->setPosition(Vec2(
+			(origin.x + visibleSize.width) / 2,
+			(origin.y + visibleSize.height)/ btnCallbacks->size()  + (200 * i)));
+
+		menu->addChild(bufferBtmImage);
+
+	}
+
+	menu->setPosition(Vec2::ZERO);
+
+
+	Label* label = Label::createWithTTF("Kalush", "fonts/Marker Felt.ttf", 24);
+	label->setPosition(Vec2(
+		origin.x + visibleSize.width / 2,
+		origin.y + visibleSize.height - label->getContentSize().height));
+
+
+	Sprite* background = Sprite::create("background.png");
+
+	background->setAnchorPoint(cocos2d::Vec2(0, 0));
+
+	this->addChild(background, 0);
+	this->addChild(label, 1);
+	this->addChild(menu, 1);
+
+	return true;
 }
 
 
 void MainMenu::menuCloseCallback(Ref* pSender)
 {
-    //Close the cocos2d-x game scene and quit the application
-    Director::getInstance()->end();
+	Director::getInstance()->end();
+}
 
-    /*To navigate back to native iOS screen(if present) without quitting the application  ,do not use Director::getInstance()->end() as given above,instead trigger a custom event created in RootViewController.mm as below*/
+void MainMenu::newGameCallback(Ref* pSender)
+{
+	Director::getInstance()->replaceScene(GameScene::createScene());
+}
 
-    //EventCustom customEndEvent("game_scene_close_event");
-    //_eventDispatcher->dispatchEvent(&customEndEvent);
-
-
+void MainMenu::settingsCallback(Ref* pSender)
+{
+	Director::getInstance()->replaceScene(SettingsMenu::createScene());
+}
+void MainMenu::mainMenuCallback(Ref* pSender)
+{
+	Director::getInstance()->replaceScene(this->createScene());
 }
