@@ -1,3 +1,5 @@
+
+
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
 
@@ -28,7 +30,11 @@ bool HelloWorld::init()
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-    
+    /////////////////////////////
+    // 2. add a menu item with "X" image, which is clicked to quit the program
+    //    you may modify it.
+
+    // add a "close" icon to exit the progress. it's an autorelease object
     auto closeItem = MenuItemImage::create(
                                            "CloseNormal.png",
                                            "CloseSelected.png",
@@ -52,6 +58,11 @@ bool HelloWorld::init()
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
 
+    /////////////////////////////
+    // 3. add your codes below...
+
+    // add a label shows "Hello World"
+    // create and initialize a label
 
     auto label = Label::createWithTTF("Hello World", "fonts/Marker Felt.ttf", 24);
     if (label == nullptr)
@@ -68,6 +79,7 @@ bool HelloWorld::init()
         this->addChild(label, 1);
     }
 
+    // add "HelloWorld" splash screen"
     auto sprite = Sprite::create("HelloWorld.png");
     if (sprite == nullptr)
     {
@@ -75,8 +87,10 @@ bool HelloWorld::init()
     }
     else
     {
+        // position the sprite on the center of the screen
         sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
 
+        // add the sprite as a child to this layer
         this->addChild(sprite, 0);
     }
     return true;
@@ -85,6 +99,13 @@ bool HelloWorld::init()
 
 void HelloWorld::menuCloseCallback(Ref* pSender)
 {
+    //Close the cocos2d-x game scene and quit the application
     Director::getInstance()->end();
+
+    /*To navigate back to native iOS screen(if present) without quitting the application  ,do not use Director::getInstance()->end() as given above,instead trigger a custom event created in RootViewController.mm as below*/
+
+    //EventCustom customEndEvent("game_scene_close_event");
+    //_eventDispatcher->dispatchEvent(&customEndEvent);
+
 
 }
