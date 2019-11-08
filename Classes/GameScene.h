@@ -14,8 +14,6 @@ public:
 	void newMenuCallback(cocos2d::Ref* pSender);
 
 
-//	CREATE_FUNC(SecondScene);
-
 };
 
 

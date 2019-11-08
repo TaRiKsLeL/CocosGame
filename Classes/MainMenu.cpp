@@ -46,6 +46,12 @@ bool MainMenu::init()
 	);
 	btnImages->push_back(bufferBtmImage);
 
+
+	bufferBtmImage = MenuItemImage::create(
+		"settingsBtn.png",
+		"settingsBtn.png"
+	);
+	btnImages->push_back(bufferBtmImage);
 	
 	bufferBtmImage = MenuItemImage::create(
 		"continueBtn.png",
@@ -61,17 +67,11 @@ bool MainMenu::init()
 	btnImages->push_back(bufferBtmImage);
 
 
-	bufferBtmImage = MenuItemImage::create(
-		"settingsBtn.png",
-		"settingsBtn.png"
-	);
-	btnImages->push_back(bufferBtmImage);
-
 	
-	btnCallbacks->push_back(&MainMenu::mainMenuCallback);
+	btnCallbacks->push_back(&MainMenu::menuCloseCallback);
 	btnCallbacks->push_back(&MainMenu::settingsCallback);
-	btnCallbacks->push_back(&MainMenu::menuCloseCallback);
-	btnCallbacks->push_back(&MainMenu::menuCloseCallback);
+	btnCallbacks->push_back(&MainMenu::newGameCallback);
+	btnCallbacks->push_back(&MainMenu::newGameCallback);
 
 	menu = Menu::create();
 
@@ -97,18 +97,12 @@ bool MainMenu::init()
 	menu->setPosition(Vec2::ZERO);
 
 
-	Label* label = Label::createWithTTF("Kalush", "fonts/Marker Felt.ttf", 24);
-	label->setPosition(Vec2(
-		origin.x + visibleSize.width / 2,
-		origin.y + visibleSize.height - label->getContentSize().height));
-
 
 	Sprite* background = Sprite::create("background.png");
 
 	background->setAnchorPoint(cocos2d::Vec2(0, 0));
 
 	this->addChild(background, 0);
-	this->addChild(label, 1);
 	this->addChild(menu, 1);
 
 	return true;
