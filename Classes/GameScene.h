@@ -1,7 +1,9 @@
 #pragma once
 
 #include "MainMenu.h"
-#include "cocos2d.h"
+#include "Enviroment.h"
+
+USING_NS_CC;
 
 class GameScene : public cocos2d::Scene
 {
@@ -10,13 +12,8 @@ public:
 
 	virtual bool init();
 	virtual void update(float);
-	virtual void setKeyEvent();
-	void newMenuCallback(cocos2d::Ref* pSender);
+	virtual void setKeyEventListener(EventListenerKeyboard* listener, Sprite* sprite);
+	//virtual void newMenuCallback(cocos2d::Ref* pSender);
 
-
-//	CREATE_FUNC(SecondScene);
-
+	CREATE_FUNC(GameScene);
 };
-
-
-#pragma once

@@ -10,22 +10,121 @@
     <Filter Include="src">
       <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\AppDelegate">
+      <UniqueIdentifier>{0504c7ab-d7f5-4f3c-9dc4-351afedc059d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Scenes">
+      <UniqueIdentifier>{60fd5083-a809-4930-952e-8034903276c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\GameObjects">
+      <UniqueIdentifier>{36c1f2fe-3c79-4dcb-bb1d-41e5d89a9ff9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Menus">
+      <UniqueIdentifier>{74e49e5e-1729-473d-bc77-d48d0681ae14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\GameObjects\Player">
+      <UniqueIdentifier>{29c2400f-c44f-456d-96f8-3b7ccd3d311c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\GameObjects\Time">
+      <UniqueIdentifier>{a1753b43-4b0d-49b0-a88b-8b76777c56b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\GameObjects\Interfaces">
+      <UniqueIdentifier>{7dc01e1b-fe05-4142-964e-164740f7f8bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\GameObjects\Enemys">
+      <UniqueIdentifier>{3982b970-a39d-4f79-8a58-37ab1c5aa0c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\GameObjects\NPC">
+      <UniqueIdentifier>{cbc82a54-899b-4a67-afc8-5206f24062b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\GameObjects\Buildings">
+      <UniqueIdentifier>{e5893507-f152-4599-927c-1740b9b24e17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\GameObjects\NPC\Builder">
+      <UniqueIdentifier>{6028000c-3d2e-4dfa-a5e5-9eb120a944c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\GameObjects\NPC\Citizen">
+      <UniqueIdentifier>{0cf95597-ce80-4f0d-9cac-35bfd8fbbda7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\GameObjects\NPC\Warrior">
+      <UniqueIdentifier>{2de61a54-73aa-4627-a201-af31d68ed2b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\GameObjects\NPC\Worker">
+      <UniqueIdentifier>{fe2fd087-8cb1-4805-9b4c-94e3c31540c8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>win32</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\MainMenu.cpp">
-      <Filter>src</Filter>
+      <Filter>src\AppDelegate</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\GameScene.cpp">
-      <Filter>src</Filter>
+      <Filter>src\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MainMenu.cpp">
+      <Filter>src\Menus</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\SettingsMenu.cpp">
-      <Filter>src</Filter>
+      <Filter>src\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Player.cpp">
+      <Filter>src\GameObjects\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameTime.cpp">
+      <Filter>src\GameObjects\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Enemy.cpp">
+      <Filter>src\GameObjects\Enemys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\EnemyController.cpp">
+      <Filter>src\GameObjects\Enemys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BuildingController.cpp">
+      <Filter>src\GameObjects\Buildings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Building.cpp">
+      <Filter>src\GameObjects\Buildings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Castle.cpp">
+      <Filter>src\GameObjects\Buildings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Tower.cpp">
+      <Filter>src\GameObjects\Buildings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Wall.cpp">
+      <Filter>src\GameObjects\Buildings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Mine.cpp">
+      <Filter>src\GameObjects\Buildings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Builder.cpp">
+      <Filter>src\GameObjects\NPC\Builder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Citizen.cpp">
+      <Filter>src\GameObjects\NPC\Citizen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Warrior.cpp">
+      <Filter>src\GameObjects\NPC\Warrior</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Worker.cpp">
+      <Filter>src\GameObjects\NPC\Worker</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BuilderController.cpp">
+      <Filter>src\GameObjects\NPC\Builder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\CitizenController.cpp">
+      <Filter>src\GameObjects\NPC\Citizen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\WorkerController.cpp">
+      <Filter>src\GameObjects\NPC\Worker</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\WariorController.cpp">
+      <Filter>src\GameObjects\NPC\Warrior</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Enviroment.cpp">
+      <Filter>src\GameObjects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -33,16 +132,91 @@
       <Filter>win32</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\AppDelegate.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\MainMenu.h">
-      <Filter>src</Filter>
+      <Filter>src\AppDelegate</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\GameScene.h">
-      <Filter>src</Filter>
+      <Filter>src\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MainMenu.h">
+      <Filter>src\Menus</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\SettingsMenu.h">
-      <Filter>src</Filter>
+      <Filter>src\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Enviroment.h">
+      <Filter>src\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Data.h">
+      <Filter>src\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Player.h">
+      <Filter>src\GameObjects\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameTime.h">
+      <Filter>src\GameObjects\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\IMoveable.h">
+      <Filter>src\GameObjects\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ITimeDepended.h">
+      <Filter>src\GameObjects\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BuildingController.h">
+      <Filter>src\GameObjects\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\EnemyController.h">
+      <Filter>src\GameObjects\Enemys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Enemy.h">
+      <Filter>src\GameObjects\Enemys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Building.h">
+      <Filter>src\GameObjects\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Tower.h">
+      <Filter>src\GameObjects\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Wall.h">
+      <Filter>src\GameObjects\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Castle.h">
+      <Filter>src\GameObjects\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Mine.h">
+      <Filter>src\GameObjects\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Builder.h">
+      <Filter>src\GameObjects\NPC\Builder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Citizen.h">
+      <Filter>src\GameObjects\NPC\Citizen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Warrior.h">
+      <Filter>src\GameObjects\NPC\Warrior</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\FriendlyNPC.h">
+      <Filter>src\GameObjects\NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Worker.h">
+      <Filter>src\GameObjects\NPC\Worker</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BuilderController.h">
+      <Filter>src\GameObjects\NPC\Builder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\CitizenController.h">
+      <Filter>src\GameObjects\NPC\Citizen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\WorkerController.h">
+      <Filter>src\GameObjects\NPC\Worker</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\WariorController.h">
+      <Filter>src\GameObjects\NPC\Warrior</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\IPayable.h">
+      <Filter>src\GameObjects\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Shooter.h">
+      <Filter>src\GameObjects\Interfaces</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

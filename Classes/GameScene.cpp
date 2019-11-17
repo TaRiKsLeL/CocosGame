@@ -1,12 +1,7 @@
 #include "GameScene.h"
-#include "MainMenu.h"
-#include "cocos2d.h"
 
-using namespace cocos2d;
 
 USING_NS_CC;
-
-EventListenerKeyboard* listener;
 
 Scene* GameScene::createScene() {
 	return GameScene::create();
@@ -26,16 +21,16 @@ bool GameScene::init() {
 	//this->getPhysicsWorld()->setDebugDrawMask(0xffff);
 
 
-	listener = EventListenerKeyboard::create();
-	GameScene::setKeyEvent();
-//	this->_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, bgSprite);
+	Enviroment::getInstance()->setScene(this);
+
+	
 	this->scheduleUpdate();
 
 
 	//EventListenerPhysicsContact* contactListener = EventListenerPhysicsContact::create();
 	//contactListener->onContactBegin = CC_CALLBACK_1(Platform::onContactBegin, this);
 	//_eventDispatcher->addEventListenerWithSceneGraphPriority(contactListener, this);
-
+	
 	return true;
 }
 
@@ -45,12 +40,8 @@ KeyHandler
 =====================================================================================================
 */
 
-void GameScene::setKeyEvent() {
-	listener->onKeyPressed = [=](EventKeyboard::KeyCode keyCode, Event* event) {
-
-
-
-	};
+void GameScene::setKeyEventListener(EventListenerKeyboard* listener, Sprite* sprite) {
+	this->_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, sprite);
 }
 
 /*
@@ -61,5 +52,7 @@ Update
 
 void GameScene::update(float time)
 {
-
+	GameTime::updateFrame();
 }
+
+
