@@ -37,22 +37,22 @@ void Player::move() {
 }
 
 void Player::setKeyListener() {
-	onKeyMove();
+	onMoveKeyPressed();
 	static_cast<GameScene*>(Enviroment::getInstance()->getScene())->setKeyEventListener(listener, spr);
 }
 
-void Player::onKeyMove(){
+void Player::onMoveKeyPressed(){
 
 	listener->onKeyPressed = [=](EventKeyboard::KeyCode keyCode, Event* event) {
-		setMoveKeys(keyCode, true);
+		changeMoveDirection(keyCode, true);
 	};
 
 	listener->onKeyReleased = [=](EventKeyboard::KeyCode keyCode, Event* event) {
-		setMoveKeys(keyCode, false);
+		changeMoveDirection(keyCode, false);
 	};
 }
 
-void Player::setMoveKeys(EventKeyboard::KeyCode keyCode, bool condition) {
+void Player::changeMoveDirection(EventKeyboard::KeyCode keyCode, bool condition) {
 	
 	if(keyCode == EventKeyboard::KeyCode::KEY_RIGHT_ARROW)
 		direction.right = condition;

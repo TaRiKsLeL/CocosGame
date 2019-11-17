@@ -26,9 +26,9 @@ private:
 	Player(const std::string);
 
 	void setKeyListener();
-	void onKeyMove();
+	void onMoveKeyPressed();
 	void onKeyPressedAct();
-	void setMoveKeys(EventKeyboard::KeyCode, bool);
+	void changeMoveDirection(EventKeyboard::KeyCode, bool);
 	void setActKeys(EventKeyboard::KeyCode);
 
 public:
