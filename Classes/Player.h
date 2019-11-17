@@ -1,8 +1,41 @@
 #pragma once
+
+#include "cocos2d.h"
 #include "IMoveable.h"
-#include "GameTime.h"
+#include "Enviroment.h"
+#include "Data.h"
+
+USING_NS_CC;
 
 class Player : IMoveable {
-	void move();
+
+	struct MoveDirection
+	{
+		bool left;
+		bool right;
+	};
+
+private:
+
+	MoveDirection direction;
+	EventListenerKeyboard* listener;
+	Sprite* spr;
+
+	static Player* player;
+
+	Player(const std::string);
+
+	void setKeyListener();
+	void onKeyMove();
+	void onKeyPressedAct();
+	void setMoveKeys(EventKeyboard::KeyCode, bool);
+	void setActKeys(EventKeyboard::KeyCode);
+
+public:
+
+	static Player* getInstance();
+	void move() override ;
 
 };
+
+	

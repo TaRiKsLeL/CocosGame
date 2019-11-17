@@ -1,11 +1,7 @@
 #include "GameScene.h"
 
 
-using namespace cocos2d;
-
 USING_NS_CC;
-
-EventListenerKeyboard* listener;
 
 Scene* GameScene::createScene() {
 	return GameScene::create();
@@ -13,7 +9,6 @@ Scene* GameScene::createScene() {
 
 
 bool GameScene::init() {
-	cocos2d::log("some word");
 
 	if (!Scene::init())
 	{
@@ -26,9 +21,9 @@ bool GameScene::init() {
 	//this->getPhysicsWorld()->setDebugDrawMask(0xffff);
 
 
-	listener = EventListenerKeyboard::create();
-	GameScene::setKeyEvent();
-//	this->_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, bgSprite);
+	Enviroment::getInstance()->setScene(this);
+
+	
 	this->scheduleUpdate();
 
 
@@ -45,12 +40,8 @@ KeyHandler
 =====================================================================================================
 */
 
-void GameScene::setKeyEvent() {
-	listener->onKeyPressed = [=](EventKeyboard::KeyCode keyCode, Event* event) {
-
-
-
-	};
+void GameScene::setKeyEventListener(EventListenerKeyboard* listener, Sprite* sprite) {
+	this->_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, sprite);
 }
 
 /*

@@ -1,15 +1,17 @@
 #include "GameTime.h"
-#include "cocos2d.h"
 
-int GameTime::frameCount = 0;
+
+int GameTime::frameCount{ 0 };
 
 vector<IMoveable*> *GameTime::moveableObjects = new vector<IMoveable*>();
 map<int, ITimeDepended*> *GameTime::timeDependedObjects = new map<int, ITimeDepended*>();
 
 void GameTime::updateFrame() {
 	frameCount++;
-	cocos2d::log("%d", frameCount);
-	cout << frameCount << endl;
+
+	for (IMoveable* tmpObj : *moveableObjects) {
+		tmpObj->move();
+	}
 }
 
 void GameTime::addTimeDependedObject(int time, ITimeDepended* objToAdd) {

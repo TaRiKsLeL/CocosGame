@@ -2,5 +2,5 @@
 
 class IMoveable {
 public:
-	virtual void move();
+	virtual void move() = 0;
 };
