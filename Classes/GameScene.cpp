@@ -1,6 +1,5 @@
 #include "GameScene.h"
-#include "MainMenu.h"
-#include "cocos2d.h"
+
 
 using namespace cocos2d;
 
@@ -14,6 +13,7 @@ Scene* GameScene::createScene() {
 
 
 bool GameScene::init() {
+	cocos2d::log("some word");
 
 	if (!Scene::init())
 	{
@@ -35,7 +35,7 @@ bool GameScene::init() {
 	//EventListenerPhysicsContact* contactListener = EventListenerPhysicsContact::create();
 	//contactListener->onContactBegin = CC_CALLBACK_1(Platform::onContactBegin, this);
 	//_eventDispatcher->addEventListenerWithSceneGraphPriority(contactListener, this);
-
+	
 	return true;
 }
 
@@ -61,5 +61,7 @@ Update
 
 void GameScene::update(float time)
 {
-
+	GameTime::updateFrame();
 }
+
+
