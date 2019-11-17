@@ -65,9 +65,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
        
 		//standart windowed init 
-		//glview = GLViewImpl::createWithRect("CocosGame", cocos2d::Rect(0, 0, designResolutionSize.width, designResolutionSize.height));
+		glview = GLViewImpl::createWithRect("CocosGame", cocos2d::Rect(0, 0, designResolutionSize.width, designResolutionSize.height));
         
-		glview = GLViewImpl::createWithFullScreen("KALUSH");
+		//glview = GLViewImpl::createWithFullScreen("KALUSH");
 #else
         glview = GLViewImpl::create("CocosGame");
 #endif
