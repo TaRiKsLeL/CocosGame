@@ -1,5 +1,5 @@
 #include <Player.h>
-
+Sprite* spr;
 Player* Player::player{ nullptr };
 
 /*
@@ -9,11 +9,18 @@ Init Player
 */
 
 Player::Player(const std::string fileName) {
+	
+	
+
 	spr = Sprite::create(fileName);
 	spr->setAnchorPoint(Vec2(0, 0));
 	spr->setPosition(Vec2(PLAYER_START_X, PLAYER_START_Y));
-	
+
+	auto follow = Follow::create(spr, Rect::ZERO);
 	Enviroment::getInstance()->getScene()->addChild(spr, PLAYER_Z_ORDER);
+	Enviroment::getInstance()->getScene()->runAction(follow);
+
+
 	
 	listener = EventListenerKeyboard::create();
 	setKeyListener();
