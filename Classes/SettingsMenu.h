@@ -12,9 +12,7 @@ public:
 	void newMenuCallback(cocos2d::Ref* pSender);
 
 
-	//	CREATE_FUNC(SecondScene);
+	CREATE_FUNC(SettingsMenu);
 
 };
 
-
-#pragma once

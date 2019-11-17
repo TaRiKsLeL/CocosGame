@@ -15,8 +15,10 @@ private:
 	static int currentTime;
 	static int frameCount;
 
-	static vector<IMoveable*>* moveableObjects;
-	static map<int, ITimeDepended*>* timeDependedObjects;
+	//collection for refreshing objects per frame
+	static vector<IMoveable*> *moveableObjects;
+	//collection for refreshing objects per pointed second
+	static map<int, ITimeDepended*> *timeDependedObjects;
 
 	static void updateByTime();
 

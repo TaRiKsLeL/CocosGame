@@ -185,9 +185,6 @@
     <ClInclude Include="..\Classes\Mine.h">
       <Filter>src\GameObjects\Buildings</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\IShooter.h">
-      <Filter>src\GameObjects\Interfaces</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Builder.h">
       <Filter>src\GameObjects\NPC\Builder</Filter>
     </ClInclude>
@@ -216,6 +213,9 @@
       <Filter>src\GameObjects\NPC\Warrior</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\IPayable.h">
+      <Filter>src\GameObjects\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Shooter.h">
       <Filter>src\GameObjects\Interfaces</Filter>
     </ClInclude>
   </ItemGroup>
