@@ -4,6 +4,7 @@
 int GameTime::frameCount = 0;
 
 vector<IMoveable*> *GameTime::moveableObjects = new vector<IMoveable*>();
+
 map<int, ITimeDepended*> *GameTime::timeDependedObjects = new map<int, ITimeDepended*>();
 
 void GameTime::updateFrame() {

@@ -13,7 +13,6 @@ Scene* GameScene::createScene() {
 
 
 bool GameScene::init() {
-	cocos2d::log("some word");
 
 	if (!Scene::init())
 	{

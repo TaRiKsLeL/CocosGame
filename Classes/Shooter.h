@@ -1,6 +1,6 @@
 #pragma once
 
-class IShooter {
+class Shooter {
 public:
 	virtual void shoot();
 };
