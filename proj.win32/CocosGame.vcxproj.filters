@@ -123,6 +123,9 @@
     <ClCompile Include="..\Classes\WariorController.cpp">
       <Filter>src\GameObjects\NPC\Warrior</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Enviroment.cpp">
+      <Filter>src\GameObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">

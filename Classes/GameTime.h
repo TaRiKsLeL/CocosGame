@@ -1,8 +1,8 @@
 #pragma once
-#include <iostream>
 
 #include <vector>
 #include <map>
+#include "cocos2d.h"
 #include "IMoveable.h"
 #include "ITimeDepended.h"
 
