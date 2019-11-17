@@ -29,7 +29,7 @@ void Player::move() {
 	if (direction.right) {
 		pos.x += PLAYER_SPEED;
 	}
-	else if (direction.left) {
+	if (direction.left) {
 		pos.x -= PLAYER_SPEED;
 	}
 
@@ -51,22 +51,21 @@ void Player::onKeyMove(){
 		setMoveKeys(keyCode, false);
 	};
 }
-void Player::onKeyPressedAct(){
-
-}
 
 void Player::setMoveKeys(EventKeyboard::KeyCode keyCode, bool condition) {
 	
-	switch (keyCode) {
-	case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
+	if(keyCode == EventKeyboard::KeyCode::KEY_RIGHT_ARROW)
 		direction.right = condition;
-		break;
-	case EventKeyboard::KeyCode::KEY_LEFT_ARROW:
+
+	if(keyCode == EventKeyboard::KeyCode::KEY_LEFT_ARROW)
 		direction.left = condition;
-		break;
-	}
 
 }
+
+void Player::onKeyPressedAct() {
+
+}
+
 void Player::setActKeys(EventKeyboard::KeyCode keyCode){
 	if (keyCode == EventKeyboard::KeyCode::KEY_DOWN_ARROW) {
 

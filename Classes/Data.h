@@ -22,4 +22,4 @@ const string PLAYER{ "player.png" };
 
 const int PLAYER_START_X{ 6 * 16 };
 const int PLAYER_START_Y{ 6 * 16 };
-const int PLAYER_SPEED{ 10 };
+const int PLAYER_SPEED{ 5 };

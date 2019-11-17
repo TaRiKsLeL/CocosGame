@@ -11,8 +11,8 @@ class Player : IMoveable {
 
 	struct MoveDirection
 	{
-		bool left;
-		bool right;
+		bool left{false};
+		bool right{false};
 	};
 
 private:
