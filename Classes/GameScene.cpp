@@ -26,24 +26,12 @@ bool GameScene::init() {
 	//BuildingController::getInstance()->walls->at(1)->pay(sum);
 	
 
-	/*log("%d", BuildingController::getInstance()->castle->getLevel());
+	//log("%d", BuildingController::getInstance()->castle->getLevel());
 
-	BuildingController::getInstance()->castle->pay(sum);
-	
-	log("%d", BuildingController::getInstance()->castle->getLevel());
+	//BuildingController::getInstance()->castle->pay(sum);
 
-	BuildingController::getInstance()->castle->pay(sum);
-
-	log("%d", BuildingController::getInstance()->castle->getLevel());
-
-	BuildingController::getInstance()->castle->pay(sum);
-
-	log("%d", BuildingController::getInstance()->castle->getLevel());
-
-	BuildingController::getInstance()->castle->pay(sum);
-
-	log("%d", BuildingController::getInstance()->castle->getLevel());
-	log("%d", sum);*/
+	//log("%d", BuildingController::getInstance()->castle->getLevel());
+	//log("%d", sum);
 
 
 	this->scheduleUpdate();
