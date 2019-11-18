@@ -1,11 +1,12 @@
 #pragma once
 
+//#import <vector>
+
 using namespace std;
 
 // place here consts
 
 const int DAY_DURATION{ 1 };
-
 
 
 //Z-orders
@@ -26,6 +27,19 @@ const int SLAVE_TRAIDER_START_Y{ 6 * 16 };
 
 const int PLAYER_START_X{ 6 * 16 };
 const int PLAYER_START_Y{ 6 * 16 };
+const int PLAYER_SPEED{ 5 };
+
+const int DELTA_TIME{ 60 };
+
+const vector<int> towerLevelsPrices{ 0,2,3,4,6,8 };
+const vector<int> wallLevelsPrices{ 0,2,4,6,8,10 };
+const vector<int> castleLevelsPrices{ 0,5,8,10,12,14 };
+const vector<int> mineLevelsPrices{ 0,4,6,8,10,14 };
+
+const vector<int> towerTimeBuilding{ 10,15,20,22,25 };
+const vector<int> wallTimeBuilding{ 12,17,22,25,27 };
+const vector<int> castleTimeBuilding{ 15,20,25,27,30 };
+const vector<int> mineTimeBuilding{ 13,18,21,24,28 };
 const int PLAYER_SPEED{ 5 };
 
 const int SLAVE_PRICE{ 4 };

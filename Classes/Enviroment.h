@@ -4,6 +4,7 @@
 #include "GameTime.h"
 #include "cocos2d.h"
 #include "Data.h"
+#include <BuildingController.h>
 
 USING_NS_CC;
 
@@ -21,6 +22,5 @@ public:
 	void setScene(Scene*);
 	void setGroundSpr(const std::string);
 	Scene* getScene();
-
 
 };

@@ -20,11 +20,22 @@ bool GameScene::init() {
 	//GameScene::getPhysicsWorld()->setGravity(Vec2(0, -98 * 8));
 	//this->getPhysicsWorld()->setDebugDrawMask(0xffff);
 
-
 	Enviroment::getInstance()->setScene(this);
-
+	int sum = 300;
 	
+	//BuildingController::getInstance()->walls->at(1)->pay(sum);
+	
+
+	//log("%d", BuildingController::getInstance()->castle->getLevel());
+
+	//BuildingController::getInstance()->castle->pay(sum);
+
+	//log("%d", BuildingController::getInstance()->castle->getLevel());
+	//log("%d", sum);
+
+
 	this->scheduleUpdate();
+
 
 
 	//EventListenerPhysicsContact* contactListener = EventListenerPhysicsContact::create();
@@ -52,6 +63,7 @@ Update
 
 void GameScene::update(float time)
 {
+
 	GameTime::updateFrame();
 }
 
