@@ -40,6 +40,5 @@ const vector<int> towerTimeBuilding{ 10,15,20,22,25 };
 const vector<int> wallTimeBuilding{ 12,17,22,25,27 };
 const vector<int> castleTimeBuilding{ 15,20,25,27,30 };
 const vector<int> mineTimeBuilding{ 13,18,21,24,28 };
-const int PLAYER_SPEED{ 5 };
 
 const int SLAVE_PRICE{ 4 };
