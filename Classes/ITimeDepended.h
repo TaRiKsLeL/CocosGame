@@ -2,5 +2,5 @@
 
 class ITimeDepended {
 public:
-	virtual void timeDependedAction();
+	virtual void timeDependedAction()=0;
 };

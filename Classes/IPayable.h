@@ -2,5 +2,5 @@
 
 class IPayable {
 public:
-	virtual void pay(int& );
-}
+	virtual void pay(int &) = 0;
+};

@@ -12,6 +12,7 @@ void Enviroment::setGroundSpr(const std::string fileName) {
 	scene->addChild(groundSpr, GROUND_Z_ORDER);
 }
 
+
 void Enviroment::setScene(Scene* scene) {
 	this->scene = scene;
 	addComponents();
@@ -26,5 +27,6 @@ Enviroment* Enviroment::getInstance() {
 
 void Enviroment::addComponents() {
 	setGroundSpr(GROUND);
+	BuildingController::getInstance();
 	Player::getInstance();
 }
