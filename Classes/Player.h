@@ -7,32 +7,36 @@
 
 USING_NS_CC;
 
-class Player : IMoveable {
+class Player :private IMoveable {
+
+private:
 
 	struct MoveDirection
 	{
-		bool left{false};
-		bool right{false};
+		bool left{ false };
+		bool right{ false };
 	};
 
-private:
+	int money;
 
 	MoveDirection direction;
 	EventListenerKeyboard* listener;
 	Sprite* spr;
 
+
 	static Player* player;
 
 	Player(const std::string);
-
-	void setKeyListener();
-	void onMoveKeyPressed();
-	void onKeyPressedAct();
-	void changeMoveDirection(EventKeyboard::KeyCode, bool);
-	void setActKeys(EventKeyboard::KeyCode);
+	virtual void setKeyListener(void (Player::*onKeyPresssed)());
+	virtual void onMoveKeyPressed();
+	virtual void onKeyPressedAct();
+	virtual void changeMoveDirection(EventKeyboard::KeyCode, bool);
+	virtual void setActKeys(EventKeyboard::KeyCode);
 
 public:
 
+	virtual void addMoney(int);
+	virtual int& getMoney();
 	static Player* getInstance();
 	void move() override ;
 

@@ -126,6 +126,15 @@
     <ClCompile Include="..\Classes\Enviroment.cpp">
       <Filter>src\GameObjects</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\FriendlyNPC.cpp">
+      <Filter>src\GameObjects\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SlaveTraider.cpp">
+      <Filter>src\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\NPCController.cpp">
+      <Filter>src\GameObjects\NPC</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -144,9 +153,6 @@
       <Filter>src\Menus</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Enviroment.h">
-      <Filter>src\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Data.h">
       <Filter>src\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Player.h">
@@ -217,6 +223,15 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Shooter.h">
       <Filter>src\GameObjects\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SlaveTraider.h">
+      <Filter>src\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Data.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\NPCController.h">
+      <Filter>src\GameObjects\NPC</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
