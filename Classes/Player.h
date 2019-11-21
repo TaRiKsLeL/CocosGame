@@ -4,6 +4,7 @@
 #include "IMoveable.h"
 #include "Enviroment.h"
 #include "Data.h"
+#include "CitizenController.h"
 
 USING_NS_CC;
 

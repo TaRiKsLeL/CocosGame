@@ -7,5 +7,5 @@
 //}
 
 template <class NPC> void  NPCController<NPC>::createNPC(Vec2 position) {
-	//vectorNPCs.push_back(new NPC(position));
+	vectorNPCs.push_back(new NPC(position));
 }

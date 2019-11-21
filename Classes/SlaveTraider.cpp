@@ -26,5 +26,5 @@ void SlaveTraider::pay(int &money) {
 
 
 void SlaveTraider::createCitizen() {
-	//CitizenController::getInstance()->createNPC(slaveTraider->spr->getPosition());
+	CitizenController::getInstance()->create(slaveTraider->spr->getPosition());
 }

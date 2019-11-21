@@ -78,7 +78,7 @@ bool MainMenu::init()
 	for (int i = 0; i < btnCallbacks->size(); i++)
 	{
 		bufferBtmImage = btnImages->at(i);
-
+		bufferBtmImage->setAnchorPoint(Vec2(0.5, 1));
 		scenesCallMap.insert(pair< int, BtmCallBack >(bufferBtmImage->_ID, btnCallbacks->at(i)));
 
 		bufferBtmImage->setCallback([&](Ref* sender) {
@@ -88,7 +88,7 @@ bool MainMenu::init()
 
 		bufferBtmImage->setPosition(Vec2(
 			(origin.x + visibleSize.width) / 2,
-			(origin.y + visibleSize.height)/ btnCallbacks->size()  + (200 * i)));
+			(origin.y + visibleSize.height)/ btnCallbacks->size()  + (visibleSize.height / btnCallbacks->size() * i)));
 
 		menu->addChild(bufferBtmImage);
 

@@ -1,5 +1,6 @@
 #pragma once
 #include "Player.h"
+#include "SlaveTraider.h"
 #include "GameScene.h"
 #include "GameTime.h"
 #include "cocos2d.h"

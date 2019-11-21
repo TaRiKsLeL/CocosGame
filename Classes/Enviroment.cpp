@@ -29,4 +29,5 @@ void Enviroment::addComponents() {
 	setGroundSpr(GROUND);
 	BuildingController::getInstance();
 	Player::getInstance();
+	SlaveTraider::getInstance();
 }

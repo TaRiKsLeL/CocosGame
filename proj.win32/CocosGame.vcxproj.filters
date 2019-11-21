@@ -102,15 +102,6 @@
     <ClCompile Include="..\Classes\Builder.cpp">
       <Filter>src\GameObjects\NPC\Builder</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Citizen.cpp">
-      <Filter>src\GameObjects\NPC\Citizen</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Warrior.cpp">
-      <Filter>src\GameObjects\NPC\Warrior</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Worker.cpp">
-      <Filter>src\GameObjects\NPC\Worker</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\BuilderController.cpp">
       <Filter>src\GameObjects\NPC\Builder</Filter>
     </ClCompile>
@@ -131,9 +122,6 @@
     </ClCompile>
     <ClCompile Include="..\Classes\SlaveTraider.cpp">
       <Filter>src\GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\NPCController.cpp">
-      <Filter>src\GameObjects\NPC</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -194,17 +182,8 @@
     <ClInclude Include="..\Classes\Builder.h">
       <Filter>src\GameObjects\NPC\Builder</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Citizen.h">
-      <Filter>src\GameObjects\NPC\Citizen</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Warrior.h">
-      <Filter>src\GameObjects\NPC\Warrior</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\FriendlyNPC.h">
       <Filter>src\GameObjects\NPC</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Worker.h">
-      <Filter>src\GameObjects\NPC\Worker</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\BuilderController.h">
       <Filter>src\GameObjects\NPC\Builder</Filter>
@@ -229,9 +208,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Data.h">
       <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\NPCController.h">
-      <Filter>src\GameObjects\NPC</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -7,6 +7,7 @@ using namespace std;
 // place here consts
 
 const int DAY_DURATION{ 1 };
+const double SCALE_FACTOR{ 1 };
 
 
 //Z-orders
@@ -22,11 +23,11 @@ const string PLAYER{ "player.png" };
 const string SLAVE_TRAIDER{ "slaveTraider.png" };
 const string CITIZEN{ "citizen.png" };
 
-const int SLAVE_TRAIDER_START_X{ 12 * 16 };
-const int SLAVE_TRAIDER_START_Y{ 6 * 16 };
+const int SLAVE_TRAIDER_START_X = 12 * 16 / SCALE_FACTOR ;
+const int SLAVE_TRAIDER_START_Y = 6 * 16 / SCALE_FACTOR ;
 
-const int PLAYER_START_X{ 6 * 16 };
-const int PLAYER_START_Y{ 6 * 16 };
+const int PLAYER_START_X = 6 * 16 / SCALE_FACTOR ;
+const int PLAYER_START_Y = 6 * 16 / SCALE_FACTOR ;
 const int PLAYER_SPEED{ 5 };
 
 const int DELTA_TIME{ 60 };

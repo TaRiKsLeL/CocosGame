@@ -15,8 +15,6 @@ private:
 
 public:
 
-	//NPCController();
-
 	virtual void createNPC(Vec2);
 
 };
