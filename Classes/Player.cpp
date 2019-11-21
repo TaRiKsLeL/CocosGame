@@ -1,4 +1,4 @@
-#include <Player.h>
+#include "Player.h"
 Sprite* spr;
 Player* Player::player{ nullptr };
 
@@ -23,7 +23,7 @@ Player::Player(const std::string fileName) {
 
 	
 	listener = EventListenerKeyboard::create();
-	setKeyListener();
+	setKeyListener(&Player::onMoveKeyPressed);
 	GameTime::addMoveableObject(this);
 
 	player = this;
@@ -55,8 +55,8 @@ void Player::move() {
 	spr->setPosition(pos);
 }
 
-void Player::setKeyListener() {
-	onMoveKeyPressed();
+void Player::setKeyListener(void (Player::*moveFuncPointer)()) {
+	(*this.*moveFuncPointer)();
 	static_cast<GameScene*>(Enviroment::getInstance()->getScene())->setKeyEventListener(listener, spr);
 }
 
@@ -89,4 +89,17 @@ void Player::setActKeys(EventKeyboard::KeyCode keyCode){
 	if (keyCode == EventKeyboard::KeyCode::KEY_DOWN_ARROW) {
 
 	}
+}
+
+/*
+=====================================================================================================
+Player money
+=====================================================================================================
+*/
+
+void Player::addMoney(int moneyToAdd) {
+	this->money += moneyToAdd;
+}
+int& Player::getMoney() {
+	return this->money;
 }
