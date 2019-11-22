@@ -2,6 +2,7 @@
 
 #include "AppDelegate.h"
 #include "MainMenu.h"
+#include "Data.h"
 
 // #define USE_AUDIO_ENGINE 1
 // #define USE_SIMPLE_AUDIO_ENGINE 1
@@ -84,9 +85,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
     glview->setDesignResolutionSize(designResolutionSize.width, designResolutionSize.height, ResolutionPolicy::NO_BORDER);
     auto frameSize = glview->getFrameSize();
 	
-	
-	
 	/*
+	
+	
     // if the frame's height is larger than the height of medium size.
     if (frameSize.height > mediumResolutionSize.height)
     {        
@@ -103,8 +104,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
         director->setContentScaleFactor(MIN(smallResolutionSize.height/designResolutionSize.height, smallResolutionSize.width/designResolutionSize.width));
     }
 	*/
-   
-	
+
+
+
 	
 	register_all_packages();
 
@@ -112,6 +114,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto scene = MainMenu::createScene();
 
     // run
+	director->setContentScaleFactor(SCALE_FACTOR);
     director->runWithScene(scene);
 
     return true;

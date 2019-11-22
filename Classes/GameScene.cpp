@@ -23,20 +23,10 @@ bool GameScene::init() {
 	Enviroment::getInstance()->setScene(this);
 	int sum = 300;
 	
-	//BuildingController::getInstance()->walls->at(1)->pay(sum);
-	
-
-	//log("%d", BuildingController::getInstance()->castle->getLevel());
-
-	//BuildingController::getInstance()->castle->pay(sum);
-
-	//log("%d", BuildingController::getInstance()->castle->getLevel());
-	//log("%d", sum);
-
+	BuildingController::getInstance()->walls.at(0)->pay(sum);
+	BuildingController::getInstance()->walls.at(1)->pay(sum);
 
 	this->scheduleUpdate();
-
-
 
 	//EventListenerPhysicsContact* contactListener = EventListenerPhysicsContact::create();
 	//contactListener->onContactBegin = CC_CALLBACK_1(Platform::onContactBegin, this);

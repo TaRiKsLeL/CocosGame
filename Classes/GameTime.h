@@ -6,6 +6,8 @@
 #include "IMoveable.h"
 #include "ITimeDepended.h"
 #include "Data.h"
+#include <stack>
+
 
 using namespace std;
 
@@ -15,7 +17,7 @@ private:
 
 	static int currentTime;
 	static int frameCount;
-
+	static stack<ITimeDepended*> *deleteStack;
 	//collection for refreshing objects per frame
 	static vector<IMoveable*> *moveableObjects;
 	//collection for refreshing objects per pointed second
