@@ -12,7 +12,7 @@ Player::Player(const std::string fileName) {
 
 	spr = Sprite::create(fileName);
 	spr->setAnchorPoint(Vec2(0, 0));
-	spr->setPosition(Vec2(PLAYER_START_X, GENERAL_Y_ANCHOR));
+	spr->setPosition(Vec2(PLAYER_START_X, GENERAL_Y));
 	spr->getTexture()->setAliasTexParameters();
 	spr->addComponent(createPhysBody());
 	spr->setTag(SprTag::PLAYER);

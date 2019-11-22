@@ -86,36 +86,36 @@ void BuildingController::generateBuildings(int towerAm,int wallsAm,int minesAm) 
 
 void BuildingController::createWall(bool dir,int xPos) {
 	Wall* wall = new Wall(dir,WALLS);
-	wall->getSprite()->setPosition(Vec2(xPos, GENERAL_Y_ANCHOR));
+	wall->getSprite()->setPosition(Vec2(xPos, GENERAL_Y));
 	walls.push_back(wall);
 }
 
 void BuildingController::createTower(bool dir,int xPos) {
 	Tower* tower = new Tower(dir,TOWERS);
-	tower->getSprite()->setPosition(Vec2(xPos, GENERAL_Y_ANCHOR));
+	tower->getSprite()->setPosition(Vec2(xPos, GENERAL_Y));
 	towers.push_back(tower);
 }
 
 void BuildingController::createMine(int xPos) {
 	Mine* mine = new Mine(MINES);
-	mine->getSprite()->setPosition(Vec2(xPos, GENERAL_Y_ANCHOR));
+	mine->getSprite()->setPosition(Vec2(xPos, GENERAL_Y));
 	mines.push_back(mine);
 }
 
 void BuildingController::createCenteralBuildings(float center, int shift) {
 
 	castle = new Castle(CASTLES);
-	castle->getSprite()->setPosition(Vec2(center, GENERAL_Y_ANCHOR));
+	castle->getSprite()->setPosition(Vec2(center, GENERAL_Y));
 
 	for (int d = 1; d < 3; d++) { // d=1 ліва сторона, d=2 права сторона
 		if (d == 1)
 		{
 			Tower* tower = new Tower(TOWERS);
-			tower->getSprite()->setPosition(Vec2(center - shift, GENERAL_Y_ANCHOR));
+			tower->getSprite()->setPosition(Vec2(center - shift, GENERAL_Y));
 
 
 			Wall* wall = new Wall(WALLS);
-			wall->getSprite()->setPosition(Vec2(center - shift - 300, GENERAL_Y_ANCHOR));
+			wall->getSprite()->setPosition(Vec2(center - shift - 300, GENERAL_Y));
 
 			towers.push_back(tower);
 			walls.push_back(wall);
@@ -125,10 +125,10 @@ void BuildingController::createCenteralBuildings(float center, int shift) {
 
 
 			Tower* tower = new Tower(true,TOWERS);
-			tower->getSprite()->setPosition(Vec2(center + shift, GENERAL_Y_ANCHOR));
+			tower->getSprite()->setPosition(Vec2(center + shift, GENERAL_Y));
 
 			Wall* wall = new Wall(true, WALLS);
-			wall->getSprite()->setPosition(Vec2(center + shift + 300, GENERAL_Y_ANCHOR));
+			wall->getSprite()->setPosition(Vec2(center + shift + 300, GENERAL_Y));
 
 			towers.push_back(tower);
 			walls.push_back(wall);
