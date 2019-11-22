@@ -66,9 +66,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
        
 		//standart windowed init 
-		//glview = GLViewImpl::createWithRect("CocosGame", cocos2d::Rect(0, 0, designResolutionSize.width, designResolutionSize.height));
+		glview = GLViewImpl::createWithRect("CocosGame", cocos2d::Rect(0, 0, designResolutionSize.width, designResolutionSize.height));
         
-		glview = GLViewImpl::createWithFullScreen("KALUSH");
+		//glview = GLViewImpl::createWithFullScreen("KALUSH");
 #else
         glview = GLViewImpl::create("CocosGame");
 #endif
@@ -85,9 +85,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
     glview->setDesignResolutionSize(designResolutionSize.width, designResolutionSize.height, ResolutionPolicy::NO_BORDER);
     auto frameSize = glview->getFrameSize();
 	
+	
+	
 	/*
-	
-	
     // if the frame's height is larger than the height of medium size.
     if (frameSize.height > mediumResolutionSize.height)
     {        
@@ -104,8 +104,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
         director->setContentScaleFactor(MIN(smallResolutionSize.height/designResolutionSize.height, smallResolutionSize.width/designResolutionSize.width));
     }
 	*/
-
-
+   
+	director->setContentScaleFactor(SCALE_FACTOR);
 
 	
 	register_all_packages();
@@ -114,7 +114,6 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto scene = MainMenu::createScene();
 
     // run
-	director->setContentScaleFactor(SCALE_FACTOR);
     director->runWithScene(scene);
 
     return true;

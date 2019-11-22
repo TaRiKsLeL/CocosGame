@@ -4,25 +4,33 @@
 
 using namespace std;
 
+enum SprTag {
+	PLAYER = 1,
+	SLAVE_TRAIDER
+};
+
 // place here consts
 
 const int DAY_DURATION{ 1 };
+const double SCALE_FACTOR{ 1 };
 
 
 //Z-orders
 const int BUILDING_Z_ORDER{ 0 };
 
-
-const int GROUND_Z_ORDER{ 2 };
+const int GROUND_Z_ORDER{ 3 };
+const int NPC_Z_ORDER{ 2 };
 const int PLAYER_Z_ORDER{ 1 };
 
-//sprites names
+//sprites name
 
 const string GROUND{ "ground.png" };
 const string PLAYER{ "player.png" };
 const string CASTLE("castle.png");
 const string WALL("wall.png");
 const string TOWER("tower.png");
+const string SLAVE_TRAIDER_SPR{ "slaveTraider.png" };
+const string CITIZEN_SPR{ "citizen.png" };
 
 //AMOUNT OF EACH BUILDING
 
@@ -50,9 +58,13 @@ const int MINE_HEIGHT{ 120 };
 const int PLAYER_START_X{ 5000 };
 const int GENERAL_Y_ANCHOR{ 6 *2* 16 };
 const int PLAYER_SPEED{ 20 };
+const int SLAVE_TRAIDER_START_X = 12 * 16 / SCALE_FACTOR ;
+const int SLAVE_TRAIDER_START_Y = 6 * 16 / SCALE_FACTOR ;
 
-//
-const double SCALE_FACTOR{0.5};
+const int PLAYER_START_X = 6 * 16 / SCALE_FACTOR ;
+const int PLAYER_START_Y = 6 * 16 / SCALE_FACTOR ;
+const int PLAYER_SPEED{ 5 };
+const int PLAYER_START_MONEY{ 10 };
 
 const int DELTA_TIME{ 60 };
 
@@ -87,3 +99,6 @@ const vector<std::string> WALLS{
 const vector<std::string> TOWERS{ "buildings/towers/tower0.png","buildings/towers/tower1.png"};
 const vector<std::string> CASTLES{ "buildings/castles/castle0.png","buildings/castles/castle1.png"};
 const vector<std::string> MINES{ "buildings/mines/mine0.png","buildings/mines/mine1.png"};
+const vector<int> mineTimeBuilding{ 13,18,21,24,28 };
+
+const int SLAVE_PRICE{ 4 };
