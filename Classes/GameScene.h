@@ -14,8 +14,10 @@ public:
 	
 	virtual bool init();
 	virtual void update(float) override;
-	virtual void setKeyEventListener(EventListenerKeyboard* listener, Sprite* sprite);
+	virtual void removeKeyEventListener(EventListenerKeyboard*);
+	virtual void setKeyEventListener(EventListenerKeyboard* , Sprite* );
 	bool onContactBegin(PhysicsContact&);
+	bool onContactSeparate(PhysicsContact&);
 
 	//virtual void newMenuCallback(cocos2d::Ref* pSender);
 

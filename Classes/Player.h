@@ -22,7 +22,8 @@ private:
 	int money;
 
 	MoveDirection direction;
-	EventListenerKeyboard* listener;
+	EventListenerKeyboard* moveListener;
+	EventListenerKeyboard* actListener;
 	Sprite* spr;
 	IPayable* objInFocus;
 
@@ -30,7 +31,7 @@ private:
 
 	Player(const std::string);
 	virtual PhysicsBody* createPhysBody();
-	virtual void setKeyListener(void (Player::*onKeyPresssed)());
+	virtual void setKeyListener(void (Player::*onKeyPresssed)(), EventListenerKeyboard*);
 	virtual void onMoveKeyPressed();
 	virtual void onKeyPressedAct();
 	virtual void changeMoveDirection(EventKeyboard::KeyCode, bool);
@@ -43,6 +44,7 @@ public:
 	virtual int& getMoney();
 	static Player* getInstance();
 	void move() override ;
+	void removeActListener();
 
 };
 

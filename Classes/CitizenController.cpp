@@ -23,4 +23,6 @@ void CitizenController::create(Vec2 pos) {
 
 
 
-Citizen::Citizen(Vec2 pos) : FriendlyNPC(pos, CITIZEN_SPR) {}
+Citizen::Citizen(Vec2 pos) : FriendlyNPC(pos, CITIZEN_SPR) { 
+	log("я народився!!! привіт світ!!!");
+}

@@ -22,7 +22,6 @@ bool GameScene::init() {
 
 	Scene::initWithPhysics();
 
-	GameScene::getPhysicsWorld()->setGravity(Vec2(0, 0));
 
 	this->getPhysicsWorld()->setDebugDrawMask(0xffff);
 
@@ -31,6 +30,7 @@ bool GameScene::init() {
 
 	auto contactListener = EventListenerPhysicsContact::create();
 	contactListener->onContactBegin = CC_CALLBACK_1(GameScene::onContactBegin, this);
+	contactListener->onContactSeparate = CC_CALLBACK_1(GameScene::onContactSeparate, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(contactListener, this);
 
 	log("post Init");
@@ -49,6 +49,9 @@ void GameScene::setKeyEventListener(EventListenerKeyboard* listener, Sprite* spr
 	this->_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, sprite);
 }
 
+void GameScene::removeKeyEventListener(EventListenerKeyboard* listener) {
+	this->_eventDispatcher->removeEventListener(listener);
+}
 /*
 =====================================================================================================
 Update
@@ -69,7 +72,6 @@ onContact
 
 bool GameScene::onContactBegin(PhysicsContact& contact)
 {
-	log("oncontact");
 
 	auto nodeA = contact.getShapeA()->getBody()->getNode();
 	auto nodeB = contact.getShapeB()->getBody()->getNode();
@@ -79,7 +81,6 @@ bool GameScene::onContactBegin(PhysicsContact& contact)
 
 	if (nodeA && nodeB)
 	{
-		log("word1");
 
 		if (nodeA->getTag() == SprTag::PLAYER || nodeB->getTag() == SprTag::PLAYER)
 			player = Player::getInstance();
@@ -89,7 +90,32 @@ bool GameScene::onContactBegin(PhysicsContact& contact)
 
 		if (player && slaveTraider) {
 			player->setPayable(slaveTraider);
-			log("word");
+		}
+	}
+
+	return true;
+}
+
+bool GameScene::onContactSeparate(PhysicsContact& contact)
+{
+
+	auto nodeA = contact.getShapeA()->getBody()->getNode();
+	auto nodeB = contact.getShapeB()->getBody()->getNode();
+
+	Player* player;
+	SlaveTraider* slaveTraider;
+
+	if (nodeA && nodeB)
+	{
+
+		if (nodeA->getTag() == SprTag::PLAYER || nodeB->getTag() == SprTag::PLAYER)
+			player = Player::getInstance();
+
+		if (nodeA->getTag() == SprTag::SLAVE_TRAIDER || nodeB->getTag() == SprTag::SLAVE_TRAIDER)
+			slaveTraider = SlaveTraider::getInstance();
+
+		if (player && slaveTraider) {
+			player->removeActListener();
 		}
 	}
 

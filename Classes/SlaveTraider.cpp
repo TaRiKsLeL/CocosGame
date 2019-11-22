@@ -22,9 +22,9 @@ SlaveTraider* SlaveTraider::getInstance() {
 }
 
 PhysicsBody* SlaveTraider::createPhysBody() {
-	PhysicsBody* pb = PhysicsBody::createBox(spr->getBoundingBox().size, PhysicsMaterial(1,1,1));
-	pb->setTag(SprTag::PLAYER);
-	//pb->setDynamic(false);
+	PhysicsBody* pb = PhysicsBody::createBox(spr->getBoundingBox().size);
+	pb->setContactTestBitmask(true);
+	pb->setDynamic(false);
 	return pb;
 }
 

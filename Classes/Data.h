@@ -5,7 +5,7 @@
 using namespace std;
 
 enum SprTag {
-	PLAYER,
+	PLAYER = 1,
 	SLAVE_TRAIDER
 };
 
@@ -34,6 +34,7 @@ const int SLAVE_TRAIDER_START_Y = 6 * 16 / SCALE_FACTOR ;
 const int PLAYER_START_X = 6 * 16 / SCALE_FACTOR ;
 const int PLAYER_START_Y = 6 * 16 / SCALE_FACTOR ;
 const int PLAYER_SPEED{ 5 };
+const int PLAYER_START_MONEY{ 10 };
 
 const int DELTA_TIME{ 60 };
 
