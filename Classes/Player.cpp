@@ -1,5 +1,6 @@
 #include "Player.h"
 Sprite* spr;
+Rect sprRect;
 Player* Player::player{ nullptr };
 
 /*
@@ -16,7 +17,19 @@ Player::Player(const std::string fileName) {
 	spr->setAnchorPoint(Vec2(0, 0));
 	spr->setPosition(Vec2(PLAYER_START_X, PLAYER_START_Y));
 
-	auto follow = Follow::create(spr, Rect::ZERO);
+	Point origin = Director::sharedDirector()->getVisibleOrigin();
+
+	Size size = Director::sharedDirector()->getVisibleSize();
+
+	Point center = Point(size.width / 2 + origin.x, size.height / 2 + origin.y);
+
+	float cameraWidth = size.width*16;
+	float cameraHeight = size.height+200;
+	Rect rect = Rect(center.x - cameraWidth / 2, center.y - cameraHeight / 2,cameraWidth,cameraHeight);
+
+	log(cameraHeight);
+
+	auto follow = Follow::create(spr,rect);
 	Enviroment::getInstance()->getScene()->addChild(spr, PLAYER_Z_ORDER);
 	Enviroment::getInstance()->getScene()->runAction(follow);
 
@@ -32,6 +45,7 @@ Player::Player(const std::string fileName) {
 Player* Player::getInstance() {
 	if (player)
 		return player;
+
 	player = new Player(PLAYER);
 	return player;
 }

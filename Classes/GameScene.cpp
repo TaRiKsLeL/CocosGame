@@ -16,6 +16,7 @@ bool GameScene::init() {
 		return false;
 	}
 
+
 	//Scene::initWithPhysics();
 
 	//GameScene::getPhysicsWorld()->setGravity(Vec2(0, -98 * 8));
