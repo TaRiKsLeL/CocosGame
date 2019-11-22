@@ -1,5 +1,6 @@
 #include "Enviroment.h"
 
+
 Enviroment* Enviroment::enviroment{ nullptr };
 
 Scene* Enviroment::getScene() {
@@ -26,7 +27,7 @@ Enviroment* Enviroment::getInstance() {
 }
 
 void Enviroment::addComponents() {
-	setGroundSpr(GROUND);
+	setGroundSpr(GROUND_SPR);
 	BuildingController::getInstance();
 	Player::getInstance();
 	SlaveTraider::getInstance();

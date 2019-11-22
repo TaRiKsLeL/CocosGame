@@ -2,6 +2,7 @@
 
 #include "cocos2d.h"
 #include "IMoveable.h"
+#include "IPayable.h"
 #include "Enviroment.h"
 #include "Data.h"
 #include "CitizenController.h"
@@ -23,11 +24,12 @@ private:
 	MoveDirection direction;
 	EventListenerKeyboard* listener;
 	Sprite* spr;
-
+	IPayable* objInFocus;
 
 	static Player* player;
 
 	Player(const std::string);
+	virtual PhysicsBody* createPhysBody();
 	virtual void setKeyListener(void (Player::*onKeyPresssed)());
 	virtual void onMoveKeyPressed();
 	virtual void onKeyPressedAct();
@@ -36,6 +38,7 @@ private:
 
 public:
 
+	void setPayable(IPayable*);
 	virtual void addMoney(int);
 	virtual int& getMoney();
 	static Player* getInstance();

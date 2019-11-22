@@ -1,11 +1,12 @@
 #pragma once
 #include "Player.h"
-#include "SlaveTraider.h"
 #include "GameScene.h"
 #include "GameTime.h"
 #include "cocos2d.h"
 #include "Data.h"
-#include <BuildingController.h>
+#include "BuildingController.h"
+#include "SlaveTraider.h"
+
 
 USING_NS_CC;
 

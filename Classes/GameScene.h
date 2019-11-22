@@ -1,18 +1,22 @@
 #pragma once
-
+#include "cocos2d.h"
 #include "MainMenu.h"
 #include "Enviroment.h"
 
 USING_NS_CC;
 
-class GameScene : public cocos2d::Scene
+class GameScene : public Scene
 {
-public:
-	static cocos2d::Scene* createScene();
+protected:
 
+public:
+	static Scene* createScene();
+	
 	virtual bool init();
-	virtual void update(float);
+	virtual void update(float) override;
 	virtual void setKeyEventListener(EventListenerKeyboard* listener, Sprite* sprite);
+	bool onContactBegin(PhysicsContact&);
+
 	//virtual void newMenuCallback(cocos2d::Ref* pSender);
 
 	CREATE_FUNC(GameScene);
