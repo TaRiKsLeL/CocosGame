@@ -5,19 +5,21 @@
 using namespace std;
 
 enum SprTag {
-	PLAYER ,
-	SLAVE_TRAIDER
+	PLAYER,
+	SLAVE_TRAIDER,
+	CITIZEN
 };
 
 // place here consts
 
+const int DELTA_TIME{ 60 };
 const int DAY_DURATION{ 1 };
 const double SCALE_FACTOR{ 0.5 };
 
 
 //Z-orders
-const int BUILDING_Z_ORDER{ 0 };
 
+const int BUILDING_Z_ORDER{ 0 };
 const int GROUND_Z_ORDER{ 3 };
 const int NPC_Z_ORDER{ 2 };
 const int PLAYER_Z_ORDER{ 1 };
@@ -50,21 +52,23 @@ const int TOWER_HEIGHT{ 120 };
 const int MINE_WIDTH{ 64 };
 const int MINE_HEIGHT{ 120 };
 
-//
-
-const double GENERAL_Y{ 6 * 16 / SCALE_FACTOR };
-const int PLAYER_SPEED{ 20 };
-const double SLAVE_TRAIDER_START_X{ 12 * 16 / SCALE_FACTOR };
-
-const double PLAYER_START_X{ 6 * 16 / SCALE_FACTOR };
-
-const int DELTA_TIME{ 60 };
 
 const int MAX_BUILDING_WIDTH{ 200 };
 
 const int SPACING{ 750 };  // проміжок між будівлями
 
 const int RANDOM_FACTOR{ 300 }; // здвиги вправо або вліво при генерації будівель
+
+
+// start position
+
+const double GENERAL_Y{ 6 * 16 / SCALE_FACTOR };
+
+const double SLAVE_TRAIDER_START_X{ 12 * 16 / SCALE_FACTOR };
+const double PLAYER_START_X{ 6 * 16 / SCALE_FACTOR };
+
+
+
 
 const int CAMERA_OFFSET_Y{ -220 };
 
@@ -94,5 +98,12 @@ const vector<std::string> TOWERS{ "buildings/towers/tower0.png","buildings/tower
 const vector<std::string> CASTLES{ "buildings/castles/castle0.png","buildings/castles/castle1.png"};
 const vector<std::string> MINES{ "buildings/mines/mine0.png","buildings/mines/mine1.png"};
 
+//money
+
+
 const int SLAVE_PRICE{ 4 };
-const int PLAYER_START_MONEY{ 10 };
+const int PLAYER_START_MONEY{ 100 };
+
+//speed
+const int PLAYER_SPEED{ 10 };
+const int FRIENDLY_NPC_MOVE_SPEED{ 1 };

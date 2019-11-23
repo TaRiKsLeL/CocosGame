@@ -44,6 +44,7 @@ bool MainMenu::init()
 		"UI/exitBtn.png",
 		"UI/exitBtn.png"
 	);
+	bufferBtmImage->setScale(SCALE_FACTOR);
 	btnImages->push_back(bufferBtmImage);
 
 
@@ -51,12 +52,14 @@ bool MainMenu::init()
 		"UI/settingsBtn.png",
 		"UI/settingsBtn.png"
 	);
+	bufferBtmImage->setScale(SCALE_FACTOR);
 	btnImages->push_back(bufferBtmImage);
 	
 	bufferBtmImage = MenuItemImage::create(
 		"UI/continueBtn.png",
 		"UI/continueBtn.png"
 	);
+	bufferBtmImage->setScale(SCALE_FACTOR);
 	btnImages->push_back(bufferBtmImage);
 
 
@@ -64,9 +67,8 @@ bool MainMenu::init()
 		"UI/newGameBtn.png",
 		"UI/newGameBtn.png"
 	);
+	bufferBtmImage->setScale(SCALE_FACTOR);
 	btnImages->push_back(bufferBtmImage);
-
-
 	
 	btnCallbacks->push_back(&MainMenu::menuCloseCallback);
 	btnCallbacks->push_back(&MainMenu::settingsCallback);
