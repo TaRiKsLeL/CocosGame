@@ -12,7 +12,6 @@ private:
 	SlaveTraider();
 	static SlaveTraider* slaveTraider;
 	virtual void createCitizen();
-	virtual void setQueryRect();
 	PhysicsBody* createPhysBody();
 
 public:

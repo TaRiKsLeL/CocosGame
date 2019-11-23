@@ -61,6 +61,7 @@ void FriendlyNPC::moveTo(Vec2 destination) {
 void FriendlyNPC::move() {
 
 	if (!isMoving) {
+		//SET KINGDOM BORDER
 		currentPointToMove = randPoint(0, 3000);
 		isMoving = true;
 	}
@@ -68,18 +69,27 @@ void FriendlyNPC::move() {
 
 }
 
+Vec2 FriendlyNPC::randPoint(int fromX, int toX) {
+	Vec2 point(0, GENERAL_Y);
+	point.x = fromX + ((rand() * std::time(0)) % (fromX - toX));
+	return point;
+}
+
+
+
+/*
+=====================================================================================================
+active/unactive
+=====================================================================================================
+*/
+
+
 void FriendlyNPC::setUnactive() {
 	isActive = false;
 }
 
 void FriendlyNPC::setActive() {
 	isActive = true;
-}
-
-Vec2 FriendlyNPC::randPoint(int fromX, int toX) {
-	Vec2 point(0, GENERAL_Y);
-	point.x = fromX + ((rand() * std::time(0)) % (fromX - toX));
-	return point;
 }
 
 

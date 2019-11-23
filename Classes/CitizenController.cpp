@@ -1,5 +1,12 @@
 #include "CitizenController.h"
 
+
+/*
+=====================================================================================================
+Controller
+=====================================================================================================
+*/
+
 CitizenController* CitizenController::citizenController{ nullptr };
 
 CitizenController::CitizenController() {
@@ -28,6 +35,12 @@ void CitizenController::allMoveRand() {
 
 
 
+/*
+=====================================================================================================
+Citizen
+=====================================================================================================
+*/
+
 Citizen::Citizen(Vec2 pos) : FriendlyNPC(pos, CITIZEN_SPR) { 
 	spr->setTag(SprTag::CITIZEN);
 	log("ya rodyvsa!!! Hello world!!!");
@@ -42,4 +55,11 @@ Citizen* CitizenController::findByPosition(Vec2 pos) {
 	}
 
 	return nullptr;
+}
+
+void Citizen::pay(int &money) {
+	if (money >= SET_ROLE_PRICE) {
+		money -= SET_ROLE_PRICE;
+		//DO SMTH
+	}
 }

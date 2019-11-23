@@ -27,6 +27,7 @@ Player::Player(const std::string fileName) {
 	setKeyListener(&Player::onMoveKeyPressed, moveListener);
 	GameTime::addMoveableObject(this);
 
+	actListener = nullptr;
 	objInFocus = nullptr ;
 
 	player = this;
@@ -54,7 +55,7 @@ PhysicsBody* Player::createPhysBody() {
 
 /*
 =====================================================================================================
-Player movement
+Player movement and listeners
 =====================================================================================================
 */
 
@@ -147,6 +148,12 @@ int& Player::getMoney() {
 
 
 void Player::setPayable(IPayable* objInFocus) {
+	
+	if (this->objInFocus != nullptr) {
+		log("remove listener in set");
+		removeActListener();
+	}
+	
 	this->objInFocus = objInFocus;
 	log("create listener");
 	actListener = EventListenerKeyboard::create();

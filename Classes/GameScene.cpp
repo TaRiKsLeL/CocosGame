@@ -97,10 +97,18 @@ bool GameScene::onContactBegin(PhysicsContact& contact)
 			citizen = CitizenController::getInstance()->findByPosition(nodeB->getPosition());
 
 		if (player && slaveTraider) {
+			log("%d", player->getMoney());
+
+			log("slave pay");
 			player->setPayable(slaveTraider);
 		}
 		else if (player && citizen) {
+			log("%d", player->getMoney());
+
+			log("citizen pay");
+			player->setPayable(citizen);
 		}
+
 	}
 
 	return true;
@@ -127,11 +135,11 @@ bool GameScene::onContactSeparate(PhysicsContact& contact)
 		
 		if (nodeA->getTag() == SprTag::PLAYER || nodeB->getTag() == SprTag::PLAYER)
 			player = Player::getInstance();
-
+		
 		if (nodeA->getTag() == SprTag::SLAVE_TRAIDER || nodeB->getTag() == SprTag::SLAVE_TRAIDER)
 			slaveTraider = SlaveTraider::getInstance();
-
-		if (player && slaveTraider) {
+		
+		if (player!=nullptr) {
 			player->removeActListener();
 		}
 	}

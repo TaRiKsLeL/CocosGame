@@ -7,7 +7,10 @@ using namespace std;
 enum SprTag {
 	PLAYER,
 	SLAVE_TRAIDER,
-	CITIZEN
+	CITIZEN,
+	WORKER,
+	WARRIOR,
+	BUILDER,
 };
 
 // place here consts
@@ -100,6 +103,7 @@ const vector<std::string> MINES{ "buildings/mines/mine0.png","buildings/mines/mi
 
 
 const int SLAVE_PRICE{ 4 };
+const int SET_ROLE_PRICE{ 1 };
 const int PLAYER_START_MONEY{ 100 };
 
 //speed
