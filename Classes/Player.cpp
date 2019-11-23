@@ -19,8 +19,9 @@ Player::Player(const std::string fileName) {
 
 	setCamera();
 
-	float cameraHeight = size.height+200;
-	Rect rect = Rect(center.x - cameraWidth / 2, center.y - cameraHeight / 2,cameraWidth,cameraHeight);
+	//float cameraHeight = size.height+200;
+	//Rect rect = Rect(center.x - cameraWidth / 2, center.y - cameraHeight / 2,cameraWidth,cameraHeight);\
+
 	Enviroment::getInstance()->getScene()->addChild(spr, PLAYER_Z_ORDER);
 	
 	money = PLAYER_START_MONEY;
