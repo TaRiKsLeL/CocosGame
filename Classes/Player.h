@@ -13,12 +13,6 @@ class Player :private IMoveable {
 
 private:
 
-	struct MoveDirection
-	{
-		bool left{ false };
-		bool right{ false };
-	};
-
 	int money;
 
 	MoveDirection direction;

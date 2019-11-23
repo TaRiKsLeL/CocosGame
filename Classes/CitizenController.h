@@ -24,7 +24,9 @@ private:
 	CitizenController();
 	static CitizenController* citizenController;
 public:
-
+	
 	static CitizenController* getInstance();
 	void create(Vec2);
+	void allMoveRand();
+	Citizen* findByPosition(Vec2);
 };
