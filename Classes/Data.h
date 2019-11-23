@@ -12,7 +12,7 @@ enum SprTag {
 // place here consts
 
 const int DAY_DURATION{ 1 };
-const double SCALE_FACTOR{ 1 };
+const double SCALE_FACTOR{ 0.5 };
 
 
 //Z-orders
