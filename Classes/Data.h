@@ -11,6 +11,10 @@ enum SprTag {
 	WORKER,
 	WARRIOR,
 	BUILDER,
+	CASTLE,
+	TOWER,
+	WALL,
+	MINE
 };
 
 // place here consts
@@ -58,9 +62,9 @@ const int MINE_HEIGHT{ 120 };
 
 const int MAX_BUILDING_WIDTH{ 200 };
 
-const int SPACING{ 750 };  // проміжок між будівлями
+const int SPACING{ 650 };  // проміжок між будівлями
 
-const int RANDOM_FACTOR{ 300 }; // здвиги вправо або вліво при генерації будівель
+const int RANDOM_FACTOR{ 400 }; // здвиги вправо або вліво при генерації будівель
 
 
 // start position
@@ -82,10 +86,10 @@ const vector<int> wallLevelsPrices{ 0,2,4,6,8,10 };
 const vector<int> castleLevelsPrices{ 0,5,8,10,12,14 };
 const vector<int> mineLevelsPrices{ 0,4,6,8,10,14 };
 
-const vector<int> towerTimeBuilding{ 10,15,20,22,25 };
-const vector<int> wallTimeBuilding{ 12,17,22,25,27 };
-const vector<int> castleTimeBuilding{ 15,20,25,27,30 };
-const vector<int> mineTimeBuilding{ 13,18,21,24,28 };
+const vector<int> towerTimeBuilding{ 10,15,20,22,25,27 };
+const vector<int> wallTimeBuilding{ 12,17,22,25,27,30 };
+const vector<int> castleTimeBuilding{ 15,20,25,27,30,34 };
+const vector<int> mineTimeBuilding{ 13,18,21,24,28,33 };
 
 //collections of images
 
@@ -97,7 +101,7 @@ const vector<std::string> WALLS{
 	"buildings/walls/wall4.png"
 };
 
-const vector<std::string> TOWERS{ "buildings/towers/tower0.png","buildings/towers/tower1.png"};
+const vector<std::string> TOWERS{ "buildings/towers/tower0.png","buildings/towers/tower3.png"};
 const vector<std::string> CASTLES{ "buildings/castles/castle0.png","buildings/castles/castle1.png"};
 const vector<std::string> MINES{ "buildings/mines/mine0.png","buildings/mines/mine1.png"};
 

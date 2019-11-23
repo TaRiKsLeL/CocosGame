@@ -133,7 +133,6 @@ void Player::setActKeys(EventKeyboard::KeyCode keyCode){
 
 
 void Player::removeActListener() {
-	log("remove listener");
 	dynamic_cast<GameScene*>(Enviroment::getInstance()->getScene())->removeKeyEventListener(actListener);
 	objInFocus = nullptr;
 }

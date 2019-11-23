@@ -34,6 +34,9 @@ void Enviroment::addComponents() {
 
 	SlaveTraider::getInstance();
 }
+
+
+
 double Enviroment::getGroundWidth() {
 	return groundSpr->getBoundingBox().size.width;
 }

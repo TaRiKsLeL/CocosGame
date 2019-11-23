@@ -4,5 +4,7 @@
 
 class Mine : public Building {
 public:
-	Mine(vector<std::string>);
+	Mine(const vector<std::string>*);
+
+	void pay(int&) override;
 };

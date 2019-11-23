@@ -4,6 +4,8 @@
 class Castle : public Building {
 
 public:
-	Castle(vector<std::string>);
+	Castle(const vector<std::string>*);
+
+	void pay(int&) override;
 
 };

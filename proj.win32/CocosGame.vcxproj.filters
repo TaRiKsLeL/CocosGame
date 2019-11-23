@@ -209,6 +209,9 @@
     <ClInclude Include="..\Classes\Data.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\KingdomBorders.h">
+      <Filter>src\GameObjects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">
