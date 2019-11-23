@@ -12,7 +12,7 @@ enum SprTag {
 // place here consts
 
 const int DAY_DURATION{ 1 };
-const double SCALE_FACTOR{ 1 };
+const double SCALE_FACTOR{ 0.5 };
 
 
 //Z-orders
@@ -65,6 +65,8 @@ const int MAX_BUILDING_WIDTH{ 200 };
 const int SPACING{ 750 };  // проміжок між будівлями
 
 const int RANDOM_FACTOR{ 300 }; // здвиги вправо або вліво при генерації будівель
+
+const int CAMERA_OFFSET_Y{ -220 };
 
 //collections 
 

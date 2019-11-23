@@ -1,6 +1,4 @@
 #include "Player.h"
-Sprite* spr;
-Rect sprRect;
 Player* Player::player{ nullptr };
 
 
@@ -19,22 +17,12 @@ Player::Player(const std::string fileName) {
 	spr->addComponent(createPhysBody());
 	spr->setTag(SprTag::PLAYER);
 
-	Point origin = Director::sharedDirector()->getVisibleOrigin();
+	setCamera();
 
-	Size size = Director::sharedDirector()->getVisibleSize();
-
-	Point center = Point(size.width / 2 + origin.x, size.height / 2 + origin.y);
-
-	float cameraWidth = size.width*16;
 	float cameraHeight = size.height+200;
 	Rect rect = Rect(center.x - cameraWidth / 2, center.y - cameraHeight / 2,cameraWidth,cameraHeight);
-
-	log(cameraHeight);
-
-	auto follow = Follow::create(spr,rect);
 	Enviroment::getInstance()->getScene()->addChild(spr, PLAYER_Z_ORDER);
-	Enviroment::getInstance()->getScene()->runAction(follow);
-
+	
 	money = PLAYER_START_MONEY;
 	
 	moveListener = EventListenerKeyboard::create();
@@ -44,6 +32,13 @@ Player::Player(const std::string fileName) {
 	objInFocus = nullptr ;
 
 	player = this;
+}
+
+void Player::setCamera()
+{
+	Rect camRect = Rect::ZERO;
+	auto follow = Follow::createWithOffset(spr, 0, CAMERA_OFFSET_Y, camRect);
+	Enviroment::getInstance()->getScene()->runAction(follow);
 }
 
 

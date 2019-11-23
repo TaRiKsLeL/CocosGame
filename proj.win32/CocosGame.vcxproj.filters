@@ -117,6 +117,8 @@
     <ClCompile Include="..\Classes\Wall.cpp">
       <Filter>src\GameObjects\Buildings</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\FriendlyNPC.cpp" />
+    <ClCompile Include="..\Classes\SlaveTraider.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -133,9 +135,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\SettingsMenu.h">
       <Filter>src\Menus</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Enviroment.h">
-      <Filter>src\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Player.h">
       <Filter>src\GameObjects\Player</Filter>
@@ -178,6 +177,19 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Shooter.h">
       <Filter>src\GameObjects\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Building.h" />
+    <ClInclude Include="..\Classes\BuildingController.h" />
+    <ClInclude Include="..\Classes\Castle.h" />
+    <ClInclude Include="..\Classes\Mine.h" />
+    <ClInclude Include="..\Classes\SlaveTraider.h" />
+    <ClInclude Include="..\Classes\Tower.h" />
+    <ClInclude Include="..\Classes\Wall.h" />
+    <ClInclude Include="..\Classes\Enviroment.h">
+      <Filter>src\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Data.h">
+      <Filter>src\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
