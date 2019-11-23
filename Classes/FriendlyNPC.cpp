@@ -77,7 +77,7 @@ void FriendlyNPC::setActive() {
 }
 
 Vec2 FriendlyNPC::randPoint(int fromX, int toX) {
-	Vec2 point(0, PLAYER_START_Y);
+	Vec2 point(0, GENERAL_Y);
 	point.x = fromX + ((rand() * std::time(0)) % (fromX - toX));
 	return point;
 }
