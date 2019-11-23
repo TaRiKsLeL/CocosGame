@@ -38,19 +38,18 @@ protected:
 	int nextUpgradeDuration;
 	int currentState{0};
 	
-
+	PhysicsBody* createPhysBody();
+	virtual void setQueryRect();
 public:
 
 	Building(std::string,const int, const int);
-
 	Building(vector<std::string>);
 
 	Sprite* getSprite();
-
+	
 	void pay(int&) override;
 	void timeDependedAction() override;
 	int getLevel();
-
 	void upgrade();
 
 };

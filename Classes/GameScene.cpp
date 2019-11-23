@@ -78,6 +78,7 @@ bool GameScene::onContactBegin(PhysicsContact& contact)
 
 	Player* player;
 	SlaveTraider* slaveTraider;
+	Building* building;
 
 	if (nodeA && nodeB)
 	{
@@ -91,6 +92,9 @@ bool GameScene::onContactBegin(PhysicsContact& contact)
 		if (player && slaveTraider) {
 			player->setPayable(slaveTraider);
 		}
+
+		//if(nodeA->getTag()==SprTag::BUILDING || nodeB->getTag()==SprTag::BUILDING)
+			//building
 	}
 
 	return true;

@@ -6,7 +6,8 @@ using namespace std;
 
 enum SprTag {
 	PLAYER ,
-	SLAVE_TRAIDER
+	SLAVE_TRAIDER,
+	BUILDING
 };
 
 // place here consts

@@ -35,6 +35,10 @@ Building::Building(vector<std::string> images) {
 	spr = Sprite::create(levelsImages.at(level));
 	spr->getTexture()->setAliasTexParameters();
 	spr->setAnchorPoint(Vec2(0.5, 0));
+	spr->addComponent(createPhysBody());
+	spr->setTag(SprTag::BUILDING);
+
+	setQueryRect();
 
 	Enviroment::getInstance()->getScene()->addChild(spr, BUILDING_Z_ORDER);
 }
@@ -85,6 +89,37 @@ void Building::pay(int& sum) {
 }
 
 
+
+
+PhysicsBody* Building::createPhysBody() {
+	PhysicsBody* pb = PhysicsBody::createBox(spr->getBoundingBox().size);
+	pb->setContactTestBitmask(true);
+	pb->setDynamic(false);
+	return pb;
+}
+
+void Building::setQueryRect() {
+
+	Vec2 point(spr->getPosition().x + spr->getContentSize().width / 2,
+		spr->getPosition().y + spr->getContentSize().height / 2);
+
+	log("%f", point.x);
+	log("%f", point.y);
+
+	Enviroment::getInstance()->getScene()->getPhysicsWorld()->queryPoint(
+		[=](PhysicsWorld& world, PhysicsShape& shape, void* userData)->bool
+		{
+			if (shape.getTag() == SprTag::PLAYER) {
+				Player* player = Player::getInstance();
+				log("asdf2");
+				player->setPayable(this);
+			}
+			return true;
+		}
+	, point, nullptr);
+
+}
+
 void Building::upgrade() {
 	isBuilding = true;
 	level++;
@@ -94,13 +129,10 @@ void Building::upgrade() {
 	spr->getTexture()->setAliasTexParameters();
 }
 
-int Building::getLevel() {
-	return level;
-}
 
 void Building::timeDependedAction()
 {
-	if(currentState>nextUpgradeDuration)
+	if (currentState > nextUpgradeDuration)
 	{
 		GameTime::removeTimeDependedObject(this);
 	}
@@ -109,6 +141,9 @@ void Building::timeDependedAction()
 	log("%d", currentState);
 }
 
+int Building::getLevel() {
+	return level;
+}
 
 Sprite* Building::getSprite() {
 	return spr;
