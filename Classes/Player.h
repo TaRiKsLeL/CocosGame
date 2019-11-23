@@ -15,6 +15,7 @@ private:
 
 	int money;
 
+	bool isFocused;
 	MoveDirection direction;
 	EventListenerKeyboard* moveListener;
 	EventListenerKeyboard* actListener;
@@ -34,12 +35,13 @@ private:
 
 public:
 
-	void setPayable(IPayable*);
 	virtual void addMoney(int);
 	virtual int& getMoney();
 	static Player* getInstance();
 	void move() override ;
 	void removeActListener();
+	void setPayable(IPayable*);
+	bool focused();
 
 };
 

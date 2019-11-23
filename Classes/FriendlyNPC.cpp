@@ -14,10 +14,10 @@ FriendlyNPC::FriendlyNPC(Vec2 pos, std::string sprName) {
 
 	spr = Sprite::create(sprName);
 	spr->setPosition(pos);
-	spr->setAnchorPoint(Vec2(0, 0));
+	spr->setAnchorPoint(Vec2(0.5, 0));
 	spr->addComponent(createPhysBody());
 
-	GameTime::addMoveableObject(this);
+	moveStart();
 	Enviroment::getInstance()->getScene()->addChild(spr, NPC_Z_ORDER);
 }
 
@@ -37,6 +37,11 @@ move and position
 
 Vec2 FriendlyNPC::getPosition() {
 	return spr->getPosition();
+}
+
+void FriendlyNPC::moveStart() {
+	GameTime::addMoveableObject(this);
+	//isMoving = true;
 }
 
 
@@ -75,7 +80,10 @@ Vec2 FriendlyNPC::randPoint(int fromX, int toX) {
 	return point;
 }
 
-
+void FriendlyNPC::stopMoving() {
+	GameTime::removeMoveableObject(this);
+	//isMoving = false;
+}
 
 /*
 =====================================================================================================
@@ -93,3 +101,12 @@ void FriendlyNPC::setActive() {
 }
 
 
+/*
+=====================================================================================================
+get set
+=====================================================================================================
+*/
+
+Sprite* FriendlyNPC::getSpr() {
+	return spr;
+}

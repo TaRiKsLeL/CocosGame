@@ -3,7 +3,8 @@ USING_NS_CC;
 
 int GameTime::frameCount{ 0 };
 
-stack<ITimeDepended*>* GameTime::deleteStack = new stack<ITimeDepended*>();
+stack<ITimeDepended*>* GameTime::deleteTimeDependedStack = new stack<ITimeDepended*>();
+stack<IMoveable*>* GameTime::deleteMoveableStack = new stack<IMoveable*>();
 
 vector<IMoveable*> *GameTime::moveableObjects = new vector<IMoveable*>();
 
@@ -15,19 +16,36 @@ void GameTime::updateFrame() {
 	for (IMoveable* tmpObj : *moveableObjects) {
 		tmpObj->move();
 	}
+	while (deleteMoveableStack->size() > 0)
+	{
+		for (int i = 0; i < moveableObjects->size(); i++) {
+			if ((moveableObjects->at(i)) == deleteMoveableStack->top()) {
+				
+				moveableObjects->erase(moveableObjects->begin() + i);
+				
+				deleteMoveableStack->pop();
+
+				if (deleteMoveableStack->size() == 0)
+					break;
+			}
+		}
+
+	}
 
 	if (frameCount >= DELTA_TIME) {
 		frameCount = 0;
+
 		if(timeDependedObjects->size()>0)
 			for each (TimeAction tmpPair in *timeDependedObjects)
 			{
 				tmpPair.first->timeDependedAction();
 				log("In loop of dependent objects");
 			}
-		while (deleteStack->size() > 0) 
+
+		while (deleteTimeDependedStack->size() > 0) 
 		{
-			timeDependedObjects->erase(deleteStack->top());
-			deleteStack->pop();
+			timeDependedObjects->erase(deleteTimeDependedStack->top());
+			deleteTimeDependedStack->pop();
 		}
 	}
 }
@@ -42,8 +60,8 @@ void GameTime::addMoveableObject(IMoveable* objToAdd) {
 
 void GameTime::removeTimeDependedObject(ITimeDepended* objToErase) {
 	log("In erace");
-	deleteStack->push(objToErase);
+	deleteTimeDependedStack->push(objToErase);
 }
 void GameTime::removeMoveableObject(IMoveable* objToRemove) {
-
+	deleteMoveableStack->push(objToRemove);
 }

@@ -27,12 +27,42 @@ const int GROUND_Z_ORDER{ 3 };
 const int NPC_Z_ORDER{ 2 };
 const int PLAYER_Z_ORDER{ 1 };
 
+// start position
+
+const double GENERAL_Y{ 6 * 16 / SCALE_FACTOR };
+
+const double SLAVE_TRAIDER_START_X{ 12 * 16 / SCALE_FACTOR };
+const double PLAYER_START_X{ 6 * 16 / SCALE_FACTOR };
+
+
+const int CAMERA_OFFSET_Y{ -220 };
+
+
 //sprites name
 
 const string GROUND_SPR{ "ground.png" };
 const string PLAYER_SPR{ "player.png" };
 const string SLAVE_TRAIDER_SPR{ "slaveTraider.png" };
 const string CITIZEN_SPR{ "citizen.png" };
+
+// UI elements
+
+const string NEW_GAME_BTN{ "UI/newGameBtn.png" };
+const string CONTINUE_BTN{ "UI/continueBtn.png" };
+const string SETTINGS_BTN{ "UI/settingsBtn.png" };
+const string EXIT_BTN{ "UI/exitBtn.png" };
+
+const string PICK_SPR{ "UI/pickBtn.png" };
+const string HUMMER_SPR{ "UI/hummerBtn.png" };
+const string BOW_SPR{ "UI/bowBtn.png" };
+
+//UI elements shift position
+
+const double SELECT_SITIZEN_ROLE_Y{ GENERAL_Y + 16 * 4 / SCALE_FACTOR  };
+
+const double SELECT_SITIZEN_ROLE_RIGHT_X{ 16 * 7 / SCALE_FACTOR };
+const double SELECT_SITIZEN_ROLE_MIDDLE_X{ 0 };
+const double SELECT_SITIZEN_ROLE_LEFT_X{ -(16 * 7 / SCALE_FACTOR) };
 
 //AMOUNT OF EACH BUILDING
 
@@ -63,17 +93,6 @@ const int SPACING{ 750 };  // проміжок між будівлями
 const int RANDOM_FACTOR{ 300 }; // здвиги вправо або вліво при генерації будівель
 
 
-// start position
-
-const double GENERAL_Y{ 6 * 16 / SCALE_FACTOR };
-
-const double SLAVE_TRAIDER_START_X{ 12 * 16 / SCALE_FACTOR };
-const double PLAYER_START_X{ 6 * 16 / SCALE_FACTOR };
-
-
-
-
-const int CAMERA_OFFSET_Y{ -220 };
 
 //collections 
 

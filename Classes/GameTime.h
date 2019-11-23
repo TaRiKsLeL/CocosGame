@@ -12,12 +12,15 @@
 using namespace std;
 
 class GameTime {
-	using TimeAction = pair<ITimeDepended*,int>;
 private:
+
+	using TimeAction = pair<ITimeDepended*, int>;
 
 	static int currentTime;
 	static int frameCount;
-	static stack<ITimeDepended*> *deleteStack;
+
+	static stack<ITimeDepended*> *deleteTimeDependedStack;
+	static stack<IMoveable*> *deleteMoveableStack;
 	//collection for refreshing objects per frame
 	static vector<IMoveable*> *moveableObjects;
 	//collection for refreshing objects per pointed second

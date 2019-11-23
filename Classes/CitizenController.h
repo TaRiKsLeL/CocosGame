@@ -4,20 +4,10 @@
 #include "IPayable.h"
 #include "Data.h"
 #include "Enviroment.h"
-#include "FriendlyNPC.h"
-//#include "Citizen.h"
+#include "Citizen.h"
+#include "UI.h"
 
 USING_NS_CC;
-
-class Citizen :public FriendlyNPC , public IPayable {
-private:
-
-public:
-	Citizen(Vec2);
-
-	virtual void pay(int&) override;
-
-};
 
 
 class CitizenController 

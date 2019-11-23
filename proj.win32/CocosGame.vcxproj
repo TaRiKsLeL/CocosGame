@@ -170,6 +170,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\SettingsMenu.cpp" />
     <ClCompile Include="..\Classes\SlaveTraider.cpp" />
     <ClCompile Include="..\Classes\Tower.cpp" />
+    <ClCompile Include="..\Classes\UI.cpp" />
     <ClCompile Include="..\Classes\Wall.cpp" />
     <ClCompile Include="..\Classes\WariorController.cpp" />
     <ClCompile Include="..\Classes\WorkerController.cpp" />
@@ -182,6 +183,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Building.h" />
     <ClInclude Include="..\Classes\BuildingController.h" />
     <ClInclude Include="..\Classes\Castle.h" />
+    <ClInclude Include="..\Classes\Citizen.h" />
     <ClInclude Include="..\Classes\CitizenController.h" />
     <ClInclude Include="..\Classes\Data.h" />
     <ClInclude Include="..\Classes\Enemy.h" />
@@ -200,6 +202,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\ITimeDepended.h" />
     <ClInclude Include="..\Classes\SlaveTraider.h" />
     <ClInclude Include="..\Classes\Tower.h" />
+    <ClInclude Include="..\Classes\UI.h" />
     <ClInclude Include="..\Classes\Wall.h" />
     <ClInclude Include="..\Classes\WariorController.h" />
     <ClInclude Include="..\Classes\WorkerController.h" />
