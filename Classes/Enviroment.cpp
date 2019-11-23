@@ -32,7 +32,6 @@ void Enviroment::addComponents() {
 	Player::getInstance();
 
 
-
 	SlaveTraider::getInstance();
 }
 double Enviroment::getGroundWidth() {

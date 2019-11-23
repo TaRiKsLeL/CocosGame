@@ -13,12 +13,6 @@ class Player :private IMoveable {
 
 private:
 
-	struct MoveDirection
-	{
-		bool left{ false };
-		bool right{ false };
-	};
-
 	int money;
 
 	MoveDirection direction;
@@ -30,6 +24,7 @@ private:
 	static Player* player;
 
 	Player(const std::string);
+	void setCamera();
 	virtual PhysicsBody* createPhysBody();
 	virtual void setKeyListener(void (Player::*onKeyPresssed)(), EventListenerKeyboard*);
 	virtual void onMoveKeyPressed();

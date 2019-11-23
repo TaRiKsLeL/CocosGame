@@ -121,7 +121,7 @@
       <Filter>src\GameObjects\NPC</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\SlaveTraider.cpp">
-      <Filter>src\GameObjects</Filter>
+      <Filter>src\GameObjects\NPC</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -139,9 +139,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\SettingsMenu.h">
       <Filter>src\Menus</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Enviroment.h">
-      <Filter>src\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Player.h">
       <Filter>src\GameObjects\Player</Filter>
@@ -185,29 +182,32 @@
     <ClInclude Include="..\Classes\Shooter.h">
       <Filter>src\GameObjects\Interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Mine.h">
-      <Filter>src\GameObjects\Buildings</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Castle.h">
-      <Filter>src\GameObjects\Buildings</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Wall.h">
-      <Filter>src\GameObjects\Buildings</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Tower.h">
+    <ClInclude Include="..\Classes\Building.h">
       <Filter>src\GameObjects\Buildings</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\BuildingController.h">
       <Filter>src\GameObjects\Buildings</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Building.h">
+    <ClInclude Include="..\Classes\Castle.h">
       <Filter>src\GameObjects\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Enviroment.h">
+      <Filter>src\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Mine.h">
+      <Filter>src\GameObjects\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Tower.h">
+      <Filter>src\GameObjects\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Wall.h">
+      <Filter>src\GameObjects\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SlaveTraider.h">
+      <Filter>src\GameObjects\NPC</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Data.h">
       <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\SlaveTraider.h">
-      <Filter>src\GameObjects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
