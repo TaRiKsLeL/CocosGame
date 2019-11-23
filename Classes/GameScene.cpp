@@ -3,6 +3,7 @@
 
 USING_NS_CC;
 
+
 Scene* GameScene::createScene() {
 	return GameScene::create();
 }

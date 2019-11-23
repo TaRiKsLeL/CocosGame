@@ -73,6 +73,8 @@ const double PLAYER_START_X{ 6 * 16 / SCALE_FACTOR };
 
 
 
+const int CAMERA_OFFSET_Y{ -220 };
+
 //collections 
 
 const vector<int> towerLevelsPrices{ 0,2,3,4,6,8 };

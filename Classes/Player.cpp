@@ -17,10 +17,12 @@ Player::Player(const std::string fileName) {
 	spr->addComponent(createPhysBody());
 	spr->setTag(SprTag::PLAYER);
 
-	Follow* follow = Follow::create(spr, Rect::ZERO);
-	Enviroment::getInstance()->getScene()->addChild(spr, PLAYER_Z_ORDER);
-	Enviroment::getInstance()->getScene()->runAction(follow);
+	setCamera();
 
+	float cameraHeight = size.height+200;
+	Rect rect = Rect(center.x - cameraWidth / 2, center.y - cameraHeight / 2,cameraWidth,cameraHeight);
+	Enviroment::getInstance()->getScene()->addChild(spr, PLAYER_Z_ORDER);
+	
 	money = PLAYER_START_MONEY;
 	
 	moveListener = EventListenerKeyboard::create();
@@ -31,6 +33,13 @@ Player::Player(const std::string fileName) {
 	objInFocus = nullptr ;
 
 	player = this;
+}
+
+void Player::setCamera()
+{
+	Rect camRect = Rect::ZERO;
+	auto follow = Follow::createWithOffset(spr, 0, CAMERA_OFFSET_Y, camRect);
+	Enviroment::getInstance()->getScene()->runAction(follow);
 }
 
 
