@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Enviroment.h"
 #include "Building.h"
 #include "Castle.h"
 #include "Wall.h"
@@ -16,23 +17,22 @@ private:
 	static BuildingController* buildingController;
 
 
-	vector<Mine*>* mines;
-	vector<Tower*>* towers;
+	Castle* castle;
+	
+	vector<Mine*> mines;
+	vector<Tower*> towers;
 
-	void createWalls();
 
-	void loadBuildings();
+	void createWall(bool,int);
+	void createTower(bool,int);
+	void createMine(int);
+
+	void createCenteralBuildings(float,int);
+	void generateBuildings(int, int, int);
 
 public:
 
-//	void addWall(Wall*);
-//	void addTower(Tower*);
-//	void addMine(Mine*);
-
-	vector<Wall*>* walls;
-
-	Castle* castle;
-
+	vector<Wall*> walls;
 
 	BuildingController();
 

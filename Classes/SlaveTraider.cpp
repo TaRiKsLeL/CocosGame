@@ -5,7 +5,7 @@ SlaveTraider* SlaveTraider::slaveTraider{ nullptr };
 SlaveTraider::SlaveTraider(){
 	spr = Sprite::create(SLAVE_TRAIDER_SPR);
 	spr->setAnchorPoint(Vec2(0, 0));
-	spr->setPosition(Vec2(SLAVE_TRAIDER_START_X, SLAVE_TRAIDER_START_Y));
+	spr->setPosition(Vec2(SLAVE_TRAIDER_START_X, GENERAL_Y));
 	spr->setTag(SprTag::SLAVE_TRAIDER);
 
 	spr->addComponent(createPhysBody());

@@ -23,6 +23,9 @@ public:
 	
 	void setScene(Scene*);
 	void setGroundSpr(const std::string);
+
+	double getGroundWidth();
+	
 	Scene* getScene();
 
 };

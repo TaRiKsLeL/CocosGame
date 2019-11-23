@@ -1,6 +1,5 @@
 #include "Enviroment.h"
 
-
 Enviroment* Enviroment::enviroment{ nullptr };
 
 Scene* Enviroment::getScene() {
@@ -9,6 +8,7 @@ Scene* Enviroment::getScene() {
 
 void Enviroment::setGroundSpr(const std::string fileName) {
 	groundSpr = Sprite::create(fileName);
+	groundSpr->getTexture()->setAliasTexParameters();
 	groundSpr->setAnchorPoint(Vec2(0, 0));
 	scene->addChild(groundSpr, GROUND_Z_ORDER);
 }
@@ -30,5 +30,11 @@ void Enviroment::addComponents() {
 	setGroundSpr(GROUND_SPR);
 	BuildingController::getInstance();
 	Player::getInstance();
+
+
+
 	SlaveTraider::getInstance();
+}
+double Enviroment::getGroundWidth() {
+	return groundSpr->getBoundingBox().size.width;
 }
