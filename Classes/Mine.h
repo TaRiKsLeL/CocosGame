@@ -2,6 +2,7 @@
 
 #include "Building.h"
 
-class Mine : Building {
-
+class Mine : public Building {
+public:
+	Mine(vector<std::string>);
 };

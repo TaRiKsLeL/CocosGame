@@ -6,9 +6,47 @@
 #include "Data.h"
 #include "Enviroment.h"
 
+/*
+=====================================================================================================
+CONSTRUCTORS
+=====================================================================================================
+*/
+
+Building::Building(std::string fileName,const int width, const int height)
+{
+	this->filename = fileName;
+	buildingWigth = width;
+	buildingHeight = height;
+	level = 0;
+
+	spr = Sprite::create(fileName);
+	spr->getTexture()->setAliasTexParameters();
+	spr->setAnchorPoint(Vec2(0.5, 0));
+
+	Enviroment::getInstance()->getScene()->addChild(spr, BUILDING_Z_ORDER);
+}
+
+Building::Building(vector<std::string> images) {
+
+	nextUpgradeDuration = 10;
+
+	levelsImages = images;
+	
+	spr = Sprite::create(levelsImages.at(level));
+	spr->getTexture()->setAliasTexParameters();
+	spr->setAnchorPoint(Vec2(0.5, 0));
+
+	Enviroment::getInstance()->getScene()->addChild(spr, BUILDING_Z_ORDER);
+}
+
+/*
+=====================================================================================================
+INTERACTION
+=====================================================================================================
+*/
+
 void Building::pay(int& sum) {
 	int price{0};
-
 
 
 	if (Tower* t = dynamic_cast<Tower*>(this))			//якщо мій об'єкт є вишкою
@@ -47,32 +85,31 @@ void Building::pay(int& sum) {
 }
 
 
+void Building::upgrade() {
+	isBuilding = true;
+	level++;
+	GameTime::addTimeDependedObject(-1, this);
+
+	spr->setTexture(levelsImages.at(level));
+	spr->getTexture()->setAliasTexParameters();
+}
+
 int Building::getLevel() {
 	return level;
 }
 
-void Building::increaseLevel() {
-	level++;
-}
-
-void Building::upgrade() {
-	isBuilding = true;
-	increaseLevel();
-	timeDependedAction();
-	GameTime::addTimeDependedObject(-1, this);
-
-	// spr->setTexture()				встановити нову текстуру спрайту будівлі
-}
-
-
-
-
 void Building::timeDependedAction()
 {
-	if(currentState>=nextUpgradeDuration)
+	if(currentState>nextUpgradeDuration)
 	{
 		GameTime::removeTimeDependedObject(this);
 	}
 
 	currentState++;
+	log("%d", currentState);
+}
+
+
+Sprite* Building::getSprite() {
+	return spr;
 }

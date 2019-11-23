@@ -8,15 +8,11 @@
 
 USING_NS_CC;
 
-class Citizen{// :public FriendlyNPC {
+class Citizen :public FriendlyNPC {
 private:
-
-	Sprite* spr;
 
 public:
 	Citizen(Vec2);
-	Citizen();
-
 };
 
 

@@ -22,11 +22,7 @@ void CitizenController::create(Vec2 pos) {
 
 
 
-Citizen::Citizen() {}
 
-Citizen::Citizen(Vec2 pos) {
-	spr = Sprite::create(CITIZEN);
-	spr->setPosition(pos);
-	spr->setAnchorPoint(Vec2(0, 0));
-	Enviroment::getInstance()->getScene()->addChild(spr, NPC_Z_ORDER);
+Citizen::Citizen(Vec2 pos) : FriendlyNPC(pos, CITIZEN_SPR) { 
+	log("я народився!!! привіт світ!!!");
 }
