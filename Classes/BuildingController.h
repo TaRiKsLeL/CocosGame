@@ -6,8 +6,10 @@
 #include "Wall.h"
 #include "Tower.h"
 #include "Mine.h"
-
+#include "Data.h"
+#include <time.h>
 #include <vector>
+#include "KingdomBorders.h"
 
 using namespace std;
 
@@ -35,6 +37,12 @@ public:
 	vector<Wall*> walls;
 
 	BuildingController();
+
+	Building* findBuildingByTagAndPosition(int,Vec2);
+
+	KingdomBorders* getKingdomBorders();
+
+	void createBuilding(int& type, bool side, int& previus, int& num, int& counter, float& sideShift,float center,float shift,int random);
 
 	static BuildingController* getInstance();
 

@@ -7,8 +7,9 @@ private:
 
 public:
 
-	Wall(vector<std::string>);
-	Wall(bool,vector<std::string>);
+	Wall(bool,const vector<std::string>*);
+	
+	void pay(int&) override;
 
 	int hp;
 	void repair();

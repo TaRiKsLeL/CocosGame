@@ -13,6 +13,11 @@ void Enviroment::setGroundSpr(const std::string fileName) {
 	scene->addChild(groundSpr, GROUND_Z_ORDER);
 }
 
+void Enviroment::setBorders(KingdomBorders *borders)
+{
+	this->borders = borders;
+}
+
 
 void Enviroment::setScene(Scene* scene) {
 	this->scene = scene;
@@ -30,6 +35,15 @@ void Enviroment::addComponents() {
 	setGroundSpr(GROUND_SPR);
 	BuildingController::getInstance();
 	Player::getInstance();
+}
+
+
+
+
+
+KingdomBorders* Enviroment::getBorders()
+{
+	return borders;
 }
 
 double Enviroment::getGroundWidth() {

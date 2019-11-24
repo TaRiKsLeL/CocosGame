@@ -135,6 +135,9 @@
     <ClCompile Include="..\Classes\Collisions.cpp">
       <Filter>src\Collisions</Filter>
     </ClCompile>
+    <ClCompile Include="KingdomBorders.cpp">
+      <Filter>src\GameObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -226,6 +229,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Citizen.h">
       <Filter>src\GameObjects\NPC\Citizen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\KingdomBorders.h">
+      <Filter>src\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Collisions.h">
       <Filter>src\Collisions</Filter>

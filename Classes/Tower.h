@@ -4,6 +4,7 @@
 class Tower : public Building 
 {
 public:
-	Tower(vector<std::string>);
-	Tower(bool,vector<std::string>);
+	Tower(bool,const vector<std::string>*);
+
+	void pay(int&) override;
 };

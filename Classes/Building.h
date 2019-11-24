@@ -25,7 +25,7 @@ protected:
 
 	string filename;
 
-	vector<std::string> levelsImages;
+	const vector<std::string>* levelsImages;
 
 	int buildingWigth;
 	int buildingHeight;
@@ -38,19 +38,18 @@ protected:
 	int nextUpgradeDuration;
 	int currentState{0};
 	
-
+	PhysicsBody* createPhysBody();
 public:
 
 	Building(std::string,const int, const int);
-
-	Building(vector<std::string>);
+	Building(const vector<std::string>*);
 
 	Sprite* getSprite();
+	
 
-	void pay(int&) override;
+	virtual void pay(int&)=0;
 	void timeDependedAction() override;
 	int getLevel();
-
 	void upgrade();
 
 };

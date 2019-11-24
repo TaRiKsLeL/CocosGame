@@ -27,9 +27,11 @@ bool GameScene::init() {
 	this->getPhysicsWorld()->setDebugDrawMask(0xffff);
 
 	Enviroment::getInstance()->setScene(this);
+	int sum = PLAYER_START_MONEY;
+	BuildingController::getInstance()->walls.at(0)->pay(sum);
+	BuildingController::getInstance()->walls.at(1)->pay(sum);
+	Enviroment::getInstance()->setBorders(BuildingController::getInstance()->getKingdomBorders());
 	SlaveTraider::getInstance();
-
-
 	auto contactListener = EventListenerPhysicsContact::create();
 	contactListener->onContactBegin = CC_CALLBACK_1(GameScene::onContactBegin, this);
 	contactListener->onContactSeparate = CC_CALLBACK_1(GameScene::onContactSeparate, this);
@@ -81,6 +83,7 @@ bool GameScene::onContactBegin(PhysicsContact& contact)
 	Player* player = nullptr;
 	SlaveTraider* slaveTraider = nullptr;
 	Citizen* citizen = nullptr;
+	Building* building = nullptr;
 
 	if (nodeA && nodeB)
 	{
@@ -100,6 +103,14 @@ bool GameScene::onContactBegin(PhysicsContact& contact)
 			citizen = CitizenController::getInstance()->findByPosition(nodeB->getPosition());
 
 
+		
+		building = BuildingController::getInstance()->findBuildingByTagAndPosition(nodeA->getTag(), nodeA->getPosition());
+		
+		if(!building) {
+			building = BuildingController::getInstance()->findBuildingByTagAndPosition(nodeB->getTag(), nodeB->getPosition());
+		}
+
+
 		if(player != nullptr)
 		if (player && slaveTraider) {
 			log("%d", player->getMoney());
@@ -112,6 +123,20 @@ bool GameScene::onContactBegin(PhysicsContact& contact)
 
 			log("citizen pay");
 			player->setPayable(citizen);
+		}
+		else if (player && building) {
+			log("%d", player->getMoney());
+
+			log("building pay");
+
+			if (Enviroment::getInstance()->getBorders()->isInKingdom(building->getSprite()->getPositionX())) {
+				player->setPayable(building);
+			}
+			else if (Wall* wall = dynamic_cast<Wall*>(building)) {
+				player->setPayable(building);
+				Enviroment::getInstance()->setBorders(BuildingController::getInstance()->getKingdomBorders());
+			}
+			
 		}
 
 	}

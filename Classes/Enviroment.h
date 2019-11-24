@@ -5,12 +5,15 @@
 #include "cocos2d.h"
 #include "Data.h"
 #include "BuildingController.h"
-
+#include "SlaveTraider.h"
+#include "KingdomBorders.h"
 
 USING_NS_CC;
 
 class Enviroment {
 private:
+
+	KingdomBorders* borders;
 
 	static Enviroment* enviroment;
 	Sprite* groundSpr;
@@ -18,13 +21,18 @@ private:
 
 	void addComponents();
 public:
+
 	static Enviroment* getInstance();
 	
 	void setScene(Scene*);
 	void setGroundSpr(const std::string);
+	void setBorders(KingdomBorders* borders);
 
+	KingdomBorders* getBorders();
 	double getGroundWidth();
 	
 	Scene* getScene();
 
 };
+
+

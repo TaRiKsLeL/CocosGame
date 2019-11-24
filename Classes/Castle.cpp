@@ -4,6 +4,23 @@
 //
 //}
 
-Castle::Castle(vector<std::string> images) : Building(images) {
+Castle::Castle(const vector<std::string> *images) : Building(images) {
+	spr->setTag(SprTag::CASTLE);
+}
 
+void Castle::pay(int& sum) {
+	int price{ 0 };
+
+	if (levelsImages->size()-1 > level) {
+		price = castleLevelsPrices[level + 1];
+		nextUpgradeDuration = castleTimeBuilding[level + 1];
+
+		if (price <= sum && price != 0) {
+			sum -= price;
+			log("Sum after buying CASTLE %d", sum);
+			upgrade();
+		}
+	}
+
+	
 }

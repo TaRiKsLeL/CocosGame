@@ -179,7 +179,6 @@ void Player::removeActListener() {
 		dynamic_cast<GameScene*>(Enviroment::getInstance()->getScene())->removeKeyEventListener(actListener);
 }
 
-
 /*
 =====================================================================================================
 Player Pay
