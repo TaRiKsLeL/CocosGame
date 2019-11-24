@@ -55,6 +55,9 @@
     <Filter Include="src\UI">
       <UniqueIdentifier>{da4c9bb5-1eca-41bc-9e4b-c4ed46cd06ed}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Collisions">
+      <UniqueIdentifier>{c98f3cec-d537-4514-9e39-f0a12ecf2baa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -128,6 +131,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\UI.cpp">
       <Filter>src\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Collisions.cpp">
+      <Filter>src\Collisions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -220,6 +226,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Citizen.h">
       <Filter>src\GameObjects\NPC\Citizen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Collisions.h">
+      <Filter>src\Collisions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

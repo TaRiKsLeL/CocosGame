@@ -12,7 +12,7 @@ protected:
 
 	bool isActive;
 	bool isMoving;
-
+	bool stop;
 	Sprite* spr;
 	Vec2 currentPointToMove;
 

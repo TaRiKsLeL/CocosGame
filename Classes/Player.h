@@ -3,6 +3,7 @@
 #include "cocos2d.h"
 #include "IMoveable.h"
 #include "IPayable.h"
+#include "ITimedepended.h"
 #include "Enviroment.h"
 #include "Data.h"
 #include "CitizenController.h"
@@ -16,6 +17,7 @@ private:
 	int money;
 
 	bool isFocused;
+	bool deleteListener;
 	MoveDirection direction;
 	EventListenerKeyboard* moveListener;
 	EventListenerKeyboard* actListener;
@@ -31,7 +33,7 @@ private:
 	virtual void onMoveKeyPressed();
 	virtual void onKeyPressedAct();
 	virtual void changeMoveDirection(EventKeyboard::KeyCode, bool);
-	virtual void setActKeys(EventKeyboard::KeyCode);
+	virtual void setSelectKeys();
 
 public:
 
@@ -39,10 +41,13 @@ public:
 	virtual int& getMoney();
 	static Player* getInstance();
 	void move() override ;
+	void removeFocusActListener();
 	void removeActListener();
 	void setPayable(IPayable*);
+	bool checkFocusedObj(IPayable*);
 	bool focused();
 
+	void setSelectRoleListener();
 };
 
 	

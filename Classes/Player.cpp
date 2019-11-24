@@ -17,7 +17,6 @@ Player::Player(const std::string fileName) {
 	spr->addComponent(createPhysBody());
 	spr->setTag(SprTag::PLAYER);
 
-	setCamera();
 
 	Enviroment::getInstance()->getScene()->addChild(spr, PLAYER_Z_ORDER);
 	
@@ -26,6 +25,7 @@ Player::Player(const std::string fileName) {
 	moveListener = EventListenerKeyboard::create();
 	setKeyListener(&Player::onMoveKeyPressed, moveListener);
 	GameTime::addMoveableObject(this);
+	setCamera();
 
 	actListener = nullptr;
 	objInFocus = nullptr ;
@@ -62,13 +62,19 @@ PhysicsBody* Player::createPhysBody() {
 
 /*
 =====================================================================================================
-Player movement and listeners
+Player movement 
 =====================================================================================================
 */
 
 
 
 void Player::move() {
+
+	if (deleteListener) {
+		dynamic_cast<GameScene*>(Enviroment::getInstance()->getScene())->removeKeyEventListener(actListener);
+		deleteListener = false;
+	}
+
 	Vec2 pos = spr->getPosition();
 
 	if (direction.right) {
@@ -113,34 +119,65 @@ void Player::changeMoveDirection(EventKeyboard::KeyCode keyCode, bool condition)
 
 }
 
+/*
+=====================================================================================================
+Player key act
+=====================================================================================================
+*/
+
+
 
 
 void Player::onKeyPressedAct() {
 	actListener->onKeyPressed = [=](EventKeyboard::KeyCode keyCode, Event* event) {
-		setActKeys(keyCode);
+		if (keyCode == EventKeyboard::KeyCode::KEY_DOWN_ARROW) {
+			objInFocus->pay(this->money);
+		}
 	};
 	actListener->onKeyReleased = [=](EventKeyboard::KeyCode keyCode, Event* event) {};
 }
 
-void Player::setActKeys(EventKeyboard::KeyCode keyCode){
-	if (keyCode == EventKeyboard::KeyCode::KEY_DOWN_ARROW) {
-		objInFocus->pay(this->money);
-	}
+
+void Player::setSelectKeys() {
+	CitizenController* citizenController = CitizenController::getInstance();
+
+
+	
+	actListener->onKeyPressed = [=](EventKeyboard::KeyCode keyCode, Event* event) {
+		if (keyCode == EventKeyboard::KeyCode::KEY_RIGHT_ARROW) {
+			citizenController->setNewRole(SprTag::BUILDER, objInFocus);
+			objInFocus = nullptr;
+			deleteListener = true;
+		}
+		else if (keyCode == EventKeyboard::KeyCode::KEY_DOWN_ARROW) {
+			objInFocus->pay(this->money);
+		}
+		else if (keyCode == EventKeyboard::KeyCode::KEY_LEFT_ARROW) {
+			objInFocus->pay(this->money);
+		}
+	};
+
+	actListener->onKeyReleased = [=](EventKeyboard::KeyCode keyCode, Event* event) {};
 }
 
 
-void Player::removeActListener() {
+
+void Player::setSelectRoleListener() {
+	setKeyListener(&Player::setSelectKeys, actListener);
+}
+
+void Player::removeFocusActListener() {
 	if (objInFocus != nullptr) {
-		log("remove listener");
-		
 		dynamic_cast<GameScene*>(Enviroment::getInstance()->getScene())->removeKeyEventListener(actListener);
-		
+
 		objInFocus->onChangeFocus();
-		
 		objInFocus = nullptr;
 	}
 }
 
+void Player::removeActListener() {
+		dynamic_cast<GameScene*>(Enviroment::getInstance()->getScene())->removeKeyEventListener(actListener);
+}
 
 
 /*
@@ -158,6 +195,11 @@ int& Player::getMoney() {
 	return this->money;
 }
 
+bool Player::checkFocusedObj(IPayable* objTocheck) {
+	if (objTocheck == objInFocus)
+		return true;
+	return false;
+}
 
 
 void Player::setPayable(IPayable* objInFocus) {

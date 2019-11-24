@@ -44,6 +44,9 @@ const string GROUND_SPR{ "ground.png" };
 const string PLAYER_SPR{ "player.png" };
 const string SLAVE_TRAIDER_SPR{ "slaveTraider.png" };
 const string CITIZEN_SPR{ "citizen.png" };
+const string BUILDER_SPR{ "builder.png" };
+const string WARRIOR_SPR{ "warrior.png" };
+const string WORKER_SPR{ "worker.png" };
 
 // UI elements
 

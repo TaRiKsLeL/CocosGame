@@ -30,10 +30,8 @@ void Enviroment::addComponents() {
 	setGroundSpr(GROUND_SPR);
 	BuildingController::getInstance();
 	Player::getInstance();
-
-
-	SlaveTraider::getInstance();
 }
+
 double Enviroment::getGroundWidth() {
 	return groundSpr->getBoundingBox().size.width;
 }

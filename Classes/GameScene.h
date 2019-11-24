@@ -2,6 +2,7 @@
 #include "cocos2d.h"
 #include "MainMenu.h"
 #include "Enviroment.h"
+#include "SlaveTraider.h"
 
 USING_NS_CC;
 

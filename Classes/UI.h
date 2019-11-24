@@ -4,7 +4,6 @@
 #include "CitizenController.h"
 #include <vector>
 #include <stack>
-#include "Citizen.h"
 
 USING_NS_CC;
 

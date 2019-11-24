@@ -27,6 +27,7 @@ bool GameScene::init() {
 	this->getPhysicsWorld()->setDebugDrawMask(0xffff);
 
 	Enviroment::getInstance()->setScene(this);
+	SlaveTraider::getInstance();
 
 
 	auto contactListener = EventListenerPhysicsContact::create();
@@ -99,7 +100,7 @@ bool GameScene::onContactBegin(PhysicsContact& contact)
 			citizen = CitizenController::getInstance()->findByPosition(nodeB->getPosition());
 
 
-
+		if(player != nullptr)
 		if (player && slaveTraider) {
 			log("%d", player->getMoney());
 
@@ -135,23 +136,33 @@ bool GameScene::onContactSeparate(PhysicsContact& contact)
 	SlaveTraider* slaveTraider = nullptr;
 	Citizen* citizen = nullptr;
 
+	IPayable* payable;
+
 
 		if (nodeA->getTag() == SprTag::PLAYER || nodeB->getTag() == SprTag::PLAYER)
 			player = Player::getInstance();
 		
-		if (nodeA->getTag() == SprTag::SLAVE_TRAIDER || nodeB->getTag() == SprTag::SLAVE_TRAIDER)
+		if (nodeA->getTag() == SprTag::SLAVE_TRAIDER || nodeB->getTag() == SprTag::SLAVE_TRAIDER) {
 			slaveTraider = SlaveTraider::getInstance();
+			payable = dynamic_cast<IPayable*>(slaveTraider);
+		}
 		
-		if (nodeA->getTag() == SprTag::CITIZEN)
+		//переробити {
+
+		if (nodeA->getTag() == SprTag::CITIZEN) {
 			citizen = CitizenController::getInstance()->findByPosition(nodeA->getPosition());
-		else if (nodeB->getTag() == SprTag::CITIZEN)
+			payable = dynamic_cast<IPayable*>(citizen);
+		}
+		else if (nodeB->getTag() == SprTag::CITIZEN) {
 			citizen = CitizenController::getInstance()->findByPosition(nodeB->getPosition());
+			payable = dynamic_cast<IPayable*>(citizen);
+		}
 
-
+		//}
 
 		if (player != nullptr && player->focused() ) {
-			
-			player->removeActListener();
+			if(player->checkFocusedObj(payable))
+				player->removeFocusActListener();
 		}
 	
 
