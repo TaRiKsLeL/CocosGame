@@ -93,6 +93,7 @@ bool GameScene::onContactBegin(PhysicsContact& contact)
 		if (nodeA->getTag() == SprTag::SLAVE_TRAIDER || nodeB->getTag() == SprTag::SLAVE_TRAIDER)
 			slaveTraider = SlaveTraider::getInstance();
 
+
 		if (nodeA->getTag() == SprTag::CITIZEN)
 		{
 			citizen = CitizenController::getInstance()->findByPosition(nodeA->getPosition());
@@ -148,20 +149,27 @@ bool GameScene::onContactSeparate(PhysicsContact& contact)
 
 	Player* player = nullptr;
 	SlaveTraider* slaveTraider = nullptr;
+	Citizen* citizen = nullptr;
 
-	if (nodeA && nodeB)
-	{
-		
+
 		if (nodeA->getTag() == SprTag::PLAYER || nodeB->getTag() == SprTag::PLAYER)
 			player = Player::getInstance();
 		
 		if (nodeA->getTag() == SprTag::SLAVE_TRAIDER || nodeB->getTag() == SprTag::SLAVE_TRAIDER)
 			slaveTraider = SlaveTraider::getInstance();
 		
-		if (player!=nullptr) {
+		if (nodeA->getTag() == SprTag::CITIZEN)
+			citizen = CitizenController::getInstance()->findByPosition(nodeA->getPosition());
+		else if (nodeB->getTag() == SprTag::CITIZEN)
+			citizen = CitizenController::getInstance()->findByPosition(nodeB->getPosition());
+
+
+
+		if (player != nullptr && player->focused() ) {
+			
 			player->removeActListener();
 		}
-	}
+	
 
 	return true;
 }

@@ -19,9 +19,6 @@ Player::Player(const std::string fileName) {
 
 	setCamera();
 
-	//float cameraHeight = size.height+200;
-	//Rect rect = Rect(center.x - cameraWidth / 2, center.y - cameraHeight / 2,cameraWidth,cameraHeight);\
-
 	Enviroment::getInstance()->getScene()->addChild(spr, PLAYER_Z_ORDER);
 	
 	money = PLAYER_START_MONEY;
@@ -133,8 +130,15 @@ void Player::setActKeys(EventKeyboard::KeyCode keyCode){
 
 
 void Player::removeActListener() {
-	dynamic_cast<GameScene*>(Enviroment::getInstance()->getScene())->removeKeyEventListener(actListener);
-	objInFocus = nullptr;
+	if (objInFocus != nullptr) {
+		log("remove listener");
+		
+		dynamic_cast<GameScene*>(Enviroment::getInstance()->getScene())->removeKeyEventListener(actListener);
+		
+		objInFocus->onChangeFocus();
+		
+		objInFocus = nullptr;
+	}
 }
 
 
@@ -156,14 +160,18 @@ int& Player::getMoney() {
 
 
 void Player::setPayable(IPayable* objInFocus) {
-	
-	if (this->objInFocus != nullptr) {
-		log("remove listener in set");
-		removeActListener();
+
+	if (this->objInFocus == nullptr) 
+	{
+		this->objInFocus = objInFocus;
+		log("create listener");
+		actListener = EventListenerKeyboard::create();
+		setKeyListener(&Player::onKeyPressedAct, actListener);
 	}
-	
-	this->objInFocus = objInFocus;
-	log("create listener");
-	actListener = EventListenerKeyboard::create();
-	setKeyListener(&Player::onKeyPressedAct, actListener);
+}
+bool Player::focused() {
+	if (objInFocus == nullptr)
+		return false;
+	else
+		return true;
 }

@@ -42,6 +42,7 @@ Citizen
 */
 
 Citizen::Citizen(Vec2 pos) : FriendlyNPC(pos, CITIZEN_SPR) { 
+	isPayed = false;
 	spr->setTag(SprTag::CITIZEN);
 	log("ya rodyvsa!!! Hello world!!!");
 }
@@ -60,6 +61,18 @@ Citizen* CitizenController::findByPosition(Vec2 pos) {
 void Citizen::pay(int &money) {
 	if (money >= SET_ROLE_PRICE) {
 		money -= SET_ROLE_PRICE;
-		//DO SMTH
+		isPayed = true;
+		UI::getInstance()->addCitizenSelectIcons(this);
+		log("citizen stoped");
+		this->stopMoving();
 	}
+}
+
+void Citizen::onChangeFocus(){
+	if(isPayed)
+		UI::getInstance()->removeCitizenSelectIcons();
+	
+	log("citizen move rand");
+	this->moveStart();
+	
 }

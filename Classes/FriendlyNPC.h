@@ -21,10 +21,18 @@ protected:
 	PhysicsBody* createPhysBody();
 
 public:
+
 	void setUnactive();
 	void setActive();
+
+	void moveStart();
 	void moveTo(Vec2);
+	void stopMoving();
+	
+	Sprite* getSpr();
+
 	Vec2 getPosition();
+	
 	virtual void move() override;
 
 };

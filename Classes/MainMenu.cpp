@@ -41,31 +41,31 @@ bool MainMenu::init()
 
 
 	bufferBtmImage = MenuItemImage::create(
-		"UI/exitBtn.png",
-		"UI/exitBtn.png"
+		EXIT_BTN,
+		EXIT_BTN
 	);
 	bufferBtmImage->setScale(SCALE_FACTOR);
 	btnImages->push_back(bufferBtmImage);
 
 
 	bufferBtmImage = MenuItemImage::create(
-		"UI/settingsBtn.png",
-		"UI/settingsBtn.png"
+		SETTINGS_BTN,
+		SETTINGS_BTN
 	);
 	bufferBtmImage->setScale(SCALE_FACTOR);
 	btnImages->push_back(bufferBtmImage);
 	
 	bufferBtmImage = MenuItemImage::create(
-		"UI/continueBtn.png",
-		"UI/continueBtn.png"
+		CONTINUE_BTN,
+		CONTINUE_BTN
 	);
 	bufferBtmImage->setScale(SCALE_FACTOR);
 	btnImages->push_back(bufferBtmImage);
 
 
 	bufferBtmImage = MenuItemImage::create(
-		"UI/newGameBtn.png",
-		"UI/newGameBtn.png"
+		NEW_GAME_BTN,
+		NEW_GAME_BTN
 	);
 	bufferBtmImage->setScale(SCALE_FACTOR);
 	btnImages->push_back(bufferBtmImage);
