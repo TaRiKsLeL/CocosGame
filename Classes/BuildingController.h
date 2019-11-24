@@ -40,7 +40,7 @@ public:
 
 	Building* findBuildingByTagAndPosition(int,Vec2);
 
-	KingdomBorders getKingdomBorders();
+	KingdomBorders* getKingdomBorders();
 
 	void createBuilding(int& type, bool side, int& previus, int& num, int& counter, float& sideShift,float center,float shift,int random);
 

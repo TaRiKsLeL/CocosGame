@@ -29,7 +29,8 @@ bool GameScene::init() {
 	Enviroment::getInstance()->setScene(this);
 	int sum = PLAYER_START_MONEY;
 	BuildingController::getInstance()->walls.at(0)->pay(sum);
-	BuildingController::getInstance()->getKingdomBorders();
+	BuildingController::getInstance()->walls.at(1)->pay(sum);
+	Enviroment::getInstance()->setBorders(BuildingController::getInstance()->getKingdomBorders());
 
 	auto contactListener = EventListenerPhysicsContact::create();
 	contactListener->onContactBegin = CC_CALLBACK_1(GameScene::onContactBegin, this);
@@ -126,7 +127,15 @@ bool GameScene::onContactBegin(PhysicsContact& contact)
 			log("%d", player->getMoney());
 
 			log("building pay");
-			player->setPayable(building);
+
+			if (Enviroment::getInstance()->getBorders()->isInKingdom(building->getSprite()->getPositionX())) {
+				player->setPayable(building);
+			}
+			else if (Wall* wall = dynamic_cast<Wall*>(building)) {
+				player->setPayable(building);
+				Enviroment::getInstance()->setBorders(BuildingController::getInstance()->getKingdomBorders());
+			}
+			
 		}
 
 	}

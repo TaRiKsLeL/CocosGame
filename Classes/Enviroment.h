@@ -13,7 +13,7 @@ USING_NS_CC;
 class Enviroment {
 private:
 
-	KingdomBorders borders;
+	KingdomBorders* borders;
 
 	static Enviroment* enviroment;
 	Sprite* groundSpr;
@@ -26,7 +26,9 @@ public:
 	
 	void setScene(Scene*);
 	void setGroundSpr(const std::string);
+	void setBorders(KingdomBorders* borders);
 
+	KingdomBorders* getBorders();
 	double getGroundWidth();
 	
 	Scene* getScene();

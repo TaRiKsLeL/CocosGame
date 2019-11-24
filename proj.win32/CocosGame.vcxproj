@@ -174,6 +174,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Wall.cpp" />
     <ClCompile Include="..\Classes\WariorController.cpp" />
     <ClCompile Include="..\Classes\WorkerController.cpp" />
+    <ClCompile Include="KingdomBorders.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>

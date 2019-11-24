@@ -6,6 +6,7 @@ BuildingController* BuildingController::buildingController{nullptr};
 BuildingController::BuildingController() {
 	
 	generateBuildings(TOWERS_AMOUNT,WALLS_AMOUNT,MINES_AMOUNT);
+	Enviroment::getInstance()->setBorders(getKingdomBorders());
 	buildingController = this;
 }
 
@@ -41,8 +42,8 @@ void BuildingController::generateBuildings(int towerAm,int wallsAm,int minesAm) 
 			int buildingLeft = 0 + rand() % 3;
 			int buildingRight = 0 + rand() % 3;
 
-			random = -RANDOM_FACTOR + rand() % RANDOM_FACTOR;
-
+			random = rand() % RANDOM_FACTOR;
+			
 			if(d==1)
 			{
 
@@ -136,7 +137,6 @@ void BuildingController::createBuilding(int& type, bool side, int& previus, int&
 		log("Prev duilding %d .... This building %d ", previus, sideShift);
 		previus = sideShift;
 
-		log("Adding left tower");
 		counter = 0;
 		num--;
 	}
@@ -195,31 +195,30 @@ void BuildingController::createCenteralBuildings(float center, int shift) {
 }
 
 
-KingdomBorders BuildingController::getKingdomBorders() {
-	
-	float leftX;
-	float rightX;
+KingdomBorders* BuildingController::getKingdomBorders() {
 
 	float min = walls.at(0)->getSprite()->getPositionX();
 	float max = walls.at(0)->getSprite()->getPositionX();
 
 	for each (Wall* wall in walls)
 	{
-		if (min > wall->getSprite()->getPositionX()) {
-			min = wall->getSprite()->getPositionX();
-		}
+		if (wall->getLevel() > 0) {
+			if (min > wall->getSprite()->getPositionX()) {
+				min = wall->getSprite()->getPositionX();
+			}
 
-		if (max < wall->getSprite()->getPositionX()) {
-			max = wall->getSprite()->getPositionX();
+			if (max < wall->getSprite()->getPositionX()) {
+				max = wall->getSprite()->getPositionX();
+			}
 		}
 	}
 	
 	log("Left %f   Right %f", min, max);
 
-	KingdomBorders b;
-	b.leftX = min;
-	b.rightX = max;
-	return b;
+	KingdomBorders *borders = new KingdomBorders();
+	borders->leftX = min;
+	borders->rightX = max;
+	return borders;
 }
 
 Building* BuildingController::findBuildingByTagAndPosition(int tag,Vec2 position) {

@@ -1,6 +1,10 @@
 #pragma once
 
-struct KingdomBorders {
-	float leftX{ 0 };
-	float rightX{ 0 };
+class KingdomBorders {
+public:
+	float leftX;
+	float rightX;
+
+	bool isInKingdom(float);
+
 };

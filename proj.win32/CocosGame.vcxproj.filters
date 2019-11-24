@@ -52,6 +52,9 @@
     <Filter Include="src\GameObjects\NPC\Worker">
       <UniqueIdentifier>{fe2fd087-8cb1-4805-9b4c-94e3c31540c8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\UI">
+      <UniqueIdentifier>{da4c9bb5-1eca-41bc-9e4b-c4ed46cd06ed}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -122,6 +125,12 @@
     </ClCompile>
     <ClCompile Include="..\Classes\SlaveTraider.cpp">
       <Filter>src\GameObjects\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\UI.cpp">
+      <Filter>src\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="KingdomBorders.cpp">
+      <Filter>src\GameObjects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -208,6 +217,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Data.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\UI.h">
+      <Filter>src\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Citizen.h">
+      <Filter>src\GameObjects\NPC\Citizen</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\KingdomBorders.h">
       <Filter>src\GameObjects</Filter>
