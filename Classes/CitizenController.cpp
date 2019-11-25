@@ -98,8 +98,8 @@ void Citizen::pay(int &money) {
 		UI::getInstance()->addCitizenSelectIcons(this);
 		
 
-		Player::getInstance()->removeActListener();
-		Player::getInstance()->setSelectRoleListener();
+		Player::getInstance()->disableBuyListener();
+		Player::getInstance()->enableSelectRoleListener();
 
 
 		this->stopMoving();

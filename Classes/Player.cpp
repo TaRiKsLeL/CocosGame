@@ -16,18 +16,18 @@ Player::Player(const std::string fileName) {
 	spr->getTexture()->setAliasTexParameters();
 	spr->addComponent(createPhysBody());
 	spr->setTag(SprTag::PLAYER);
-
-
 	Enviroment::getInstance()->getScene()->addChild(spr, PLAYER_Z_ORDER);
 	
 	money = PLAYER_START_MONEY;
 	
-	moveListener = EventListenerKeyboard::create();
-	setKeyListener(&Player::onMoveKeyPressed, moveListener);
-	GameTime::addMoveableObject(this);
-	setCamera();
+	initMoveListener();
+	initBuyListener();
+	initChoseRoleListener();
 
-	actListener = nullptr;
+	GameTime::addMoveableObject(this);
+	//
+	setCamera();
+	//
 	objInFocus = nullptr ;
 
 	player = this;
@@ -71,7 +71,7 @@ Player movement
 void Player::move() {
 
 	if (deleteListener) {
-		dynamic_cast<GameScene*>(Enviroment::getInstance()->getScene())->removeKeyEventListener(actListener);
+		disableBuyListener();
 		deleteListener = false;
 	}
 
@@ -88,15 +88,19 @@ void Player::move() {
 }
 
 
+void Player::changeMoveDirection(EventKeyboard::KeyCode keyCode, bool condition) {
 
-void Player::setKeyListener(void (Player::*moveFuncPointer)(), EventListenerKeyboard* listener) {
-	(*this.*moveFuncPointer)();
-	dynamic_cast<GameScene*>(Enviroment::getInstance()->getScene())->setKeyEventListener(listener, spr);
+	if (keyCode == EventKeyboard::KeyCode::KEY_RIGHT_ARROW)
+		direction.right = condition;
+
+	if (keyCode == EventKeyboard::KeyCode::KEY_LEFT_ARROW)
+		direction.left = condition;
+
 }
 
+void Player::initMoveListener() {
 
-
-void Player::onMoveKeyPressed(){
+	moveListener = EventListenerKeyboard::create();
 
 	moveListener->onKeyPressed = [=](EventKeyboard::KeyCode keyCode, Event* event) {
 		changeMoveDirection(keyCode, true);
@@ -105,49 +109,46 @@ void Player::onMoveKeyPressed(){
 	moveListener->onKeyReleased = [=](EventKeyboard::KeyCode keyCode, Event* event) {
 		changeMoveDirection(keyCode, false);
 	};
+
+	dynamic_cast<GameScene*>(Enviroment::getInstance()->getScene())->setKeyEventListener(moveListener, spr);
 }
 
 
 
-void Player::changeMoveDirection(EventKeyboard::KeyCode keyCode, bool condition) {
+void Player::initBuyListener() {
+
+	buyListener = EventListenerKeyboard::create();
+
+	buyListener->onKeyPressed = [=](EventKeyboard::KeyCode keyCode, Event* event) {
 	
-	if(keyCode == EventKeyboard::KeyCode::KEY_RIGHT_ARROW)
-		direction.right = condition;
-
-	if(keyCode == EventKeyboard::KeyCode::KEY_LEFT_ARROW)
-		direction.left = condition;
-
-}
-
-/*
-=====================================================================================================
-Player key act
-=====================================================================================================
-*/
-
-
-
-
-void Player::onKeyPressedAct() {
-	actListener->onKeyPressed = [=](EventKeyboard::KeyCode keyCode, Event* event) {
 		if (keyCode == EventKeyboard::KeyCode::KEY_DOWN_ARROW) {
+
 			objInFocus->pay(this->money);
 		}
 	};
-	actListener->onKeyReleased = [=](EventKeyboard::KeyCode keyCode, Event* event) {};
+	
+	buyListener->onKeyReleased = [=](EventKeyboard::KeyCode keyCode, Event* event) {};
+
+	buyListener->setEnabled(false);
+
+	dynamic_cast<GameScene*>(Enviroment::getInstance()->getScene())->setKeyEventListener(buyListener, spr);
 }
 
 
-void Player::setSelectKeys() {
-	CitizenController* citizenController = CitizenController::getInstance();
+
+void Player::initChoseRoleListener() {
+
+	choseRoleListener = EventListenerKeyboard::create();
 
 
-	
-	actListener->onKeyPressed = [=](EventKeyboard::KeyCode keyCode, Event* event) {
+	choseRoleListener->onKeyPressed = [=](EventKeyboard::KeyCode keyCode, Event* event) {
 		if (keyCode == EventKeyboard::KeyCode::KEY_RIGHT_ARROW) {
-			citizenController->setNewRole(SprTag::BUILDER, objInFocus);
+			
+			CitizenController::getInstance()->setNewRole(SprTag::BUILDER, objInFocus);
+		
 			objInFocus = nullptr;
 			deleteListener = true;
+		
 		}
 		else if (keyCode == EventKeyboard::KeyCode::KEY_DOWN_ARROW) {
 			objInFocus->pay(this->money);
@@ -157,26 +158,38 @@ void Player::setSelectKeys() {
 		}
 	};
 
-	actListener->onKeyReleased = [=](EventKeyboard::KeyCode keyCode, Event* event) {};
+	buyListener->onKeyReleased = [=](EventKeyboard::KeyCode keyCode, Event* event) {};
+
+	choseRoleListener->setEnabled(false);
+
+	dynamic_cast<GameScene*>(Enviroment::getInstance()->getScene())->setKeyEventListener(choseRoleListener, spr);
 }
 
 
 
-void Player::setSelectRoleListener() {
-	setKeyListener(&Player::setSelectKeys, actListener);
+/*
+=====================================================================================================
+Player key act
+=====================================================================================================
+*/
+
+
+void Player::enableSelectRoleListener() {
+	buyListener->setEnabled(true);
 }
 
-void Player::removeFocusActListener() {
-	if (objInFocus != nullptr) {
-		dynamic_cast<GameScene*>(Enviroment::getInstance()->getScene())->removeKeyEventListener(actListener);
+void Player::disableFocusBuyListener() {
+	if (objInFocus != nullptr) 
+	{
+		buyListener->setEnabled(false);
 
 		objInFocus->onChangeFocus();
 		objInFocus = nullptr;
 	}
 }
 
-void Player::removeActListener() {
-		dynamic_cast<GameScene*>(Enviroment::getInstance()->getScene())->removeKeyEventListener(actListener);
+void Player::disableBuyListener() {
+	buyListener->setEnabled(false);
 }
 
 /*
@@ -207,10 +220,10 @@ void Player::setPayable(IPayable* objInFocus) {
 	{
 		this->objInFocus = objInFocus;
 		log("create listener");
-		actListener = EventListenerKeyboard::create();
-		setKeyListener(&Player::onKeyPressedAct, actListener);
+		buyListener->setEnabled(true);
 	}
 }
+
 bool Player::focused() {
 	if (objInFocus == nullptr)
 		return false;

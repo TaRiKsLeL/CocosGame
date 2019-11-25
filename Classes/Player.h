@@ -18,36 +18,47 @@ private:
 
 	bool isFocused;
 	bool deleteListener;
+
 	MoveDirection direction;
+	
 	EventListenerKeyboard* moveListener;
-	EventListenerKeyboard* actListener;
+	EventListenerKeyboard* buyListener;
+	EventListenerKeyboard* choseRoleListener;
+	
 	Sprite* spr;
+	
 	IPayable* objInFocus;
 
 	static Player* player;
 
 	Player(const std::string);
+	
 	void setCamera();
-	virtual PhysicsBody* createPhysBody();
-	virtual void setKeyListener(void (Player::*onKeyPresssed)(), EventListenerKeyboard*);
-	virtual void onMoveKeyPressed();
-	virtual void onKeyPressedAct();
-	virtual void changeMoveDirection(EventKeyboard::KeyCode, bool);
-	virtual void setSelectKeys();
+	
+	PhysicsBody* createPhysBody();
 
+	void initMoveListener();
+	void initBuyListener();
+	void initChoseRoleListener();
+
+	void changeMoveDirection(EventKeyboard::KeyCode, bool);
+	
 public:
-
-	virtual void addMoney(int);
-	virtual int& getMoney();
 	static Player* getInstance();
+
+	void addMoney(int);
+	int& getMoney();
+
 	void move() override ;
-	void removeFocusActListener();
-	void removeActListener();
+	
+	void disableFocusBuyListener();
+	void disableBuyListener();
+	
 	void setPayable(IPayable*);
 	bool checkFocusedObj(IPayable*);
 	bool focused();
 
-	void setSelectRoleListener();
+	void enableSelectRoleListener();
 };
 
 	

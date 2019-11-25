@@ -27,11 +27,14 @@ bool GameScene::init() {
 	this->getPhysicsWorld()->setDebugDrawMask(0xffff);
 
 	Enviroment::getInstance()->setScene(this);
+	
 	int sum = PLAYER_START_MONEY;
 	BuildingController::getInstance()->walls.at(0)->pay(sum);
 	BuildingController::getInstance()->walls.at(1)->pay(sum);
 	Enviroment::getInstance()->setBorders(BuildingController::getInstance()->getKingdomBorders());
+	
 	SlaveTraider::getInstance();
+	
 	auto contactListener = EventListenerPhysicsContact::create();
 	contactListener->onContactBegin = CC_CALLBACK_1(GameScene::onContactBegin, this);
 	contactListener->onContactSeparate = CC_CALLBACK_1(GameScene::onContactSeparate, this);
@@ -54,6 +57,7 @@ void GameScene::setKeyEventListener(EventListenerKeyboard* listener, Sprite* spr
 }
 
 void GameScene::removeKeyEventListener(EventListenerKeyboard* listener) {
+	log("i removed)))");
 	this->_eventDispatcher->removeEventListener(listener);
 }
 /*
@@ -161,7 +165,7 @@ bool GameScene::onContactSeparate(PhysicsContact& contact)
 	SlaveTraider* slaveTraider = nullptr;
 	Citizen* citizen = nullptr;
 
-	IPayable* payable;
+	IPayable* payable = nullptr;
 
 
 		if (nodeA->getTag() == SprTag::PLAYER || nodeB->getTag() == SprTag::PLAYER)
@@ -187,7 +191,7 @@ bool GameScene::onContactSeparate(PhysicsContact& contact)
 
 		if (player != nullptr && player->focused() ) {
 			if(player->checkFocusedObj(payable))
-				player->removeFocusActListener();
+				player->disableFocusBuyListener();
 		}
 	
 

@@ -138,6 +138,9 @@
     <ClCompile Include="KingdomBorders.cpp">
       <Filter>src\GameObjects</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\PlayerKeyListener.cpp">
+      <Filter>src\GameObjects\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -235,6 +238,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Collisions.h">
       <Filter>src\Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PlayerKeyListener.h">
+      <Filter>src\GameObjects\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
