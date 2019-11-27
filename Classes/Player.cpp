@@ -53,8 +53,10 @@ Player* Player::getInstance() {
 
 PhysicsBody* Player::createPhysBody() {
 	PhysicsBody* pb = PhysicsBody::createBox(spr->getBoundingBox().size);
-	pb->setContactTestBitmask(true);
 	pb->setDynamic(false);
+	pb->setContactTestBitmask(true);
+	pb->setCategoryBitmask(PLAYER_CATEGORY_BM);
+	pb->setCollisionBitmask(PLAYER_COLLIDE_BM);
 	return pb;
 }
 
@@ -70,9 +72,9 @@ Player movement
 
 void Player::move() {
 
-	if (deleteListener) {
-		disableBuyListener();
-		deleteListener = false;
+	if (isDisabledChoseRoleListener) {
+		choseRoleListener->setEnabled(false);
+		isDisabledChoseRoleListener = false;
 	}
 
 	Vec2 pos = spr->getPosition();
@@ -140,21 +142,32 @@ void Player::initChoseRoleListener() {
 
 	choseRoleListener = EventListenerKeyboard::create();
 
-
 	choseRoleListener->onKeyPressed = [=](EventKeyboard::KeyCode keyCode, Event* event) {
-		if (keyCode == EventKeyboard::KeyCode::KEY_RIGHT_ARROW) {
-			
+		
+		switch (keyCode)
+		{
+		case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
+			CitizenController::getInstance()->setNewRole(SprTag::WARRIOR, objInFocus);
+			break;
+
+		case EventKeyboard::KeyCode::KEY_UP_ARROW:
 			CitizenController::getInstance()->setNewRole(SprTag::BUILDER, objInFocus);
+			break;
+
+		case EventKeyboard::KeyCode::KEY_LEFT_ARROW:
+
+			break;
+		default:
+			break;
+		}
+
 		
+		if (keyCode == EventKeyboard::KeyCode::KEY_LEFT_ARROW ||
+			keyCode == EventKeyboard::KeyCode::KEY_UP_ARROW ||
+			keyCode == EventKeyboard::KeyCode::KEY_RIGHT_ARROW)
+		{
 			objInFocus = nullptr;
-			deleteListener = true;
-		
-		}
-		else if (keyCode == EventKeyboard::KeyCode::KEY_DOWN_ARROW) {
-			objInFocus->pay(this->money);
-		}
-		else if (keyCode == EventKeyboard::KeyCode::KEY_LEFT_ARROW) {
-			objInFocus->pay(this->money);
+			isDisabledChoseRoleListener = true;
 		}
 	};
 
@@ -174,22 +187,23 @@ Player key act
 */
 
 
-void Player::enableSelectRoleListener() {
-	buyListener->setEnabled(true);
+void Player::enableChoseRoleListener() {
+	choseRoleListener->setEnabled(true);
 }
 
+void Player::disableBuyListener() {
+	buyListener->setEnabled(false);
+}
+
+
 void Player::disableFocusBuyListener() {
-	if (objInFocus != nullptr) 
+	if (objInFocus != nullptr)
 	{
 		buyListener->setEnabled(false);
 
 		objInFocus->onChangeFocus();
 		objInFocus = nullptr;
 	}
-}
-
-void Player::disableBuyListener() {
-	buyListener->setEnabled(false);
 }
 
 /*

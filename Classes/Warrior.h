@@ -2,11 +2,11 @@
 #include "IPayable.h"
 #include "FriendlyNPC.h"
 
-class Builder : public FriendlyNPC 
+class Warrior : public FriendlyNPC
 {
 private:
-	bool isFree;
+	//bool isFree;
 
 public:
-	Builder(Vec2);
+	Warrior(Vec2);
 };

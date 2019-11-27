@@ -99,9 +99,6 @@
     <ClCompile Include="..\Classes\WorkerController.cpp">
       <Filter>src\GameObjects\NPC\Worker</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\WariorController.cpp">
-      <Filter>src\GameObjects\NPC\Warrior</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Enviroment.cpp">
       <Filter>src\GameObjects</Filter>
     </ClCompile>
@@ -138,8 +135,11 @@
     <ClCompile Include="KingdomBorders.cpp">
       <Filter>src\GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\PlayerKeyListener.cpp">
-      <Filter>src\GameObjects\Player</Filter>
+    <ClCompile Include="..\Classes\WarriorController.cpp">
+      <Filter>src\GameObjects\NPC\Warrior</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Warrior.cpp">
+      <Filter>src\GameObjects\NPC\Warrior</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -191,9 +191,6 @@
     <ClInclude Include="..\Classes\WorkerController.h">
       <Filter>src\GameObjects\NPC\Worker</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\WariorController.h">
-      <Filter>src\GameObjects\NPC\Warrior</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\IPayable.h">
       <Filter>src\GameObjects\Interfaces</Filter>
     </ClInclude>
@@ -236,11 +233,11 @@
     <ClInclude Include="..\Classes\KingdomBorders.h">
       <Filter>src\GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Collisions.h">
-      <Filter>src\Collisions</Filter>
+    <ClInclude Include="..\Classes\WarriorController.h">
+      <Filter>src\GameObjects\NPC\Warrior</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\PlayerKeyListener.h">
-      <Filter>src\GameObjects\Player</Filter>
+    <ClInclude Include="..\Classes\Warrior.h">
+      <Filter>src\GameObjects\NPC\Warrior</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

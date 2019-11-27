@@ -47,7 +47,7 @@ void CitizenController::create(Vec2 pos) {
 
 void CitizenController::allMoveRand() {
 	for (Citizen *tmp : *citizens) {
-		GameTime::addMoveableObject(tmp);
+		tmp->moveStart();
 	}
 }
 
@@ -69,6 +69,9 @@ void CitizenController::setNewRole(SprTag tag, IPayable* citzenPayable) {
 	case SprTag::BUILDER:
 		BuilderController::getInstance()->create(citizenToChange->getPosition());
 		break;
+	case SprTag::WARRIOR:
+		WarriorController::getInstance()->create(citizenToChange->getPosition());
+		break;
 	}
 
 	deleteByPos(citizenToChange->getPosition());
@@ -83,8 +86,9 @@ Citizen
 
 Citizen::Citizen(Vec2 pos) : FriendlyNPC(pos, CITIZEN_SPR) { 
 	isPayed = false;
+	spr->getPhysicsBody()->setCategoryBitmask(NPC_CATEGORY_BM);
+	spr->getPhysicsBody()->setCollisionBitmask(NPC_COLLIDE_BM);
 	spr->setTag(SprTag::CITIZEN);
-	log("ya rodyvsa!!! Hello world!!!");
 }
 
 
@@ -99,7 +103,7 @@ void Citizen::pay(int &money) {
 		
 
 		Player::getInstance()->disableBuyListener();
-		Player::getInstance()->enableSelectRoleListener();
+		Player::getInstance()->enableChoseRoleListener();
 
 
 		this->stopMoving();

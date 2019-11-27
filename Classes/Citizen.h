@@ -7,7 +7,7 @@
 
 USING_NS_CC;
 
-class Citizen :public FriendlyNPC, public IPayable {
+class Citizen :public FriendlyNPC {
 private:
 	bool isPayed;
 public:

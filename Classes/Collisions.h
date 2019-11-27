@@ -3,7 +3,7 @@
 #include "BuilderController.h"
 #include "BuildingController.h"
 #include "CitizenController.h"
-#include "WariorController.h"
+#include "WarriorController.h"
 #include "WorkerController.h"
 #include "EnemyController.h"
 
@@ -12,7 +12,9 @@ class Collisions
 {
 public:
 
-	static void playerCollide(Player*, Node*, Node*);
+	bool onPlayerContactBegin(PhysicsContact&);
+	bool onPlayerContactSeparate(PhysicsContact&);
+
 
 };
 

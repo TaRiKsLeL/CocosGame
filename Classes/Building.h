@@ -47,7 +47,7 @@ public:
 	Sprite* getSprite();
 	
 
-	virtual void pay(int&)=0;
+	virtual void pay(int&) = 0;
 	void timeDependedAction() override;
 	int getLevel();
 	void upgrade();

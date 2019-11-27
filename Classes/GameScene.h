@@ -1,4 +1,5 @@
 #pragma once
+#include "Collisions.h"
 #include "cocos2d.h"
 #include "MainMenu.h"
 #include "Enviroment.h"
@@ -17,8 +18,8 @@ public:
 	virtual void update(float) override;
 	virtual void removeKeyEventListener(EventListenerKeyboard*);
 	virtual void setKeyEventListener(EventListenerKeyboard* , Sprite* );
-	bool onContactBegin(PhysicsContact&);
-	bool onContactSeparate(PhysicsContact&);
+	bool onPlayerContactBegin(PhysicsContact&);
+	bool onPlayerContactSeparate(PhysicsContact&);
 
 	//virtual void newMenuCallback(cocos2d::Ref* pSender);
 

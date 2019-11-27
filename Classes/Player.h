@@ -17,7 +17,7 @@ private:
 	int money;
 
 	bool isFocused;
-	bool deleteListener;
+	bool isDisabledChoseRoleListener;
 
 	MoveDirection direction;
 	
@@ -58,7 +58,7 @@ public:
 	bool checkFocusedObj(IPayable*);
 	bool focused();
 
-	void enableSelectRoleListener();
+	void enableChoseRoleListener();
 };
 
 	

@@ -25,8 +25,8 @@ FriendlyNPC::FriendlyNPC(Vec2 pos, std::string sprName) {
 
 PhysicsBody* FriendlyNPC::createPhysBody() {
 	PhysicsBody* pb = PhysicsBody::createBox(spr->getBoundingBox().size);
-	pb->setContactTestBitmask(true);
 	pb->setDynamic(false);
+	pb->setContactTestBitmask(true);
 	return pb;
 }
 

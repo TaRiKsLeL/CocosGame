@@ -17,7 +17,27 @@ enum SprTag {
 	MINE
 };
 
+
 // place here consts
+
+// bitmaps
+
+const int PLAYER_CATEGORY_BM		{ 0b00001 };
+const int PLAYER_COLLIDE_BM			{ 0b01010 };
+
+const int NPC_CATEGORY_BM			{ 0b00101 };
+const int NPC_COLLIDE_BM			{ 0b00001 };
+
+const int BUILDER_CATEGORY_BM		{ 0b00010 };
+const int BUILDER_COLLIDE_BM		{ 0b00001 };
+
+const int BUILDING_CATEGORY_BM		{ 0b01001 };
+const int BUILDING_COLLIDE_BM		{ 0b00001 };
+
+const int SLAVE_TRAIDER_CATEGORY_BM	{ 0b00011 };
+const int SLAVE_TRAIDER_COLLIDE_BM	{ 0b00001 };
+
+
 
 const int DELTA_TIME{ 60 };
 const int DAY_DURATION{ 1 };
@@ -28,8 +48,8 @@ const double SCALE_FACTOR{ 0.5 };
 
 const int BUILDING_Z_ORDER{ 0 };
 const int GROUND_Z_ORDER{ 3 };
-const int NPC_Z_ORDER{ 2 };
-const int PLAYER_Z_ORDER{ 1 };
+const int NPC_Z_ORDER{ 1 };
+const int PLAYER_Z_ORDER{ 2 };
 
 // start position
 
@@ -132,7 +152,7 @@ const vector<std::string> MINES{ "buildings/mines/mine0.png","buildings/mines/mi
 
 const int SLAVE_PRICE{ 4 };
 const int SET_ROLE_PRICE{ 1 };
-const int PLAYER_START_MONEY{ 100 };
+const int PLAYER_START_MONEY{ 1000 };
 
 //speed
 const int PLAYER_SPEED{ 10 };

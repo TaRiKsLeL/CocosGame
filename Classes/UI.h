@@ -1,7 +1,7 @@
 #pragma once
 #include "cocos2d.h"
 #include "Data.h"
-#include "CitizenController.h"
+#include "Citizen.h"
 #include <vector>
 #include <stack>
 

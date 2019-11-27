@@ -13,25 +13,23 @@ map<ITimeDepended*,int> *GameTime::timeDependedObjects = new map<ITimeDepended*,
 void GameTime::updateFrame() {
 	frameCount++;
 
-	for (IMoveable* tmpObj : *moveableObjects) {
-		tmpObj->move();
-	}
 	while (deleteMoveableStack->size() > 0)
 	{
 		for (int i = 0; i < moveableObjects->size(); i++) {
 			if ((moveableObjects->at(i)) == deleteMoveableStack->top()) {
-				
+
 				moveableObjects->erase(moveableObjects->begin() + i);
-				
+
 				deleteMoveableStack->pop();
 
-				if (deleteMoveableStack->size() == 0)
-					break;
 			}
 		}
-
+	}	
+	
+	for (IMoveable* tmpObj : *moveableObjects) {
+		tmpObj->move();
 	}
-
+	
 	if (frameCount >= DELTA_TIME) {
 		frameCount = 0;
 

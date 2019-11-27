@@ -48,8 +48,10 @@ INTERACTION
 
 PhysicsBody* Building::createPhysBody() {
 	PhysicsBody* pb = PhysicsBody::createBox(spr->getBoundingBox().size);
-	pb->setContactTestBitmask(true);
 	pb->setDynamic(false);
+	pb->setContactTestBitmask(true);
+	pb->setCategoryBitmask(BUILDING_CATEGORY_BM);
+	pb->setCollisionBitmask(BUILDING_COLLIDE_BM);
 	return pb;
 }
 

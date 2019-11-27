@@ -168,13 +168,13 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\MainMenu.cpp" />
     <ClCompile Include="..\Classes\Mine.cpp" />
     <ClCompile Include="..\Classes\Player.cpp" />
-    <ClCompile Include="..\Classes\PlayerKeyListener.cpp" />
     <ClCompile Include="..\Classes\SettingsMenu.cpp" />
     <ClCompile Include="..\Classes\SlaveTraider.cpp" />
     <ClCompile Include="..\Classes\Tower.cpp" />
     <ClCompile Include="..\Classes\UI.cpp" />
     <ClCompile Include="..\Classes\Wall.cpp" />
-    <ClCompile Include="..\Classes\WariorController.cpp" />
+    <ClCompile Include="..\Classes\Warrior.cpp" />
+    <ClCompile Include="..\Classes\WarriorController.cpp" />
     <ClCompile Include="..\Classes\WorkerController.cpp" />
     <ClCompile Include="KingdomBorders.cpp" />
     <ClCompile Include="main.cpp" />
@@ -188,7 +188,6 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Castle.h" />
     <ClInclude Include="..\Classes\Citizen.h" />
     <ClInclude Include="..\Classes\CitizenController.h" />
-    <ClInclude Include="..\Classes\Collisions.h" />
     <ClInclude Include="..\Classes\Data.h" />
     <ClInclude Include="..\Classes\Enemy.h" />
     <ClInclude Include="..\Classes\EnemyController.h" />
@@ -198,7 +197,6 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\GameTime.h" />
     <ClInclude Include="..\Classes\KingdomBorders.h" />
     <ClInclude Include="..\Classes\Mine.h" />
-    <ClInclude Include="..\Classes\PlayerKeyListener.h" />
     <ClInclude Include="..\Classes\Shooter.h" />
     <ClInclude Include="..\Classes\MainMenu.h" />
     <ClInclude Include="..\Classes\IMoveable.h" />
@@ -210,7 +208,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Tower.h" />
     <ClInclude Include="..\Classes\UI.h" />
     <ClInclude Include="..\Classes\Wall.h" />
-    <ClInclude Include="..\Classes\WariorController.h" />
+    <ClInclude Include="..\Classes\Warrior.h" />
+    <ClInclude Include="..\Classes\WarriorController.h" />
     <ClInclude Include="..\Classes\WorkerController.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>

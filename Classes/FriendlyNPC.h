@@ -3,15 +3,18 @@
 #include"Data.h"
 #include <ctime>
 #include"IMoveable.h"
+#include"IPayable.h"
 
 USING_NS_CC;
 
-class FriendlyNPC : public IMoveable {
+class FriendlyNPC : public IMoveable , public IPayable 
+{
 
 protected:
 
 	bool isActive;
 	bool isMoving;
+
 	bool stop;
 	Sprite* spr;
 	Vec2 currentPointToMove;
