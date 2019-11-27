@@ -10,17 +10,20 @@ USING_NS_CC;
 class GameScene : public Scene
 {
 protected:
-
+	int count = 0;
 public:
 	static Scene* createScene();
 	
 	virtual bool init();
 	virtual void update(float) override;
+
 	virtual void removeKeyEventListener(EventListenerKeyboard*);
 	virtual void setKeyEventListener(EventListenerKeyboard* , Sprite* );
+	
 	bool onPlayerContactBegin(PhysicsContact&);
 	bool onPlayerContactSeparate(PhysicsContact&);
 
+	IPayable* getPayableByNode(Node*);
 	//virtual void newMenuCallback(cocos2d::Ref* pSender);
 
 	CREATE_FUNC(GameScene);

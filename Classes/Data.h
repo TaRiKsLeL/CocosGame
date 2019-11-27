@@ -22,19 +22,19 @@ enum SprTag {
 
 // bitmaps
 
-const int PLAYER_CATEGORY_BM		{ 0b00001 };
-const int PLAYER_COLLIDE_BM			{ 0b01010 };
+const int PLAYER_CATEGORY_BM		{ 0b11111 };
+const int PLAYER_COLLIDE_BM			{ 0b11111 };
 
-const int NPC_CATEGORY_BM			{ 0b00101 };
+const int NPC_CATEGORY_BM			{ 0b00010 };
 const int NPC_COLLIDE_BM			{ 0b00001 };
 
-const int BUILDER_CATEGORY_BM		{ 0b00010 };
+const int BUILDER_CATEGORY_BM		{ 0b00100 };
 const int BUILDER_COLLIDE_BM		{ 0b00001 };
 
-const int BUILDING_CATEGORY_BM		{ 0b01001 };
+const int BUILDING_CATEGORY_BM		{ 0b01000 };
 const int BUILDING_COLLIDE_BM		{ 0b00001 };
 
-const int SLAVE_TRAIDER_CATEGORY_BM	{ 0b00011 };
+const int SLAVE_TRAIDER_CATEGORY_BM	{ 0b10000 };
 const int SLAVE_TRAIDER_COLLIDE_BM	{ 0b00001 };
 
 
