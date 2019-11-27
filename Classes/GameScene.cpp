@@ -59,7 +59,6 @@ bool GameScene::init() {
 	
 	
 	
-	log("post Init");
 	this->scheduleUpdate();
 
 	return true;
@@ -76,7 +75,6 @@ void GameScene::setKeyEventListener(EventListenerKeyboard* listener, Sprite* spr
 }
 
 void GameScene::removeKeyEventListener(EventListenerKeyboard* listener) {
-	log("i removed)))");
 	this->_eventDispatcher->removeEventListener(listener);
 }
 /*

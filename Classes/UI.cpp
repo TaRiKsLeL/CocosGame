@@ -49,7 +49,6 @@ CITIZEN PICTURES METHODS
 */
 
 void UI::addCitizenSelectIcons(Citizen* citizen) {
-	log("citizen add to icon");
 	currentCitizen = citizen;
 	
 	initStack();

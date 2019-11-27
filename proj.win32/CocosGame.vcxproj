@@ -175,6 +175,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Wall.cpp" />
     <ClCompile Include="..\Classes\Warrior.cpp" />
     <ClCompile Include="..\Classes\WarriorController.cpp" />
+    <ClCompile Include="..\Classes\Worker.cpp" />
     <ClCompile Include="..\Classes\WorkerController.cpp" />
     <ClCompile Include="KingdomBorders.cpp" />
     <ClCompile Include="main.cpp" />
@@ -210,6 +211,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Wall.h" />
     <ClInclude Include="..\Classes\Warrior.h" />
     <ClInclude Include="..\Classes\WarriorController.h" />
+    <ClInclude Include="..\Classes\Worker.h" />
     <ClInclude Include="..\Classes\WorkerController.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>

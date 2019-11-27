@@ -88,6 +88,8 @@ Citizen::Citizen(Vec2 pos) : FriendlyNPC(pos, CITIZEN_SPR) {
 	isPayed = false;
 	spr->getPhysicsBody()->setCategoryBitmask(NPC_CATEGORY_BM);
 	spr->getPhysicsBody()->setCollisionBitmask(NPC_COLLIDE_BM);
+	spr->getPhysicsBody()->setContactTestBitmask(NPC_COLLIDE_BM);
+
 	spr->setTag(SprTag::CITIZEN);
 }
 

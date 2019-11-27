@@ -54,7 +54,7 @@ Player* Player::getInstance() {
 PhysicsBody* Player::createPhysBody() {
 	PhysicsBody* pb = PhysicsBody::createBox(spr->getBoundingBox().size);
 	pb->setDynamic(false);
-	pb->setContactTestBitmask(true);
+	pb->setContactTestBitmask(PLAYER_COLLIDE_BM);
 	pb->setCategoryBitmask(PLAYER_CATEGORY_BM);
 	pb->setCollisionBitmask(PLAYER_COLLIDE_BM);
 	return pb;
@@ -233,7 +233,6 @@ void Player::setPayable(IPayable* objInFocus) {
 	if (this->objInFocus == nullptr) 
 	{
 		this->objInFocus = objInFocus;
-		log("create listener");
 		buyListener->setEnabled(true);
 	}
 }

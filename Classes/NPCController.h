@@ -1,20 +1,23 @@
 #pragma once
 #include "cocos2d.h"
-#include "CitizenController.h"
 #include <vector>
+#include "Data.h"
+#include "Enviroment.h"
 
 USING_NS_CC;
 
-template <class NPC>
-class  NPCController {
-
+template <class T> class NCPController
+{
 
 private:
 
-	std::vector <NPC*> vectorNPCs;
+	vector<NPC*>* m_NPCs;
 
 public:
 
-	virtual void createNPC(Vec2);
-
+	NPCController();
+	void create(Vec2);
+	void allMoveRand();
+	T* findByPosition(Vec2);
+	T* findClosestFree(Vec2);
 };
