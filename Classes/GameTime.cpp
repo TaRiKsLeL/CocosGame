@@ -39,7 +39,6 @@ void GameTime::updateFrame() {
 			for each (TimeAction tmpPair in *timeDependedObjects)
 			{
 				tmpPair.first->timeDependedAction();
-				log("In loop of dependent objects");
 			}
 
 		while (deleteTimeDependedStack->size() > 0) 
@@ -59,7 +58,6 @@ void GameTime::addMoveableObject(IMoveable* objToAdd) {
 }
 
 void GameTime::removeTimeDependedObject(ITimeDepended* objToErase) {
-	log("In erace");
 	deleteTimeDependedStack->push(objToErase);
 }
 void GameTime::removeMoveableObject(IMoveable* objToRemove) {

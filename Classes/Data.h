@@ -83,6 +83,8 @@ const string PICK_SPR{ "UI/pickBtn.png" };
 const string HUMMER_SPR{ "UI/hummerBtn.png" };
 const string BOW_SPR{ "UI/bowBtn.png" };
 
+const string BACKGROUND_SPR{ "UI/background.png" };
+
 //UI elements shift position
 
 const double SELECT_SITIZEN_ROLE_Y{ GENERAL_Y + 16 * 4 / SCALE_FACTOR  };

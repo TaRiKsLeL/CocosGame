@@ -1,6 +1,7 @@
 #pragma once
 
 #include "MainMenu.h"
+#include "Data.h"
 #include "cocos2d.h"
 
 class SettingsMenu : public cocos2d::Scene

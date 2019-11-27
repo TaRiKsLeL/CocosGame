@@ -233,7 +233,6 @@ void Player::setPayable(IPayable* objInFocus) {
 	if (this->objInFocus == nullptr) 
 	{
 		this->objInFocus = objInFocus;
-		log("create listener");
 		buyListener->setEnabled(true);
 	}
 }

@@ -24,7 +24,7 @@ bool SettingsMenu::init() {
 
 	this->addChild(menu);
 
-	Sprite* background = Sprite::create("background.png");
+	Sprite* background = Sprite::create(BACKGROUND_SPR);
 
 	background->setAnchorPoint(cocos2d::Vec2(0, 0));
 
