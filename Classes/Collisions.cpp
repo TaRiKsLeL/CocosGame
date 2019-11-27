@@ -52,6 +52,8 @@ bool GameScene::onPlayerContactBegin(PhysicsContact& contact)
 	if (building)
 		objToPay = dynamic_cast<IPayable*>(building);
 
+
+
 	switch (nonPlayerNode->getTag()) {
 	case SprTag::SLAVE_TRAIDER:
 		slaveTraider = SlaveTraider::getInstance();
