@@ -4,6 +4,7 @@
 #include <ctime>
 #include"IMoveable.h"
 #include"IPayable.h"
+#include "KingdomBorders.h"
 
 USING_NS_CC;
 

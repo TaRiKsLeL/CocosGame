@@ -26,7 +26,6 @@ FriendlyNPC::FriendlyNPC(Vec2 pos, std::string sprName) {
 PhysicsBody* FriendlyNPC::createPhysBody() {
 	PhysicsBody* pb = PhysicsBody::createBox(spr->getBoundingBox().size);
 	pb->setDynamic(false);
-	pb->setContactTestBitmask(true);
 	return pb;
 }
 
@@ -70,8 +69,8 @@ void FriendlyNPC::moveTo(Vec2 destination) {
 void FriendlyNPC::move() {
 
 	if (!isMoving) {
-		//SET KINGDOM BORDER
-		currentPointToMove = randPoint(0, 3000);
+		currentPointToMove = randPoint(Enviroment::getInstance()->getBorders()->leftX,
+			Enviroment::getInstance()->getBorders()->rightX);
 		isMoving = true;
 	}
 	moveTo(currentPointToMove);
