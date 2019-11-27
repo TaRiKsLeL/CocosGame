@@ -22,6 +22,8 @@ void GameTime::updateFrame() {
 
 				deleteMoveableStack->pop();
 
+				if (deleteMoveableStack->size() == 0)
+					break;
 			}
 		}
 	}	
