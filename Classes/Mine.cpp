@@ -13,7 +13,6 @@ void Mine::pay(int& sum) {
 
 		if (price <= sum && price != 0) {
 			sum -= price;
-			log("Sum after buying MINE %d", sum);
 			upgrade();
 		}
 	}

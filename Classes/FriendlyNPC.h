@@ -15,22 +15,26 @@ protected:
 
 	bool isActive;
 	bool isMoving;
-
+	bool isMovingRand;
 	bool stop;
+
 	Sprite* spr;
 	Vec2 currentPointToMove;
 
 	Vec2 randPoint(int fromX, int toX);
 	FriendlyNPC(Vec2, std::string);
 	PhysicsBody* createPhysBody();
+	void moveTo(Vec2);
 
 public:
 
 	void setUnactive();
 	void setActive();
 
-	void moveStart();
-	void moveTo(Vec2);
+	void moveRandStart();
+	void moveStart(Vec2 pos);
+
+	Vec2 getCurrentPointMoveTo();
 	void stopMoving();
 	
 	Sprite* getSpr();

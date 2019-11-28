@@ -156,9 +156,6 @@
     <ClCompile Include="KingdomBorders.cpp">
       <Filter>src\GameObjects\Enviroment</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\BaseController.cpp">
-      <Filter>src\GameObjects\NPC\BaseController</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\TemplatesController.cpp">
       <Filter>src\GameObjects\NPC\BaseController</Filter>
     </ClCompile>

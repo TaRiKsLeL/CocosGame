@@ -23,6 +23,9 @@ public:
 	bool onPlayerContactBegin(PhysicsContact&);
 	bool onPlayerContactSeparate(PhysicsContact&);
 
+	bool onBuilderContactBegin(PhysicsContact&);
+	bool onBuilderContactSeparate(PhysicsContact&);
+
 	IPayable* getPayableByNode(Node*);
 	//virtual void newMenuCallback(cocos2d::Ref* pSender);
 

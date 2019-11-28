@@ -5,8 +5,10 @@
 class Builder : public FriendlyNPC 
 {
 private:
-	bool isFree;
+	bool m_isBuilding;
 
 public:
 	Builder(Vec2);
+	void setBuild(bool);
+	bool isBuilding();
 };

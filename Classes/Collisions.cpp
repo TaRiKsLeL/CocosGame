@@ -2,16 +2,13 @@
 
 /*
 =====================================================================================================
-onContact
+onContact Player
 =====================================================================================================
 */
 
 bool GameScene::onPlayerContactBegin(PhysicsContact& contact)
 {
 	Player* player = nullptr;
-
-	//log("collision %d", count);
-	//count++;
 
 	auto nodeA = contact.getShapeA()->getBody()->getNode();
 	auto nodeB = contact.getShapeB()->getBody()->getNode();
@@ -46,7 +43,7 @@ bool GameScene::onPlayerContactBegin(PhysicsContact& contact)
 
 /*
 =====================================================================================================
-onContactSeparate
+onContactSeparate Player
 =====================================================================================================
 */
 
@@ -102,6 +99,8 @@ bool GameScene::onPlayerContactSeparate(PhysicsContact& contact)
 	return true;
 }
 
+
+
 IPayable* GameScene::getPayableByNode(Node* nonPlayerNode) {
 
 	Building* building = nullptr;
@@ -150,4 +149,74 @@ IPayable* GameScene::getPayableByNode(Node* nonPlayerNode) {
 		break;
 	}
 	return objToPay;
+}
+
+/*
+=====================================================================================================
+onContact Builder
+=====================================================================================================
+*/
+
+bool GameScene::onBuilderContactBegin(PhysicsContact& contact)
+{
+	Builder* builder = nullptr;
+	Building* building = nullptr;
+
+	auto nodeA = contact.getShapeA()->getBody()->getNode();
+	auto nodeB = contact.getShapeB()->getBody()->getNode();
+
+	Node* secondNode = nullptr;
+
+	if ((nodeA->getPhysicsBody()->getCategoryBitmask() ^ BUILDER_CATEGORY_BM) == 0) {
+		builder = BuilderController::getInstance()->findByPosition(nodeA->getPosition());
+		secondNode = nodeB;
+	}
+	else if ((nodeB->getPhysicsBody()->getCategoryBitmask() ^ BUILDER_CATEGORY_BM) == 0) {
+		builder = BuilderController::getInstance()->findByPosition(nodeA->getPosition());
+		secondNode = nodeA;
+	}
+	else
+		return false;
+
+	if ((secondNode->getPhysicsBody()->getCollisionBitmask() & BUILDER_COLLIDE_BM) == 0)
+		return false;
+
+	switch (secondNode->getTag()) {
+
+	case SprTag::MINE:
+	case SprTag::TOWER:
+	case SprTag::CASTLE:
+	case SprTag::WALL:
+		building = BuildingController::getInstance()->findBuildingByTagAndPosition(secondNode->getTag(), secondNode->getPosition());
+		if (building == nullptr) return false;
+		break;
+	default:
+		return false;
+	}
+
+	if (builder && builder->isBuilding() && builder->getCurrentPointMoveTo() == building->getPosition()) {
+		builder->stopMoving();
+		building->setBuildingStatus(true);
+		return true;
+	}
+
+	return false;
+}
+
+/*
+=====================================================================================================
+onContactSeparate Builder
+=====================================================================================================
+*/
+
+
+bool GameScene::onBuilderContactSeparate(PhysicsContact& contact)
+{
+
+	auto nodeA = contact.getShapeA()->getBody()->getNode();
+	auto nodeB = contact.getShapeB()->getBody()->getNode();
+
+
+
+	return true;
 }

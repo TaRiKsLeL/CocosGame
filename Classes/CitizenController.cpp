@@ -100,6 +100,6 @@ void Citizen::onChangeFocus(){
 	if(isPayed)
 		UI::getInstance()->removeCitizenSelectIcons();
 	
-	this->moveStart();
+	this->moveRandStart();
 	
 }

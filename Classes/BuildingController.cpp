@@ -169,7 +169,7 @@ void BuildingController::createCenteralBuildings(float center, int shift) {
 	castle = new Castle(&CASTLES);
 	castle->getSprite()->setPosition(Vec2(center, GENERAL_Y));
 
-	for (int d = 1; d < 3; d++) { // d=1 ліва сторона, d=2 права сторона
+	for (int d = 1; d <= 2; d++) { // d=1 ліва сторона, d=2 права сторона
 		if (d == 1)
 		{
 			Tower* tower = new Tower(false,&TOWERS);
@@ -202,7 +202,7 @@ void BuildingController::createCenteralBuildings(float center, int shift) {
 KingdomBorders* BuildingController::getKingdomBorders() {
 
 	float min = walls.at(0)->getSprite()->getPositionX();
-	float max = walls.at(0)->getSprite()->getPositionX();
+	float max = walls.at(1)->getSprite()->getPositionX();
 
 	for each (Wall* wall in walls)
 	{
