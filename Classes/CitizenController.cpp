@@ -10,25 +10,9 @@ Controller
 CitizenController* CitizenController::citizenController{ nullptr };
 
 CitizenController::CitizenController() {
-	citizens = new std::vector<Citizen*>();
 }
 
-void CitizenController::deleteByPos(Vec2 pos) {
-	Citizen* toDelete = findByPosition(pos);
 
-
-	for (int i = 0; i < citizens->size(); i++) {
-		if (citizens->at(i)->getPosition().x == pos.x) {
-			citizens->erase(citizens->begin() + i);
-			break;
-		}
-	}
-
-	Enviroment::getInstance()->getScene()->removeChild(toDelete->getSpr(), true);
-
-	delete toDelete;
-
-}
 
 
 CitizenController* CitizenController::getInstance() {
@@ -40,25 +24,21 @@ CitizenController* CitizenController::getInstance() {
 
 }
 
+void CitizenController::deleteByPos(Vec2 pos) {
+	Enviroment::getInstance()->getScene()->removeChild(controller.deleteByPos(pos)->getSpr(), true);
+
+}
+
 void CitizenController::create(Vec2 pos) {
-	
-	citizens->push_back(new Citizen(pos));
+	controller.create(pos);
 }
 
 void CitizenController::allMoveRand() {
-	for (Citizen *tmp : *citizens) {
-		tmp->moveStart();
-	}
+	controller.allMoveRand();
 }
 
 Citizen* CitizenController::findByPosition(Vec2 pos) {
-
-	for (Citizen* tmp : *citizens) {
-		if (tmp->getPosition().x == pos.x)
-			return tmp;
-	}
-
-	return nullptr;
+	return controller.findByPosition(pos);
 }
 
 void CitizenController::setNewRole(SprTag tag, IPayable* citzenPayable) {
@@ -71,6 +51,9 @@ void CitizenController::setNewRole(SprTag tag, IPayable* citzenPayable) {
 		break;
 	case SprTag::WARRIOR:
 		WarriorController::getInstance()->create(citizenToChange->getPosition());
+		break;
+	case SprTag::WORKER:
+		WorkerController::getInstance()->create(citizenToChange->getPosition());
 		break;
 	}
 

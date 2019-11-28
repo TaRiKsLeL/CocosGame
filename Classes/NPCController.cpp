@@ -1,19 +1,19 @@
 #include "NPCController.h"
 
-template <class T> 
-NPCController<NPC>::NPCController() {
-	m_NPCs = new std::vector<NPC*>();
+template <typename T> 
+NPCController<T>::NPCController() {
+	m_NPCs = new std::vector<T*>();
 }
 
 template <class T> 
-void NPCController<NPC>::create(Vec2 pos) {
+void NPCController<T>::create(Vec2 pos) {
 
-	m_NPC->push_back(new NPC(pos));
+	m_NPC->push_back(new T(pos));
 }
 
 template <class T> 
-void NPCController<NPC>::allMoveRand() {
-	for (NPC* tmp : *m_NPCs) {
+void NPCController<T>::allMoveRand() {
+	for (T* tmp : *m_NPCs) {
 		GameTime::addMoveableObject(tmp);
 	}
 }
@@ -29,13 +29,3 @@ T* NPCController<T>::findByPosition(Vec2 pos) {
 	return nullptr;
 }
 
-template <class T> 
-T* NPCController<T>::findClosestFree(Vec2 pos) {
-
-	for (NPC* tmp : *m_NPCs) {
-		if (tmp->getPosition().x == pos.x)
-			return tmp;
-	}
-
-	return nullptr;
-}

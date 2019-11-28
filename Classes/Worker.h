@@ -3,5 +3,6 @@
 
 class Worker : public FriendlyNPC
 {
+public:
 	Worker(Vec2);
 };
