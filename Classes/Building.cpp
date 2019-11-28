@@ -64,7 +64,7 @@ void Building::updateEnviromentData()
 void Building::upgrade() {
 	isBuilding = true;
 	level++;
-	//GameTime::addTimeDependedObject(-1, this);
+	GameTime::addTimeDependedObject(-1, this);
 
 	log("%d", level);
 
@@ -82,6 +82,7 @@ void Building::timeDependedAction()
 	if (currentState > nextUpgradeDuration)
 	{
 		GameTime::removeTimeDependedObject(this);
+		updateEnviromentData();
 	}
 
 	currentState++;

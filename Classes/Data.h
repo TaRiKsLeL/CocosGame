@@ -72,7 +72,7 @@ const string CITIZEN_SPR{ "citizen.png" };
 const string BUILDER_SPR{ "builder.png" };
 const string WARRIOR_SPR{ "warrior.png" };
 const string WORKER_SPR{ "worker.png" };
-
+const string FENCE_SPR{ "Environment/fence.png" };
 // UI elements
 
 const string NEW_GAME_BTN{ "UI/newGameBtn.png" };
@@ -155,7 +155,10 @@ const vector<std::string> CASTLES{ "buildings/castles/castle0.png","buildings/ca
 const vector<std::string> MINES{ "buildings/mines/mine0.png","buildings/mines/mine1.png"};
 
 const vector<std::string> TREES{ "Environment/tree1.png","Environment/tree2.png","Environment/tree3.png",
-"Environment/tree4.png","Environment/tree5.png" };
+"Environment/tree4.png","Environment/tree5.png","Environment/tree6.png",
+"Environment/tree7.png","Environment/tree8.png","Environment/tree9.png",
+"Environment/bush1.png","Environment/grass1.png","Environment/stick1.png" };
+
 
 //money
 

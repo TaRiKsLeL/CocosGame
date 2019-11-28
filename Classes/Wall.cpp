@@ -25,7 +25,6 @@ void Wall::pay(int& sum) {
 			sum -= price;
 			log("Sum after buying WALL %d", sum);
 			upgrade();
-			updateEnviromentData();
 		}
 	}
 	

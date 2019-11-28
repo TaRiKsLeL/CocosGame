@@ -34,6 +34,7 @@ public:
 
 	void generateTrees();
 	void updateTrees();
+	void createFence();
 
 	KingdomBorders* getBorders();
 	double getGroundWidth();
