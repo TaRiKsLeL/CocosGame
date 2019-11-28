@@ -46,6 +46,7 @@ const double SCALE_FACTOR{ 0.5 };
 
 //Z-orders
 
+const int TREE_Z_ORDER{ -1 };
 const int BUILDING_Z_ORDER{ 0 };
 const int GROUND_Z_ORDER{ 3 };
 const int NPC_Z_ORDER{ 1 };
@@ -99,6 +100,10 @@ const int WALLS_AMOUNT = 10;
 const int TOWERS_AMOUNT = 10;
 const int MINES_AMOUNT = 4;
 
+//TREES
+
+const int TREES_AMOUNT = 50;
+
 //sprites texture size per picture
 
 
@@ -148,6 +153,9 @@ const vector<std::string> WALLS{
 const vector<std::string> TOWERS{ "buildings/towers/tower0.png","buildings/towers/tower3.png"};
 const vector<std::string> CASTLES{ "buildings/castles/castle0.png","buildings/castles/castle1.png"};
 const vector<std::string> MINES{ "buildings/mines/mine0.png","buildings/mines/mine1.png"};
+
+const vector<std::string> TREES{ "Environment/tree1.png","Environment/tree2.png","Environment/tree3.png",
+"Environment/tree4.png","Environment/tree5.png" };
 
 //money
 

@@ -10,8 +10,8 @@ bool GameScene::onPlayerContactBegin(PhysicsContact& contact)
 {
 	Player* player = nullptr;
 
-	log("collision %d", count);
-	count++;
+	//log("collision %d", count);
+	//count++;
 
 	auto nodeA = contact.getShapeA()->getBody()->getNode();
 	auto nodeB = contact.getShapeB()->getBody()->getNode();
@@ -210,7 +210,14 @@ IPayable* GameScene::getPayableByNode(Node* nonPlayerNode) {
 	case SprTag::CASTLE:
 	case SprTag::WALL:
 		building = BuildingController::getInstance()->findBuildingByTagAndPosition(nonPlayerNode->getTag(), nonPlayerNode->getPosition());
-		objToPay = dynamic_cast<IPayable*>(building);
+		if (Enviroment::getInstance()->getBorders()->isInKingdom(building->getSprite()->getPositionX())) {
+			objToPay = dynamic_cast<IPayable*>(building);
+		}
+		else if (Wall* wall = dynamic_cast<Wall*>(building)) {
+			objToPay = dynamic_cast<IPayable*>(building);
+
+			
+		}
 		break;
 	}
 	return objToPay;

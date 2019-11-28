@@ -1,7 +1,6 @@
 #include "Wall.h"
 
 
-
 Wall::Wall(bool dir,const vector<std::string> *images) : Building(images) {
 
 	spr->setTag(SprTag::WALL);
@@ -26,8 +25,10 @@ void Wall::pay(int& sum) {
 			sum -= price;
 			log("Sum after buying WALL %d", sum);
 			upgrade();
+			updateEnviromentData();
 		}
 	}
+	
 }
 
 void Wall::repair() {

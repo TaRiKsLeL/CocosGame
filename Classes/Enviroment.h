@@ -19,6 +19,10 @@ private:
 	Sprite* groundSpr;
 	Scene* scene;
 
+	vector<Sprite*> trees;
+	stack<Sprite*>* deleteTreesStack;
+	bool pointIntersectsTree(float);
+
 	void addComponents();
 public:
 
@@ -27,6 +31,9 @@ public:
 	void setScene(Scene*);
 	void setGroundSpr(const std::string);
 	void setBorders(KingdomBorders* borders);
+
+	void generateTrees();
+	void updateTrees();
 
 	KingdomBorders* getBorders();
 	double getGroundWidth();

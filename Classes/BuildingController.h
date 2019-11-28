@@ -23,7 +23,7 @@ private:
 	
 	vector<Mine*> mines;
 	vector<Tower*> towers;
-
+	vector<Wall*> walls;
 
 	void createWall(bool,int);
 	void createTower(bool,int);
@@ -34,7 +34,6 @@ private:
 
 public:
 
-	vector<Wall*> walls;
 
 	BuildingController();
 
@@ -43,6 +42,8 @@ public:
 	KingdomBorders* getKingdomBorders();
 
 	void createBuilding(int& type, bool side, int& previus, int& num, int& counter, float& sideShift,float center,float shift,int random);
+
+	vector<Wall*> getWalls();
 
 	static BuildingController* getInstance();
 

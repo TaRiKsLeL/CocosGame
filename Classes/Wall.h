@@ -1,11 +1,13 @@
 #pragma once
 
 #include "Building.h"
+//#include "Enviroment.h"
 
 class Wall :public Building {
 private:
-
+	
 public:
+
 
 	Wall(bool,const vector<std::string>*);
 	

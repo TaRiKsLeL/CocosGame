@@ -31,9 +31,7 @@ bool GameScene::init() {
 	Enviroment::getInstance()->setScene(this);
 	
 	int sum = PLAYER_START_MONEY;
-	BuildingController::getInstance()->walls.at(0)->pay(sum);
-	BuildingController::getInstance()->walls.at(1)->pay(sum);
-	Enviroment::getInstance()->setBorders(BuildingController::getInstance()->getKingdomBorders());
+	
 	
 
 

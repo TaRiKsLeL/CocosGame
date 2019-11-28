@@ -5,7 +5,6 @@
 #include "Mine.h"
 #include "Data.h"
 #include "Enviroment.h"
-
 /*
 =====================================================================================================
 CONSTRUCTORS
@@ -55,6 +54,12 @@ PhysicsBody* Building::createPhysBody() {
 	return pb;
 }
 
+void Building::updateEnviromentData()
+{
+	Enviroment::getInstance()->setBorders(BuildingController::getInstance()->getKingdomBorders());
+	Enviroment::getInstance()->updateTrees();
+}
+
 
 void Building::upgrade() {
 	isBuilding = true;
@@ -67,6 +72,8 @@ void Building::upgrade() {
 	spr->getTexture()->setAliasTexParameters();
 	spr->removeAllComponents();
 	spr->addComponent(createPhysBody());
+
+	
 }
 
 
