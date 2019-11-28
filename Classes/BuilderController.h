@@ -30,6 +30,6 @@ public:
 	Builder* findByPosition(Vec2);
 	Builder* findByDestinationPoint(Vec2);
 	
-	void setPositionToBuild(Vec2);
+	bool setPositionToBuild(Vec2);
 
 };

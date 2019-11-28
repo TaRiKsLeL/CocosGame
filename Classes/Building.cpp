@@ -62,9 +62,9 @@ void Building::updateEnviromentData()
 
 
 void Building::upgrade() {
-	GameTime::addTimeDependedObject(-1, this);
-
-	BuilderController::getInstance()->setPositionToBuild(this->getPosition());
+		
+	if(!isBuilding && BuilderController::getInstance()->setPositionToBuild(this->getPosition()))
+		GameTime::addTimeDependedObject(-1, this);
 }
 
 void Building::timeDependedAction()

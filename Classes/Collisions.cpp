@@ -212,11 +212,46 @@ onContactSeparate Builder
 
 bool GameScene::onBuilderContactSeparate(PhysicsContact& contact)
 {
+	Builder* builder = nullptr;
+	Building* building = nullptr;
 
 	auto nodeA = contact.getShapeA()->getBody()->getNode();
 	auto nodeB = contact.getShapeB()->getBody()->getNode();
 
+	Node* secondNode = nullptr;
 
+	if ((nodeA->getPhysicsBody()->getCategoryBitmask() ^ BUILDER_CATEGORY_BM) == 0) {
+		builder = BuilderController::getInstance()->findByPosition(nodeA->getPosition());
+		secondNode = nodeB;
+	}
+	else if ((nodeB->getPhysicsBody()->getCategoryBitmask() ^ BUILDER_CATEGORY_BM) == 0) {
+		builder = BuilderController::getInstance()->findByPosition(nodeA->getPosition());
+		secondNode = nodeA;
+	}
+	else
+		return false;
 
-	return true;
+	if ((secondNode->getPhysicsBody()->getCollisionBitmask() & BUILDER_COLLIDE_BM) == 0)
+		return false;
+
+	switch (secondNode->getTag()) {
+
+	case SprTag::MINE:
+	case SprTag::TOWER:
+	case SprTag::CASTLE:
+	case SprTag::WALL:
+		building = BuildingController::getInstance()->findBuildingByTagAndPosition(secondNode->getTag(), secondNode->getPosition());
+		if (building == nullptr) return false;
+		break;
+	default:
+		return false;
+	}
+
+	if (builder && builder->getCurrentPointMoveTo() == building->getPosition()) {
+		builder->setBuild(false);
+		building->setBuildingStatus(false);
+		return true;
+	}
+
+	return false;
 }

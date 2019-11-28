@@ -110,10 +110,6 @@ bool Enviroment::pointIntersectsTree(float xPos)
 
 void Enviroment::addComponents() {
 	setGroundSpr(GROUND_SPR);
-	//int s = 20;
-	BuildingController::getInstance();
-	BuildingController::getInstance()->getWalls().at(0)->upgrade();
-	BuildingController::getInstance()->getWalls().at(1)->upgrade();
 	setBorders(BuildingController::getInstance()->getKingdomBorders());
 	generateTrees();
 	Player::getInstance();
