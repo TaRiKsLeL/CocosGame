@@ -5,6 +5,7 @@
 #include "ITimeDepended.h"
 #include "Data.h"
 #include <vector>
+
 //#include "Enviroment.h"
 
 USING_NS_CC;
@@ -39,6 +40,7 @@ protected:
 	int currentState{0};
 	
 	PhysicsBody* createPhysBody();
+	void updateEnviromentData();
 public:
 
 	Building(std::string,const int, const int);

@@ -6,7 +6,6 @@ BuildingController* BuildingController::buildingController{nullptr};
 BuildingController::BuildingController() {
 	
 	generateBuildings(TOWERS_AMOUNT,WALLS_AMOUNT,MINES_AMOUNT);
-	Enviroment::getInstance()->setBorders(getKingdomBorders());
 	buildingController = this;
 }
 
@@ -140,6 +139,11 @@ void BuildingController::createBuilding(int& type, bool side, int& previus, int&
 		counter = 0;
 		num--;
 	}
+}
+
+vector<Wall*> BuildingController::getWalls()
+{
+	return walls;
 }
 
 void BuildingController::createWall(bool dir,int xPos) {

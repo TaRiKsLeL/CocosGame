@@ -5,7 +5,6 @@
 #include "Mine.h"
 #include "Data.h"
 #include "Enviroment.h"
-
 /*
 =====================================================================================================
 CONSTRUCTORS
@@ -53,6 +52,12 @@ PhysicsBody* Building::createPhysBody() {
 	pb->setCategoryBitmask(BUILDING_CATEGORY_BM);
 	pb->setCollisionBitmask(BUILDING_COLLIDE_BM);
 	return pb;
+}
+
+void Building::updateEnviromentData()
+{
+	Enviroment::getInstance()->setBorders(BuildingController::getInstance()->getKingdomBorders());
+	Enviroment::getInstance()->updateTrees();
 }
 
 
