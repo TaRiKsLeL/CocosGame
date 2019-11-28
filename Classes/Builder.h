@@ -6,7 +6,6 @@ class Builder : public FriendlyNPC
 {
 private:
 	bool m_isBuilding;
-	bool isMovingToTarget;
 
 public:
 	Builder(Vec2);

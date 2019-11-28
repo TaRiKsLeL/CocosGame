@@ -32,7 +32,7 @@ const int BUILDER_CATEGORY_BM		{ 0b00100 };
 const int BUILDER_COLLIDE_BM		{ 0b01001 };
 
 const int BUILDING_CATEGORY_BM		{ 0b01000 };
-const int BUILDING_COLLIDE_BM		{ 0b00001 };
+const int BUILDING_COLLIDE_BM		{ 0b00101 };
 
 const int SLAVE_TRAIDER_CATEGORY_BM	{ 0b10000 };
 const int SLAVE_TRAIDER_COLLIDE_BM	{ 0b00001 };
@@ -158,4 +158,4 @@ const int PLAYER_START_MONEY{ 1000 };
 
 //speed
 const int PLAYER_SPEED{ 10 };
-const int FRIENDLY_NPC_MOVE_SPEED{ 2 };
+const int FRIENDLY_NPC_MOVE_SPEED{ 5 };

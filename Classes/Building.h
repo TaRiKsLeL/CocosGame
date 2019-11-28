@@ -45,12 +45,14 @@ public:
 	Building(const vector<std::string>*);
 
 	Sprite* getSprite();
-	
+	Vec2 getPosition();
+
 
 	virtual void pay(int&) = 0;
 	void timeDependedAction() override;
 	int getLevel();
 	void upgrade();
+	void setBuildingStatus(bool);
 
 };
 

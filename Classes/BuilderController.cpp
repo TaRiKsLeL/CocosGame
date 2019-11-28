@@ -37,7 +37,8 @@ void BuilderController::setPositionToBuild(Vec2 pos)
 	Builder* builder = findCosestFree(pos);
 
 	builder->stopMoving();
-	builder->moveTo(pos);
+	builder->setBuild(true);
+	builder->moveStart(pos);
 
 
 }
@@ -55,4 +56,16 @@ Builder* BuilderController::findCosestFree(Vec2 pos) {
 
 	return findByPosition(closest);
 
+}
+
+Builder* BuilderController::findByDestinationPoint(Vec2 pos) {
+	vector<Builder*>* builders = controller.getElems();
+
+	for (Builder* tmp : *builders) {
+		if (tmp->getCurrentPointMoveTo() == pos) {
+			return tmp;
+		}
+	}
+
+	return nullptr;
 }

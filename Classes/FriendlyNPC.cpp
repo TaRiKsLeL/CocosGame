@@ -12,13 +12,14 @@ FriendlyNPC::FriendlyNPC(Vec2 pos, std::string sprName) {
 	setActive();
 	isMoving = false;
 	stop = true;
+	isMovingRand = true;
 
 	spr = Sprite::create(sprName);
 	spr->setPosition(pos);
 	spr->setAnchorPoint(Vec2(0.5, 0));
 	spr->addComponent(createPhysBody());
 
-	moveStart();
+	moveRandStart();
 	Enviroment::getInstance()->getScene()->addChild(spr, NPC_Z_ORDER);
 }
 
@@ -39,16 +40,27 @@ Vec2 FriendlyNPC::getPosition() {
 	return spr->getPosition();
 }
 
-void FriendlyNPC::moveStart() {
+void FriendlyNPC::moveRandStart() {
 	if (stop) {
+		
 		stop = false;
+		isMovingRand = true;
 		GameTime::addMoveableObject(this);
 	}
 
 }
 
+void FriendlyNPC::moveStart(Vec2 pos) {
+	if (stop) {
+		stop = false;
+		currentPointToMove = pos;
+		GameTime::addMoveableObject(this);
+	}
+
+}
 
 void FriendlyNPC::moveTo(Vec2 destination) {
+
 	int direction;
 	int delta = destination.x - spr->getPosition().x;
 
@@ -73,7 +85,7 @@ Vec2 FriendlyNPC::getCurrentPointMoveTo() {
 
 void FriendlyNPC::move() {
 
-	if (!isMoving) {
+	if (!isMoving && isMovingRand) {
 		currentPointToMove = randPoint(Enviroment::getInstance()->getBorders()->leftX,
 			Enviroment::getInstance()->getBorders()->rightX);
 		isMoving = true;
@@ -91,6 +103,7 @@ Vec2 FriendlyNPC::randPoint(int fromX, int toX) {
 void FriendlyNPC::stopMoving() {
 	if (!stop) {
 		stop = true;
+		isMovingRand = false;
 		GameTime::removeMoveableObject(this);
 	}
 }

@@ -28,6 +28,7 @@ public:
 	void allMoveRand();
 	void deleteByPos(Vec2);
 	Builder* findByPosition(Vec2);
+	Builder* findByDestinationPoint(Vec2);
 	
 	void setPositionToBuild(Vec2);
 

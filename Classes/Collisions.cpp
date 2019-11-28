@@ -181,14 +181,15 @@ bool GameScene::onBuilderContactBegin(PhysicsContact& contact)
 	case SprTag::CASTLE:
 	case SprTag::WALL:
 		building = BuildingController::getInstance()->findBuildingByTagAndPosition(secondNode->getTag(), secondNode->getPosition());
-		if (building) return false;
+		if (building == nullptr) return false;
 		break;
+	default:
+		return false;
 	}
 
-	if (builder->getCurrentPointMoveTo() == building->getSprite()->getPosition()) {
+	if (builder && builder->isBuilding() && builder->getCurrentPointMoveTo() == building->getPosition()) {
 		builder->stopMoving();
-		builder->setBuild(true);
-		//building
+		building->setBuildingStatus(true);
 		return true;
 	}
 

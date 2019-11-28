@@ -31,8 +31,8 @@ bool GameScene::init() {
 	Enviroment::getInstance()->setScene(this);
 	
 	int sum = PLAYER_START_MONEY;
-	BuildingController::getInstance()->walls.at(0)->pay(sum);
-	BuildingController::getInstance()->walls.at(1)->pay(sum);
+	//BuildingController::getInstance()->walls.at(0)->pay(sum);
+	//BuildingController::getInstance()->walls.at(1)->pay(sum);
 	Enviroment::getInstance()->setBorders(BuildingController::getInstance()->getKingdomBorders());
 	
 
@@ -49,11 +49,15 @@ bool GameScene::init() {
 	playerContactListener->onContactBegin = CC_CALLBACK_1(GameScene::onPlayerContactBegin, this);
 	playerContactListener->onContactSeparate = CC_CALLBACK_1(GameScene::onPlayerContactSeparate, this);
 	
-	
+	EventListenerPhysicsContact* builderContactListener = EventListenerPhysicsContact::create();
+	builderContactListener->onContactBegin = CC_CALLBACK_1(GameScene::onBuilderContactBegin, this);
+	builderContactListener->onContactSeparate = CC_CALLBACK_1(GameScene::onBuilderContactSeparate, this);
+
 	
 	
 	
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(playerContactListener, this);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(builderContactListener, this);
 
 	
 	

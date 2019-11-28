@@ -57,31 +57,48 @@ PhysicsBody* Building::createPhysBody() {
 
 
 void Building::upgrade() {
-	isBuilding = true;
-	level++;
-	//GameTime::addTimeDependedObject(-1, this);
+	GameTime::addTimeDependedObject(-1, this);
 
-	log("%d", level);
-
-	spr->setTexture(levelsImages->at(level));
-	spr->getTexture()->setAliasTexParameters();
-	spr->removeAllComponents();
-	spr->addComponent(createPhysBody());
+	BuilderController::getInstance()->setPositionToBuild(this->getPosition());
 }
-
 
 void Building::timeDependedAction()
 {
 	if (currentState > nextUpgradeDuration)
 	{
 		GameTime::removeTimeDependedObject(this);
+
+		level++;
+
+		BuilderController::getInstance()->findByDestinationPoint(getPosition())->setBuild(false);
+		BuilderController::getInstance()->findByDestinationPoint(getPosition())->moveRandStart();
+
+		spr->setTexture(levelsImages->at(level));
+		spr->getTexture()->setAliasTexParameters();
+		spr->removeAllComponents();
+		spr->addComponent(createPhysBody());
+
+		isBuilding = false;
+		currentState = 0;
 	}
 
-	currentState++;
+	if(isBuilding == true)
+		currentState++;
+
+	log("%d", currentState);
 }
 
 int Building::getLevel() {
 	return level;
+}
+
+void Building::setBuildingStatus(bool status) {
+	isBuilding = status;
+}
+
+
+Vec2 Building::getPosition() {
+	return spr->getPosition();
 }
 
 Sprite* Building::getSprite() {
