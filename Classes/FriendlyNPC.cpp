@@ -66,6 +66,11 @@ void FriendlyNPC::moveTo(Vec2 destination) {
 	}
 }
 
+Vec2 FriendlyNPC::getCurrentPointMoveTo() {
+	return currentPointToMove;
+}
+
+
 void FriendlyNPC::move() {
 
 	if (!isMoving) {

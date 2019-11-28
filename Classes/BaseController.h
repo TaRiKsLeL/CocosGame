@@ -20,7 +20,6 @@ public:
 	};
 
 	void create(Vec2 pos) {
-
 		m_NPCs->push_back(new T(pos));
 	};
 
@@ -55,5 +54,9 @@ public:
 
 		return nullptr;
 	};
+
+	vector<T*>* getElems() {
+		return m_NPCs;
+	}
 };
 

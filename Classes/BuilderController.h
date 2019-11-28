@@ -14,10 +14,12 @@ class BuilderController
 {
 
 private:
-	
+
 	BuilderController();
 	BaseController<Builder> controller;
 	static BuilderController* builderController;
+	Builder* findCosestFree(Vec2);
+
 
 public:
 
@@ -27,5 +29,6 @@ public:
 	void deleteByPos(Vec2);
 	Builder* findByPosition(Vec2);
 	
-	Builder* findClosestFree(Vec2);
+	void setPositionToBuild(Vec2);
+
 };

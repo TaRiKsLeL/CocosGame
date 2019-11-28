@@ -31,6 +31,7 @@ public:
 
 	void moveStart();
 	void moveTo(Vec2);
+	Vec2 getCurrentPointMoveTo();
 	void stopMoving();
 	
 	Sprite* getSpr();

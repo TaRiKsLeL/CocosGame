@@ -24,7 +24,6 @@ void Tower::pay(int& sum) {
 
 		if (price <= sum && price != 0) {
 			sum -= price;
-			log("Sum after buying TOWER %d", sum);
 			upgrade();
 		}
 	}

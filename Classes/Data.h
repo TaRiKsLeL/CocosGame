@@ -158,4 +158,4 @@ const int PLAYER_START_MONEY{ 1000 };
 
 //speed
 const int PLAYER_SPEED{ 10 };
-const int FRIENDLY_NPC_MOVE_SPEED{ 1 };
+const int FRIENDLY_NPC_MOVE_SPEED{ 2 };
