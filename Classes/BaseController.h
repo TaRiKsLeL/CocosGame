@@ -40,6 +40,7 @@ public:
 			}
 		}
 
+		toDelete->deleteObj();
 
 		return toDelete;
 

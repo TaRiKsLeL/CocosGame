@@ -39,6 +39,10 @@ public:
 	
 	Sprite* getSpr();
 
+	void addChild(Sprite*);
+	void removeAllChildren();
+	void deleteObj();
+
 	Vec2 getPosition();
 	
 	virtual void move() override;

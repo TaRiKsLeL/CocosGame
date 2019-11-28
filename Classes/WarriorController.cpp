@@ -22,8 +22,7 @@ void WarriorController::allMoveRand() {
 }
 
 void WarriorController::deleteByPos(Vec2 pos) {
-	Enviroment::getInstance()->getScene()->removeChild(controller.deleteByPos(pos)->getSpr(), true);
-
+	controller.deleteByPos(pos);
 }
 
 Warrior* WarriorController::findByPosition(Vec2 pos) {

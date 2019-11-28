@@ -133,3 +133,16 @@ get set
 Sprite* FriendlyNPC::getSpr() {
 	return spr;
 }
+
+
+void FriendlyNPC::addChild(Sprite* spr) {
+	this->spr->addChild(spr);
+}
+
+void FriendlyNPC::removeAllChildren() {
+	spr->removeAllChildren();
+}
+
+void FriendlyNPC::deleteObj() {
+	spr->removeFromParentAndCleanup(true);
+}

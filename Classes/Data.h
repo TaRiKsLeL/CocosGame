@@ -40,7 +40,7 @@ const int SLAVE_TRAIDER_COLLIDE_BM	{ 0b00001 };
 
 
 const int DELTA_TIME{ 60 };
-const int DAY_DURATION{ 1 };
+const int DAY_DURATION{ 240 };
 const double SCALE_FACTOR{ 0.5 };
 
 

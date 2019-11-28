@@ -2,6 +2,7 @@
 USING_NS_CC;
 
 int GameTime::frameCount{ 0 };
+int GameTime::currentTime{ 0 };
 
 stack<ITimeDepended*>* GameTime::deleteTimeDependedStack = new stack<ITimeDepended*>();
 stack<IMoveable*>* GameTime::deleteMoveableStack = new stack<IMoveable*>();
@@ -31,14 +32,23 @@ void GameTime::updateFrame() {
 	for (IMoveable* tmpObj : *moveableObjects) {
 		tmpObj->move();
 	}
-	
+
+
+
 	if (frameCount >= DELTA_TIME) {
 		frameCount = 0;
+		currentTime++;
+
+		if (currentTime == DAY_DURATION)
+			currentTime = 0;
+
+		log("current time: %d", currentTime);
 
 		if(timeDependedObjects->size()>0)
 			for each (TimeAction tmpPair in *timeDependedObjects)
-			{
-				tmpPair.first->timeDependedAction();
+			{	
+				if(tmpPair.second == currentTime || tmpPair.second == -1)
+					tmpPair.first->timeDependedAction();
 			}
 
 		while (deleteTimeDependedStack->size() > 0) 
@@ -47,7 +57,10 @@ void GameTime::updateFrame() {
 			deleteTimeDependedStack->pop();
 		}
 	}
+
+	
 }
+
 
 void GameTime::addTimeDependedObject(int time, ITimeDepended* objToAdd) {
 	timeDependedObjects->insert(TimeAction(objToAdd,time));

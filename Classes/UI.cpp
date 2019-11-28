@@ -49,8 +49,8 @@ CITIZEN PICTURES METHODS
 */
 
 void UI::addCitizenSelectIcons(Citizen* citizen) {
-	currentCitizen = citizen;
 	
+	currentCitizen = citizen;
 	initStack();
 	initIcons();
 
@@ -61,7 +61,7 @@ void UI::addCitizenSelectIcons(Citizen* citizen) {
 				SELECT_SITIZEN_ROLE_Y ));
 		selectSprsPositionX->pop();
 
-		currentCitizen->getSpr()->addChild(tmp);
+		currentCitizen->addChild(tmp);
 	}
 
 }
@@ -69,6 +69,6 @@ void UI::addCitizenSelectIcons(Citizen* citizen) {
 
 void UI::removeCitizenSelectIcons() {
 	if(currentCitizen != nullptr)
-		currentCitizen->getSpr()->removeAllChildren();
+		currentCitizen->removeAllChildren();
 	currentCitizen = nullptr;
 }

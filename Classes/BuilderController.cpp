@@ -25,7 +25,7 @@ void BuilderController::allMoveRand() {
 }
 
 void BuilderController::deleteByPos(Vec2 pos) {
-	Enviroment::getInstance()->getScene()->removeChild(controller.deleteByPos(pos)->getSpr(), true);
+	controller.deleteByPos(pos);
 }
 
 Builder* BuilderController::findByPosition(Vec2 pos) {
