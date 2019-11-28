@@ -3,7 +3,7 @@
 BuilderController* BuilderController::builderController{ nullptr };
 
 BuilderController::BuilderController() {
-	builders = new std::vector<Builder*>();
+	
 }
 
 BuilderController* BuilderController::getInstance() {
@@ -16,32 +16,24 @@ BuilderController* BuilderController::getInstance() {
 }
 
 void BuilderController::create(Vec2 pos) {
-
-	builders->push_back(new Builder(pos));
+	controller.create(pos);
 }
 
 void BuilderController::allMoveRand() {
-	for (Builder* tmp : *builders) {
-		GameTime::addMoveableObject(tmp);
-	}
+	controller.allMoveRand();
+}
+
+void BuilderController::deleteByPos(Vec2 pos) {
+	Enviroment::getInstance()->getScene()->removeChild(controller.deleteByPos(pos)->getSpr(), true);
 }
 
 Builder* BuilderController::findByPosition(Vec2 pos) {
-
-	for (Builder* tmp : *builders) {
-		if (tmp->getPosition().x == pos.x)
-			return tmp;
-	}
-
-	return nullptr;
+	return controller.findByPosition(pos);
 }
 
 Builder* BuilderController::findClosestFree(Vec2 pos) {
 
-	for (Builder* tmp : *builders) {
-		if (tmp->getPosition().x == pos.x)
-			return tmp;
-	}
+	
 
 	return nullptr;
 }

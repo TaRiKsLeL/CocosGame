@@ -155,7 +155,7 @@ void Player::initChoseRoleListener() {
 			break;
 
 		case EventKeyboard::KeyCode::KEY_LEFT_ARROW:
-
+			CitizenController::getInstance()->setNewRole(SprTag::WORKER, objInFocus);
 			break;
 		default:
 			break;

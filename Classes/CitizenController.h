@@ -1,12 +1,15 @@
 #pragma once
-#include "cocos2d.h"
+
+#include "UI.h"
 #include <vector>
 #include "Data.h"
-#include "Enviroment.h"
-#include "Citizen.h"
-#include "UI.h"
-#include "BuilderController.h"
 #include "Player.h"
+#include "Citizen.h"
+#include "Enviroment.h"
+#include "BuilderController.h"
+#include "WorkerController.h"
+#include "BaseController.h"
+
 
 USING_NS_CC;
 
@@ -15,7 +18,7 @@ class CitizenController
 {
 
 private:
-	vector<Citizen*>* citizens;
+	BaseController<Citizen> controller;
 	CitizenController();
 	static CitizenController* citizenController;
 public:
