@@ -40,7 +40,6 @@ void BuilderController::setPositionToBuild(Vec2 pos)
 	builder->setBuild(true);
 	builder->moveStart(pos);
 
-
 }
 
 Builder* BuilderController::findCosestFree(Vec2 pos) {

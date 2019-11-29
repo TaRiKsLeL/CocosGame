@@ -7,6 +7,7 @@
 #include "Enviroment.h"
 #include "Data.h"
 #include "CitizenController.h"
+#include "UI.h"
 
 USING_NS_CC;
 
@@ -48,6 +49,9 @@ public:
 
 	void addMoney(int);
 	int& getMoney();
+
+	void addChild(Node*);
+	void removeAllChildren();
 
 	void move() override ;
 	

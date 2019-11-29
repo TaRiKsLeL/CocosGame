@@ -57,7 +57,8 @@ PhysicsBody* Building::createPhysBody() {
 void Building::updateEnviromentData()
 {
 	Enviroment::getInstance()->setBorders(BuildingController::getInstance()->getKingdomBorders());
-	Enviroment::getInstance()->updateTrees();
+	EnvironmentUI::getInstance()->updateTrees();
+	EnvironmentUI::getInstance()->createFence(Enviroment::getInstance()->getBorders());
 }
 
 
@@ -82,6 +83,8 @@ void Building::timeDependedAction()
 		spr->getTexture()->setAliasTexParameters();
 		spr->removeAllComponents();
 		spr->addComponent(createPhysBody());
+
+		updateEnviromentData();
 
 		isBuilding = false;
 		currentState = 0;

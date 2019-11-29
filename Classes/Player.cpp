@@ -126,6 +126,7 @@ void Player::initBuyListener() {
 		if (keyCode == EventKeyboard::KeyCode::KEY_DOWN_ARROW) {
 
 			objInFocus->pay(this->money);
+			UI::getInstance()->getCoinsLabel()->setString(to_string(this->money));
 		}
 	};
 	
@@ -219,6 +220,16 @@ void Player::addMoney(int moneyToAdd) {
 }
 int& Player::getMoney() {
 	return this->money;
+}
+
+void Player::addChild(Node* child)
+{
+	spr->addChild(child);
+}
+
+void Player::removeAllChildren()
+{
+	spr->removeAllChildren();
 }
 
 bool Player::checkFocusedObj(IPayable* objTocheck) {

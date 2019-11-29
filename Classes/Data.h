@@ -20,6 +20,7 @@ enum SprTag {
 
 // place here consts
 
+
 // bitmaps
 
 const int PLAYER_CATEGORY_BM		{ 0b00001 };
@@ -43,10 +44,45 @@ const int DELTA_TIME{ 60 };
 const int DAY_DURATION{ 1 };
 const double SCALE_FACTOR{ 0.5 };
 
+//UI
+
+//-----coin-----
+const std::string COINS_AMOUNT_FONT{ "fonts/PixelFont.ttf" };
+const int LABEL_SCALE{ 4 };
+const int COINS_LABEL_SIZE{ 70* LABEL_SCALE };
+
+const int LABEL_X_SPACE_FROM_PLAYER{ 850 };
+const int LABEL_Y_SPACE_FROM_PLAYER{ 700 };
+
+const float COIN_SCALE_FACTOR{ 1.0f / SCALE_FACTOR };
+
+//----heart-----
+
+const float HEART_SCALE_FACTOR{ 1.0f / SCALE_FACTOR };
+
+
+// ANIMATION
+
+
+//-----coin-----
+const std::string COIN_FRAMES{ "UI/coins_frames.png" };
+const int COIN_IMAGES_AMOUNT{ 8 };
+const int COIN_IMAGE_SIZE{ static_cast<int>(16 / SCALE_FACTOR)};
+const float COIN_TIME_PER_FRAME{ 0.5f };
+
+//----heart-----
+
+const std::string FULL_HEART_FRAMES{ "UI/full_frames.png" };
+const std::string EMPTY_HEART_FRAMES{ "UI/empty_frames.png" };
+const int HEART_IMAGES_AMOUNT{ 4 };
+const int HEART_IMAGE_SIZE{ static_cast<int>(32 / SCALE_FACTOR) };
+const float HEART_TIME_PER_FRAME{ 0.5f };
+
 
 //Z-orders
 
 const int TREE_Z_ORDER{ -1 };
+const int FENCE_Z_ORDER{ -2 };
 const int BUILDING_Z_ORDER{ 0 };
 const int GROUND_Z_ORDER{ 3 };
 const int NPC_Z_ORDER{ 1 };
@@ -72,7 +108,7 @@ const string CITIZEN_SPR{ "citizen.png" };
 const string BUILDER_SPR{ "builder.png" };
 const string WARRIOR_SPR{ "warrior.png" };
 const string WORKER_SPR{ "worker.png" };
-const string FENCE_SPR{ "Environment/fence.png" };
+const string FENCE_SPR{ "Environment/fence2.png" };
 // UI elements
 
 const string NEW_GAME_BTN{ "UI/newGameBtn.png" };
@@ -156,7 +192,7 @@ const vector<std::string> MINES{ "buildings/mines/mine0.png","buildings/mines/mi
 
 const vector<std::string> TREES{ "Environment/tree1.png","Environment/tree2.png","Environment/tree3.png",
 "Environment/tree4.png","Environment/tree5.png","Environment/tree6.png",
-"Environment/tree7.png","Environment/tree8.png","Environment/tree9.png",
+"Environment/tree7.png",
 "Environment/bush1.png","Environment/grass1.png","Environment/stick1.png" };
 
 
