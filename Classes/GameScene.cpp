@@ -24,7 +24,7 @@ bool GameScene::init() {
 	Scene::initWithPhysics();
 
 
-	this->getPhysicsWorld()->setDebugDrawMask(0xffff);
+	//this->getPhysicsWorld()->setDebugDrawMask(0xffff);
 
 	
 	
@@ -37,7 +37,7 @@ bool GameScene::init() {
 	UI::getInstance()->createHeart(FULL_HEART_FRAMES, EMPTY_HEART_FRAMES, HEART_IMAGES_AMOUNT, HEART_IMAGE_SIZE, HEART_TIME_PER_FRAME);
 
 	SlaveTraider::getInstance();
-
+	EnemyController::getInstance();
 
 
 

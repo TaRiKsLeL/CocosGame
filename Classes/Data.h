@@ -38,10 +38,13 @@ const int BUILDING_COLLIDE_BM		{ 0b00101 };
 const int SLAVE_TRAIDER_CATEGORY_BM	{ 0b10000 };
 const int SLAVE_TRAIDER_COLLIDE_BM	{ 0b00001 };
 
+const int ENEMY_CATEGORY_BM			{ 0b100000 };
+const int ENEMY_COLLIDE_BM			{ 0b000001 };
+
 
 
 const int DELTA_TIME{ 60 };
-const int DAY_DURATION{ 1 };
+const int DAY_DURATION{ 240 };
 const double SCALE_FACTOR{ 0.5 };
 
 //UI
@@ -109,6 +112,8 @@ const string BUILDER_SPR{ "builder.png" };
 const string WARRIOR_SPR{ "warrior.png" };
 const string WORKER_SPR{ "worker.png" };
 const string FENCE_SPR{ "Environment/fence2.png" };
+const string ENEMY_SPR{ "enemy.png" };
+
 // UI elements
 
 const string NEW_GAME_BTN{ "UI/newGameBtn.png" };
@@ -205,4 +210,18 @@ const int PLAYER_START_MONEY{ 1000 };
 
 //speed
 const int PLAYER_SPEED{ 10 };
-const int FRIENDLY_NPC_MOVE_SPEED{ 5 };
+const int FRIENDLY_NPC_MOVE_SPEED{ 3 };
+const int DEFAULT_NPC_MOVE_SPEED{ 1 };
+
+const int ENEMY_MOVE_SPEED_MIN{ 3 };
+const int ENEMY_MOVE_SPEED_MAX{ 4 };
+const int ENEMY_RAND_DIVISION{ 10 };
+
+//HP
+const int PLAYER_HP{ 3 };
+const int ENEMY_HP{ 1 };
+
+//attack power
+const int FRIENDLY_ATTACK{ 1 };
+const int ENEMY_ATTACK{ 1 };
+

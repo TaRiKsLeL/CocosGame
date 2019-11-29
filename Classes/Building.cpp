@@ -11,23 +11,11 @@ CONSTRUCTORS
 =====================================================================================================
 */
 
-Building::Building(std::string fileName,const int width, const int height)
-{
-	this->filename = fileName;
-	buildingWigth = width;
-	buildingHeight = height;
-	//level = 0;
-
-	spr = Sprite::create(fileName);
-	spr->getTexture()->setAliasTexParameters();
-	spr->setAnchorPoint(Vec2(0.5, 0));
-
-	Enviroment::getInstance()->getScene()->addChild(spr, BUILDING_Z_ORDER);
-}
 
 Building::Building(const vector<std::string>* images) {
 
 	nextUpgradeDuration = 10;
+	setBuildingStatus(false);
 
 	levelsImages = images;
 	
@@ -63,9 +51,9 @@ void Building::updateEnviromentData()
 
 
 void Building::upgrade() {
-	GameTime::addTimeDependedObject(-1, this);
-
-	BuilderController::getInstance()->setPositionToBuild(this->getPosition());
+		
+	if(!isBuilding && BuilderController::getInstance()->setPositionToBuild(this->getPosition()))
+		GameTime::addTimeDependedObject(-1, this);
 }
 
 void Building::timeDependedAction()

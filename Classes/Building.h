@@ -43,7 +43,6 @@ protected:
 	void updateEnviromentData();
 public:
 
-	Building(std::string,const int, const int);
 	Building(const vector<std::string>*);
 
 	Sprite* getSprite();

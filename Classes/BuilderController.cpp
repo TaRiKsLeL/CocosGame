@@ -25,31 +25,35 @@ void BuilderController::allMoveRand() {
 }
 
 void BuilderController::deleteByPos(Vec2 pos) {
-	Enviroment::getInstance()->getScene()->removeChild(controller.deleteByPos(pos)->getSpr(), true);
+	controller.deleteByPos(pos);
 }
 
 Builder* BuilderController::findByPosition(Vec2 pos) {
 	return controller.findByPosition(pos);
 }
 
-void BuilderController::setPositionToBuild(Vec2 pos)
+bool BuilderController::setPositionToBuild(Vec2 pos)
 {
 	Builder* builder = findCosestFree(pos);
+	
+	if (builder) {
+		builder->stopMoving();
+		builder->setBuild(true);
+		builder->moveStart(pos);
+		return true;
+	}
 
-	builder->stopMoving();
-	builder->setBuild(true);
-	builder->moveStart(pos);
-
+	return false;
 }
 
 Builder* BuilderController::findCosestFree(Vec2 pos) {
 	
 	vector<Builder*>* builders = controller.getElems();
 	
-	Vec2 closest = builders->at(0)->getPosition();
-
+	Vec2 closest = Vec2(INT32_MAX, INT32_MAX);
+	
 	for (Builder* tmp : *builders) {
-		if (abs(pos.x - closest.x) > abs(pos.x - tmp->getPosition().x) && !tmp->isBuilding())
+		if (abs(pos.x - closest.x) > abs(pos.x - tmp->getPosition().x) && !(tmp->isBuilding()))
 			closest = tmp->getPosition();
 	}
 

@@ -22,7 +22,7 @@ void WorkerController::allMoveRand() {
 }
 
 void WorkerController::deleteByPos(Vec2 pos) {
-	Enviroment::getInstance()->getScene()->removeChild(controller.deleteByPos(pos)->getSpr(), true);
+	controller.deleteByPos(pos);
 }
 
 Worker* WorkerController::findByPosition(Vec2 pos) {

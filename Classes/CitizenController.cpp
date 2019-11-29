@@ -25,7 +25,7 @@ CitizenController* CitizenController::getInstance() {
 }
 
 void CitizenController::deleteByPos(Vec2 pos) {
-	Enviroment::getInstance()->getScene()->removeChild(controller.deleteByPos(pos)->getSpr(), true);
+	controller.deleteByPos(pos);
 
 }
 

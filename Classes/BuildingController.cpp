@@ -259,3 +259,7 @@ BuildingController* BuildingController::getInstance() {
 	buildingController = new BuildingController();
 	return buildingController;
 }
+
+Vec2 BuildingController::getCastlePos() {
+	return castle->getPosition();
+}
