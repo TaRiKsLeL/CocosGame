@@ -24,42 +24,16 @@ bool GameScene::init() {
 	Scene::initWithPhysics();
 
 
-	//this->getPhysicsWorld()->setDebugDrawMask(0xffff);
+	this->getPhysicsWorld()->setDebugDrawMask(0xffff);
 
-	
 	
 	Enviroment::getInstance()->setScene(this);
-	
-	int sum = PLAYER_START_MONEY;
-	
-	
-
 
 
 	SlaveTraider::getInstance();
 	EnemyController::getInstance();
 
-
-
-
-
-	EventListenerPhysicsContact* playerContactListener = EventListenerPhysicsContact::create();
-	playerContactListener->onContactBegin = CC_CALLBACK_1(GameScene::onPlayerContactBegin, this);
-	playerContactListener->onContactSeparate = CC_CALLBACK_1(GameScene::onPlayerContactSeparate, this);
-	
-	EventListenerPhysicsContact* builderContactListener = EventListenerPhysicsContact::create();
-	builderContactListener->onContactBegin = CC_CALLBACK_1(GameScene::onBuilderContactBegin, this);
-	builderContactListener->onContactSeparate = CC_CALLBACK_1(GameScene::onBuilderContactSeparate, this);
-
-	
-	
-	
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(playerContactListener, this);
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(builderContactListener, this);
-
-	
-	
-	
+	initContactListeners();
 	
 	this->scheduleUpdate();
 

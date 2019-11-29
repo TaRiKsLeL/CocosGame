@@ -141,11 +141,12 @@ void BuildingController::createBuilding(int& type, bool side, int& previus, int&
 	}
 }
 
+/*
 vector<Wall*> BuildingController::getWalls()
 {
 	return walls;
 }
-
+*/
 void BuildingController::createWall(bool dir,int xPos) {
 	Wall* wall = new Wall(dir,&WALLS);
 	wall->getSprite()->setPosition(Vec2(xPos, GENERAL_Y));
@@ -263,3 +264,16 @@ BuildingController* BuildingController::getInstance() {
 Vec2 BuildingController::getCastlePos() {
 	return castle->getPosition();
 }
+
+Wall* BuildingController::findWallByPos(Vec2 pos) {
+	for (Wall* tmp : walls) {
+		if (tmp->getPosition() == pos)
+			return tmp;
+	}
+	return nullptr;
+}
+
+Castle* BuildingController::getCastle() {
+	return castle;
+}
+

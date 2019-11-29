@@ -25,4 +25,6 @@ public:
 	
 	virtual void move() override;
 
+	virtual bool canBeAttacked() override;
+	virtual void hit(int) override;
 };

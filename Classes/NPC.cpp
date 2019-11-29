@@ -6,7 +6,7 @@ Init
 =====================================================================================================
 */
 
-NPC::NPC(Vec2 pos, std::string sprName) : isMoving(false), stop(true), moveSpeed(DEFAULT_NPC_MOVE_SPEED){
+NPC::NPC(Vec2 pos, std::string sprName) : isMoving(false), stop(true), moveSpeed(DEFAULT_NPC_MOVE_SPEED), direction(Direction::RIGHT){
 
 	spr = Sprite::create(sprName);
 	spr->setPosition(pos);
@@ -29,6 +29,18 @@ move and position
 =====================================================================================================
 */
 
+void NPC::resetDirection() {
+	if (currentPointToMove.x > spr->getPosition().x)
+		direction = Direction::RIGHT;
+	else
+		direction = Direction::LEFT;
+}
+
+Direction NPC::getDirection() {
+	return direction;
+}
+
+
 
 void NPC::moveStart(Vec2 pos) {
 	if (stop) {
@@ -40,6 +52,8 @@ void NPC::moveStart(Vec2 pos) {
 }
 
 void NPC::moveTo(Vec2 destination) {
+	
+	resetDirection();
 
 	int direction;
 	int delta = destination.x - spr->getPosition().x;

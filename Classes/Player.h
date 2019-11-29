@@ -7,14 +7,16 @@
 #include "Enviroment.h"
 #include "Data.h"
 #include "CitizenController.h"
+#include "GameOverScene.h"
 
 USING_NS_CC;
 
-class Player :private IMoveable {
+class Player :private IMoveable, public IAttackable {
 
 private:
 
 	int money;
+	int m_HP;
 
 	bool isFocused;
 	bool isDisabledChoseRoleListener;
@@ -50,7 +52,7 @@ public:
 	int& getMoney();
 
 	void move() override ;
-	
+
 	void disableFocusBuyListener();
 	void disableBuyListener();
 	
@@ -59,6 +61,9 @@ public:
 	bool focused();
 
 	void enableChoseRoleListener();
+	
+	virtual void hit(int) override;
+	virtual bool canBeAttacked() override;
 };
 
 	

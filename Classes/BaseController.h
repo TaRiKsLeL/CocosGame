@@ -28,7 +28,13 @@ public:
 			GameTime::addMoveableObject(tmp);
 		}
 	};
-
+	
+	void allStopMove() {
+		for (T* tmp : *m_NPCs) {
+			tmp->stopMoving();
+		}
+	};
+	
 	T* deleteByPos(Vec2 pos) {
 		T* toDelete = findByPosition(pos);
 

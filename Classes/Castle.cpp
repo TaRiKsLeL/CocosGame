@@ -1,8 +1,5 @@
 #include "Castle.h"
-
-//Castle::Castle(const std::string fileName) :Building(fileName, CASTLE_WIDTH, CASTLE_HEIGHT) {
-//
-//}
+#include "EnemyController.h"
 
 Castle::Castle(const vector<std::string> *images) : Building(images) {
 	spr->setTag(SprTag::CASTLE);
@@ -19,7 +16,21 @@ void Castle::pay(int& sum) {
 			sum -= price;
 			upgrade();
 		}
-	}
+	}	
+}
 
-	
+/*
+=====================================================================================================
+Castle attacked
+=====================================================================================================
+*/
+
+
+void Castle::hit(int attPower) {
+	EnemyController::getInstance()->allStopMove();
+	log("gg");
+}
+
+bool Castle::canBeAttacked() {
+	return true;
 }

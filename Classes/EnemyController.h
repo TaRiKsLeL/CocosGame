@@ -17,6 +17,7 @@ public:
 	void deleteByPos(Vec2);
 	void findAndMoveTo(Vec2);
 	void allMoveTo(Vec2);
+	void allStopMove();
 	virtual void timeDependedAction() override;
 	Enemy* findByPosition(Vec2);
 

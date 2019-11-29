@@ -56,4 +56,9 @@ void EnemyController::timeDependedAction() {
 	enemNum++;
 }
 
+void EnemyController::allStopMove() {
+	controller.allStopMove();
+}
+
+
 

@@ -85,3 +85,19 @@ void FriendlyNPC::setActive() {
 }
 
 
+/*
+=====================================================================================================
+FriendlyNPC attacked
+=====================================================================================================
+*/
+
+bool FriendlyNPC::canBeAttacked() {
+	if(isActive)
+		return true;
+	log("dead inside");
+	return false;
+}
+
+void FriendlyNPC::hit(int) {
+	isActive = false;
+}
