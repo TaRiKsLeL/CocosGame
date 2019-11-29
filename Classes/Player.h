@@ -16,6 +16,7 @@ class Player :private IMoveable {
 private:
 
 	int money;
+	int hp;
 
 	bool isFocused;
 	bool isDisabledChoseRoleListener;
@@ -49,6 +50,9 @@ public:
 
 	void addMoney(int);
 	int& getMoney();
+
+	void addHP(int);
+	int& getHP();
 
 	void addChild(Node*);
 	void removeAllChildren();

@@ -81,11 +81,12 @@ ANIMATE
 =====================================================================================================
 */
 
-Animate* UI::createAnimate(string path, int imAmount, float imSize, float time) {
+Animate* UI::createAnimate(string path, int imAmount, float imSize, int height, float time)
+{
 	Vector<SpriteFrame*> picsVector;
 	picsVector.reserve(imAmount);
 	for (int i = 0; i < imAmount; i++) {
-		picsVector.pushBack(SpriteFrame::create(path, Rect(i * imSize, 0, imSize, imSize)));
+		picsVector.pushBack(SpriteFrame::create(path, Rect(i * imSize, imSize-height, imSize, height)));
 		picsVector.at(i)->getTexture()->setAliasTexParameters();
 	}
 	auto animation = Animation::createWithSpriteFrames(picsVector, time, -1);
@@ -125,7 +126,7 @@ void UI::createCoin(string path, int imAmount, float imSize, float time) {
 	coin = Sprite::create(path);
 	coin->setPosition(Vec2(LABEL_X_SPACE_FROM_PLAYER-100, LABEL_Y_SPACE_FROM_PLAYER));
 	coin->setScale(COIN_SCALE_FACTOR);
-	coin->runAction(createAnimate(path, imAmount, imSize, time));
+	coin->runAction(createAnimate(path, imAmount, imSize, imSize, time));
 	Player::getInstance()->addChild(coin);
 }
 
@@ -142,14 +143,31 @@ HP
 void UI::createHeart(std::string fullHeartPath, std::string emptyHeartPath, int am, float size, float time)
 {
 	fullHeart = Sprite::create(fullHeartPath);
-	fullHeart->setPosition(Vec2(-LABEL_X_SPACE_FROM_PLAYER-50, LABEL_Y_SPACE_FROM_PLAYER));
-	fullHeart->runAction(createAnimate(fullHeartPath, am, size, time));
+	fullHeart->setPosition(Vec2(-LABEL_X_SPACE_FROM_PLAYER-50, LABEL_Y_SPACE_FROM_PLAYER-30));
+	fullHeart->setAnchorPoint(Vec2(0.5, 0));
+	auto an1 = createAnimate(fullHeartPath, am, size, size, time);
+	an1->retain();
+	fullHeart->runAction(an1);
 
 	emptyHeart = Sprite::create(emptyHeartPath);
-	emptyHeart->setPosition(Vec2(-LABEL_X_SPACE_FROM_PLAYER-50, LABEL_Y_SPACE_FROM_PLAYER));
-	emptyHeart->runAction(createAnimate(emptyHeartPath, am, size, time));
+	emptyHeart->setPosition(Vec2(-LABEL_X_SPACE_FROM_PLAYER-50, LABEL_Y_SPACE_FROM_PLAYER-30));
+	emptyHeart->setAnchorPoint(Vec2(0.5, 0));
+	emptyHeart->runAction(createAnimate(emptyHeartPath, am, size, size, time));
 
 	Player::getInstance()->addChild(emptyHeart);
 	Player::getInstance()->addChild(fullHeart);
 
+}
+
+void UI::updateHeartLogo(int hpVal)
+{
+	//HEART_IMAGE_SIZE
+
+	int pixelsToShow = static_cast<int>(HEART_IMAGE_SIZE*((float)hpVal / (float)PLAYER_MAX_HEALTH));
+
+	fullHeart->stopAllActions();
+	fullHeart->setPosition(Vec2(fullHeart->getPositionX(), fullHeart->getPositionY()));
+	fullHeart->runAction(createAnimate(FULL_HEART_FRAMES, HEART_IMAGES_AMOUNT, HEART_IMAGE_SIZE, pixelsToShow, HEART_TIME_PER_FRAME));
+
+	log("%d", pixelsToShow);
 }

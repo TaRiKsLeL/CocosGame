@@ -50,13 +50,15 @@ public:
 
 	void createCoin(std::string, int, float, float);
 
-	void createHeart(std::string, std::string, int, float, float);
-
 	void createCoinsLabel(std::string, std::string,int);
 
 	void setCoinsAmountLabel(int);
 
-	Animate* createAnimate(string, int, float, float);
+	void createHeart(std::string, std::string, int, float, float);
+
+	void updateHeartLogo(int);
+
+	Animate* createAnimate(string, int, float, int, float);
 
 	//citizen pictures methods
 

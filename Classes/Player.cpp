@@ -16,10 +16,12 @@ Player::Player(const std::string fileName) {
 	spr->getTexture()->setAliasTexParameters();
 	spr->addComponent(createPhysBody());
 	spr->setTag(SprTag::PLAYER);
+	spr->setTextureRect(Rect(0, 0, spr->getContentSize().width, spr->getContentSize().height));
 	Enviroment::getInstance()->getScene()->addChild(spr, PLAYER_Z_ORDER);
 	
 	money = PLAYER_START_MONEY;
-	
+	hp = PLAYER_MAX_HEALTH;
+
 	initMoveListener();
 	initBuyListener();
 	initChoseRoleListener();
@@ -220,6 +222,16 @@ void Player::addMoney(int moneyToAdd) {
 }
 int& Player::getMoney() {
 	return this->money;
+}
+
+void Player::addHP(int val)
+{ 
+	hp += val;
+}
+
+int& Player::getHP()
+{
+	return hp;
 }
 
 void Player::addChild(Node* child)

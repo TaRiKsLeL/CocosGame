@@ -82,6 +82,7 @@ const int HEART_IMAGE_SIZE{ static_cast<int>(32 / SCALE_FACTOR) };
 const float HEART_TIME_PER_FRAME{ 0.5f };
 
 
+
 //Z-orders
 
 const int TREE_Z_ORDER{ -1 };
@@ -207,6 +208,7 @@ const vector<std::string> TREES{ "Environment/tree1.png","Environment/tree2.png"
 const int SLAVE_PRICE{ 4 };
 const int SET_ROLE_PRICE{ 1 };
 const int PLAYER_START_MONEY{ 1000 };
+const int PLAYER_MAX_HEALTH{ 10 };
 
 //speed
 const int PLAYER_SPEED{ 10 };
