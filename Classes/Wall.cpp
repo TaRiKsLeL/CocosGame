@@ -23,7 +23,6 @@ void Wall::pay(int& sum) {
 
 		if (price <= sum && price != 0) {
 			sum -= price;
-			log("Sum after buying WALL %d", sum);
 			upgrade();
 		}
 	}
