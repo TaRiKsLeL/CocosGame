@@ -145,14 +145,13 @@ void UI::createHeart(std::string fullHeartPath, std::string emptyHeartPath, int 
 	fullHeart = Sprite::create(fullHeartPath);
 	fullHeart->setPosition(Vec2(-LABEL_X_SPACE_FROM_PLAYER-50, LABEL_Y_SPACE_FROM_PLAYER-30));
 	fullHeart->setAnchorPoint(Vec2(0.5, 0));
-	auto an1 = createAnimate(fullHeartPath, am, size, size, time);
-	an1->retain();
-	fullHeart->runAction(an1);
+	fullHeart->runAction(createAnimate(fullHeartPath, am, size, size, time));
 
 	emptyHeart = Sprite::create(emptyHeartPath);
 	emptyHeart->setPosition(Vec2(-LABEL_X_SPACE_FROM_PLAYER-50, LABEL_Y_SPACE_FROM_PLAYER-30));
 	emptyHeart->setAnchorPoint(Vec2(0.5, 0));
-	emptyHeart->runAction(createAnimate(emptyHeartPath, am, size, size, time));
+	emptyHeartAnimate = createAnimate(emptyHeartPath, am, size, size, time);
+	emptyHeart->runAction(emptyHeartAnimate);
 
 	Player::getInstance()->addChild(emptyHeart);
 	Player::getInstance()->addChild(fullHeart);
@@ -161,13 +160,13 @@ void UI::createHeart(std::string fullHeartPath, std::string emptyHeartPath, int 
 
 void UI::updateHeartLogo(int hpVal)
 {
-	//HEART_IMAGE_SIZE
-
 	int pixelsToShow = static_cast<int>(HEART_IMAGE_SIZE*((float)hpVal / (float)PLAYER_MAX_HEALTH));
 
+	emptyHeart->stopAllActions();
 	fullHeart->stopAllActions();
 	fullHeart->setPosition(Vec2(fullHeart->getPositionX(), fullHeart->getPositionY()));
 	fullHeart->runAction(createAnimate(FULL_HEART_FRAMES, HEART_IMAGES_AMOUNT, HEART_IMAGE_SIZE, pixelsToShow, HEART_TIME_PER_FRAME));
+	emptyHeart->runAction(emptyHeartAnimate);
 
 	log("%d", pixelsToShow);
 }

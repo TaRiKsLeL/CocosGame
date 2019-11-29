@@ -25,6 +25,8 @@ private:
 	Sprite* fullHeart;
 	Sprite* emptyHeart;
 
+	Animate* emptyHeartAnimate;
+
 	//citizen pictures
 	vector<Sprite*>* selectSprs;
 	

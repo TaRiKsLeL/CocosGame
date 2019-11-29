@@ -273,6 +273,7 @@ Player hit
 
 void Player::hit(int attPower) {
 	m_HP -= attPower;
+	UI::getInstance()->updateHeartLogo(m_HP);
 }
 
 bool Player::canBeAttacked() {
