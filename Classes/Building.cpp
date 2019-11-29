@@ -72,6 +72,10 @@ void Building::timeDependedAction()
 		spr->removeAllComponents();
 		spr->addComponent(createPhysBody());
 
+		if (spr->getTag() == SprTag::WALL) {
+			BuildingController::getInstance()->findWallByPos(spr->getPosition())->setHP(WALL_HP.at(level));
+		}
+		
 		updateEnviromentData();
 
 		isBuilding = false;

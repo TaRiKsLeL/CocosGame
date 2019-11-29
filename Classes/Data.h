@@ -17,34 +17,41 @@ enum SprTag {
 	MINE
 };
 
-
+enum Direction {
+	LEFT,
+	RIGHT,
+	ELSE
+};
 // place here consts
 
 
 // bitmaps
 
-const int PLAYER_CATEGORY_BM		{ 0b00001 };
-const int PLAYER_COLLIDE_BM			{ 0b11111 };
+const int PLAYER_CATEGORY_BM		{ 0b00000001 };
 
-const int NPC_CATEGORY_BM			{ 0b00010 };
-const int NPC_COLLIDE_BM			{ 0b00001 };
+const int NPC_CATEGORY_BM			{ 0b00000010 };
+const int BUILDER_CATEGORY_BM		{ 0b00000100 };
 
-const int BUILDER_CATEGORY_BM		{ 0b00100 };
-const int BUILDER_COLLIDE_BM		{ 0b01001 };
+const int SLAVE_TRAIDER_CATEGORY_BM	{ 0b00010000 };
+const int ENEMY_CATEGORY_BM			{ 0b00100000 };
 
-const int BUILDING_CATEGORY_BM		{ 0b01000 };
-const int BUILDING_COLLIDE_BM		{ 0b00101 };
+const int BUILDING_CATEGORY_BM		{ 0b00001000 };
+const int WALL_CATEGORY_BM			{ 0b01000000 };
 
-const int SLAVE_TRAIDER_CATEGORY_BM	{ 0b10000 };
-const int SLAVE_TRAIDER_COLLIDE_BM	{ 0b00001 };
 
-const int ENEMY_CATEGORY_BM			{ 0b100000 };
-const int ENEMY_COLLIDE_BM			{ 0b000001 };
+
+const int PLAYER_COLLIDE_BM			{ 0b11111111 };
+const int NPC_COLLIDE_BM			{ PLAYER_CATEGORY_BM | ENEMY_CATEGORY_BM};
+const int BUILDER_COLLIDE_BM		{ PLAYER_CATEGORY_BM | BUILDING_CATEGORY_BM | WALL_CATEGORY_BM | ENEMY_CATEGORY_BM };
+const int BUILDING_COLLIDE_BM		{ PLAYER_CATEGORY_BM | BUILDER_CATEGORY_BM };
+const int SLAVE_TRAIDER_COLLIDE_BM	{ PLAYER_CATEGORY_BM };
+const int ENEMY_COLLIDE_BM			{ PLAYER_CATEGORY_BM | NPC_CATEGORY_BM | BUILDER_CATEGORY_BM | WALL_CATEGORY_BM };
+const int WALL_COLLIDE_BM			{ PLAYER_CATEGORY_BM | BUILDER_CATEGORY_BM | ENEMY_CATEGORY_BM };
 
 
 
 const int DELTA_TIME{ 60 };
-const int DAY_DURATION{ 240 };
+const int DAY_DURATION{ 20 };
 const double SCALE_FACTOR{ 0.5 };
 
 //UI
@@ -206,6 +213,7 @@ const vector<std::string> TREES{ "Environment/tree1.png","Environment/tree2.png"
 
 
 const int SLAVE_PRICE{ 4 };
+const int NPC_RERIVE{ 2 };
 const int SET_ROLE_PRICE{ 1 };
 const int PLAYER_START_MONEY{ 1000 };
 const int PLAYER_MAX_HEALTH{ 10 };
@@ -216,14 +224,22 @@ const int FRIENDLY_NPC_MOVE_SPEED{ 3 };
 const int DEFAULT_NPC_MOVE_SPEED{ 1 };
 
 const int ENEMY_MOVE_SPEED_MIN{ 3 };
-const int ENEMY_MOVE_SPEED_MAX{ 4 };
+const int ENEMY_MOVE_SPEED_MAX{ 5 };
 const int ENEMY_RAND_DIVISION{ 10 };
 
 //HP
 const int PLAYER_HP{ 3 };
 const int ENEMY_HP{ 1 };
+const vector<int> WALL_HP{ 0,10,20,30,40,50 };
+
 
 //attack power
 const int FRIENDLY_ATTACK{ 1 };
 const int ENEMY_ATTACK{ 1 };
+
+//enemy jmp parameters
+const int ENEMY_JMP_DURATION{ 1 };
+const double ENEMY_JMP_LENGTH{ 256 / SCALE_FACTOR };
+const double ENEMY_JMP_HEIGTH{ 128 / SCALE_FACTOR};
+const int ENEMY_JMP_QUANTITY{ 1 };
 

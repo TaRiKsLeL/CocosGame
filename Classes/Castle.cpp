@@ -1,11 +1,9 @@
 #include "Castle.h"
-
-//Castle::Castle(const std::string fileName) :Building(fileName, CASTLE_WIDTH, CASTLE_HEIGHT) {
-//
-//}
+#include "EnemyController.h"
 
 Castle::Castle(const vector<std::string> *images) : Building(images) {
 	spr->setTag(SprTag::CASTLE);
+	spr->addComponent(createPhysBody());
 }
 
 void Castle::pay(int& sum) {
@@ -19,7 +17,30 @@ void Castle::pay(int& sum) {
 			sum -= price;
 			upgrade();
 		}
-	}
+	}	
+}
+PhysicsBody* Castle::createPhysBody() {
+	spr->removeAllComponents();
 
-	
+	PhysicsBody* pb = PhysicsBody::createBox(spr->getBoundingBox().size);
+	pb->setDynamic(false);
+	pb->setContactTestBitmask(WALL_COLLIDE_BM);
+	pb->setCategoryBitmask(WALL_CATEGORY_BM);
+	pb->setCollisionBitmask(WALL_COLLIDE_BM);
+	return pb;
+}
+/*
+=====================================================================================================
+Castle attacked
+=====================================================================================================
+*/
+
+
+void Castle::hit(int attPower) {
+	EnemyController::getInstance()->allStopMove();
+	log("gg");
+}
+
+bool Castle::canBeAttacked() {
+	return true;
 }

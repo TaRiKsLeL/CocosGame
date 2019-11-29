@@ -12,7 +12,11 @@ FriendlyNPC::FriendlyNPC(Vec2 pos, std::string sprName) : NPC(pos, sprName) {
 	setActive();
 	setMoveSpeed(FRIENDLY_NPC_MOVE_SPEED);
 	isMovingRand = true;
-	
+
+	spr->getPhysicsBody()->setCategoryBitmask(NPC_CATEGORY_BM);
+	spr->getPhysicsBody()->setCollisionBitmask(NPC_COLLIDE_BM);
+	spr->getPhysicsBody()->setContactTestBitmask(NPC_COLLIDE_BM);
+
 	moveRandStart();
 }
 
@@ -57,7 +61,8 @@ void FriendlyNPC::move() {
 																static_cast<int>(Enviroment::getInstance()->getBorders()->rightX));
 		isMoving = true;
 	}
-	moveTo(currentPointToMove);
+	if(isActive)
+		moveTo(currentPointToMove);
 
 }
 
@@ -84,4 +89,28 @@ void FriendlyNPC::setActive() {
 	isActive = true;
 }
 
+
+/*
+=====================================================================================================
+FriendlyNPC attacked
+=====================================================================================================
+*/
+
+bool FriendlyNPC::canBeAttacked() {
+	if(isActive)
+		return true;
+	log("dead inside");
+	return false;
+}
+
+void FriendlyNPC::hit(int) {
+	isActive = false;
+}
+
+void FriendlyNPC::pay(int& money) {
+	if (!isActive && money >= NPC_RERIVE) {
+		money -= NPC_RERIVE;
+		setActive();
+	}
+}
 

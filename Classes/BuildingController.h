@@ -43,7 +43,10 @@ public:
 
 	void createBuilding(int& type, bool side, int& previus, int& num, int& counter, float& sideShift,float center,float shift,int random);
 
-	vector<Wall*> getWalls();
+	//vector<Wall*> getWalls();
+	Wall* findWallByPos(Vec2);
+	Castle* getCastle();
+
 	Vec2 getCastlePos();
 
 	static BuildingController* getInstance();

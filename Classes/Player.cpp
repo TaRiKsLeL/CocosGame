@@ -8,7 +8,7 @@ Init Player
 =====================================================================================================
 */
 
-Player::Player(const std::string fileName) {
+Player::Player(const std::string fileName) : money(PLAYER_START_MONEY) , objInFocus(nullptr), m_HP(PLAYER_HP) {
 
 	spr = Sprite::create(fileName);
 	spr->setAnchorPoint(Vec2(0, 0));
@@ -20,7 +20,7 @@ Player::Player(const std::string fileName) {
 	Enviroment::getInstance()->getScene()->addChild(spr, PLAYER_Z_ORDER);
 	
 	money = PLAYER_START_MONEY;
-	hp = PLAYER_MAX_HEALTH;
+	m_HP = PLAYER_MAX_HEALTH;
 
 	initMoveListener();
 	initBuyListener();
@@ -30,8 +30,6 @@ Player::Player(const std::string fileName) {
 	//
 	setCamera();
 	//
-	objInFocus = nullptr ;
-
 	player = this;
 }
 
@@ -226,12 +224,12 @@ int& Player::getMoney() {
 
 void Player::addHP(int val)
 { 
-	hp += val;
+	m_HP += val;
 }
 
 int& Player::getHP()
 {
-	return hp;
+	return m_HP;
 }
 
 void Player::addChild(Node* child)
@@ -265,4 +263,18 @@ bool Player::focused() {
 		return false;
 	else
 		return true;
+}
+
+/*
+=====================================================================================================
+Player hit
+=====================================================================================================
+*/
+
+void Player::hit(int attPower) {
+	m_HP -= attPower;
+}
+
+bool Player::canBeAttacked() {
+	return true;
 }

@@ -25,4 +25,8 @@ public:
 	
 	virtual void move() override;
 
+	virtual void pay(int&) override;
+
+	virtual bool canBeAttacked() override;
+	virtual void hit(int) override;
 };

@@ -39,7 +39,7 @@ protected:
 	int nextUpgradeDuration;
 	int currentState{0};
 	
-	PhysicsBody* createPhysBody();
+	virtual PhysicsBody* createPhysBody();
 	void updateEnviromentData();
 public:
 

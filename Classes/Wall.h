@@ -1,11 +1,13 @@
 #pragma once
 
 #include "Building.h"
+#include "IAttackable.h"
 //#include "Enviroment.h"
 
-class Wall :public Building {
+class Wall :public Building , public IAttackable {
 private:
-	
+	int m_HP;
+
 public:
 
 
@@ -13,6 +15,11 @@ public:
 	
 	void pay(int&) override;
 
-	int hp;
 	void repair();
+	void setHP(int);
+
+	virtual PhysicsBody* createPhysBody();
+
+	virtual bool canBeAttacked() override;
+	virtual void hit(int) override;
 };

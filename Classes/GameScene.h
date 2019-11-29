@@ -25,8 +25,13 @@ public:
 
 	bool onBuilderContactBegin(PhysicsContact&);
 	bool onBuilderContactSeparate(PhysicsContact&);
+	
+	bool onEnemyContactBegin(PhysicsContact&);
+
+	void initContactListeners();
 
 	IPayable* getPayableByNode(Node*);
+	IAttackable* getAttackableByNode(Node*);
 	//virtual void newMenuCallback(cocos2d::Ref* pSender);
 
 	CREATE_FUNC(GameScene);

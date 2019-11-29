@@ -17,22 +17,26 @@ protected:
 
 	float moveSpeed;
 
+	Direction direction;
+
 	Sprite* spr;
 	Vec2 currentPointToMove;
 
 	NPC(Vec2, std::string);
 	PhysicsBody* createPhysBody();
+
 	void moveTo(Vec2);
+	void resetDirection();
 
 public:
 
 	void setMoveSpeed(float);
+	Direction getDirection();
 
 	void moveStart(Vec2 pos);
 
 	Vec2 getCurrentPointMoveTo();
 	void stopMoving();
-
 
 	void addChild(Sprite*);
 	void removeAllChildren();
@@ -41,5 +45,7 @@ public:
 	Vec2 getPosition();
 
 	virtual void move() override;
-	virtual void hit(int) override;
+
+	virtual bool canBeAttacked() = 0;
+	virtual void hit(int) = 0;
 };

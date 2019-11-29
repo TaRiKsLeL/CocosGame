@@ -56,4 +56,10 @@ void EnemyController::timeDependedAction() {
 	enemNum++;
 }
 
+void EnemyController::allStopMove() {
+	GameTime::removeTimeDependedObject(this);
+	controller.allStopMove();
+}
+
+
 
