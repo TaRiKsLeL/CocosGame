@@ -37,6 +37,9 @@ const int BUILDING_COLLIDE_BM		{ 0b00101 };
 const int SLAVE_TRAIDER_CATEGORY_BM	{ 0b10000 };
 const int SLAVE_TRAIDER_COLLIDE_BM	{ 0b00001 };
 
+const int ENEMY_CATEGORY_BM			{ 0b100000 };
+const int ENEMY_COLLIDE_BM			{ 0b000001 };
+
 
 
 const int DELTA_TIME{ 60 };
@@ -72,6 +75,7 @@ const string CITIZEN_SPR{ "citizen.png" };
 const string BUILDER_SPR{ "builder.png" };
 const string WARRIOR_SPR{ "warrior.png" };
 const string WORKER_SPR{ "worker.png" };
+const string ENEMY_SPR{ "enemy.png" };
 
 // UI elements
 
@@ -154,8 +158,7 @@ const vector<std::string> TOWERS{ "buildings/towers/tower0.png","buildings/tower
 const vector<std::string> CASTLES{ "buildings/castles/castle0.png","buildings/castles/castle1.png"};
 const vector<std::string> MINES{ "buildings/mines/mine0.png","buildings/mines/mine1.png"};
 
-const vector<std::string> TREES{ "Environment/tree1.png","Environment/tree2.png","Environment/tree3.png",
-"Environment/tree4.png","Environment/tree5.png" };
+const vector<std::string> TREES{ "Environment/tree1.png","Environment/tree2.png","Environment/tree3.png","Environment/tree4.png","Environment/tree5.png" };
 
 //money
 
@@ -166,4 +169,18 @@ const int PLAYER_START_MONEY{ 1000 };
 
 //speed
 const int PLAYER_SPEED{ 10 };
-const int FRIENDLY_NPC_MOVE_SPEED{ 5 };
+const int FRIENDLY_NPC_MOVE_SPEED{ 3 };
+const int DEFAULT_NPC_MOVE_SPEED{ 1 };
+
+const int ENEMY_MOVE_SPEED_MIN{ 3 };
+const int ENEMY_MOVE_SPEED_MAX{ 4 };
+const int ENEMY_RAND_DIVISION{ 10 };
+
+//HP
+const int PLAYER_HP{ 3 };
+const int ENEMY_HP{ 1 };
+
+//attack power
+const int FRIENDLY_ATTACK{ 1 };
+const int ENEMY_ATTACK{ 1 };
+

@@ -31,9 +31,6 @@
     <Filter Include="src\GameObjects\Interfaces">
       <UniqueIdentifier>{7dc01e1b-fe05-4142-964e-164740f7f8bb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\GameObjects\Enemys">
-      <UniqueIdentifier>{3982b970-a39d-4f79-8a58-37ab1c5aa0c3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\GameObjects\NPC">
       <UniqueIdentifier>{cbc82a54-899b-4a67-afc8-5206f24062b0}</UniqueIdentifier>
     </Filter>
@@ -58,9 +55,6 @@
     <Filter Include="src\Collisions">
       <UniqueIdentifier>{c98f3cec-d537-4514-9e39-f0a12ecf2baa}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\GameObjects\NPC\baseNPC">
-      <UniqueIdentifier>{73010d0e-7014-42cb-8c0e-e8f2936db077}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\GameObjects\NPC\SlaveTraider">
       <UniqueIdentifier>{ce1b7b05-f9bf-4ea0-8474-0bf056f9b150}</UniqueIdentifier>
     </Filter>
@@ -69,6 +63,18 @@
     </Filter>
     <Filter Include="src\GameObjects\NPC\BaseController">
       <UniqueIdentifier>{4598cee2-9784-4dcd-8ead-bb48304f72c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\GameObjects\NPC\FriendlyNPC">
+      <UniqueIdentifier>{73010d0e-7014-42cb-8c0e-e8f2936db077}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\GameObjects\NPC\NPCParent">
+      <UniqueIdentifier>{70da9f8c-3b86-4f15-ac43-b44a47a98819}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\GameObjects\NPC\Shooter">
+      <UniqueIdentifier>{a764eef0-30b3-4dc1-91fe-f46353604e92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\GameObjects\NPC\Enemy">
+      <UniqueIdentifier>{3982b970-a39d-4f79-8a58-37ab1c5aa0c3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -94,10 +100,10 @@
       <Filter>src\GameObjects\Time</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Enemy.cpp">
-      <Filter>src\GameObjects\Enemys</Filter>
+      <Filter>src\GameObjects\NPC\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\EnemyController.cpp">
-      <Filter>src\GameObjects\Enemys</Filter>
+      <Filter>src\GameObjects\NPC\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Builder.cpp">
       <Filter>src\GameObjects\NPC\Builder</Filter>
@@ -145,7 +151,7 @@
       <Filter>src\GameObjects\NPC\Worker</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\FriendlyNPC.cpp">
-      <Filter>src\GameObjects\NPC\baseNPC</Filter>
+      <Filter>src\GameObjects\NPC\FriendlyNPC</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\SlaveTraider.cpp">
       <Filter>src\GameObjects\NPC\SlaveTraider</Filter>
@@ -158,6 +164,12 @@
     </ClCompile>
     <ClCompile Include="..\Classes\TemplatesController.cpp">
       <Filter>src\GameObjects\NPC\BaseController</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\NPC.cpp">
+      <Filter>src\GameObjects\NPC\NPCParent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Shooter.cpp">
+      <Filter>src\GameObjects\NPC\Shooter</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -189,10 +201,10 @@
       <Filter>src\GameObjects\Interfaces</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\EnemyController.h">
-      <Filter>src\GameObjects\Enemys</Filter>
+      <Filter>src\GameObjects\NPC\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Enemy.h">
-      <Filter>src\GameObjects\Enemys</Filter>
+      <Filter>src\GameObjects\NPC\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Builder.h">
       <Filter>src\GameObjects\NPC\Builder</Filter>
@@ -207,9 +219,6 @@
       <Filter>src\GameObjects\NPC\Worker</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\IPayable.h">
-      <Filter>src\GameObjects\Interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Shooter.h">
       <Filter>src\GameObjects\Interfaces</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Building.h">
@@ -249,7 +258,7 @@
       <Filter>src\GameObjects\NPC\Worker</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\FriendlyNPC.h">
-      <Filter>src\GameObjects\NPC\baseNPC</Filter>
+      <Filter>src\GameObjects\NPC\FriendlyNPC</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\SlaveTraider.h">
       <Filter>src\GameObjects\NPC\SlaveTraider</Filter>
@@ -262,6 +271,15 @@
     </ClInclude>
     <ClInclude Include="..\Classes\BaseController.h">
       <Filter>src\GameObjects\NPC\BaseController</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\NPC.h">
+      <Filter>src\GameObjects\NPC\NPCParent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\IAttackable.h">
+      <Filter>src\GameObjects\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Shooter.h">
+      <Filter>src\GameObjects\NPC\Shooter</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

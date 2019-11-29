@@ -37,7 +37,7 @@ bool GameScene::init() {
 
 
 	SlaveTraider::getInstance();
-
+	EnemyController::getInstance();
 
 
 

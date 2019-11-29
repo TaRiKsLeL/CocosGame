@@ -1,5 +1,4 @@
 #pragma once
-#include "IPayable.h"
 #include "FriendlyNPC.h"
 
 class Builder : public FriendlyNPC 

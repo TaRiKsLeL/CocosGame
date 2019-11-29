@@ -5,7 +5,6 @@
 #include "cocos2d.h"
 #include "Data.h"
 #include "BuildingController.h"
-#include "SlaveTraider.h"
 #include "KingdomBorders.h"
 
 USING_NS_CC;

@@ -1,4 +1,5 @@
 #include "Enviroment.h"
+#include "SlaveTraider.h"
 
 Enviroment* Enviroment::enviroment{ nullptr };
 
