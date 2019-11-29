@@ -78,7 +78,7 @@ Vec2 NPC::getCurrentPointMoveTo() {
 
 
 void NPC::move() {
-	moveTo(currentPointToMove);
+		moveTo(currentPointToMove);
 }
 
 
@@ -122,7 +122,3 @@ void NPC::setMoveSpeed(float speed) {
 get set
 =====================================================================================================
 */
-
-void NPC::hit(int hitPower) {
-
-}

@@ -9,6 +9,8 @@ public:
 	Castle(const vector<std::string>*);
 
 	void pay(int&) override;
+	
+	virtual PhysicsBody* createPhysBody();
 
 	virtual bool canBeAttacked() override;
 	virtual void hit(int) override;

@@ -81,40 +81,26 @@ bool GameScene::onPlayerContactSeparate(PhysicsContact& contact)
 	auto nodeB = contact.getShapeB()->getBody()->getNode();
 
 	Player* player = nullptr;
-	SlaveTraider* slaveTraider = nullptr;
-	Citizen* citizen = nullptr;
-
-	IPayable* payable = nullptr;
 
 
-	if (nodeA->getTag() == SprTag::PLAYER || nodeB->getTag() == SprTag::PLAYER)
+
+	Node* nonPlayerNode = nullptr;
+
+	if ((nodeA->getPhysicsBody()->getCategoryBitmask() ^ PLAYER_CATEGORY_BM) == 0) {
 		player = Player::getInstance();
-
-	if (nodeA->getTag() == SprTag::SLAVE_TRAIDER || nodeB->getTag() == SprTag::SLAVE_TRAIDER) {
-		slaveTraider = SlaveTraider::getInstance();
-		payable = dynamic_cast<IPayable*>(slaveTraider);
+		nonPlayerNode = nodeB;
 	}
-
-	//переробити {
-
-	if (nodeA->getTag() == SprTag::CITIZEN) {
-		citizen = CitizenController::getInstance()->findByPosition(nodeA->getPosition());
-		payable = dynamic_cast<IPayable*>(citizen);
+	else if ((nodeB->getPhysicsBody()->getCategoryBitmask() ^ PLAYER_CATEGORY_BM) == 0) {
+		player = Player::getInstance();
+		nonPlayerNode = nodeA;
 	}
-	else if (nodeB->getTag() == SprTag::CITIZEN) {
-		citizen = CitizenController::getInstance()->findByPosition(nodeB->getPosition());
-		payable = dynamic_cast<IPayable*>(citizen);
-	}
+	else
+		return false;
 
-	Building* building = BuildingController::getInstance()->findBuildingByTagAndPosition(nodeA->getTag(), nodeA->getPosition());
+	if ((nonPlayerNode->getPhysicsBody()->getCollisionBitmask() & PLAYER_CATEGORY_BM) == 0)
+		return false;
 
-	if (!building) {
-		building = BuildingController::getInstance()->findBuildingByTagAndPosition(nodeB->getTag(), nodeB->getPosition());
-	}
-	if (building)
-		payable = dynamic_cast<IPayable*>(building);
-
-	//}
+	IPayable* payable = getPayableByNode(nonPlayerNode);
 
 	if (player != nullptr && player->focused()) {
 		if (player->checkFocusedObj(payable))
@@ -130,11 +116,6 @@ bool GameScene::onPlayerContactSeparate(PhysicsContact& contact)
 IPayable* GameScene::getPayableByNode(Node* nonPlayerNode) {
 
 	Building* building = nullptr;
-	SlaveTraider* slaveTraider = nullptr;
-	Citizen* citizen = nullptr;
-	Builder* builder = nullptr;
-	Warrior* warrior = nullptr;
-	Worker* worker = nullptr;
 
 	IPayable* objToPay = nullptr;
 
@@ -188,11 +169,11 @@ bool GameScene::onBuilderContactBegin(PhysicsContact& contact)
 
 	Node* secondNode = nullptr;
 
-	if ((nodeA->getPhysicsBody()->getCategoryBitmask() ^ BUILDER_CATEGORY_BM) == 0) {
+	if ((nodeA->getPhysicsBody()->getCategoryBitmask() & BUILDER_CATEGORY_BM) == BUILDER_CATEGORY_BM) {
 		builder = BuilderController::getInstance()->findByPosition(nodeA->getPosition());
 		secondNode = nodeB;
 	}
-	else if ((nodeB->getPhysicsBody()->getCategoryBitmask() ^ BUILDER_CATEGORY_BM) == 0) {
+	else if ((nodeB->getPhysicsBody()->getCategoryBitmask() & BUILDER_CATEGORY_BM) == BUILDER_CATEGORY_BM) {
 		builder = BuilderController::getInstance()->findByPosition(nodeB->getPosition());
 		secondNode = nodeA;
 	}
@@ -241,11 +222,11 @@ bool GameScene::onBuilderContactSeparate(PhysicsContact& contact)
 
 	Node* secondNode = nullptr;
 
-	if ((nodeA->getPhysicsBody()->getCategoryBitmask() ^ BUILDER_CATEGORY_BM) == 0) {
+	if ((nodeA->getPhysicsBody()->getCategoryBitmask() & BUILDER_CATEGORY_BM) == BUILDER_CATEGORY_BM) {
 		builder = BuilderController::getInstance()->findByPosition(nodeA->getPosition());
 		secondNode = nodeB;
 	}
-	else if ((nodeB->getPhysicsBody()->getCategoryBitmask() ^ BUILDER_CATEGORY_BM) == 0) {
+	else if ((nodeB->getPhysicsBody()->getCategoryBitmask() & BUILDER_CATEGORY_BM) == BUILDER_CATEGORY_BM) {
 		builder = BuilderController::getInstance()->findByPosition(nodeB->getPosition());
 		secondNode = nodeA;
 	}

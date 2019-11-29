@@ -45,5 +45,7 @@ public:
 	Vec2 getPosition();
 
 	virtual void move() override;
-	virtual void hit(int) override;
+
+	virtual bool canBeAttacked() = 0;
+	virtual void hit(int) = 0;
 };

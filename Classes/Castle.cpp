@@ -3,6 +3,7 @@
 
 Castle::Castle(const vector<std::string> *images) : Building(images) {
 	spr->setTag(SprTag::CASTLE);
+	spr->addComponent(createPhysBody());
 }
 
 void Castle::pay(int& sum) {
@@ -18,7 +19,16 @@ void Castle::pay(int& sum) {
 		}
 	}	
 }
+PhysicsBody* Castle::createPhysBody() {
+	spr->removeAllComponents();
 
+	PhysicsBody* pb = PhysicsBody::createBox(spr->getBoundingBox().size);
+	pb->setDynamic(false);
+	pb->setContactTestBitmask(WALL_COLLIDE_BM);
+	pb->setCategoryBitmask(WALL_CATEGORY_BM);
+	pb->setCollisionBitmask(WALL_COLLIDE_BM);
+	return pb;
+}
 /*
 =====================================================================================================
 Castle attacked
