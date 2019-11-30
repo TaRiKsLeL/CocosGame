@@ -117,8 +117,11 @@ Vec2 NPC::getPosition() {
 	return spr->getPosition();
 }
 
+Rect NPC::getBoundingBox() {
+	return spr->getBoundingBox();
+}
+
 void NPC::setMoveSpeed(float speed) {
-	log("%f", speed);
 	moveSpeed = speed;
 }
 

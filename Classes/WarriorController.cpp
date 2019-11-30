@@ -28,3 +28,12 @@ void WarriorController::deleteByPos(Vec2 pos) {
 Warrior* WarriorController::findByPosition(Vec2 pos) {
 	return controller.findByPosition(pos);
 }
+
+Warrior* WarriorController::findByNode(Node* node) {
+	for (Warrior* tmp : *(controller.getElems()))
+	{
+		if (tmp->getTarget() == node)
+			return tmp;
+	}
+	return nullptr;
+}
