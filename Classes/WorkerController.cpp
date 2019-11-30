@@ -32,7 +32,7 @@ Worker* WorkerController::findClosest(Vec2 pos)
 	Vec2 closest = Vec2(INT32_MAX, INT32_MAX);
 
 	for (Worker* tmp : *workers) {
-		if (abs(pos.x - closest.x) > abs(pos.x - tmp->getPosition().x))
+		if (abs(pos.x - closest.x) > abs(pos.x - tmp->getPosition().x) &&tmp)
 			closest = tmp->getPosition();
 	}
 
