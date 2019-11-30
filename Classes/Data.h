@@ -70,7 +70,7 @@ const int ARROW_COLLIDE_BM			{ ENEMY_CATEGORY_BM };
 
 
 const int DELTA_TIME{ 60 };
-const int DAY_DURATION{ 100 };
+const int DAY_DURATION{ 10 };
 const double SCALE_FACTOR{ 0.5 };
 
 //UI
@@ -281,3 +281,8 @@ const double WARRIOR_SHOOT_HEIGTH{ 196 / SCALE_FACTOR };
 const double ARROW_RELATIVE_HEIGTH{ 0.5 };
 const float ARROW_FLY_DURATION{ 1 };
 const int ARROW_MISS_X{ static_cast<int>(50 / SCALE_FACTOR) };
+
+// warriors 
+
+const int WALL_DIAPASON_WARRIORS_STAND{ 32 };
+const int WALL_DISTANCE_TO_WARRIORS{ 32 };

@@ -12,7 +12,7 @@ CONSTRUCTORS
 */
 
 
-Building::Building(const vector<std::string>* images) {
+Building::Building(const vector<std::string>* images) : waitForBuilder(false) {
 
 	nextUpgradeDuration = 10;
 	setBuildingStatus(false);
@@ -44,8 +44,10 @@ PhysicsBody* Building::createPhysBody() {
 
 void Building::upgrade() {
 		
-	if(!isBuilding && BuilderController::getInstance()->setPositionToBuild(this->getPosition()))
+	if (!isBuilding && !waitForBuilder && BuilderController::getInstance()->setPositionToBuild(this->getPosition())) {
+		waitForBuilder = true;
 		GameTime::addTimeDependedObject(-1, this);
+	}
 }
 
 void Building::timeDependedAction()
@@ -68,7 +70,7 @@ void Building::timeDependedAction()
 			BuildingController::getInstance()->findWallByPos(spr->getPosition())->setHP(WALL_HP.at(level));
 		}
 		
-
+		waitForBuilder = false;
 		isBuilding = false;
 		currentState = 0;
 	}

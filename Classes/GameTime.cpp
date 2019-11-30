@@ -44,18 +44,19 @@ void GameTime::updateFrame() {
 
 		log("current time: %d", currentTime);
 
-		if(timeDependedObjects->size()>0)
-			for each (TimeAction tmpPair in *timeDependedObjects)
-			{	
-				if(tmpPair.second == currentTime || tmpPair.second == -1)
-					tmpPair.first->timeDependedAction();
-			}
 
-		while (deleteTimeDependedStack->size() > 0) 
+		while (deleteTimeDependedStack->size() > 0)
 		{
 			timeDependedObjects->erase(deleteTimeDependedStack->top());
 			deleteTimeDependedStack->pop();
 		}
+	
+		for each (TimeAction tmpPair in *timeDependedObjects)
+		{
+			if (tmpPair.second == currentTime || tmpPair.second == -1)
+				tmpPair.first->timeDependedAction();
+		}
+
 	}
 
 	

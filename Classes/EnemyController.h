@@ -18,7 +18,10 @@ public:
 	void findAndMoveTo(Vec2);
 	void allMoveTo(Vec2);
 	void allStopMove();
+	bool enemiesAreAlive();
+
 	virtual void timeDependedAction() override;
+	
 	Enemy* findByPosition(Vec2);
 
 	void startSpawn(int, Vec2);
