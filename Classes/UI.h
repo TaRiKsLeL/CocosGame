@@ -34,6 +34,8 @@ private:
 
 	Citizen* currentCitizen;
 
+	Sprite* gameOverSprite;
+
 	UI();
 	void initStack();
 	void initIcons();
@@ -56,6 +58,8 @@ public:
 
 	void setCoinsAmountLabel(int);
 
+	//heart
+
 	void createHeart(std::string, std::string, int, float, float);
 
 	void updateHeartLogo(int);
@@ -67,6 +71,12 @@ public:
 	void addCitizenSelectIcons(Citizen*);
 
 	void removeCitizenSelectIcons();
+
+	//game over
+
+
+	void setGameOverSprite();
+
 
 	//other
 

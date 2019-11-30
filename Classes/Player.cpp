@@ -274,6 +274,9 @@ Player hit
 void Player::hit(int attPower) {
 	m_HP -= attPower;
 	UI::getInstance()->updateHeartLogo(m_HP);
+	if (m_HP <= 0) {
+		UI::getInstance()->setGameOverSprite();
+	}
 }
 
 bool Player::canBeAttacked() {

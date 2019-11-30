@@ -29,19 +29,23 @@ bool GameScene::init() {
 	
 	Enviroment::getInstance()->setScene(this);
 
-	UI::getInstance()->createCoinsLabel(to_string(Player::getInstance()->getMoney()), COINS_AMOUNT_FONT, COINS_LABEL_SIZE);
-	UI::getInstance()->createCoin(COIN_FRAMES, COIN_IMAGES_AMOUNT, COIN_IMAGE_SIZE, COIN_TIME_PER_FRAME);
-	UI::getInstance()->createHeart(FULL_HEART_FRAMES, EMPTY_HEART_FRAMES, HEART_IMAGES_AMOUNT, HEART_IMAGE_SIZE, HEART_TIME_PER_FRAME);
-	UI::getInstance()->updateHeartLogo(5);
-
 	SlaveTraider::getInstance();
 	EnemyController::getInstance();
+
+	initUIComponents();
 
 	initContactListeners();
 	
 	this->scheduleUpdate();
 
 	return true;
+}
+
+void GameScene::initUIComponents()
+{
+	UI::getInstance()->createCoinsLabel(to_string(Player::getInstance()->getMoney()), COINS_AMOUNT_FONT, COINS_LABEL_SIZE);
+	UI::getInstance()->createCoin(COIN_FRAMES, COIN_IMAGES_AMOUNT, COIN_IMAGE_SIZE, COIN_TIME_PER_FRAME);
+	UI::getInstance()->createHeart(FULL_HEART_FRAMES, EMPTY_HEART_FRAMES, HEART_IMAGES_AMOUNT, HEART_IMAGE_SIZE, HEART_TIME_PER_FRAME);
 }
 
 /*

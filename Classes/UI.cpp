@@ -20,6 +20,15 @@ void UI::initIcons() {
 
 }
 
+void UI::setGameOverSprite()
+{
+	gameOverSprite = Sprite::create(GAME_OVER_SPR);
+	gameOverSprite->setPosition(Vec2(0, -CAMERA_OFFSET_Y));
+	gameOverSprite->getTexture()->setAliasTexParameters();
+
+	Player::getInstance()->addChild(gameOverSprite);
+}
+
 UI* UI::getInstance() {
 	if (ui != nullptr)
 		return ui;

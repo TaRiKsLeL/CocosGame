@@ -15,6 +15,7 @@ public:
 	static Scene* createScene();
 	
 	virtual bool init();
+	void initUIComponents();
 	virtual void update(float) override;
 
 	virtual void removeKeyEventListener(EventListenerKeyboard*);

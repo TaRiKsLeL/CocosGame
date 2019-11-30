@@ -95,9 +95,11 @@ const float HEART_TIME_PER_FRAME{ 0.5f };
 const int TREE_Z_ORDER{ -1 };
 const int FENCE_Z_ORDER{ -2 };
 const int BUILDING_Z_ORDER{ 0 };
-const int GROUND_Z_ORDER{ 3 };
 const int NPC_Z_ORDER{ 1 };
 const int PLAYER_Z_ORDER{ 2 };
+const int GROUND_Z_ORDER{ 3 };
+const int GAMEOVER_Z_ORDER{ 5 };
+
 
 // start position
 
@@ -134,6 +136,7 @@ const string HUMMER_SPR{ "UI/hummerBtn.png" };
 const string BOW_SPR{ "UI/bowBtn.png" };
 
 const string BACKGROUND_SPR{ "UI/background.png" };
+const string GAME_OVER_SPR{ "UI/game_over.png" };
 
 //UI elements shift position
 
@@ -199,7 +202,13 @@ const vector<std::string> WALLS{
 	"buildings/walls/wall4.png"
 };
 
-const vector<std::string> TOWERS{ "buildings/towers/tower0.png","buildings/towers/tower3.png"};
+const vector<std::string> TOWERS{
+	"buildings/towers/tower0.png",
+	"buildings/towers/tower1.png",
+	"buildings/towers/tower2.png",
+	"buildings/towers/tower3.png",
+	"buildings/towers/tower4.png"
+};
 const vector<std::string> CASTLES{ "buildings/castles/castle0.png","buildings/castles/castle1.png"};
 const vector<std::string> MINES{ "buildings/mines/mine0.png","buildings/mines/mine1.png"};
 
