@@ -136,7 +136,7 @@ const string HUMMER_SPR{ "UI/hummerBtn.png" };
 const string BOW_SPR{ "UI/bowBtn.png" };
 
 const string BACKGROUND_SPR{ "UI/background.png" };
-const string GAME_OVER_SPR{ "UI/game_over.png" };
+const string GAME_OVER_SPR{ "UI/game_over2.png" };
 
 //UI elements shift position
 

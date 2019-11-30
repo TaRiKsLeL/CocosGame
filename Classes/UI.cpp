@@ -1,4 +1,5 @@
 #include "UI.h"
+#include "MainMenu.h"
 
 UI* UI::ui;
 
@@ -20,14 +21,44 @@ void UI::initIcons() {
 
 }
 
+/*
+=====================================================================================================
+GAME OVER
+=====================================================================================================
+*/
+
 void UI::setGameOverSprite()
 {
 	gameOverSprite = Sprite::create(GAME_OVER_SPR);
-	gameOverSprite->setPosition(Vec2(0, -CAMERA_OFFSET_Y));
+	gameOverSprite->setPosition(Vec2(0, -CAMERA_OFFSET_Y+50)); 
+	gameOverSprite->setScale(SCALE_FACTOR);
 	gameOverSprite->getTexture()->setAliasTexParameters();
 
 	Player::getInstance()->addChild(gameOverSprite);
+
+	initMainSceneListener();
+
 }
+
+void UI::initMainSceneListener()
+{
+	toMainSceneListener = EventListenerKeyboard::create();
+
+	toMainSceneListener->onKeyReleased = [=](EventKeyboard::KeyCode keyCode, Event* event) {
+		switch (keyCode)
+		{
+		case cocos2d::EventKeyboard::KeyCode::KEY_ENTER:
+
+			Director::getInstance()->replaceScene(MainMenu::createScene());
+			break;
+		default:
+			break;
+		}
+	};
+
+	dynamic_cast<GameScene*>(Enviroment::getInstance()->getScene())->setKeyEventListener(toMainSceneListener,gameOverSprite);
+}
+
 
 UI* UI::getInstance() {
 	if (ui != nullptr)

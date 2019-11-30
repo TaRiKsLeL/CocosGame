@@ -5,6 +5,8 @@
 #include <vector>
 #include <stack>
 #include "Player.h"
+#include "ui/CocosGUI.h"
+
 
 USING_NS_CC;
 
@@ -77,6 +79,8 @@ public:
 
 	void setGameOverSprite();
 
+	EventListenerKeyboard* toMainSceneListener;
+	void initMainSceneListener();
 
 	//other
 
