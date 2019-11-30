@@ -35,6 +35,7 @@ void UI::setGameOverSprite()
 	gameOverSprite->getTexture()->setAliasTexParameters();
 
 	Player::getInstance()->addChild(gameOverSprite);
+	Player::getInstance()->removeAllListeners();
 
 	initMainSceneListener();
 

@@ -59,9 +59,10 @@ bool GameScene::onPlayerContactBegin(PhysicsContact& contact)
 
 	IPayable* payable = getPayableByNode(nonPlayerNode);
 	
-	if (payable != nullptr)
+	if (payable != nullptr) {
+		log("plyer payable");
 		player->setPayable(payable);
-
+	}
 	return true;
 }
 
@@ -81,8 +82,6 @@ bool GameScene::onPlayerContactSeparate(PhysicsContact& contact)
 	auto nodeB = contact.getShapeB()->getBody()->getNode();
 
 	Player* player = nullptr;
-
-
 
 	Node* nonPlayerNode = nullptr;
 
@@ -258,6 +257,85 @@ bool GameScene::onBuilderContactSeparate(PhysicsContact& contact)
 	return false;
 }
 
+bool GameScene::onWorkerContactBegin(PhysicsContact& contact)
+{
+	Worker* worker = nullptr;
+	Mine* mine = nullptr;
+
+	auto nodeA = contact.getShapeA()->getBody()->getNode();
+	auto nodeB = contact.getShapeB()->getBody()->getNode();
+
+	Node* secondNode = nullptr;
+
+	if ((nodeA->getPhysicsBody()->getCategoryBitmask() & WORKER_CATEGORY_BM) == WORKER_CATEGORY_BM) {
+		worker = WorkerController::getInstance()->findByPosition(nodeA->getPosition());
+		secondNode = nodeB;
+	}
+	else if ((nodeB->getPhysicsBody()->getCategoryBitmask() & WORKER_CATEGORY_BM) == WORKER_CATEGORY_BM) {
+		worker = WorkerController::getInstance()->findByPosition(nodeB->getPosition());
+		secondNode = nodeA;
+	}
+	else
+		return false;
+
+	if ((secondNode->getPhysicsBody()->getCollisionBitmask() & WORKER_COLLIDE_BM) == 0)
+		return false;
+
+	switch (secondNode->getTag()) {
+	case SprTag::MINE:
+		Building * building = BuildingController::getInstance()->findBuildingByTagAndPosition(secondNode->getTag(), secondNode->getPosition());
+		
+		if (building == nullptr) return false;
+		
+		mine = dynamic_cast<Mine*>(building);
+
+		break;
+	}
+
+
+
+	return false;
+}
+
+bool GameScene::onWarriorContactBegin(PhysicsContact& contact)
+{
+	Warrior* warrior = nullptr;
+	Tower* tower = nullptr;
+
+	auto nodeA = contact.getShapeA()->getBody()->getNode();
+	auto nodeB = contact.getShapeB()->getBody()->getNode();
+
+	Node* secondNode = nullptr;
+
+	if ((nodeA->getPhysicsBody()->getCategoryBitmask() & WARRIOR_CATEGORY_BM) == WARRIOR_CATEGORY_BM) {
+		warrior = WarriorController::getInstance()->findByPosition(nodeA->getPosition());
+		secondNode = nodeB;
+	}
+	else if ((nodeB->getPhysicsBody()->getCategoryBitmask() & WARRIOR_CATEGORY_BM) == WARRIOR_CATEGORY_BM) {
+		warrior = WarriorController::getInstance()->findByPosition(nodeB->getPosition());
+		secondNode = nodeA;
+	}
+	else
+		return false;
+
+	if ((secondNode->getPhysicsBody()->getCollisionBitmask() & WARRIOR_COLLIDE_BM) == 0)
+		return false;
+
+	switch (secondNode->getTag()) {
+
+	case SprTag::TOWER:
+		Building* building = BuildingController::getInstance()->findBuildingByTagAndPosition(secondNode->getTag(), secondNode->getPosition());
+		if (building == nullptr) return false;
+		
+		tower = dynamic_cast<Tower*>(building);
+		
+		break;
+	}
+
+	
+	return false;
+}
+
 /*
 =====================================================================================================
 onContact Enemy
@@ -325,32 +403,4 @@ bool GameScene::onEnemyContactBegin(PhysicsContact& contact)
 	return false;
 }
 
-IAttackable* GameScene::getAttackableByNode(Node* node) {
 
-	Building* building = nullptr;
-	SlaveTraider* slaveTraider = nullptr;
-	Citizen* citizen = nullptr;
-	Builder* builder = nullptr;
-	Warrior* warrior = nullptr;
-
-	IAttackable* objToAttack = nullptr;
-
-	switch (node->getTag()) {
-
-	case SprTag::SLAVE_TRAIDER:
-	case SprTag::CITIZEN:
-	case SprTag::BUILDER:
-	case SprTag::WARRIOR:
-	case SprTag::WORKER:
-
-		break;
-
-	case SprTag::MINE:
-	case SprTag::TOWER:
-	case SprTag::CASTLE:
-	case SprTag::WALL:
-		break;
-	}
-
-	return objToAttack;
-}

@@ -179,6 +179,11 @@ void Player::initChoseRoleListener() {
 	dynamic_cast<GameScene*>(Enviroment::getInstance()->getScene())->setKeyEventListener(choseRoleListener, spr);
 }
 
+void Player::removeAllListeners() {
+	static_cast<GameScene*>(Director::getInstance()->getRunningScene())->removeKeyEventListener(buyListener);
+	static_cast<GameScene*>(Director::getInstance()->getRunningScene())->removeKeyEventListener(choseRoleListener);
+	static_cast<GameScene*>(Director::getInstance()->getRunningScene())->removeKeyEventListener(moveListener);
+}
 
 
 /*
@@ -276,6 +281,7 @@ void Player::hit(int attPower) {
 	UI::getInstance()->updateHeartLogo(m_HP);
 	if (m_HP <= 0) {
 		UI::getInstance()->setGameOverSprite();
+		EnemyController::getInstance()->allStopMove();
 	}
 }
 

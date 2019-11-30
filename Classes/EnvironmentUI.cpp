@@ -85,10 +85,10 @@ void EnvironmentUI::createFence(KingdomBorders* borders)
 	while (tempX < borders->rightX) {
 		auto spr = Sprite::create(FENCE_SPR);
 		spr->setAnchorPoint(Vec2(0, 0));
-		spr->setPosition(tempX,GENERAL_Y);
+		spr->setPosition(tempX, GENERAL_Y);
 		spr->getTexture()->setAliasTexParameters();
 		fence.push_back(spr);
-		Enviroment::getInstance()->getScene()->addChild(spr,FENCE_Z_ORDER);
+		Enviroment::getInstance()->getScene()->addChild(spr, FENCE_Z_ORDER);
 		tempX += spr->getContentSize().width;
 	}
 

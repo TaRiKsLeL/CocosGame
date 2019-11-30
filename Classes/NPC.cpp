@@ -52,12 +52,17 @@ void NPC::moveStart(Vec2 pos) {
 }
 
 void NPC::moveTo(Vec2 destination) {
+
+
+	int direction;
+	
+	if (!(spr))
+		return;
 	
 	resetDirection();
 
-	int direction;
 	int delta = destination.x - spr->getPosition().x;
-
+	
 	if (delta >= 0)
 		direction = 1;
 	else

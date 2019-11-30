@@ -51,3 +51,10 @@ KingdomBorders* Enviroment::getBorders()
 double Enviroment::getGroundWidth() {
 	return groundSpr->getBoundingBox().size.width;
 }
+
+void Enviroment::updateEnviromentData()
+{
+	Enviroment::getInstance()->setBorders(BuildingController::getInstance()->getKingdomBorders());
+	EnvironmentUI::getInstance()->updateTrees();
+	EnvironmentUI::getInstance()->createFence(Enviroment::getInstance()->getBorders());
+}
