@@ -23,7 +23,6 @@ Action* Enemy::createJmp() {
 	if (getDirection() == Direction::RIGHT)
 		jmpLen = -jmpLen;
 
-	log("enem length jmp %f", ENEMY_JMP_LENGTH);
 	return JumpBy::create(ENEMY_JMP_DURATION, Vec2(jmpLen, 0), ENEMY_JMP_HEIGTH , ENEMY_JMP_QUANTITY);
 }
 

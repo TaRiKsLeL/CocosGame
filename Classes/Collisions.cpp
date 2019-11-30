@@ -22,11 +22,19 @@ void GameScene::initContactListeners() {
 	EventListenerPhysicsContact* enemyContactListener = EventListenerPhysicsContact::create();
 	enemyContactListener->onContactBegin = CC_CALLBACK_1(GameScene::onEnemyContactBegin, this);
 
+	EventListenerPhysicsContact* shooterRangeContactListener = EventListenerPhysicsContact::create();
+	shooterRangeContactListener->onContactBegin = CC_CALLBACK_1(GameScene::onShooterRangeContactBegin, this);
+	shooterRangeContactListener->onContactSeparate = CC_CALLBACK_1(GameScene::GameScene::onShooterRangeContactSeparate, this);
+
+	EventListenerPhysicsContact* arrowListener = EventListenerPhysicsContact::create();
+	arrowListener->onContactBegin = CC_CALLBACK_1(GameScene::onArrowContactBegin, this);
 
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(playerContactListener, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(builderContactListener, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(workerContactListener, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(enemyContactListener, this);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(shooterRangeContactListener, this);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(arrowListener, this);
 
 }
 
@@ -421,4 +429,102 @@ bool GameScene::onEnemyContactBegin(PhysicsContact& contact)
 	return false;
 }
 
+/*
+=====================================================================================================
+onContact shoot
+=====================================================================================================
+*/
 
+bool GameScene::onShooterRangeContactBegin(PhysicsContact& contact)
+{
+	Warrior* shooter = nullptr;
+	Node* secondNode = nullptr;
+
+
+
+	auto nodeA = contact.getShapeA()->getBody()->getNode();
+	auto nodeB = contact.getShapeB()->getBody()->getNode();
+
+
+	if ((nodeA->getPhysicsBody()->getCategoryBitmask() ^ SHOOTER_CATEGORY_BM) == 0 ) {
+		shooter = WarriorController::getInstance()->findByNode(nodeA);
+		secondNode = nodeB;
+	}
+	else if ((nodeB->getPhysicsBody()->getCategoryBitmask() ^ SHOOTER_CATEGORY_BM) == 0) {
+		shooter = WarriorController::getInstance()->findByNode(nodeB);
+		secondNode = nodeA;
+	}
+	else
+		return false;
+
+
+	
+	shooter->setTarget(secondNode);
+	
+	return true;
+}
+
+bool GameScene::onShooterRangeContactSeparate(PhysicsContact& contact)
+{
+	Warrior* shooter = nullptr;
+	Node* secondNode = nullptr;
+
+
+
+
+	auto nodeA = contact.getShapeA()->getBody()->getNode();
+	auto nodeB = contact.getShapeB()->getBody()->getNode();
+
+
+	if ((nodeA->getPhysicsBody()->getCategoryBitmask() ^ SHOOTER_CATEGORY_BM) == 0) {
+		shooter = WarriorController::getInstance()->findByNode(nodeA);
+		secondNode = nodeB;
+	}
+	else if ((nodeB->getPhysicsBody()->getCategoryBitmask() ^ SHOOTER_CATEGORY_BM) == 0) {
+		shooter = WarriorController::getInstance()->findByNode(nodeB);
+		secondNode = nodeA;
+	}
+	else
+		return false;
+
+	shooter->removeTarget();
+
+	return true;
+}
+
+
+/*
+=====================================================================================================
+onContact shoot
+=====================================================================================================
+*/
+
+bool GameScene::onArrowContactBegin(PhysicsContact& contact)
+{
+	Enemy* enemy = nullptr;
+	Node* secondNode = nullptr;
+
+	auto nodeA = contact.getShapeA()->getBody()->getNode();
+	auto nodeB = contact.getShapeB()->getBody()->getNode();
+
+
+	if ((nodeA->getPhysicsBody()->getCategoryBitmask() ^ SHOOTER_CATEGORY_BM) == 0) {
+		enemy = EnemyController::getInstance()->findByPosition(nodeA->getPosition());
+		secondNode = nodeB;
+	}
+	else if ((nodeB->getPhysicsBody()->getCategoryBitmask() ^ SHOOTER_CATEGORY_BM) == 0) {
+		enemy = EnemyController::getInstance()->findByPosition(nodeB->getPosition());
+		secondNode = nodeA;
+	}
+	else
+		return false;
+
+	if ((secondNode->getPhysicsBody()->getCollisionBitmask() & SHOOTER_COLLIDE_BM) == 0)
+		return false;
+
+	secondNode->removeFromParentAndCleanup(true);
+	EnemyController::getInstance()->deleteByPos(enemy->getPosition());
+
+
+	return false;
+}

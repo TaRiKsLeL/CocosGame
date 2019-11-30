@@ -32,6 +32,10 @@ public:
 	bool onWorkerContactBegin(PhysicsContact&);
 	bool onWarriorContactBegin(PhysicsContact&);
 
+	bool onShooterRangeContactBegin(PhysicsContact&);
+	bool GameScene::onShooterRangeContactSeparate(PhysicsContact&);
+	bool onArrowContactBegin(PhysicsContact&);
+
 	void initContactListeners();
 
 	IPayable* getPayableByNode(Node*);

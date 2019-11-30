@@ -25,4 +25,6 @@ public:
 	void allMoveRand();
 	void deleteByPos(Vec2);
 	Warrior* findByPosition(Vec2);
+	Warrior* findByNode(Node*);
+
 };

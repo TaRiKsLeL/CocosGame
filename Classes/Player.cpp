@@ -92,8 +92,10 @@ void Player::move() {
 
 void Player::changeMoveDirection(EventKeyboard::KeyCode keyCode, bool condition) {
 
-	if (keyCode == EventKeyboard::KeyCode::KEY_RIGHT_ARROW)
+	if (keyCode == EventKeyboard::KeyCode::KEY_RIGHT_ARROW) {
+
 		direction.right = condition;
+	}
 
 	if (keyCode == EventKeyboard::KeyCode::KEY_LEFT_ARROW)
 		direction.left = condition;
@@ -180,6 +182,7 @@ void Player::initChoseRoleListener() {
 }
 
 void Player::removeAllListeners() {
+	GameTime::removeMoveableObject(this);
 	static_cast<GameScene*>(Director::getInstance()->getRunningScene())->removeKeyEventListener(buyListener);
 	static_cast<GameScene*>(Director::getInstance()->getRunningScene())->removeKeyEventListener(choseRoleListener);
 	static_cast<GameScene*>(Director::getInstance()->getRunningScene())->removeKeyEventListener(moveListener);

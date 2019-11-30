@@ -67,14 +67,14 @@
     <Filter Include="src\GameObjects\NPC\FriendlyNPC">
       <UniqueIdentifier>{73010d0e-7014-42cb-8c0e-e8f2936db077}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\GameObjects\NPC\NPCParent">
-      <UniqueIdentifier>{70da9f8c-3b86-4f15-ac43-b44a47a98819}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\GameObjects\NPC\Shooter">
       <UniqueIdentifier>{a764eef0-30b3-4dc1-91fe-f46353604e92}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\GameObjects\NPC\Enemy">
       <UniqueIdentifier>{3982b970-a39d-4f79-8a58-37ab1c5aa0c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\GameObjects\NPC\NPC_Parent">
+      <UniqueIdentifier>{70da9f8c-3b86-4f15-ac43-b44a47a98819}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -169,7 +169,7 @@
       <Filter>src\GameObjects\Enviroment</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\NPC.cpp">
-      <Filter>src\GameObjects\NPC\NPCParent</Filter>
+      <Filter>src\GameObjects\NPC\NPC_Parent</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Shooter.cpp">
       <Filter>src\GameObjects\NPC\Shooter</Filter>
@@ -279,7 +279,7 @@
       <Filter>src\GameObjects\Enviroment</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\NPC.h">
-      <Filter>src\GameObjects\NPC\NPCParent</Filter>
+      <Filter>src\GameObjects\NPC\NPC_Parent</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\IAttackable.h">
       <Filter>src\GameObjects\Interfaces</Filter>

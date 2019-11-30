@@ -24,7 +24,7 @@ bool GameScene::init() {
 	Scene::initWithPhysics();
 
 
-	//this->getPhysicsWorld()->setDebugDrawMask(0xffff);
+	this->getPhysicsWorld()->setDebugDrawMask(0xffff);
 
 	
 	Enviroment::getInstance()->setScene(this);

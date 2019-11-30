@@ -43,6 +43,7 @@ public:
 	void deleteObj();
 
 	Vec2 getPosition();
+	Rect getBoundingBox();
 
 	virtual void move() override;
 
