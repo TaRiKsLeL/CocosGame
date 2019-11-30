@@ -12,7 +12,7 @@ class NPC : public IMoveable , public IAttackable
 
 protected:
 
-	bool isMoving;
+	bool m_isMoving;
 	bool stop;
 
 	float moveSpeed;
@@ -41,6 +41,8 @@ public:
 	void addChild(Sprite*);
 	void removeAllChildren();
 	void deleteObj();
+
+	bool isMoving();
 
 	Vec2 getPosition();
 	Rect getBoundingBox();

@@ -1,7 +1,6 @@
 #include "Builder.h"
 
-Builder::Builder(Vec2 pos) : FriendlyNPC(pos, BUILDER_SPR) {
-	m_isBuilding = false;
+Builder::Builder(Vec2 pos) : FriendlyNPC(pos, BUILDER_SPR), goToBuilding(false), m_isBuilding(false) {
 	spr->getPhysicsBody()->setCategoryBitmask(BUILDER_CATEGORY_BM);
 	spr->getPhysicsBody()->setCollisionBitmask(BUILDER_COLLIDE_BM);
 	spr->getPhysicsBody()->setContactTestBitmask(BUILDER_COLLIDE_BM);
@@ -15,4 +14,12 @@ void Builder::setBuild(bool isBuilding) {
 
 bool Builder::isBuilding() {
 	return m_isBuilding;
+}
+
+bool Builder::isMovingToBuilding() {
+	return goToBuilding;
+}
+
+void Builder::setMovingToBuild(bool isMoving) {
+	goToBuilding = isMoving;
 }

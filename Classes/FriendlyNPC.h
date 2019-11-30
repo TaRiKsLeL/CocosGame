@@ -21,6 +21,7 @@ public:
 
 	Vec2 getCurrentPointMoveTo();
 	void stopMoving();
+
 	
 	virtual void move() override;
 
