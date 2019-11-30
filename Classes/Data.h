@@ -60,7 +60,7 @@ const int MINE_COLLIDE_BM			{ PLAYER_CATEGORY_BM | BUILDER_CATEGORY_BM | WORKER_
 
 
 const int DELTA_TIME{ 60 };
-const int DAY_DURATION{ 60 };
+const int DAY_DURATION{ 600 };
 const double SCALE_FACTOR{ 0.5 };
 
 //UI
@@ -119,6 +119,7 @@ const double PLAYER_START_X{ 6 * 16 / SCALE_FACTOR };
 
 
 const int CAMERA_OFFSET_Y{ -220 };
+const int CUST_OFFSET{ 50 };
 
 
 //sprites name
@@ -146,6 +147,9 @@ const string BOW_SPR{ "UI/bowBtn.png" };
 
 const string BACKGROUND_SPR{ "UI/background.png" };
 const string GAME_OVER_SPR{ "UI/game_over2.png" };
+const string GAME_OVER_BACK_SPR{ "UI/game_over_back.png" };
+
+const int GAME_OVER_BACK_OPACITY{ 40 };
 
 //UI elements shift position
 
@@ -250,6 +254,10 @@ const int PLAYER_HP{ 3 };
 const int ENEMY_HP{ 1 };
 const vector<int> WALL_HP{ 0,10,20,30,40,50 };
 
+
+//MINE CAPACITY
+
+const int MAX_MINE_CAPACITY{ 3 };
 
 //attack power
 const int FRIENDLY_ATTACK{ 1 };

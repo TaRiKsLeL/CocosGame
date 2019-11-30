@@ -68,9 +68,18 @@ void Building::timeDependedAction()
 			BuildingController::getInstance()->findWallByPos(spr->getPosition())->setHP(WALL_HP.at(level));
 		}
 		
-
 		isBuilding = false;
 		currentState = 0;
+
+		Enviroment::getInstance()->updateEnviromentData();
+
+		if (Mine* mine = dynamic_cast<Mine*>(this)) {
+			if (BuildingController::getInstance()->getMinesSearchingWorkers()->size() == 0) {
+				GameTime::removeTimeDependedObject(this);
+			}
+			BuildingController::getInstance()->getMinesSearchingWorkers()->push(mine);
+			GameTime::addTimeDependedObject(-1, BuildingController::getInstance());
+		}
 	}
 
 	if(isBuilding == true)

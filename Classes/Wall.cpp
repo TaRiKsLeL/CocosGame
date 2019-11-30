@@ -29,7 +29,6 @@ void Wall::pay(int& sum) {
 		if (price <= sum && price != 0) {
 			sum -= price;
 			upgrade();
-			Enviroment::getInstance()->updateEnviromentData();
 		}
 	}
 	

@@ -30,10 +30,15 @@ GAME OVER
 void UI::setGameOverSprite()
 {
 	gameOverSprite = Sprite::create(GAME_OVER_SPR);
-	gameOverSprite->setPosition(Vec2(0, -CAMERA_OFFSET_Y+50)); 
+	gameOverSprite->setPosition(Vec2(CUST_OFFSET, -CAMERA_OFFSET_Y+CUST_OFFSET));
 	gameOverSprite->setScale(SCALE_FACTOR);
 	gameOverSprite->getTexture()->setAliasTexParameters();
 
+	auto back = Sprite::create(GAME_OVER_BACK_SPR);
+	back->setOpacity(GAME_OVER_BACK_OPACITY);
+
+
+	Player::getInstance()->addChild(back);
 	Player::getInstance()->addChild(gameOverSprite);
 	Player::getInstance()->removeAllListeners();
 
@@ -99,6 +104,7 @@ void UI::addCitizenSelectIcons(Citizen* citizen) {
 
 	for (Sprite* tmp : *selectSprs) {
 		tmp->setAnchorPoint(Vec2(0.5, 0));
+		tmp->getTexture()->setAliasTexParameters();
 		tmp->setPosition(
 			Vec2(selectSprsPositionX->top() , 
 				SELECT_SITIZEN_ROLE_Y ));
@@ -153,7 +159,7 @@ void UI::createCoinsLabel(std::string text, std::string font, int size)
 {
 	coinsAmount = Label::createWithTTF(text, font, size);
 	coinsAmount->setScale(1.0f / LABEL_SCALE);
-	coinsAmount->setPosition(Vec2(LABEL_X_SPACE_FROM_PLAYER, LABEL_Y_SPACE_FROM_PLAYER));
+	coinsAmount->setPosition(Vec2(LABEL_X_SPACE_FROM_PLAYER+CUST_OFFSET, LABEL_Y_SPACE_FROM_PLAYER));
 	coinsAmount->getFontAtlas()->setAliasTexParameters();
 	Player::getInstance()->addChild(coinsAmount);
 }
@@ -165,7 +171,7 @@ void UI::setCoinsAmountLabel(int sum)
 
 void UI::createCoin(string path, int imAmount, float imSize, float time) {
 	coin = Sprite::create(path);
-	coin->setPosition(Vec2(LABEL_X_SPACE_FROM_PLAYER-100, LABEL_Y_SPACE_FROM_PLAYER));
+	coin->setPosition(Vec2(LABEL_X_SPACE_FROM_PLAYER-CUST_OFFSET, LABEL_Y_SPACE_FROM_PLAYER));
 	coin->setScale(COIN_SCALE_FACTOR);
 	coin->runAction(createAnimate(path, imAmount, imSize, imSize, time));
 	Player::getInstance()->addChild(coin);
@@ -184,12 +190,12 @@ HP
 void UI::createHeart(std::string fullHeartPath, std::string emptyHeartPath, int am, float size, float time)
 {
 	fullHeart = Sprite::create(fullHeartPath);
-	fullHeart->setPosition(Vec2(-LABEL_X_SPACE_FROM_PLAYER-50, LABEL_Y_SPACE_FROM_PLAYER-30));
+	fullHeart->setPosition(Vec2(-LABEL_X_SPACE_FROM_PLAYER, LABEL_Y_SPACE_FROM_PLAYER- (CUST_OFFSET/2)));
 	fullHeart->setAnchorPoint(Vec2(0.5, 0));
 	fullHeart->runAction(createAnimate(fullHeartPath, am, size, size, time));
 
 	emptyHeart = Sprite::create(emptyHeartPath);
-	emptyHeart->setPosition(Vec2(-LABEL_X_SPACE_FROM_PLAYER-50, LABEL_Y_SPACE_FROM_PLAYER-30));
+	emptyHeart->setPosition(Vec2(-LABEL_X_SPACE_FROM_PLAYER, LABEL_Y_SPACE_FROM_PLAYER- (CUST_OFFSET / 2)));
 	emptyHeart->setAnchorPoint(Vec2(0.5, 0));
 	emptyHeartAnimate = createAnimate(emptyHeartPath, am, size, size, time);
 	emptyHeart->runAction(emptyHeartAnimate);

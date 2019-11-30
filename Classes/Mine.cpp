@@ -35,3 +35,13 @@ PhysicsBody* Mine::createPhysBody() {
 
 	return pb;
 }
+
+void Mine::addWorker()
+{
+	amInside++;
+}
+
+int Mine::workersAmountInside()
+{
+	return amInside;
+}

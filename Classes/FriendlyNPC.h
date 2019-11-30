@@ -18,7 +18,6 @@ public:
 	void setActive();
 
 	void moveRandStart();
-	void moveStart(Vec2 pos);
 
 	Vec2 getCurrentPointMoveTo();
 	void stopMoving();

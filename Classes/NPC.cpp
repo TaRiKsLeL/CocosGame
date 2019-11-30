@@ -12,6 +12,7 @@ NPC::NPC(Vec2 pos, std::string sprName) : isMoving(false), stop(true), moveSpeed
 	spr->setPosition(pos);
 	spr->setAnchorPoint(Vec2(0.5, 0));
 	spr->addComponent(createPhysBody());
+	spr->getTexture()->setAliasTexParameters();
 
 	Director::getInstance()->getRunningScene()->addChild(spr, NPC_Z_ORDER);
 }
@@ -56,7 +57,7 @@ void NPC::moveTo(Vec2 destination) {
 
 	int direction;
 	
-	if (!(spr))
+	if (!spr)
 		return;
 	
 	resetDirection();
@@ -110,6 +111,7 @@ void NPC::removeAllChildren() {
 }
 
 void NPC::deleteObj() {
+	spr->removeAllComponents();
 	spr->removeFromParentAndCleanup(true);
 }
 

@@ -15,12 +15,17 @@ void GameScene::initContactListeners() {
 	builderContactListener->onContactBegin = CC_CALLBACK_1(GameScene::onBuilderContactBegin, this);
 	builderContactListener->onContactSeparate = CC_CALLBACK_1(GameScene::onBuilderContactSeparate, this);
 
+	EventListenerPhysicsContact* workerContactListener = EventListenerPhysicsContact::create();
+	workerContactListener->onContactBegin = CC_CALLBACK_1(GameScene::onWorkerContactBegin, this);
+	//workerContactListener->onContactSeparate = CC_CALLBACK_1(GameScene::onWorkerContactSeparate, this);
+
 	EventListenerPhysicsContact* enemyContactListener = EventListenerPhysicsContact::create();
 	enemyContactListener->onContactBegin = CC_CALLBACK_1(GameScene::onEnemyContactBegin, this);
 
 
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(playerContactListener, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(builderContactListener, this);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(workerContactListener, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(enemyContactListener, this);
 
 }
@@ -288,6 +293,19 @@ bool GameScene::onWorkerContactBegin(PhysicsContact& contact)
 		if (building == nullptr) return false;
 		
 		mine = dynamic_cast<Mine*>(building);
+
+
+		if (worker && worker->getCurrentPointMoveTo() == building->getPosition()) {
+			worker->stopMoving();
+			mine->addWorker();
+			//WorkerController::getInstance()->deleteByPos(worker->getPosition());
+			log("In mine: %d", mine->workersAmountInside());
+			WorkerController::getInstance()->getWorkersToPutInsideMine()->push(worker);
+			GameTime::addTimeDependedObject(-1, WorkerController::getInstance());
+
+			//building->setBuildingStatus(true);
+			return true;
+		}
 
 		break;
 	}

@@ -34,16 +34,6 @@ void FriendlyNPC::moveRandStart() {
 
 }
 
-void FriendlyNPC::moveStart(Vec2 pos) {
-	if (stop) {
-		stop = false;
-		currentPointToMove = pos;
-		GameTime::addMoveableObject(this);
-	}
-
-}
-
-
 
 Vec2 FriendlyNPC::getCurrentPointMoveTo() {
 	return currentPointToMove;

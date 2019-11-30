@@ -127,26 +127,7 @@ void BuildingController::generateBuildings(int towerAm,int wallsAm,int minesAm) 
 
 
 }
-void BuildingController::createBuilding(int& type, bool side, int& previus, int& num, int& counter, float& sideShift,float center, float shift, int random) {
 
-	if (type == 0 && num > 0 && (previus != type)) {
-		sideShift += shift + random;
-		createTower(false, center - sideShift);
-
-		log("Prev duilding %d .... This building %d ", previus, sideShift);
-		previus = sideShift;
-
-		counter = 0;
-		num--;
-	}
-}
-
-/*
-vector<Wall*> BuildingController::getWalls()
-{
-	return walls;
-}
-*/
 void BuildingController::createWall(bool dir,int xPos) {
 	Wall* wall = new Wall(dir,&WALLS);
 	wall->getSprite()->setPosition(Vec2(xPos, GENERAL_Y));
@@ -259,6 +240,27 @@ BuildingController* BuildingController::getInstance() {
 	}
 	buildingController = new BuildingController();
 	return buildingController;
+}
+
+queue<Mine*>* BuildingController::getMinesSearchingWorkers()
+{
+	return &minesSearchingWorkers;
+}
+
+void BuildingController::timeDependedAction()
+{	
+	Mine* mine = minesSearchingWorkers.front();
+
+	if (mine) {
+
+		for (int i = 0; i < MAX_MINE_CAPACITY - mine->workersAmountInside(); i++)
+			WorkerController::getInstance()->setPositionToWork(mine->getPosition());
+
+		if (mine->workersAmountInside()-1 == MAX_MINE_CAPACITY)
+			minesSearchingWorkers.pop();
+	}
+	if (minesSearchingWorkers.size() == 0)
+		GameTime::removeTimeDependedObject(this);
 }
 
 Vec2 BuildingController::getCastlePos() {

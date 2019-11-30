@@ -11,7 +11,7 @@ Init Player
 Player::Player(const std::string fileName) : money(PLAYER_START_MONEY) , objInFocus(nullptr), m_HP(PLAYER_HP) {
 
 	spr = Sprite::create(fileName);
-	spr->setAnchorPoint(Vec2(0, 0));
+	spr->setAnchorPoint(Vec2(0.5, 0));
 	spr->setPosition(Vec2(PLAYER_START_X, GENERAL_Y));
 	spr->getTexture()->setAliasTexParameters();
 	spr->addComponent(createPhysBody());
