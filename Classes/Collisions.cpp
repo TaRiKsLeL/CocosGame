@@ -203,8 +203,10 @@ bool GameScene::onBuilderContactBegin(PhysicsContact& contact)
 		return false;
 	}
 
-	if (builder && builder->isBuilding() && builder->getCurrentPointMoveTo() == building->getPosition()) {
+	if (builder && builder->isMovingToBuilding() && builder->getCurrentPointMoveTo() == building->getPosition()) {
 		builder->stopMoving();
+		builder->setBuild(true);
+		builder->setMovingToBuild(false);
 		building->setBuildingStatus(true);
 		return true;
 	}
@@ -490,18 +492,18 @@ bool GameScene::onArrowContactBegin(PhysicsContact& contact)
 	auto nodeB = contact.getShapeB()->getBody()->getNode();
 
 
-	if ((nodeA->getPhysicsBody()->getCategoryBitmask() ^ SHOOTER_CATEGORY_BM) == 0) {
+	if ((nodeA->getPhysicsBody()->getCategoryBitmask() ^ ARROW_CATEGORY_BM) == 0) {
 		enemy = EnemyController::getInstance()->findByPosition(nodeA->getPosition());
 		secondNode = nodeB;
 	}
-	else if ((nodeB->getPhysicsBody()->getCategoryBitmask() ^ SHOOTER_CATEGORY_BM) == 0) {
+	else if ((nodeB->getPhysicsBody()->getCategoryBitmask() ^ ARROW_CATEGORY_BM) == 0) {
 		enemy = EnemyController::getInstance()->findByPosition(nodeB->getPosition());
 		secondNode = nodeA;
 	}
 	else
 		return false;
 
-	if ((secondNode->getPhysicsBody()->getCollisionBitmask() & SHOOTER_COLLIDE_BM) == 0)
+	if ((secondNode->getPhysicsBody()->getCollisionBitmask() & ARROW_COLLIDE_BM) == 0)
 		return false;
 
 	secondNode->removeFromParentAndCleanup(true);

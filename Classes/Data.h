@@ -17,6 +17,8 @@ enum SprTag {
 	MINE
 };
 
+const int TAG_COUNT = 9;
+
 enum Direction {
 	LEFT,
 	RIGHT,

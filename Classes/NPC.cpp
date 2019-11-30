@@ -6,7 +6,7 @@ Init
 =====================================================================================================
 */
 
-NPC::NPC(Vec2 pos, std::string sprName) : isMoving(false), stop(true), moveSpeed(DEFAULT_NPC_MOVE_SPEED), direction(Direction::RIGHT){
+NPC::NPC(Vec2 pos, std::string sprName) : m_isMoving(false), stop(true), moveSpeed(DEFAULT_NPC_MOVE_SPEED), direction(Direction::RIGHT){
 
 	spr = Sprite::create(sprName);
 	spr->setPosition(pos);
@@ -45,6 +45,7 @@ Direction NPC::getDirection() {
 void NPC::moveStart(Vec2 pos) {
 	if (stop) {
 		stop = false;
+		m_isMoving = true;
 		currentPointToMove = pos;
 		GameTime::addMoveableObject(this);
 	}
@@ -73,7 +74,7 @@ void NPC::moveTo(Vec2 destination) {
 	if (spr->getPosition().x - moveSpeed / 2 <= destination.x &&
 		spr->getPosition().x + moveSpeed / 2 >= destination.x)
 	{
-		isMoving = false;
+		m_isMoving = false;
 	}
 }
 
@@ -89,6 +90,7 @@ void NPC::move() {
 
 void NPC::stopMoving() {
 	if (!stop) {
+		m_isMoving = false;
 		stop = true;
 		GameTime::removeMoveableObject(this);
 	}
@@ -125,8 +127,6 @@ void NPC::setMoveSpeed(float speed) {
 	moveSpeed = speed;
 }
 
-/*
-=====================================================================================================
-get set
-=====================================================================================================
-*/
+bool NPC::isMoving() {
+	return m_isMoving;
+}

@@ -37,3 +37,16 @@ Warrior* WarriorController::findByNode(Node* node) {
 	}
 	return nullptr;
 }
+
+void WarriorController::moveToWall() {
+	int leftBorder = Enviroment::getInstance()->getBorders()->leftX;
+	int rightBorder = Enviroment::getInstance()->getBorders()->rightX;
+
+	int leftCount = 0;
+	int rightCount = 0;
+
+	Vec2 leftDiapason;
+	Vec2 rigthDiapason;
+
+
+}

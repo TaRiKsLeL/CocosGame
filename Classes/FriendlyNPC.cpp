@@ -26,18 +26,9 @@ move and position
 
 void FriendlyNPC::moveRandStart() {
 	if (stop) {
-		
+		m_isMoving = false;
 		stop = false;
 		isMovingRand = true;
-		GameTime::addMoveableObject(this);
-	}
-
-}
-
-void FriendlyNPC::moveStart(Vec2 pos) {
-	if (stop) {
-		stop = false;
-		currentPointToMove = pos;
 		GameTime::addMoveableObject(this);
 	}
 
@@ -52,11 +43,14 @@ Vec2 FriendlyNPC::getCurrentPointMoveTo() {
 
 void FriendlyNPC::move() {
 
-	if (!isMoving && isMovingRand) {
+	if (!m_isMoving && isMovingRand) {
 		currentPointToMove.y = GENERAL_Y;
 		currentPointToMove.x = RandomHelper::random_int<int>(static_cast<int>(Enviroment::getInstance()->getBorders()->leftX),
 																static_cast<int>(Enviroment::getInstance()->getBorders()->rightX));
-		isMoving = true;
+		m_isMoving = true;
+	}
+	else if(!m_isMoving) {
+		stopMoving();
 	}
 	if(isActive)
 		moveTo(currentPointToMove);
@@ -67,6 +61,7 @@ void FriendlyNPC::stopMoving() {
 	if (!stop) {
 		stop = true;
 		isMovingRand = false;
+		m_isMoving = false;
 		GameTime::removeMoveableObject(this);
 	}
 }
