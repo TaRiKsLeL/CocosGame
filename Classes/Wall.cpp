@@ -1,12 +1,14 @@
 #include "Wall.h"
+#include "Enviroment.h"
 
 
 Wall::Wall(bool dir,const vector<std::string> *images) : Building(images) , m_HP(0) {
 
 	spr->setTag(SprTag::WALL);
 	
-	spr->addComponent(createPhysBody());
+	spr->setPhysicsBody(createPhysBody());
 	
+
 	if (dir) {
 		direction.right = dir;
 		spr->setFlipX(-1);
@@ -16,16 +18,6 @@ Wall::Wall(bool dir,const vector<std::string> *images) : Building(images) , m_HP
 	}
 }
 
-PhysicsBody* Wall::createPhysBody() {
-	spr->removeAllComponents();
-
-	PhysicsBody* pb = PhysicsBody::createBox(spr->getBoundingBox().size);
-	pb->setDynamic(false);
-	pb->setContactTestBitmask(WALL_COLLIDE_BM);
-	pb->setCategoryBitmask(WALL_CATEGORY_BM);
-	pb->setCollisionBitmask(WALL_COLLIDE_BM);
-	return pb;
-}
 
 void Wall::pay(int& sum) {
 	int price{ 0 };
@@ -37,6 +29,7 @@ void Wall::pay(int& sum) {
 		if (price <= sum && price != 0) {
 			sum -= price;
 			upgrade();
+			Enviroment::getInstance()->updateEnviromentData();
 		}
 	}
 	
@@ -46,6 +39,17 @@ void Wall::repair() {
 	level = lastLevel;
 }
 
+PhysicsBody* Wall::createPhysBody() {
+	PhysicsBody* pb = PhysicsBody::createBox(spr->getBoundingBox().size);
+	pb->setDynamic(false);
+	pb->setContactTestBitmask(WALL_COLLIDE_BM);
+	pb->setCategoryBitmask(WALL_CATEGORY_BM);
+	pb->setCollisionBitmask(WALL_COLLIDE_BM);
+	
+	setHP(WALL_HP.at(level));
+
+	return pb;
+}
 
 /*
 =====================================================================================================

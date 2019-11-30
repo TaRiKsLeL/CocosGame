@@ -1,6 +1,12 @@
 #pragma once
+#include "cocos2d.h"
+
+USING_NS_CC;
 
 class Shooter {
+private:
+
 public:
-	virtual void shoot();
+	PhysicsBody* createPhysicsBody();
+	void shoot();
 };

@@ -40,7 +40,6 @@ protected:
 	int currentState{0};
 	
 	virtual PhysicsBody* createPhysBody();
-	void updateEnviromentData();
 public:
 
 	Building(const vector<std::string>*);

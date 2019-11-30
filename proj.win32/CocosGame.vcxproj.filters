@@ -174,9 +174,6 @@
     <ClCompile Include="..\Classes\Shooter.cpp">
       <Filter>src\GameObjects\NPC\Shooter</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\GameOverScene.cpp">
-      <Filter>src\Scenes</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -289,9 +286,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Shooter.h">
       <Filter>src\GameObjects\NPC\Shooter</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\GameOverScene.h">
-      <Filter>src\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -24,7 +24,9 @@ private:
 public:
 
 	static Enviroment* getInstance();
-	
+
+	void updateEnviromentData();
+
 	void setScene(Scene*);
 	void setGroundSpr(const std::string);
 	void setBorders(KingdomBorders* borders);

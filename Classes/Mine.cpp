@@ -2,6 +2,10 @@
 
 Mine::Mine(const vector<std::string>* images) : Building(images){
 	spr->setTag(SprTag::MINE);
+	
+	spr->setPhysicsBody(createPhysBody());
+
+
 }
 
 void Mine::pay(int& sum) {
@@ -18,4 +22,16 @@ void Mine::pay(int& sum) {
 	}
 
 	
+}
+
+PhysicsBody* Mine::createPhysBody() {
+	PhysicsBody* pb = PhysicsBody::createBox(spr->getBoundingBox().size);
+
+	pb->setContactTestBitmask(MINE_COLLIDE_BM);
+	pb->setCategoryBitmask(MINE_CATEGORY_BM);
+	pb->setCollisionBitmask(MINE_COLLIDE_BM);
+	
+	pb->setDynamic(false);
+
+	return pb;
 }

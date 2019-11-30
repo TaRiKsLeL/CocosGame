@@ -2,7 +2,6 @@
 
 #include "Building.h"
 #include "IAttackable.h"
-//#include "Enviroment.h"
 
 class Wall :public Building , public IAttackable {
 private:

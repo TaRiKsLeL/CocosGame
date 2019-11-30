@@ -36,18 +36,10 @@ INTERACTION
 PhysicsBody* Building::createPhysBody() {
 	PhysicsBody* pb = PhysicsBody::createBox(spr->getBoundingBox().size);
 	pb->setDynamic(false);
-	pb->setContactTestBitmask(BUILDING_COLLIDE_BM);
-	pb->setCategoryBitmask(BUILDING_CATEGORY_BM);
-	pb->setCollisionBitmask(BUILDING_COLLIDE_BM);
+	
 	return pb;
 }
 
-void Building::updateEnviromentData()
-{
-	Enviroment::getInstance()->setBorders(BuildingController::getInstance()->getKingdomBorders());
-	EnvironmentUI::getInstance()->updateTrees();
-	EnvironmentUI::getInstance()->createFence(Enviroment::getInstance()->getBorders());
-}
 
 
 void Building::upgrade() {
@@ -76,7 +68,6 @@ void Building::timeDependedAction()
 			BuildingController::getInstance()->findWallByPos(spr->getPosition())->setHP(WALL_HP.at(level));
 		}
 		
-		updateEnviromentData();
 
 		isBuilding = false;
 		currentState = 0;

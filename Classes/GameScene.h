@@ -29,6 +29,9 @@ public:
 	
 	bool onEnemyContactBegin(PhysicsContact&);
 
+	bool onWorkerContactBegin(PhysicsContact&);
+	bool onWarriorContactBegin(PhysicsContact&);
+
 	void initContactListeners();
 
 	IPayable* getPayableByNode(Node*);

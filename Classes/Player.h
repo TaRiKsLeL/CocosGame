@@ -71,6 +71,8 @@ public:
 	
 	virtual void hit(int) override;
 	virtual bool canBeAttacked() override;
+
+	void removeAllListeners();
 };
 
 	

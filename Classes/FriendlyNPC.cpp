@@ -13,9 +13,6 @@ FriendlyNPC::FriendlyNPC(Vec2 pos, std::string sprName) : NPC(pos, sprName) {
 	setMoveSpeed(FRIENDLY_NPC_MOVE_SPEED);
 	isMovingRand = true;
 
-	spr->getPhysicsBody()->setCategoryBitmask(NPC_CATEGORY_BM);
-	spr->getPhysicsBody()->setCollisionBitmask(NPC_COLLIDE_BM);
-	spr->getPhysicsBody()->setContactTestBitmask(NPC_COLLIDE_BM);
 
 	moveRandStart();
 }
