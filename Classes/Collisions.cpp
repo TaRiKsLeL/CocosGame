@@ -51,30 +51,33 @@ bool GameScene::onPlayerContactBegin(PhysicsContact& contact)
 
 	auto nodeA = contact.getShapeA()->getBody()->getNode();
 	auto nodeB = contact.getShapeB()->getBody()->getNode();
-
-	Node* nonPlayerNode = nullptr;
-
-	if ((nodeA->getPhysicsBody()->getCategoryBitmask() ^ PLAYER_CATEGORY_BM) == 0) {
-		player = Player::getInstance();
-		nonPlayerNode = nodeB;
-	}
-	else if ((nodeB->getPhysicsBody()->getCategoryBitmask() ^ PLAYER_CATEGORY_BM) == 0) {
-		player = Player::getInstance();
-		nonPlayerNode = nodeA;
-	}
-	else
-		return false;
-
-	if ((nonPlayerNode->getPhysicsBody()->getCollisionBitmask() & PLAYER_CATEGORY_BM) == 0)
-		return false;
-
-
-
-	IPayable* payable = getPayableByNode(nonPlayerNode);
 	
-	if (payable != nullptr) {
-		log("plyer payable");
-		player->setPayable(payable);
+	if (nodeA && nodeB) {
+
+		Node* nonPlayerNode = nullptr;
+
+		if ((nodeA->getPhysicsBody()->getCategoryBitmask() ^ PLAYER_CATEGORY_BM) == 0) {
+			player = Player::getInstance();
+			nonPlayerNode = nodeB;
+		}
+		else if ((nodeB->getPhysicsBody()->getCategoryBitmask() ^ PLAYER_CATEGORY_BM) == 0) {
+			player = Player::getInstance();
+			nonPlayerNode = nodeA;
+		}
+		else
+			return false;
+
+		if ((nonPlayerNode->getPhysicsBody()->getCollisionBitmask() & PLAYER_CATEGORY_BM) == 0)
+			return false;
+
+
+
+		IPayable* payable = getPayableByNode(nonPlayerNode);
+
+		if (payable != nullptr) {
+			log("plyer payable");
+			player->setPayable(payable);
+		}
 	}
 	return true;
 }
@@ -97,29 +100,30 @@ bool GameScene::onPlayerContactSeparate(PhysicsContact& contact)
 	Player* player = nullptr;
 
 	Node* nonPlayerNode = nullptr;
+	
+	if (nodeA && nodeB) {
+		if ((nodeA->getPhysicsBody()->getCategoryBitmask() ^ PLAYER_CATEGORY_BM) == 0) {
+			player = Player::getInstance();
+			nonPlayerNode = nodeB;
+		}
+		else if ((nodeB->getPhysicsBody()->getCategoryBitmask() ^ PLAYER_CATEGORY_BM) == 0) {
+			player = Player::getInstance();
+			nonPlayerNode = nodeA;
+		}
+		else
+			return false;
 
-	if ((nodeA->getPhysicsBody()->getCategoryBitmask() ^ PLAYER_CATEGORY_BM) == 0) {
-		player = Player::getInstance();
-		nonPlayerNode = nodeB;
+		if ((nonPlayerNode->getPhysicsBody()->getCollisionBitmask() & PLAYER_CATEGORY_BM) == 0)
+			return false;
+
+		IPayable* payable = getPayableByNode(nonPlayerNode);
+
+		if (player != nullptr && player->focused()) {
+			if (player->checkFocusedObj(payable))
+				player->disableFocusBuyListener();
+		}
+
 	}
-	else if ((nodeB->getPhysicsBody()->getCategoryBitmask() ^ PLAYER_CATEGORY_BM) == 0) {
-		player = Player::getInstance();
-		nonPlayerNode = nodeA;
-	}
-	else
-		return false;
-
-	if ((nonPlayerNode->getPhysicsBody()->getCollisionBitmask() & PLAYER_CATEGORY_BM) == 0)
-		return false;
-
-	IPayable* payable = getPayableByNode(nonPlayerNode);
-
-	if (player != nullptr && player->focused()) {
-		if (player->checkFocusedObj(payable))
-			player->disableFocusBuyListener();
-	}
-
-
 	return true;
 }
 
@@ -180,42 +184,44 @@ bool GameScene::onBuilderContactBegin(PhysicsContact& contact)
 	auto nodeB = contact.getShapeB()->getBody()->getNode();
 
 	Node* secondNode = nullptr;
+	
+	if (nodeA && nodeB) {
 
-	if ((nodeA->getPhysicsBody()->getCategoryBitmask() & BUILDER_CATEGORY_BM) == BUILDER_CATEGORY_BM) {
-		builder = BuilderController::getInstance()->findByPosition(nodeA->getPosition());
-		secondNode = nodeB;
+		if ((nodeA->getPhysicsBody()->getCategoryBitmask() & BUILDER_CATEGORY_BM) == BUILDER_CATEGORY_BM) {
+			builder = BuilderController::getInstance()->findByPosition(nodeA->getPosition());
+			secondNode = nodeB;
+		}
+		else if ((nodeB->getPhysicsBody()->getCategoryBitmask() & BUILDER_CATEGORY_BM) == BUILDER_CATEGORY_BM) {
+			builder = BuilderController::getInstance()->findByPosition(nodeB->getPosition());
+			secondNode = nodeA;
+		}
+		else
+			return false;
+
+		if ((secondNode->getPhysicsBody()->getCollisionBitmask() & BUILDER_COLLIDE_BM) == 0)
+			return false;
+
+		switch (secondNode->getTag()) {
+
+		case SprTag::MINE:
+		case SprTag::TOWER:
+		case SprTag::CASTLE:
+		case SprTag::WALL:
+			building = BuildingController::getInstance()->findBuildingByTagAndPosition(secondNode->getTag(), secondNode->getPosition());
+			if (building == nullptr) return false;
+			break;
+		default:
+			return false;
+		}
+
+		if (builder && builder->isMovingToBuilding() && builder->getCurrentPointMoveTo() == building->getPosition()) {
+			builder->stopMoving();
+			builder->setMovingToBuild(false);
+			builder->setBuild(true);
+			building->setBuildingStatus(true);
+			return true;
+		}
 	}
-	else if ((nodeB->getPhysicsBody()->getCategoryBitmask() & BUILDER_CATEGORY_BM) == BUILDER_CATEGORY_BM) {
-		builder = BuilderController::getInstance()->findByPosition(nodeB->getPosition());
-		secondNode = nodeA;
-	}
-	else
-		return false;
-
-	if ((secondNode->getPhysicsBody()->getCollisionBitmask() & BUILDER_COLLIDE_BM) == 0)
-		return false;
-
-	switch (secondNode->getTag()) {
-
-	case SprTag::MINE:
-	case SprTag::TOWER:
-	case SprTag::CASTLE:
-	case SprTag::WALL:
-		building = BuildingController::getInstance()->findBuildingByTagAndPosition(secondNode->getTag(), secondNode->getPosition());
-		if (building == nullptr) return false;
-		break;
-	default:
-		return false;
-	}
-
-	if (builder && builder->isMovingToBuilding() && builder->getCurrentPointMoveTo() == building->getPosition()) {
-		builder->stopMoving();
-		builder->setMovingToBuild(false);
-		builder->setBuild(true);
-		building->setBuildingStatus(true);
-		return true;
-	}
-
 	return false;
 }
 
@@ -235,41 +241,43 @@ bool GameScene::onBuilderContactSeparate(PhysicsContact& contact)
 	auto nodeB = contact.getShapeB()->getBody()->getNode();
 
 	Node* secondNode = nullptr;
+	
+	if (nodeA && nodeB) {
 
-	if ((nodeA->getPhysicsBody()->getCategoryBitmask() & BUILDER_CATEGORY_BM) == BUILDER_CATEGORY_BM) {
-		builder = BuilderController::getInstance()->findByPosition(nodeA->getPosition());
-		secondNode = nodeB;
+		if ((nodeA->getPhysicsBody()->getCategoryBitmask() & BUILDER_CATEGORY_BM) == BUILDER_CATEGORY_BM) {
+			builder = BuilderController::getInstance()->findByPosition(nodeA->getPosition());
+			secondNode = nodeB;
+		}
+		else if ((nodeB->getPhysicsBody()->getCategoryBitmask() & BUILDER_CATEGORY_BM) == BUILDER_CATEGORY_BM) {
+			builder = BuilderController::getInstance()->findByPosition(nodeB->getPosition());
+			secondNode = nodeA;
+		}
+		else
+			return false;
+
+		if ((secondNode->getPhysicsBody()->getCollisionBitmask() & BUILDER_COLLIDE_BM) == 0)
+			return false;
+
+		switch (secondNode->getTag()) {
+
+		case SprTag::MINE:
+		case SprTag::TOWER:
+		case SprTag::CASTLE:
+		case SprTag::WALL:
+			building = BuildingController::getInstance()->findBuildingByTagAndPosition(secondNode->getTag(), secondNode->getPosition());
+			if (building == nullptr) return false;
+			break;
+		default:
+			return false;
+		}
+
+		if (builder && builder->getCurrentPointMoveTo() == building->getPosition()) {
+			builder->moveRandStart();
+			builder->setBuild(false);
+			//	building->setBuildingStatus(false);
+			return true;
+		}
 	}
-	else if ((nodeB->getPhysicsBody()->getCategoryBitmask() & BUILDER_CATEGORY_BM) == BUILDER_CATEGORY_BM) {
-		builder = BuilderController::getInstance()->findByPosition(nodeB->getPosition());
-		secondNode = nodeA;
-	}
-	else
-		return false;
-
-	if ((secondNode->getPhysicsBody()->getCollisionBitmask() & BUILDER_COLLIDE_BM) == 0)
-		return false;
-
-	switch (secondNode->getTag()) {
-
-	case SprTag::MINE:
-	case SprTag::TOWER:
-	case SprTag::CASTLE:
-	case SprTag::WALL:
-		building = BuildingController::getInstance()->findBuildingByTagAndPosition(secondNode->getTag(), secondNode->getPosition());
-		if (building == nullptr) return false;
-		break;
-	default:
-		return false;
-	}
-
-	if (builder && builder->getCurrentPointMoveTo() == building->getPosition()) {
-		builder->moveRandStart();
-		builder->setBuild(false);
-	//	building->setBuildingStatus(false);
-		return true;
-	}
-
 	return false;
 }
 
@@ -282,28 +290,30 @@ bool GameScene::onWorkerContactBegin(PhysicsContact& contact)
 	auto nodeB = contact.getShapeB()->getBody()->getNode();
 
 	Node* secondNode = nullptr;
+	
+	if (nodeA && nodeB) {
 
-	if ((nodeA->getPhysicsBody()->getCategoryBitmask() & WORKER_CATEGORY_BM) == WORKER_CATEGORY_BM) {
-		worker = WorkerController::getInstance()->findByPosition(nodeA->getPosition());
-		secondNode = nodeB;
-	}
-	else if ((nodeB->getPhysicsBody()->getCategoryBitmask() & WORKER_CATEGORY_BM) == WORKER_CATEGORY_BM) {
-		worker = WorkerController::getInstance()->findByPosition(nodeB->getPosition());
-		secondNode = nodeA;
-	}
-	else
-		return false;
+		if ((nodeA->getPhysicsBody()->getCategoryBitmask() & WORKER_CATEGORY_BM) == WORKER_CATEGORY_BM) {
+			worker = WorkerController::getInstance()->findByPosition(nodeA->getPosition());
+			secondNode = nodeB;
+		}
+		else if ((nodeB->getPhysicsBody()->getCategoryBitmask() & WORKER_CATEGORY_BM) == WORKER_CATEGORY_BM) {
+			worker = WorkerController::getInstance()->findByPosition(nodeB->getPosition());
+			secondNode = nodeA;
+		}
+		else
+			return false;
 
-	if ((secondNode->getPhysicsBody()->getCollisionBitmask() & WORKER_COLLIDE_BM) == 0)
-		return false;
+		if ((secondNode->getPhysicsBody()->getCollisionBitmask() & WORKER_COLLIDE_BM) == 0)
+			return false;
 
-	switch (secondNode->getTag()) {
-	case SprTag::MINE:
-		Building * building = BuildingController::getInstance()->findBuildingByTagAndPosition(secondNode->getTag(), secondNode->getPosition());
-		
-		if (building == nullptr) return false;
-		
-		mine = dynamic_cast<Mine*>(building);
+		switch (secondNode->getTag()) {
+		case SprTag::MINE:
+			Building* building = BuildingController::getInstance()->findBuildingByTagAndPosition(secondNode->getTag(), secondNode->getPosition());
+
+			if (building == nullptr) return false;
+
+			mine = dynamic_cast<Mine*>(building);
 
 
 		if (worker && worker->getCurrentPointMoveTo() == building->getPosition()) {
@@ -322,7 +332,7 @@ bool GameScene::onWorkerContactBegin(PhysicsContact& contact)
 	}
 
 
-
+	}
 	return false;
 }
 
@@ -334,34 +344,36 @@ bool GameScene::onWarriorContactBegin(PhysicsContact& contact)
 	auto nodeA = contact.getShapeA()->getBody()->getNode();
 	auto nodeB = contact.getShapeB()->getBody()->getNode();
 
-	Node* secondNode = nullptr;
+	if (nodeA && nodeB) {
 
-	if ((nodeA->getPhysicsBody()->getCategoryBitmask() & WARRIOR_CATEGORY_BM) == WARRIOR_CATEGORY_BM) {
-		warrior = WarriorController::getInstance()->findByPosition(nodeA->getPosition());
-		secondNode = nodeB;
+		Node* secondNode = nullptr;
+
+		if ((nodeA->getPhysicsBody()->getCategoryBitmask() & WARRIOR_CATEGORY_BM) == WARRIOR_CATEGORY_BM) {
+			warrior = WarriorController::getInstance()->findByPosition(nodeA->getPosition());
+			secondNode = nodeB;
+		}
+		else if ((nodeB->getPhysicsBody()->getCategoryBitmask() & WARRIOR_CATEGORY_BM) == WARRIOR_CATEGORY_BM) {
+			warrior = WarriorController::getInstance()->findByPosition(nodeB->getPosition());
+			secondNode = nodeA;
+		}
+		else
+			return false;
+
+		if ((secondNode->getPhysicsBody()->getCollisionBitmask() & WARRIOR_COLLIDE_BM) == 0)
+			return false;
+
+		switch (secondNode->getTag()) {
+
+		case SprTag::TOWER:
+			Building* building = BuildingController::getInstance()->findBuildingByTagAndPosition(secondNode->getTag(), secondNode->getPosition());
+			if (building == nullptr) return false;
+
+			tower = dynamic_cast<Tower*>(building);
+
+			break;
+		}
+
 	}
-	else if ((nodeB->getPhysicsBody()->getCategoryBitmask() & WARRIOR_CATEGORY_BM) == WARRIOR_CATEGORY_BM) {
-		warrior = WarriorController::getInstance()->findByPosition(nodeB->getPosition());
-		secondNode = nodeA;
-	}
-	else
-		return false;
-
-	if ((secondNode->getPhysicsBody()->getCollisionBitmask() & WARRIOR_COLLIDE_BM) == 0)
-		return false;
-
-	switch (secondNode->getTag()) {
-
-	case SprTag::TOWER:
-		Building* building = BuildingController::getInstance()->findBuildingByTagAndPosition(secondNode->getTag(), secondNode->getPosition());
-		if (building == nullptr) return false;
-		
-		tower = dynamic_cast<Tower*>(building);
-		
-		break;
-	}
-
-	
 	return false;
 }
 
@@ -383,51 +395,53 @@ bool GameScene::onEnemyContactBegin(PhysicsContact& contact)
 	auto nodeA = contact.getShapeA()->getBody()->getNode();
 	auto nodeB = contact.getShapeB()->getBody()->getNode();
 
+	if (nodeA && nodeB) {
 
-	if ((nodeA->getPhysicsBody()->getCategoryBitmask() ^ ENEMY_CATEGORY_BM) == 0) {
-		enemy = EnemyController::getInstance()->findByPosition(nodeA->getPosition());
-		secondNode = nodeB;
-	}
-	else if ((nodeB->getPhysicsBody()->getCategoryBitmask() ^ ENEMY_CATEGORY_BM) == 0) {
-		enemy = EnemyController::getInstance()->findByPosition(nodeB->getPosition());
-		secondNode = nodeA;
-	}
-	else
-		return false;
+		if ((nodeA->getPhysicsBody()->getCategoryBitmask() ^ ENEMY_CATEGORY_BM) == 0) {
+			enemy = EnemyController::getInstance()->findByPosition(nodeA->getPosition());
+			secondNode = nodeB;
+		}
+		else if ((nodeB->getPhysicsBody()->getCategoryBitmask() ^ ENEMY_CATEGORY_BM) == 0) {
+			enemy = EnemyController::getInstance()->findByPosition(nodeB->getPosition());
+			secondNode = nodeA;
+		}
+		else
+			return false;
 
-	if ((secondNode->getPhysicsBody()->getCollisionBitmask() & ENEMY_COLLIDE_BM) == 0)
-		return false;
+		if ((secondNode->getPhysicsBody()->getCollisionBitmask() & ENEMY_COLLIDE_BM) == 0)
+			return false;
 
-	switch (secondNode->getTag()) {
-	case SprTag::WALL:
-		isWall = true;
-		objToAtt = static_cast<IAttackable*>(BuildingController::getInstance()->findWallByPos(secondNode->getPosition()));
-		break;
-	case SprTag::PLAYER:
-		objToAtt = static_cast<IAttackable*>(Player::getInstance());
-		break;
-	case SprTag::CASTLE:
-		objToAtt = static_cast<IAttackable*>(BuildingController::getInstance()->getCastle());
-		break;
-	case SprTag::CITIZEN:
-		objToAtt = static_cast<IAttackable*>(CitizenController::getInstance()->findByPosition(secondNode->getPosition()));
-		break;
-	case SprTag::WARRIOR:
-		objToAtt = static_cast<IAttackable*>(WarriorController::getInstance()->findByPosition(secondNode->getPosition()));
-		break;
-	case SprTag::WORKER:
-		objToAtt = static_cast<IAttackable*>(WorkerController::getInstance()->findByPosition(secondNode->getPosition()));
-		break;
-	case SprTag::BUILDER:
-		objToAtt = static_cast<IAttackable*>(BuilderController::getInstance()->findByPosition(secondNode->getPosition()));
-		break;
-	default:
-		return false;
-	}
+		switch (secondNode->getTag()) {
+		case SprTag::WALL:
+			isWall = true;
+			objToAtt = static_cast<IAttackable*>(BuildingController::getInstance()->findWallByPos(secondNode->getPosition()));
+			break;
+		case SprTag::PLAYER:
+			objToAtt = static_cast<IAttackable*>(Player::getInstance());
+			break;
+		case SprTag::CASTLE:
+			objToAtt = static_cast<IAttackable*>(BuildingController::getInstance()->getCastle());
+			break;
+		case SprTag::CITIZEN:
+			objToAtt = static_cast<IAttackable*>(CitizenController::getInstance()->findByPosition(secondNode->getPosition()));
+			break;
+		case SprTag::WARRIOR:
+			objToAtt = static_cast<IAttackable*>(WarriorController::getInstance()->findByPosition(secondNode->getPosition()));
+			break;
+		case SprTag::WORKER:
+			objToAtt = static_cast<IAttackable*>(WorkerController::getInstance()->findByPosition(secondNode->getPosition()));
+			break;
+		case SprTag::BUILDER:
+			objToAtt = static_cast<IAttackable*>(BuilderController::getInstance()->findByPosition(secondNode->getPosition()));
+			break;
+		default:
+			return false;
+		}
 
-	if (objToAtt != nullptr && objToAtt->canBeAttacked()) {
-		objToAtt->hit(enemy->getAttPower());
-		enemy->jmpBack();
+		if (objToAtt != nullptr && objToAtt->canBeAttacked()) {
+			objToAtt->hit(enemy->getAttPower());
+			enemy->jmpBack();
+		}
 	}
 	return false;
 }
@@ -448,22 +462,23 @@ bool GameScene::onShooterRangeContactBegin(PhysicsContact& contact)
 	auto nodeA = contact.getShapeA()->getBody()->getNode();
 	auto nodeB = contact.getShapeB()->getBody()->getNode();
 
+	if (nodeA && nodeB) {
 
-	if ((nodeA->getPhysicsBody()->getCategoryBitmask() ^ SHOOTER_CATEGORY_BM) == 0 ) {
-		shooter = WarriorController::getInstance()->findByNode(nodeA);
-		secondNode = nodeB;
+		if ((nodeA->getPhysicsBody()->getCategoryBitmask() ^ SHOOTER_CATEGORY_BM) == 0) {
+			shooter = WarriorController::getInstance()->findByNode(nodeA);
+			secondNode = nodeB;
+		}
+		else if ((nodeB->getPhysicsBody()->getCategoryBitmask() ^ SHOOTER_CATEGORY_BM) == 0) {
+			shooter = WarriorController::getInstance()->findByNode(nodeB);
+			secondNode = nodeA;
+		}
+		else
+			return false;
+
+
+
+		shooter->setTarget(secondNode);
 	}
-	else if ((nodeB->getPhysicsBody()->getCategoryBitmask() ^ SHOOTER_CATEGORY_BM) == 0) {
-		shooter = WarriorController::getInstance()->findByNode(nodeB);
-		secondNode = nodeA;
-	}
-	else
-		return false;
-
-
-	
-	shooter->setTarget(secondNode);
-	
 	return true;
 }
 
@@ -478,27 +493,28 @@ bool GameScene::onShooterRangeContactSeparate(PhysicsContact& contact)
 	auto nodeA = contact.getShapeA()->getBody()->getNode();
 	auto nodeB = contact.getShapeB()->getBody()->getNode();
 
+	if (nodeA && nodeB) {
 
-	if ((nodeA->getPhysicsBody()->getCategoryBitmask() ^ SHOOTER_CATEGORY_BM) == 0) {
-		shooter = WarriorController::getInstance()->findByNode(nodeA);
-		secondNode = nodeB;
+		if ((nodeA->getPhysicsBody()->getCategoryBitmask() ^ SHOOTER_CATEGORY_BM) == 0) {
+			shooter = WarriorController::getInstance()->findByNode(nodeA);
+			secondNode = nodeB;
+		}
+		else if ((nodeB->getPhysicsBody()->getCategoryBitmask() ^ SHOOTER_CATEGORY_BM) == 0) {
+			shooter = WarriorController::getInstance()->findByNode(nodeB);
+			secondNode = nodeA;
+		}
+		else
+			return false;
+
+		shooter->removeTarget();
 	}
-	else if ((nodeB->getPhysicsBody()->getCategoryBitmask() ^ SHOOTER_CATEGORY_BM) == 0) {
-		shooter = WarriorController::getInstance()->findByNode(nodeB);
-		secondNode = nodeA;
-	}
-	else
-		return false;
-
-	shooter->removeTarget();
-
 	return true;
 }
 
 
 /*
 =====================================================================================================
-onContact shoot
+onContact arrow
 =====================================================================================================
 */
 
@@ -510,24 +526,25 @@ bool GameScene::onArrowContactBegin(PhysicsContact& contact)
 	auto nodeA = contact.getShapeA()->getBody()->getNode();
 	auto nodeB = contact.getShapeB()->getBody()->getNode();
 
+	if (nodeA && nodeB) {
 
-	if ((nodeA->getPhysicsBody()->getCategoryBitmask() ^ ARROW_CATEGORY_BM) == 0) {
-		enemy = EnemyController::getInstance()->findByPosition(nodeA->getPosition());
-		secondNode = nodeB;
+		if ((nodeA->getPhysicsBody()->getCategoryBitmask() ^ ENEMY_CATEGORY_BM) == 0) {
+			enemy = EnemyController::getInstance()->findByPosition(nodeA->getPosition());
+			secondNode = nodeB;
+		}
+		else if ((nodeB->getPhysicsBody()->getCategoryBitmask() ^ ENEMY_CATEGORY_BM) == 0) {
+			enemy = EnemyController::getInstance()->findByPosition(nodeB->getPosition());
+			secondNode = nodeA;
+		}
+		else
+			return false;
+
+		if ((secondNode->getPhysicsBody()->getCategoryBitmask() & ARROW_CATEGORY_BM) == 0)
+			return false;
+
+		secondNode->removeFromParentAndCleanup(true);
+		EnemyController::getInstance()->deleteByPos(enemy->getPosition());
+
 	}
-	else if ((nodeB->getPhysicsBody()->getCategoryBitmask() ^ ARROW_CATEGORY_BM) == 0) {
-		enemy = EnemyController::getInstance()->findByPosition(nodeB->getPosition());
-		secondNode = nodeA;
-	}
-	else
-		return false;
-
-	if ((secondNode->getPhysicsBody()->getCollisionBitmask() & ARROW_COLLIDE_BM) == 0)
-		return false;
-
-	secondNode->removeFromParentAndCleanup(true);
-	EnemyController::getInstance()->deleteByPos(enemy->getPosition());
-
-
 	return false;
 }

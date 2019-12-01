@@ -295,12 +295,12 @@ const int ENEMY_JMP_QUANTITY{ 1 };
 //shoot range && arrow
 
 const double WARRIOR_SHOOT_WIGTH{ 512 / SCALE_FACTOR };
-const double WARRIOR_SHOOT_HEIGTH{ 196 / SCALE_FACTOR };
+const double WARRIOR_SHOOT_HEIGTH{ 256 / SCALE_FACTOR };
 const double ARROW_RELATIVE_HEIGTH{ 0.5 };
 const float ARROW_FLY_DURATION{ 1 };
 const int ARROW_MISS_X{ static_cast<int>(50 / SCALE_FACTOR) };
 
 // warriors 
 
-const int WALL_DIAPASON_WARRIORS_STAND{ 32 };
-const int WALL_DISTANCE_TO_WARRIORS{ 32 };
+const int WALL_DIAPASON_WARRIORS_STAND{ 64 };
+const int WALL_DISTANCE_TO_WARRIORS{ 64 };
