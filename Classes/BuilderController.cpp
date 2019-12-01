@@ -63,8 +63,8 @@ Builder* BuilderController::findCosestFree(Vec2 pos) {
 							tmp->stopMoving();
 							tmp->moveStart(pos);
 							tmp->stopMoving();
-							tmp->setBuild(true);
 							tmp->setMovingToBuild(false);
+							tmp->setBuild(true);
 							building->setBuildingStatus(true);
 							return tmp;
 						}

@@ -100,13 +100,24 @@ void UI::addCitizenSelectIcons(Citizen* citizen) {
 	for (Sprite* tmp : *selectSprs) {
 		tmp->setAnchorPoint(Vec2(0.5, 0));
 		tmp->setPosition(
-			Vec2(selectSprsPositionX->top() , 
+			Vec2(selectSprsPositionX->top() + currentCitizen->getBoundingBox().size.width/2,
 				SELECT_SITIZEN_ROLE_Y ));
 		selectSprsPositionX->pop();
 
 		currentCitizen->addChild(tmp);
 	}
 
+}
+
+void UI::addMark(Sprite* spr) {
+	Sprite* mark = Sprite::create(MARK_ICO_SPR);
+	mark->setPosition(spr->getContentSize().width / 2, spr->getPosition().y + (spr->getContentSize().height / 2) + MARKS_Y_SHIFT);
+	spr->addChild(mark);
+}
+void UI::addHummer(Sprite* spr) {
+	Sprite* mark = Sprite::create(HUMMER_ICO_SPR);
+	mark->setPosition(spr->getContentSize().width / 2, spr->getPosition().y + (spr->getContentSize().height / 2) + MARKS_Y_SHIFT);
+	spr->addChild(mark);
 }
 
 

@@ -44,9 +44,12 @@ PhysicsBody* Building::createPhysBody() {
 
 void Building::upgrade() {
 		
-	if (!isBuilding && !waitForBuilder && BuilderController::getInstance()->setPositionToBuild(this->getPosition())) {
-		waitForBuilder = true;
-		GameTime::addTimeDependedObject(-1, this);
+	if (!isBuilding && !waitForBuilder) 
+	{
+		if (BuilderController::getInstance()->setPositionToBuild(this->getPosition())) {
+			waitForBuilder = true;
+			GameTime::addTimeDependedObject(-1, this);
+		}
 	}
 }
 

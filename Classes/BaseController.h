@@ -25,7 +25,7 @@ public:
 
 	void allMoveRand() {
 		for (T* tmp : *m_NPCs) {
-			GameTime::addMoveableObject(tmp);
+			tmp->moveRandStart();
 		}
 	};
 	

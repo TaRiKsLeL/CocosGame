@@ -205,8 +205,8 @@ bool GameScene::onBuilderContactBegin(PhysicsContact& contact)
 
 	if (builder && builder->isMovingToBuilding() && builder->getCurrentPointMoveTo() == building->getPosition()) {
 		builder->stopMoving();
-		builder->setBuild(true);
 		builder->setMovingToBuild(false);
+		builder->setBuild(true);
 		building->setBuildingStatus(true);
 		return true;
 	}
