@@ -57,7 +57,7 @@ void NPC::moveTo(Vec2 destination) {
 
 	int direction;
 	
-	if (!(spr))
+	if (spr == nullptr )
 		return;
 	
 	resetDirection();
@@ -113,6 +113,7 @@ void NPC::removeAllChildren() {
 
 void NPC::deleteObj() {
 	spr->removeFromParentAndCleanup(true);
+	spr = nullptr;
 }
 
 Vec2 NPC::getPosition() {

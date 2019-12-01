@@ -66,7 +66,7 @@ void WarriorController::moveToWall() {
 		}
 		else
 		{
-			tmp->moveStart(Vec2(RandomHelper::random_int<int>(rightDiapason.x, rightDiapason.y), GENERAL_Y));
+			tmp->moveStart(Vec2(RandomHelper::random_int<int>(rightDiapason.y, rightDiapason.x), GENERAL_Y));
 			rightCount++;
 		}
 	}
