@@ -33,13 +33,14 @@ Worker* WorkerController::findClosest(Vec2 pos)
 
 	for (Worker* tmp : *workers) {
 		if (abs(pos.x - closest.x) > abs(pos.x - tmp->getPosition().x) ) {
-			Building* building = BuildingController::getInstance()->findBuildingByTagAndPosition(3, pos);
+			Building* building = BuildingController::getInstance()->findBuildingByTagAndPosition(SprTag::MINE, pos);
 			if (building != nullptr)
 				if (building->getSprite()->getBoundingBox().intersectsRect(tmp->getBoundingBox())) {
 					tmp->stopMoving();
 					tmp->moveStart(pos);
 					tmp->stopMoving();
 					tmp->setMovingToMine(false);
+					//WorkerController::getInstance()->getWorkersToPutInsideMine()->push(tmp);
 					return tmp;
 				}
 

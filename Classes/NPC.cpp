@@ -31,10 +31,13 @@ move and position
 */
 
 void NPC::resetDirection() {
-	if (currentPointToMove.x > spr->getPosition().x)
-		direction = Direction::RIGHT;
-	else
-		direction = Direction::LEFT;
+	try {
+		if (currentPointToMove.x > spr->getPosition().x)
+			direction = Direction::RIGHT;
+		else
+			direction = Direction::LEFT;
+	}
+	catch(...){}
 }
 
 Direction NPC::getDirection() {
@@ -60,22 +63,31 @@ void NPC::moveTo(Vec2 destination) {
 	
 	if (!spr)
 		return;
-	
-	resetDirection();
 
-	int delta = destination.x - spr->getPosition().x;
-	
-	if (delta >= 0)
-		direction = 1;
-	else
-		direction = -1;
 
-	spr->setPosition(spr->getPosition().x + direction * moveSpeed, spr->getPosition().y);
+	__try {
+		resetDirection();
 
-	if (spr->getPosition().x - moveSpeed / 2 <= destination.x &&
-		spr->getPosition().x + moveSpeed / 2 >= destination.x)
-	{
-		m_isMoving = false;
+
+		int delta = destination.x - spr->getPosition().x;
+
+		if (delta >= 0)
+			direction = 1;
+		else
+			direction = -1;
+
+		spr->setPosition(spr->getPosition().x + direction * moveSpeed, spr->getPosition().y);
+
+		if (spr->getPosition().x - moveSpeed / 2 <= destination.x &&
+			spr->getPosition().x + moveSpeed / 2 >= destination.x)
+		{
+			m_isMoving = false;
+		}
+	}
+	__except ((GetExceptionCode() == EXCEPTION_ACCESS_VIOLATION
+		? EXCEPTION_EXECUTE_HANDLER
+		: EXCEPTION_CONTINUE_SEARCH)) {
+		return;
 	}
 }
 
