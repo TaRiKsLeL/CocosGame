@@ -47,6 +47,9 @@ private:
 
 public:
 
+	void addMark(Sprite*);
+	void addHummer(Sprite*);
+
 	static UI* getInstance();
 
 	//coins

@@ -70,7 +70,7 @@ const int ARROW_COLLIDE_BM			{ ENEMY_CATEGORY_BM };
 
 
 const int DELTA_TIME{ 60 };
-const int DAY_DURATION{ 400 };
+const int DAY_DURATION{ 100 };
 const double SCALE_FACTOR{ 0.5 };
 
 //UI
@@ -160,6 +160,8 @@ const string BOW_SPR{ "UI/bowBtn.png" };
 
 const string BACKGROUND_SPR{ "UI/background.png" };
 const string GAME_OVER_SPR{ "UI/game_over2.png" };
+const string MARK_ICO_SPR{ "UI/mark.png" };
+const string HUMMER_ICO_SPR{ "UI/hummer.png" };
 const string GAME_OVER_BACK_SPR{ "UI/game_over_back.png" };
 
 const int GAME_OVER_BACK_OPACITY{ 40 };
@@ -171,6 +173,8 @@ const double SELECT_SITIZEN_ROLE_Y{ GENERAL_Y + 16 * 4 / SCALE_FACTOR  };
 const double SELECT_SITIZEN_ROLE_RIGHT_X{ 16 * 7 / SCALE_FACTOR };
 const double SELECT_SITIZEN_ROLE_MIDDLE_X{ 0 };
 const double SELECT_SITIZEN_ROLE_LEFT_X{ -(16 * 7 / SCALE_FACTOR) };
+
+const double MARKS_Y_SHIFT{ 32 / SCALE_FACTOR };
 
 //AMOUNT OF EACH BUILDING
 

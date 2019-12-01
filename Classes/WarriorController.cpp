@@ -2,7 +2,9 @@
 
 WarriorController* WarriorController::warriorController{ nullptr };
 
-WarriorController::WarriorController() {}
+WarriorController::WarriorController() : enemiesJustKilled(true) {
+	GameTime::addTimeDependedObject(-1, this);
+}
 
 WarriorController* WarriorController::getInstance() {
 	if (warriorController)
@@ -58,7 +60,7 @@ void WarriorController::moveToWall() {
 
 		tmp->stopMoving();
 
-		if (leftCount >= rightCount) {
+		if (leftCount <= rightCount) {
 			tmp->moveStart(Vec2(RandomHelper::random_int<int>(leftDiapason.x, leftDiapason.y), GENERAL_Y));
 			leftCount++;
 		}
@@ -66,6 +68,23 @@ void WarriorController::moveToWall() {
 		{
 			tmp->moveStart(Vec2(RandomHelper::random_int<int>(rightDiapason.x, rightDiapason.y), GENERAL_Y));
 			rightCount++;
+		}
+	}
+}
+
+void WarriorController::allMoveStop() {
+	controller.allStopMove();
+}
+
+
+void WarriorController::timeDependedAction() {
+	if (EnemyController::getInstance()->enemiesAreAlive())
+		moveToWall();
+	else {
+		if (enemiesJustKilled == false) {
+			enemiesJustKilled = true;
+			allMoveStop();
+			allMoveRand();
 		}
 	}
 }

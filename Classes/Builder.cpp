@@ -1,4 +1,5 @@
 #include "Builder.h"
+#include "UI.h"
 
 Builder::Builder(Vec2 pos) : FriendlyNPC(pos, BUILDER_SPR), goToBuilding(false), m_isBuilding(false) {
 	spr->getPhysicsBody()->setCategoryBitmask(BUILDER_CATEGORY_BM);
@@ -9,6 +10,10 @@ Builder::Builder(Vec2 pos) : FriendlyNPC(pos, BUILDER_SPR), goToBuilding(false),
 }
 
 void Builder::setBuild(bool isBuilding) {
+	spr->removeAllChildren();
+	if (isBuilding)
+		UI::getInstance()->addHummer(spr);
+	
 	this->m_isBuilding = isBuilding;
 }
 
@@ -21,5 +26,9 @@ bool Builder::isMovingToBuilding() {
 }
 
 void Builder::setMovingToBuild(bool isMoving) {
+	spr->removeAllChildren();
+	if (isMoving)
+		UI::getInstance()->addMark(spr);
+	
 	goToBuilding = isMoving;
 }
