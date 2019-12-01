@@ -272,6 +272,12 @@ const vector<int> WALL_HP{ 0,10,20,30,40,50 };
 
 const int MAX_MINE_CAPACITY{ 3 };
 
+//SALARY
+
+const int COINS_PER_WORKER{ 27 };
+const int SALARY_MOMENT{ DAY_DURATION/3 };
+
+
 //attack power
 const int FRIENDLY_ATTACK{ 1 };
 const int ENEMY_ATTACK{ 1 };

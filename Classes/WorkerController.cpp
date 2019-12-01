@@ -32,10 +32,20 @@ Worker* WorkerController::findClosest(Vec2 pos)
 	Vec2 closest = Vec2(INT32_MAX, INT32_MAX);
 
 	for (Worker* tmp : *workers) {
-		if (abs(pos.x - closest.x) > abs(pos.x - tmp->getPosition().x) &&tmp)
-			closest = tmp->getPosition();
-	}
+		if (abs(pos.x - closest.x) > abs(pos.x - tmp->getPosition().x) ) {
+			Building* building = BuildingController::getInstance()->findBuildingByTagAndPosition(3, pos);
+			if (building != nullptr)
+				if (building->getSprite()->getBoundingBox().intersectsRect(tmp->getBoundingBox())) {
+					tmp->stopMoving();
+					tmp->moveStart(pos);
+					tmp->stopMoving();
+					tmp->setMovingToMine(false);
+					return tmp;
+				}
 
+			closest = tmp->getPosition();
+		}
+	}
 	return findByPosition(closest);
 }
 
@@ -49,6 +59,7 @@ bool WorkerController::setPositionToWork(Vec2 pos)
 
 	if (worker) {
 		worker->stopMoving();
+		worker->setMovingToMine(true);
 		worker->moveStart(pos);
 		return true;
 	}
