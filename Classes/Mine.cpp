@@ -1,6 +1,7 @@
 #include "Mine.h"
 
-Mine::Mine(const vector<std::string>* images) : Building(images){
+
+Mine::Mine(const vector<std::string>* images) : Building(images), moneyEarner(nullptr){
 	spr->setTag(SprTag::MINE);
 	
 	spr->setPhysicsBody(createPhysBody());
@@ -34,4 +35,18 @@ PhysicsBody* Mine::createPhysBody() {
 	pb->setDynamic(false);
 
 	return pb;
+}
+
+void Mine::addWorker()
+{
+	amInside++;
+	if (moneyEarner == nullptr){
+		moneyEarner = new MoneyEarner(SALARY_MOMENT);
+	}
+	moneyEarner->addWorker();
+}
+
+int Mine::workersAmountInside()
+{
+	return amInside;
 }

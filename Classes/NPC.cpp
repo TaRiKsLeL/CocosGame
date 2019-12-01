@@ -12,6 +12,7 @@ NPC::NPC(Vec2 pos, std::string sprName) : m_isMoving(false), stop(true), moveSpe
 	spr->setPosition(pos);
 	spr->setAnchorPoint(Vec2(0.5, 0));
 	spr->addComponent(createPhysBody());
+	spr->getTexture()->setAliasTexParameters();
 
 	Director::getInstance()->getRunningScene()->addChild(spr, NPC_Z_ORDER);
 }
@@ -112,6 +113,7 @@ void NPC::removeAllChildren() {
 }
 
 void NPC::deleteObj() {
+	spr->removeAllComponents();
 	spr->removeFromParentAndCleanup(true);
 	spr = nullptr;
 }

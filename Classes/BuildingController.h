@@ -13,7 +13,7 @@
 
 using namespace std;
 
-class BuildingController {
+class BuildingController : public ITimeDepended {
 private:
 
 	static BuildingController* buildingController;
@@ -21,6 +21,9 @@ private:
 
 	Castle* castle;
 	
+	queue<Mine*> minesSearchingWorkers;
+
+
 	vector<Mine*> mines;
 	vector<Tower*> towers;
 	vector<Wall*> walls;
@@ -41,9 +44,6 @@ public:
 
 	KingdomBorders* getKingdomBorders();
 
-	void createBuilding(int& type, bool side, int& previus, int& num, int& counter, float& sideShift,float center,float shift,int random);
-
-	//vector<Wall*> getWalls();
 	Wall* findWallByPos(Vec2);
 	Castle* getCastle();
 
@@ -52,4 +52,8 @@ public:
 	static BuildingController* getInstance();
 
 	void enableBuildings();
+
+	queue <Mine*> *getMinesSearchingWorkers();
+
+	void timeDependedAction() override;
 };
