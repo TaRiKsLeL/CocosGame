@@ -38,8 +38,10 @@ bool BuilderController::setPositionToBuild(Vec2 pos)
 	
 	if (builder) {
 		builder->stopMoving();
-		builder->setMovingToBuild(true);
-		builder->moveStart(pos);
+		if (!builder->isBuilding()) {
+			builder->setMovingToBuild(true);
+			builder->moveStart(pos);
+		}
 		return true;
 	}
 
@@ -58,10 +60,13 @@ Builder* BuilderController::findCosestFree(Vec2 pos) {
 					Building* building = BuildingController::getInstance()->findBuildingByTagAndPosition(i, pos);
 					if (building != nullptr)
 						if (building->getSprite()->getBoundingBox().intersectsRect(tmp->getBoundingBox())) {
-							Vec2 tmpPos = tmp->getPosition();
-							deleteByPos(tmpPos);
-							create(tmpPos);
-							return findByPosition(tmpPos);
+							tmp->stopMoving();
+							tmp->moveStart(pos);
+							tmp->stopMoving();
+							tmp->setBuild(true);
+							tmp->setMovingToBuild(false);
+							building->setBuildingStatus(true);
+							return tmp;
 						}
 				}
 				closest = tmp->getPosition();

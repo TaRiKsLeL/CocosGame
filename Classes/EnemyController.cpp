@@ -61,5 +61,12 @@ void EnemyController::allStopMove() {
 	controller.allStopMove();
 }
 
+bool EnemyController::enemiesAreAlive() {
+	if (controller.getElems()->size() > 0) {
+		return true;
+	}
+	return false;
+}
+
 
 

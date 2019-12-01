@@ -46,7 +46,26 @@ void WarriorController::moveToWall() {
 	int rightCount = 0;
 
 	Vec2 leftDiapason;
-	Vec2 rigthDiapason;
+	Vec2 rightDiapason;
 
+	leftDiapason.x = leftBorder + WALL_DISTANCE_TO_WARRIORS;
+	leftDiapason.y = leftBorder + WALL_DISTANCE_TO_WARRIORS + WALL_DIAPASON_WARRIORS_STAND;
 
+	rightDiapason.x = rightBorder - WALL_DISTANCE_TO_WARRIORS;
+	rightDiapason.y = rightBorder - WALL_DISTANCE_TO_WARRIORS - WALL_DIAPASON_WARRIORS_STAND;
+
+	for (Warrior* tmp : *controller.getElems()) {
+
+		tmp->stopMoving();
+
+		if (leftCount >= rightCount) {
+			tmp->moveStart(Vec2(RandomHelper::random_int<int>(leftDiapason.x, leftDiapason.y), GENERAL_Y));
+			leftCount++;
+		}
+		else
+		{
+			tmp->moveStart(Vec2(RandomHelper::random_int<int>(rightDiapason.x, rightDiapason.y), GENERAL_Y));
+			rightCount++;
+		}
+	}
 }

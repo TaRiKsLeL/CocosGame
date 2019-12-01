@@ -13,7 +13,7 @@ USING_NS_CC;
 class Building : public IPayable, public ITimeDepended
 {
 private:
-	
+
 protected:
 
 	struct Direction
@@ -35,7 +35,10 @@ protected:
 
 	int level{0};
 	int lastLevel{ level };
+	
 	bool isBuilding;
+	bool waitForBuilder;
+
 	int nextUpgradeDuration;
 	int currentState{0};
 	
