@@ -45,9 +45,9 @@ public:
 				break;
 			}
 		}
-
+		
 		toDelete->deleteObj();
-
+		toDelete = nullptr;
 		return toDelete;
 
 	};

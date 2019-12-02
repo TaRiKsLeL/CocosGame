@@ -70,7 +70,7 @@ const int ARROW_COLLIDE_BM			{ ENEMY_CATEGORY_BM };
 
 
 const int DELTA_TIME{ 60 };
-const int DAY_DURATION{ 100 };
+const int DAY_DURATION{ 300 };
 const double SCALE_FACTOR{ 0.5 };
 
 //UI
@@ -302,5 +302,5 @@ const int ARROW_MISS_X{ static_cast<int>(50 / SCALE_FACTOR) };
 
 // warriors 
 
-const int WALL_DIAPASON_WARRIORS_STAND{ 64 };
-const int WALL_DISTANCE_TO_WARRIORS{ 64 };
+const int WALL_DIAPASON_WARRIORS_STAND{ static_cast<int>(64 / SCALE_FACTOR) };
+const int WALL_DISTANCE_TO_WARRIORS{ static_cast<int>(64 / SCALE_FACTOR) };

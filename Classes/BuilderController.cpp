@@ -54,23 +54,29 @@ Builder* BuilderController::findCosestFree(Vec2 pos) {
 	
 	Vec2 closest = Vec2(INT32_MAX, INT32_MAX);
 	
+	Building* building = nullptr;
+	
+	for (int i = SprTag::CASTLE; i <= SprTag::MINE; i++) {
+		building = BuildingController::getInstance()->findBuildingByTagAndPosition(i, pos);
+		if (building != nullptr)
+			break;
+	}
+
 	for (Builder* tmp : *builders) {
-			if (abs(pos.x - closest.x) > abs(pos.x - tmp->getPosition().x) && !(tmp->isBuilding()) && !(tmp->isMovingToBuilding())) {
-				for (int i = 0; i < TAG_COUNT; i++) {
-					Building* building = BuildingController::getInstance()->findBuildingByTagAndPosition(i, pos);
-					if (building != nullptr)
-						if (building->getSprite()->getBoundingBox().intersectsRect(tmp->getBoundingBox())) {
-							tmp->stopMoving();
-							tmp->moveStart(pos);
-							tmp->stopMoving();
-							tmp->setMovingToBuild(false);
-							tmp->setBuild(true);
-							building->setBuildingStatus(true);
-							return tmp;
-						}
+		if (abs(pos.x - closest.x) > abs(pos.x - tmp->getPosition().x) && !(tmp->isBuilding()) && !(tmp->isMovingToBuilding())) {
+			if (building != nullptr)
+				if (building->getSprite()->getBoundingBox().intersectsRect(tmp->getBoundingBox())) {
+					tmp->stopMoving();
+					tmp->moveStart(pos);
+					tmp->stopMoving();
+					tmp->setMovingToBuild(false);
+					tmp->setBuild(true);
+					building->setBuildingStatus(true);
+					return tmp;
 				}
-				closest = tmp->getPosition();
-			
+
+			closest = tmp->getPosition();
+
 		}
 	}
 

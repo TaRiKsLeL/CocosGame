@@ -211,7 +211,8 @@ Building* BuildingController::findBuildingByTagAndPosition(int tag,Vec2 position
 	switch (tag)
 	{
 	case CASTLE:
-		return castle;
+		if (castle->getSprite()->getPosition().equals(position))
+			return castle;
 		break;
 	case TOWER:
 		for each (Tower* tower in towers)
