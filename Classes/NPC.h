@@ -14,6 +14,7 @@ protected:
 
 	bool m_isMoving;
 	bool stop;
+	bool goingToRemove;
 
 	float moveSpeed;
 
@@ -24,14 +25,16 @@ protected:
 
 	NPC(Vec2, std::string);
 	PhysicsBody* createPhysBody();
-
+	
 	void moveTo(Vec2);
 	void resetDirection();
-
 public:
+
 
 	void setMoveSpeed(float);
 	Direction getDirection();
+	void setSprDirection(Direction);
+
 
 	void moveStart(Vec2 pos);
 
@@ -43,6 +46,7 @@ public:
 	void deleteObj();
 
 	bool isMoving();
+	bool isGoingToRemove();
 
 	Vec2 getPosition();
 	Rect getBoundingBox();

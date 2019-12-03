@@ -6,7 +6,7 @@ Init
 =====================================================================================================
 */
 
-NPC::NPC(Vec2 pos, std::string sprName) : m_isMoving(false), stop(true), moveSpeed(DEFAULT_NPC_MOVE_SPEED), direction(Direction::RIGHT){
+NPC::NPC(Vec2 pos, std::string sprName) : m_isMoving(false), stop(true), goingToRemove(false), moveSpeed(DEFAULT_NPC_MOVE_SPEED), direction(Direction::RIGHT){
 
 	spr = Sprite::create(sprName);
 	spr->setPosition(pos);
@@ -35,6 +35,8 @@ void NPC::resetDirection() {
 		direction = Direction::RIGHT;
 	else
 		direction = Direction::LEFT;
+
+	setSprDirection(direction);
 }
 
 Direction NPC::getDirection() {
@@ -79,12 +81,18 @@ void NPC::moveTo(Vec2 destination) {
 	}
 }
 
+bool NPC::isGoingToRemove() {
+	return goingToRemove;
+}
+
+
 Vec2 NPC::getCurrentPointMoveTo() {
 	return currentPointToMove;
 }
 
 
 void NPC::move() {
+	if(m_isMoving)
 		moveTo(currentPointToMove);
 }
 
@@ -94,6 +102,17 @@ void NPC::stopMoving() {
 		m_isMoving = false;
 		stop = true;
 		GameTime::removeMoveableObject(this);
+	}
+}
+
+void NPC::setSprDirection(Direction dir) {
+	if (dir == Direction::RIGHT) {
+		direction = dir;
+		spr->setFlipX(-1);
+	}
+	else {
+		direction = dir;
+		spr->setFlipX(0);
 	}
 }
 
@@ -113,6 +132,8 @@ void NPC::removeAllChildren() {
 }
 
 void NPC::deleteObj() {
+	goingToRemove = true;
+	stopMoving();
 	spr->removeAllComponents();
 	spr->removeFromParentAndCleanup(true);
 	spr = nullptr;

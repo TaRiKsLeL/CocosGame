@@ -40,6 +40,9 @@ PhysicsBody* Building::createPhysBody() {
 	return pb;
 }
 
+void Building::specitalUpdateAction() {}
+
+
 
 
 void Building::upgrade() {
@@ -69,9 +72,8 @@ void Building::timeDependedAction()
 		spr->removeAllComponents();
 		spr->addComponent(createPhysBody());
 
-		if (spr->getTag() == SprTag::WALL) {
-			BuildingController::getInstance()->findWallByPos(spr->getPosition())->setHP(WALL_HP.at(level));
-		}
+		specitalUpdateAction();
+		
 		
 		waitForBuilder = false;
 		isBuilding = false;
@@ -109,4 +111,8 @@ Vec2 Building::getPosition() {
 
 Sprite* Building::getSprite() {
 	return spr;
+}
+
+Direction Building::getDirrection() {
+	return direction;
 }

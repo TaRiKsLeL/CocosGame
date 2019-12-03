@@ -34,7 +34,7 @@ Warrior* WarriorController::findByPosition(Vec2 pos) {
 Warrior* WarriorController::findByNode(Node* node) {
 	for (Warrior* tmp : *(controller.getElems()))
 	{
-		if (tmp->getTarget() == node)
+		if (tmp->getNode() == node)
 			return tmp;
 	}
 	return nullptr;
@@ -58,16 +58,19 @@ void WarriorController::moveToWall() {
 
 	for (Warrior* tmp : *controller.getElems()) {
 
-		tmp->stopMoving();
-
-		if (leftCount <= rightCount) {
-			tmp->moveStart(Vec2(RandomHelper::random_int<int>(leftDiapason.x, leftDiapason.y), GENERAL_Y));
-			leftCount++;
-		}
-		else
+		if (!tmp->isOnTower()) 
 		{
-			tmp->moveStart(Vec2(RandomHelper::random_int<int>(rightDiapason.y, rightDiapason.x), GENERAL_Y));
-			rightCount++;
+			tmp->stopMoving();
+
+			if (leftCount <= rightCount) {
+				tmp->moveStart(Vec2(RandomHelper::random_int<int>(leftDiapason.x, leftDiapason.y), GENERAL_Y));
+				leftCount++;
+			}
+			else
+			{
+				tmp->moveStart(Vec2(RandomHelper::random_int<int>(rightDiapason.y, rightDiapason.x), GENERAL_Y));
+				rightCount++;
+			}
 		}
 	}
 }
@@ -76,6 +79,12 @@ void WarriorController::allMoveStop() {
 	controller.allStopMove();
 }
 
+void WarriorController::removeTargetByTargetPosition(Vec2 pos) {
+	for (Warrior* tmp : *controller.getElems()) {
+		if (tmp->getTarget() != nullptr && tmp->getTarget()->getPosition().x == pos.x)
+			tmp->removeTarget();
+	}
+}
 
 void WarriorController::timeDependedAction() {
 	if (EnemyController::getInstance()->enemiesAreAlive())

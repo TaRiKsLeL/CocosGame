@@ -4,6 +4,8 @@
 
 using namespace std;
 
+USING_NS_CC;
+
 enum SprTag {
 	PLAYER,
 	SLAVE_TRAIDER,
@@ -20,7 +22,7 @@ enum SprTag {
 const int TAG_COUNT = 9;
 
 enum Direction {
-	LEFT,
+	LEFT = -1,
 	RIGHT,
 	ELSE
 };
@@ -70,7 +72,7 @@ const int ARROW_COLLIDE_BM			{ ENEMY_CATEGORY_BM };
 
 
 const int DELTA_TIME{ 60 };
-const int DAY_DURATION{ 300 };
+const int DAY_DURATION{ 120 };
 const double SCALE_FACTOR{ 0.5 };
 
 //UI
@@ -110,9 +112,9 @@ const float HEART_TIME_PER_FRAME{ 0.5f };
 
 
 //Z-orders
-
-const int TREE_Z_ORDER{ -1 };
-const int FENCE_Z_ORDER{ -2 };
+const int FENCE_Z_ORDER{ -3 };
+const int TREE_Z_ORDER{ -2 };
+const int WARRIOR_ON_TOWER_Z_ORDER{ -1 };
 const int BUILDING_Z_ORDER{ 0 };
 const int NPC_Z_ORDER{ 1 };
 const int PLAYER_Z_ORDER{ 2 };
@@ -222,6 +224,16 @@ const vector<int> wallTimeBuilding{ 12,17,22,25,27,30 };
 const vector<int> castleTimeBuilding{ 15,20,25,27,30,34 };
 const vector<int> mineTimeBuilding{ 13,18,21,24,28,33 };
 
+const vector<int> towerMaxWarriors{ 0,1,1,2,3 };
+
+const vector<vector<Vec2>> towerSetWariorShift{ 
+	{Vec2(0, 0)},
+	{Vec2(0, 80 / SCALE_FACTOR)},
+	{Vec2(0, 110 / SCALE_FACTOR)},
+	{Vec2(-30 / SCALE_FACTOR, 100 / SCALE_FACTOR), Vec2(30 / SCALE_FACTOR, 100 / SCALE_FACTOR)},
+	{Vec2(-40 / SCALE_FACTOR, 120 / SCALE_FACTOR), Vec2(0, 120 / SCALE_FACTOR), Vec2(40 / SCALE_FACTOR, 120 / SCALE_FACTOR)},
+};
+
 //collections of images
 
 const vector<std::string> WALLS{ 
@@ -297,8 +309,9 @@ const int ENEMY_JMP_QUANTITY{ 1 };
 const double WARRIOR_SHOOT_WIGTH{ 512 / SCALE_FACTOR };
 const double WARRIOR_SHOOT_HEIGTH{ 256 / SCALE_FACTOR };
 const double ARROW_RELATIVE_HEIGTH{ 0.5 };
-const float ARROW_FLY_DURATION{ 1 };
-const int ARROW_MISS_X{ static_cast<int>(50 / SCALE_FACTOR) };
+const int ARROW_FLY_DURATION{ 1 };
+const int ARROW_REMOVE_DELAY{ ARROW_FLY_DURATION + 3 };
+const int ARROW_MISS_X{ static_cast<int>(48 / SCALE_FACTOR) };
 
 // warriors 
 

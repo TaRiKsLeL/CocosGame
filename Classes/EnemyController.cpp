@@ -27,7 +27,7 @@ void EnemyController::findAndMoveTo(Vec2 pos) {
 }
 
 void EnemyController::deleteByPos(Vec2 pos) {
-	findByPosition(pos)->stopMoving();
+	//findByPosition(pos)->stopMoving();
 	controller.deleteByPos(pos);
 }
 

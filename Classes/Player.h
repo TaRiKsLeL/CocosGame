@@ -31,6 +31,7 @@ private:
 	Sprite* spr;
 	
 	IPayable* objInFocus;
+	//Direction direction;
 
 	static Player* player;
 

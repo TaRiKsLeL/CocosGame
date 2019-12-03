@@ -17,7 +17,9 @@ void GameScene::initContactListeners() {
 
 	EventListenerPhysicsContact* workerContactListener = EventListenerPhysicsContact::create();
 	workerContactListener->onContactBegin = CC_CALLBACK_1(GameScene::onWorkerContactBegin, this);
-	//workerContactListener->onContactSeparate = CC_CALLBACK_1(GameScene::onWorkerContactSeparate, this);
+
+	EventListenerPhysicsContact* warriorContactListener = EventListenerPhysicsContact::create();
+	warriorContactListener->onContactBegin = CC_CALLBACK_1(GameScene::onWarriorContactBegin, this);
 
 	EventListenerPhysicsContact* enemyContactListener = EventListenerPhysicsContact::create();
 	enemyContactListener->onContactBegin = CC_CALLBACK_1(GameScene::onEnemyContactBegin, this);
@@ -32,6 +34,7 @@ void GameScene::initContactListeners() {
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(playerContactListener, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(builderContactListener, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(workerContactListener, this);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(warriorContactListener, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(enemyContactListener, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(shooterRangeContactListener, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(arrowListener, this);
@@ -340,6 +343,7 @@ bool GameScene::onWarriorContactBegin(PhysicsContact& contact)
 {
 	Warrior* warrior = nullptr;
 	Tower* tower = nullptr;
+	Building* building = nullptr;
 
 	auto nodeA = contact.getShapeA()->getBody()->getNode();
 	auto nodeB = contact.getShapeB()->getBody()->getNode();
@@ -365,14 +369,21 @@ bool GameScene::onWarriorContactBegin(PhysicsContact& contact)
 		switch (secondNode->getTag()) {
 
 		case SprTag::TOWER:
-			Building* building = BuildingController::getInstance()->findBuildingByTagAndPosition(secondNode->getTag(), secondNode->getPosition());
+			building = BuildingController::getInstance()->findBuildingByTagAndPosition(secondNode->getTag(), secondNode->getPosition());
 			if (building == nullptr) return false;
 
 			tower = dynamic_cast<Tower*>(building);
-
+			break;
+		default:
+			return false;
 			break;
 		}
 
+		if (tower->canAddWarrior()) {
+			tower->addWarrior(warrior);
+			//Vec2 warriorPos();
+			//warrior->setFixedPosition(tower->getPosition() + );
+		}
 	}
 	return false;
 }
@@ -476,8 +487,8 @@ bool GameScene::onShooterRangeContactBegin(PhysicsContact& contact)
 			return false;
 
 
-
-		shooter->setTarget(secondNode);
+		if(shooter != nullptr)
+			shooter->setTarget(secondNode);
 	}
 	return true;
 }
@@ -506,7 +517,8 @@ bool GameScene::onShooterRangeContactSeparate(PhysicsContact& contact)
 		else
 			return false;
 
-		shooter->removeTarget();
+		if (shooter != nullptr)
+			shooter->removeTarget();
 	}
 	return true;
 }
@@ -542,7 +554,9 @@ bool GameScene::onArrowContactBegin(PhysicsContact& contact)
 		if ((secondNode->getPhysicsBody()->getCategoryBitmask() & ARROW_CATEGORY_BM) == 0)
 			return false;
 
-		secondNode->removeFromParentAndCleanup(true);
+		log("enemy died");
+
+		WarriorController::getInstance()->removeTargetByTargetPosition(enemy->getPosition());
 		EnemyController::getInstance()->deleteByPos(enemy->getPosition());
 
 	}

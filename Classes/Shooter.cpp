@@ -21,6 +21,9 @@ PhysicsBody* Shooter::createPhysicsBodyShootDiapason() {
 }
 
 Node* Shooter::getTarget() {
+	return targetEnemy;
+}
+Node* Shooter::getNode() {
 	return node;
 }
 
@@ -59,8 +62,11 @@ void Shooter::shoot(Vec2 posTarget) {
 
 	
 	Director::getInstance()->getRunningScene()->addChild(arrow, ARROW_Z_ORDER);
-
+	
 	arrow->runAction(createFlyAction(posTarget.x + rndMiss, WARRIOR_SHOOT_HEIGTH));
+
+	ArrowEraser* arrowEraser = new ArrowEraser(arrow);
+	arrowEraser->setTimeDependedAction();
 
 }
 
@@ -69,4 +75,27 @@ Spawn* Shooter::createFlyAction(int posX, int height) {
 	Spawn* action = Spawn::createWithTwoActions(JumpTo::create(ARROW_FLY_DURATION, Vec2(posX, GENERAL_Y), height, 1), RotateBy::create(ARROW_FLY_DURATION, -90));
 	return action;
 }
+
+ArrowEraser::ArrowEraser(Sprite* spr) {
+	log("create Eraser");
+	arrow = spr;
+}
+
+
+void ArrowEraser::setTimeDependedAction() {
+	int eraseTime = (GameTime::getCurrentTime() + ARROW_FLY_DURATION) % DAY_DURATION;
+	GameTime::addTimeDependedObject(eraseTime, this);
+};
+
+
+void ArrowEraser::timeDependedAction() {
+	log("delete arrow");
+	arrow->removeAllComponents();
+	arrow->removeFromParentAndCleanup(true);
+	GameTime::removeTimeDependedObject(this);
+	log("remove arrow");
+};
+
+
+
 

@@ -28,8 +28,8 @@ private:
 	vector<Tower*> towers;
 	vector<Wall*> walls;
 
-	void createWall(bool,int);
-	void createTower(bool,int);
+	void createWall(Direction,int);
+	void createTower(Direction,int);
 	void createMine(int);
 
 	void createCenteralBuildings(float,int);
