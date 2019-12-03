@@ -10,7 +10,7 @@ private:
 public:
 
 
-	Wall(bool,const vector<std::string>*);
+	Wall(Direction ,const vector<std::string>*);
 	
 	void pay(int&) override;
 
@@ -21,4 +21,6 @@ public:
 
 	virtual bool canBeAttacked() override;
 	virtual void hit(int) override;
+	virtual void specitalUpdateAction() override;
+
 };

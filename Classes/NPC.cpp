@@ -6,7 +6,7 @@ Init
 =====================================================================================================
 */
 
-NPC::NPC(Vec2 pos, std::string sprName) : m_isMoving(false), stop(true), moveSpeed(DEFAULT_NPC_MOVE_SPEED), direction(Direction::RIGHT){
+NPC::NPC(Vec2 pos, std::string sprName) : m_isMoving(false), stop(true), goingToRemove(false), moveSpeed(DEFAULT_NPC_MOVE_SPEED), direction(Direction::RIGHT){
 
 	spr = Sprite::create(sprName);
 	spr->setPosition(pos);
@@ -31,13 +31,12 @@ move and position
 */
 
 void NPC::resetDirection() {
-	try {
-		if (currentPointToMove.x > spr->getPosition().x)
-			direction = Direction::RIGHT;
-		else
-			direction = Direction::LEFT;
-	}
-	catch(...){}
+	if (currentPointToMove.x > spr->getPosition().x)
+		direction = Direction::RIGHT;
+	else
+		direction = Direction::LEFT;
+
+	setSprDirection(direction);
 }
 
 Direction NPC::getDirection() {
@@ -78,18 +77,17 @@ void NPC::moveTo(Vec2 destination) {
 
 		spr->setPosition(spr->getPosition().x + direction * moveSpeed, spr->getPosition().y);
 
-		if (spr->getPosition().x - moveSpeed / 2 <= destination.x &&
-			spr->getPosition().x + moveSpeed / 2 >= destination.x)
-		{
-			m_isMoving = false;
-		}
-	}
-	__except ((GetExceptionCode() == EXCEPTION_ACCESS_VIOLATION
-		? EXCEPTION_EXECUTE_HANDLER
-		: EXCEPTION_CONTINUE_SEARCH)) {
-		return;
+	if (spr->getPosition().x - moveSpeed / 2 <= destination.x &&
+		spr->getPosition().x + moveSpeed / 2 >= destination.x)
+	{
+		m_isMoving = false;
 	}
 }
+
+bool NPC::isGoingToRemove() {
+	return goingToRemove;
+}
+
 
 Vec2 NPC::getCurrentPointMoveTo() {
 	return currentPointToMove;
@@ -97,6 +95,7 @@ Vec2 NPC::getCurrentPointMoveTo() {
 
 
 void NPC::move() {
+	if(m_isMoving)
 		moveTo(currentPointToMove);
 }
 
@@ -106,6 +105,17 @@ void NPC::stopMoving() {
 		m_isMoving = false;
 		stop = true;
 		GameTime::removeMoveableObject(this);
+	}
+}
+
+void NPC::setSprDirection(Direction dir) {
+	if (dir == Direction::RIGHT) {
+		direction = dir;
+		spr->setFlipX(-1);
+	}
+	else {
+		direction = dir;
+		spr->setFlipX(0);
 	}
 }
 
@@ -125,6 +135,8 @@ void NPC::removeAllChildren() {
 }
 
 void NPC::deleteObj() {
+	goingToRemove = true;
+	stopMoving();
 	spr->removeAllComponents();
 	spr->removeFromParentAndCleanup(true);
 	spr = nullptr;

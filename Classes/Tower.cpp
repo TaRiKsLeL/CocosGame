@@ -2,19 +2,19 @@
 
 
 
-Tower::Tower(bool dir, const vector<std::string>* images) : Building(images) {
+Tower::Tower(Direction dir, const vector<std::string>* images) : Building(images), maxWarriorNum(towerMaxWarriors.at(0)) {
 
 	spr->setTag(SprTag::TOWER);
 	
 	spr->setPhysicsBody(createPhysBody());
 
 	
-	if (dir) {
-		direction.right = dir;
+	if (dir == Direction::RIGHT) {
+		direction = dir;
 		spr->setFlipX(-1);
 	}
 	else {
-		direction.left = dir;
+		direction = dir;
 	}
 }
 
@@ -43,4 +43,28 @@ PhysicsBody* Tower::createPhysBody() {
 	pb->setCollisionBitmask(TOWER_COLLIDE_BM);
 
 	return pb;
+}
+
+void Tower::specitalUpdateAction() {
+	int counter = 0;
+	
+	maxWarriorNum = towerMaxWarriors.at(level);
+
+	for (Warrior* tmp : warriorsInsideTower) {
+		tmp->setFixedPosition(this->getPosition() + towerSetWariorShift.at(level).at(counter));
+			counter++;
+	}
+}
+
+
+void Tower::addWarrior(Warrior* sprite) {
+	if (warriorsInsideTower.size() < maxWarriorNum) {
+		sprite->setFixedPosition(this->getPosition() + towerSetWariorShift.at(level).at(warriorsInsideTower.size()));
+		sprite->setSprDirection(direction);
+		warriorsInsideTower.push_back(sprite);
+	}
+}
+
+bool Tower::canAddWarrior() {
+	return warriorsInsideTower.size() < maxWarriorNum;
 }

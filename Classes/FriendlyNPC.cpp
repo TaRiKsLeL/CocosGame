@@ -52,7 +52,7 @@ void FriendlyNPC::move() {
 	else if(!m_isMoving) {
 		stopMoving();
 	}
-	if(isActive)
+	if(isActive & m_isMoving)
 		moveTo(currentPointToMove);
 
 }

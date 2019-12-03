@@ -23,8 +23,23 @@ public:
 
 
 	Node* getTarget();
+	Node* getNode();
 
 	virtual void setTarget(Node*) = 0;
 	virtual void removeTarget() = 0;
 	void shoot(Vec2);
+};
+
+class ArrowEraser : ITimeDepended {
+private:
+
+	Sprite* arrow;
+
+public:
+
+	ArrowEraser(Sprite* );
+	void setTimeDependedAction();
+	virtual void timeDependedAction() override;
+	virtual ~ArrowEraser() {};
+
 };

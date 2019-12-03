@@ -1,8 +1,8 @@
 #include "GameTime.h"
 USING_NS_CC;
 
-int GameTime::frameCount{ 0 };
-int GameTime::currentTime{ 0 };
+int GameTime::frameCount{ -1 };
+int GameTime::currentTime{ -1 };
 
 stack<ITimeDepended*>* GameTime::deleteTimeDependedStack = new stack<ITimeDepended*>();
 stack<IMoveable*>* GameTime::deleteMoveableStack = new stack<IMoveable*>();
@@ -47,19 +47,25 @@ void GameTime::updateFrame() {
 
 		while (deleteTimeDependedStack->size() > 0)
 		{
+			log("delete timeDepended obj");
+
 			timeDependedObjects->erase(deleteTimeDependedStack->top());
 			deleteTimeDependedStack->pop();
 		}
 	
 		for each (TimeAction tmpPair in *timeDependedObjects)
 		{
-			if (tmpPair.second == currentTime || tmpPair.second == -1)
+			if ((tmpPair.second == currentTime || tmpPair.second == -1) && tmpPair.first != nullptr)
 				tmpPair.first->timeDependedAction();
 		}
 
 	}
 
 	
+}
+
+const int GameTime::getCurrentTime() {
+	return currentTime;
 }
 
 

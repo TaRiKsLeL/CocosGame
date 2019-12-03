@@ -16,12 +16,6 @@ private:
 
 protected:
 
-	struct Direction
-	{
-		bool left{ false };
-		bool right{ false };
-	};
-
 	Sprite* spr;
 
 	string filename;
@@ -55,6 +49,9 @@ public:
 	int getLevel();
 	void upgrade();
 	void setBuildingStatus(bool);
+	virtual void specitalUpdateAction();
+
+	Direction getDirrection();
 
 };
 

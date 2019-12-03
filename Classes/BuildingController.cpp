@@ -48,7 +48,7 @@ void BuildingController::generateBuildings(int towerAm,int wallsAm,int minesAm) 
 
 				if (buildingLeft == 0 && towerAm > 0 && (prevLeftBuild != buildingLeft)) {
 					leftShift += shift + random;
-					createTower(false,center - leftShift);
+					createTower(Direction::LEFT,center - leftShift);
 
 					log("Prev duilding %d .... This building %d ", prevLeftBuild, buildingLeft);
 					prevLeftBuild = buildingLeft;
@@ -59,7 +59,7 @@ void BuildingController::generateBuildings(int towerAm,int wallsAm,int minesAm) 
 				}
 				else if (buildingLeft == 1 && wallsAm > 0 &&( prevLeftBuild != buildingLeft)) {
 					leftShift += shift + random;
-					createWall(false,center - leftShift);
+					createWall(Direction::LEFT,center - leftShift);
 
 					log("Prev duilding %d .... This building %d ", prevLeftBuild, buildingLeft);
 
@@ -84,7 +84,7 @@ void BuildingController::generateBuildings(int towerAm,int wallsAm,int minesAm) 
 				
 				if (buildingRight == 0 && towerAm > 0 && (prevRightBuild != buildingRight)) {
 					rightShift += shift + random;
-					createTower(true,center + rightShift);
+					createTower(Direction::RIGHT,center + rightShift);
 
 					log("Prev duilding %d .... This building %d ", prevRightBuild, buildingRight);
 
@@ -96,7 +96,7 @@ void BuildingController::generateBuildings(int towerAm,int wallsAm,int minesAm) 
 				}
 				else if (buildingRight == 1 && wallsAm > 0 && (prevRightBuild != buildingRight)) {
 					rightShift += shift + random;
-					createWall(true,center + rightShift);
+					createWall(Direction::RIGHT,center + rightShift);
 
 					log("Prev duilding %d .... This building %d ", prevRightBuild, buildingRight);
 
@@ -128,13 +128,13 @@ void BuildingController::generateBuildings(int towerAm,int wallsAm,int minesAm) 
 
 }
 
-void BuildingController::createWall(bool dir,int xPos) {
+void BuildingController::createWall(Direction dir,int xPos) {
 	Wall* wall = new Wall(dir,&WALLS);
 	wall->getSprite()->setPosition(Vec2(xPos, GENERAL_Y));
 	walls.push_back(wall);
 }
 
-void BuildingController::createTower(bool dir,int xPos) {
+void BuildingController::createTower(Direction dir,int xPos) {
 	Tower* tower = new Tower(dir,&TOWERS);
 	tower->getSprite()->setPosition(Vec2(xPos, GENERAL_Y));
 	towers.push_back(tower);
@@ -154,11 +154,11 @@ void BuildingController::createCenteralBuildings(float center, int shift) {
 	for (int d = 1; d <= 2; d++) { // d=1 ліва сторона, d=2 права сторона
 		if (d == 1)
 		{
-			Tower* tower = new Tower(false,&TOWERS);
+			Tower* tower = new Tower(Direction::LEFT,&TOWERS);
 			tower->getSprite()->setPosition(Vec2(center - shift, GENERAL_Y));
 
 
-			Wall* wall = new Wall(false, &WALLS);
+			Wall* wall = new Wall(Direction::LEFT, &WALLS);
 			wall->getSprite()->setPosition(Vec2(center - shift - 300, GENERAL_Y));
 
 			towers.push_back(tower);
@@ -168,10 +168,10 @@ void BuildingController::createCenteralBuildings(float center, int shift) {
 		else {
 
 
-			Tower* tower = new Tower(true, &TOWERS);
+			Tower* tower = new Tower(Direction::RIGHT, &TOWERS);
 			tower->getSprite()->setPosition(Vec2(center + shift, GENERAL_Y));
 
-			Wall* wall = new Wall(true, &WALLS);
+			Wall* wall = new Wall(Direction::RIGHT, &WALLS);
 			wall->getSprite()->setPosition(Vec2(center + shift + 300, GENERAL_Y));
 
 			towers.push_back(tower);
@@ -211,7 +211,8 @@ Building* BuildingController::findBuildingByTagAndPosition(int tag,Vec2 position
 	switch (tag)
 	{
 	case CASTLE:
-		return castle;
+		if (castle->getSprite()->getPosition().equals(position))
+			return castle;
 		break;
 	case TOWER:
 		for each (Tower* tower in towers)

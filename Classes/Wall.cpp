@@ -2,19 +2,19 @@
 #include "Enviroment.h"
 
 
-Wall::Wall(bool dir,const vector<std::string> *images) : Building(images) , m_HP(0) {
+Wall::Wall(Direction dir,const vector<std::string> *images) : Building(images) , m_HP(0) {
 
 	spr->setTag(SprTag::WALL);
 	
 	spr->setPhysicsBody(createPhysBody());
 	
 
-	if (dir) {
-		direction.right = dir;
+	if (dir == Direction::RIGHT) {
+		direction = dir;
 		spr->setFlipX(-1);
 	}
 	else {
-		direction.left = dir;
+		direction = dir;
 	}
 }
 
@@ -48,6 +48,10 @@ PhysicsBody* Wall::createPhysBody() {
 	setHP(WALL_HP.at(level));
 
 	return pb;
+}
+
+void Wall::specitalUpdateAction(){
+	BuildingController::getInstance()->findWallByPos(spr->getPosition())->setHP(WALL_HP.at(level));
 }
 
 /*

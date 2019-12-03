@@ -26,6 +26,8 @@ public:
 	void allMoveRand();
 	void allMoveStop();
 	void deleteByPos(Vec2);
+	void removeTargetByTargetPosition(Vec2);
+
 	Warrior* findByPosition(Vec2);
 	Warrior* findByNode(Node*);
 	void moveToWall();

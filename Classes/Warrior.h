@@ -5,12 +5,14 @@
 class Warrior : public FriendlyNPC, public Shooter, public ITimeDepended
 {
 private:
-	//bool isFree;
+	bool inTower;
 
 public:
 	Warrior(Vec2);
 	virtual void timeDependedAction() override;
 	virtual void removeTarget() override;
 	virtual void setTarget(Node*) override;
+	void setFixedPosition(Vec2);
+	bool isOnTower();
 
 };
