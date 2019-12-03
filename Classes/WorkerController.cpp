@@ -42,7 +42,7 @@ Worker* WorkerController::findClosest(Vec2 pos)
 						tmp->stopMoving();
 						tmp->setMovingToMine(false);
 						//WorkerController::getInstance()->getWorkersToPutInsideMine()->push(tmp);
-						return tmp;
+						return nullptr;
 					}
 
 				closest = tmp->getPosition();
@@ -75,10 +75,27 @@ queue<Worker*>* WorkerController::getWorkersToPutInsideMine()
 	return &workersToPutInsideMine;
 }
 
+void WorkerController::removebyPos(Vec2 pos)
+{
+	vector<Worker*>* workers = controller.getElems();
+	int ind=0;
+	for each (Worker* w in *workers)
+	{
+		if (w == controller.findByPosition(pos)) {
+			
+			workers->erase(workers->begin() + ind);
+
+		}
+		ind++;
+	}
+}
+
 void WorkerController::timeDependedAction()
 {
 	while (workersToPutInsideMine.size() > 0) {
 		Worker* worker = workersToPutInsideMine.front();
+		worker->removeAllComponents();
+		//Enviroment::getInstance()->getScene()->removeChild(worker->getSprite());
 		deleteByPos(worker->getPosition());
 		workersToPutInsideMine.pop();
 	}

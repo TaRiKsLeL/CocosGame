@@ -55,16 +55,15 @@ void NPC::moveStart(Vec2 pos) {
 
 }
 
-void NPC::moveTo(Vec2 destination) {
-
-
+void NPC::moveTo(Vec2 destination)
+{
 	int direction;
 	
 	if (spr == nullptr )
 		return;
 
 
-	__try {
+	
 		resetDirection();
 
 

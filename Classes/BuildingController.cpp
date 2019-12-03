@@ -257,7 +257,7 @@ void BuildingController::timeDependedAction()
 		if (mine->workersAmountInside() == MAX_MINE_CAPACITY)
 			minesSearchingWorkers.pop();
 		else {
-			for (int i = 0; i < MAX_MINE_CAPACITY - mine->workersAmountInside(); i++)
+			//for (int i = 0; i < MAX_MINE_CAPACITY - mine->workersAmountInside(); i++)
 				WorkerController::getInstance()->setPositionToWork(mine->getPosition());   // переробити. бо викликається лише 1 найближча
 		}
 	}

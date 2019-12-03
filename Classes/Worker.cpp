@@ -15,7 +15,19 @@ void Worker::setMovingToMine(bool kek)
 	isMovingToMine = kek;
 }
 
+Sprite* Worker::getSprite()
+{
+	return spr;
+}
+
 bool Worker::movingToMine()
 {
 	return isMovingToMine;
 }
+
+void Worker::removeAllComponents()
+{
+	spr->removeAllComponents();
+}
+
+

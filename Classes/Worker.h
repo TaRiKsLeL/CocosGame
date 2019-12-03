@@ -8,5 +8,7 @@ class Worker : public FriendlyNPC
 public:
 	Worker(Vec2);
 	void setMovingToMine(bool);
+	Sprite* getSprite();
 	bool movingToMine();
+	void removeAllComponents();
 };

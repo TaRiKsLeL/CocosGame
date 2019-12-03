@@ -31,5 +31,7 @@ public:
 	bool setPositionToWork(Vec2);
 
 	queue<Worker*> *getWorkersToPutInsideMine();
+	void removebyPos(Vec2);
 	void timeDependedAction() override;
+
 };

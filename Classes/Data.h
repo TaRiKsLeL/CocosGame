@@ -72,7 +72,7 @@ const int ARROW_COLLIDE_BM			{ ENEMY_CATEGORY_BM };
 
 
 const int DELTA_TIME{ 60 };
-const int DAY_DURATION{ 120 };
+const int DAY_DURATION{ 200 };
 const double SCALE_FACTOR{ 0.5 };
 
 //UI
@@ -180,9 +180,9 @@ const double MARKS_Y_SHIFT{ 32 / SCALE_FACTOR };
 
 //AMOUNT OF EACH BUILDING
 
-const int WALLS_AMOUNT = 15;
-const int TOWERS_AMOUNT = 2;
-const int MINES_AMOUNT = 15;
+const int WALLS_AMOUNT = 10;
+const int TOWERS_AMOUNT = 5;
+const int MINES_AMOUNT = 10;
 
 //TREES
 

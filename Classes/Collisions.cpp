@@ -322,8 +322,10 @@ bool GameScene::onWorkerContactBegin(PhysicsContact& contact)
 		if (worker && worker->getCurrentPointMoveTo() == building->getPosition()) {
 			worker->stopMoving();
 			mine->addWorker();
-			//WorkerController::getInstance()->deleteByPos(worker->getPosition());
 			log("In mine: %d", mine->workersAmountInside());
+			//worker->removeAllComponents();
+			//WorkerController::getInstance()->deleteByPos(worker->getPosition());
+
 			WorkerController::getInstance()->getWorkersToPutInsideMine()->push(worker);
 			GameTime::addTimeDependedObject(-1, WorkerController::getInstance());
 
