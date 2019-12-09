@@ -12,6 +12,15 @@
 using namespace std;
 
 class GameTime {
+
+
+	struct MoveableToDelete {
+		IMoveable* obj;
+		bool deleteAll;
+
+		MoveableToDelete(IMoveable* obj, bool deleteAll) : obj(obj), deleteAll(deleteAll){}
+	};
+
 private:
 
 	using TimeAction = pair<ITimeDepended*, int>;
@@ -20,7 +29,7 @@ private:
 	static int frameCount;
 
 	static stack<ITimeDepended*> *deleteTimeDependedStack;
-	static stack<IMoveable*> *deleteMoveableStack;
+	static stack<MoveableToDelete*> *deleteMoveableStack;
 	//collection for refreshing objects per frame
 	static vector<IMoveable*> *moveableObjects;
 	//collection for refreshing objects per pointed second
@@ -35,7 +44,7 @@ public:
 	static void addMoveableObject(IMoveable*);
 	
 	static void removeTimeDependedObject(ITimeDepended*);
-	static void removeMoveableObject(IMoveable*);
+	static void removeMoveableObject(IMoveable*, bool);
 
 	static void updateFrame();
 

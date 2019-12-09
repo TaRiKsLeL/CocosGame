@@ -182,7 +182,7 @@ void Player::initChoseRoleListener() {
 }
 
 void Player::removeAllListeners() {
-	GameTime::removeMoveableObject(this);
+	GameTime::removeMoveableObject(this, false);
 	static_cast<GameScene*>(Director::getInstance()->getRunningScene())->removeKeyEventListener(buyListener);
 	static_cast<GameScene*>(Director::getInstance()->getRunningScene())->removeKeyEventListener(choseRoleListener);
 	static_cast<GameScene*>(Director::getInstance()->getRunningScene())->removeKeyEventListener(moveListener);

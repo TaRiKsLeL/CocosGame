@@ -62,7 +62,7 @@ void FriendlyNPC::stopMoving() {
 		stop = true;
 		isMovingRand = false;
 		m_isMoving = false;
-		GameTime::removeMoveableObject(this);
+		GameTime::removeMoveableObject(this, false);
 	}
 }
 

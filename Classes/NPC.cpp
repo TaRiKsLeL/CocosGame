@@ -103,7 +103,7 @@ void NPC::stopMoving() {
 	if (!stop) {
 		m_isMoving = false;
 		stop = true;
-		GameTime::removeMoveableObject(this);
+		GameTime::removeMoveableObject(this, false);
 	}
 }
 
@@ -135,7 +135,7 @@ void NPC::removeAllChildren() {
 
 void NPC::deleteObj() {
 	goingToRemove = true;
-	stopMoving();
+	GameTime::removeMoveableObject(this, true);
 	spr->removeAllComponents();
 	spr->removeFromParentAndCleanup(true);
 	spr = nullptr;

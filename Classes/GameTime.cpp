@@ -1,11 +1,13 @@
 #include "GameTime.h"
 USING_NS_CC;
 
+
+
 int GameTime::frameCount{ -1 };
 int GameTime::currentTime{ -1 };
 
 stack<ITimeDepended*>* GameTime::deleteTimeDependedStack = new stack<ITimeDepended*>();
-stack<IMoveable*>* GameTime::deleteMoveableStack = new stack<IMoveable*>();
+stack<GameTime::MoveableToDelete*>* GameTime::deleteMoveableStack = new stack<GameTime::MoveableToDelete*>();
 
 vector<IMoveable*> *GameTime::moveableObjects = new vector<IMoveable*>();
 
@@ -16,15 +18,17 @@ void GameTime::updateFrame() {
 
 	while (deleteMoveableStack->size() > 0)
 	{
+		GameTime::MoveableToDelete* obj = deleteMoveableStack->top();
+		deleteMoveableStack->pop();
+
 		for (int i = 0; i < moveableObjects->size(); i++) {
-			if ((moveableObjects->at(i)) == deleteMoveableStack->top()) {
+			
+			if ((moveableObjects->at(i)) == obj->obj) {
 
 				moveableObjects->erase(moveableObjects->begin() + i);
 
-				deleteMoveableStack->pop();
-
-				if (deleteMoveableStack->size() == 0)
-					break;
+				if(!obj->deleteAll)
+				break;
 			}
 		}
 	}	
@@ -80,6 +84,9 @@ void GameTime::addMoveableObject(IMoveable* objToAdd) {
 void GameTime::removeTimeDependedObject(ITimeDepended* objToErase) {
 	deleteTimeDependedStack->push(objToErase);
 }
-void GameTime::removeMoveableObject(IMoveable* objToRemove) {
-	deleteMoveableStack->push(objToRemove);
+void GameTime::removeMoveableObject(IMoveable* objToRemove, bool deleteAll) {
+
+	GameTime::MoveableToDelete* obj = new GameTime::MoveableToDelete(objToRemove, deleteAll);
+
+	deleteMoveableStack->push(obj);
 }

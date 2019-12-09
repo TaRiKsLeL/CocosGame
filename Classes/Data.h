@@ -72,7 +72,7 @@ const int ARROW_COLLIDE_BM			{ ENEMY_CATEGORY_BM };
 
 
 const int DELTA_TIME{ 60 };
-const int DAY_DURATION{ 200 };
+const int DAY_DURATION{ 100 };
 const double SCALE_FACTOR{ 0.5 };
 
 //UI

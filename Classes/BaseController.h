@@ -35,9 +35,8 @@ public:
 		}
 	};
 	
-	T* deleteByPos(Vec2 pos) {
+	void deleteByPos(Vec2 pos) {
 		T* toDelete = findByPosition(pos);
-
 
 		for (int i = 0; i < m_NPCs->size(); i++) {
 			if (m_NPCs->at(i)->getPosition().x == pos.x) {
@@ -47,8 +46,6 @@ public:
 		}
 		
 		toDelete->deleteObj();
-		toDelete = nullptr;
-		return toDelete;
 
 	};
 

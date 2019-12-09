@@ -94,10 +94,10 @@ void WorkerController::timeDependedAction()
 {
 	while (workersToPutInsideMine.size() > 0) {
 		Worker* worker = workersToPutInsideMine.front();
-		worker->removeAllComponents();
+		//worker->removeAllComponents();
 		//Enviroment::getInstance()->getScene()->removeChild(worker->getSprite());
-		deleteByPos(worker->getPosition());
 		workersToPutInsideMine.pop();
+		deleteByPos(worker->getPosition());
 	}
 
 	if (workersToPutInsideMine.size() == 0)
