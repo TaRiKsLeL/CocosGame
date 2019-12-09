@@ -2,7 +2,7 @@
 
 #include "cocos2d.h"
 #include "IMoveable.h"
-#include "IPayable.h"
+#include "Payable.h"
 #include "ITimedepended.h"
 #include "Enviroment.h"
 #include "Data.h"
@@ -30,7 +30,7 @@ private:
 	
 	Sprite* spr;
 	
-	IPayable* objInFocus;
+	Payable* objInFocus;
 	//Direction direction;
 
 	static Player* player;
@@ -64,8 +64,8 @@ public:
 	void disableFocusBuyListener();
 	void disableBuyListener();
 	
-	void setPayable(IPayable*);
-	bool checkFocusedObj(IPayable*);
+	void setPayable(Payable*);
+	bool checkFocusedObj(Payable*);
 	bool focused();
 
 	void enableChoseRoleListener();

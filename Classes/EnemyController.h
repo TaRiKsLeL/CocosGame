@@ -6,6 +6,7 @@ class EnemyController : public ITimeDepended {
 private:
 
 	static int enemNum;
+	bool isInfinityWave;
 
 	BaseController<Enemy> controller;
 	EnemyController();
@@ -23,7 +24,8 @@ public:
 	virtual void timeDependedAction() override;
 	
 	Enemy* findByPosition(Vec2);
-
+	
+	void startInfinitySpawn();
 	void startSpawn(int, Vec2);
 };
 

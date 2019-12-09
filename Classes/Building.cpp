@@ -116,3 +116,8 @@ Sprite* Building::getSprite() {
 Direction Building::getDirrection() {
 	return direction;
 }
+
+void Building::setSelector()
+{
+	setSelectorSpr(spr);
+}

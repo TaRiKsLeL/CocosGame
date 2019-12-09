@@ -26,7 +26,7 @@ public:
 	static CitizenController* getInstance();
 	void create(Vec2);
 	void allMoveRand();
-	void setNewRole(SprTag , IPayable*);
+	void setNewRole(SprTag , Payable*);
 	void deleteByPos(Vec2);
 	Citizen* findByPosition(Vec2);
 };

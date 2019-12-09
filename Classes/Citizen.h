@@ -2,7 +2,6 @@
 
 #include "cocos2d.h"
 #include <vector>
-#include "IPayable.h"
 #include "FriendlyNPC.h"
 
 USING_NS_CC;

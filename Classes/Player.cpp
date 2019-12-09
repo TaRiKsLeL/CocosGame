@@ -78,14 +78,13 @@ void Player::move() {
 	}
 
 	Vec2 pos = spr->getPosition();
-
-	if (direction.right) {
-		pos.x += PLAYER_SPEED;
-	}
-	if (direction.left) {
-		pos.x -= PLAYER_SPEED;
-	}
-
+	
+		if (direction.right && pos.x < Enviroment::getInstance()->getGroundWidth()) {
+			pos.x += PLAYER_SPEED;
+		}
+		if (direction.left && pos.x > 0) {
+			pos.x -= PLAYER_SPEED;
+		}
 	spr->setPosition(pos);
 }
 
@@ -93,13 +92,14 @@ void Player::move() {
 void Player::changeMoveDirection(EventKeyboard::KeyCode keyCode, bool condition) {
 
 	if (keyCode == EventKeyboard::KeyCode::KEY_RIGHT_ARROW) {
-
+		spr->setFlipX(-1);
 		direction.right = condition;
 	}
 
-	if (keyCode == EventKeyboard::KeyCode::KEY_LEFT_ARROW)
+	if (keyCode == EventKeyboard::KeyCode::KEY_LEFT_ARROW) {
+		spr->setFlipX(0);
 		direction.left = condition;
-
+	}
 }
 
 void Player::initMoveListener() {
@@ -250,14 +250,14 @@ void Player::removeAllChildren()
 	spr->removeAllChildren();
 }
 
-bool Player::checkFocusedObj(IPayable* objTocheck) {
+bool Player::checkFocusedObj(Payable* objTocheck) {
 	if (objTocheck == objInFocus)
 		return true;
 	return false;
 }
 
 
-void Player::setPayable(IPayable* objInFocus) {
+void Player::setPayable(Payable* objInFocus) {
 
 	if (this->objInFocus == nullptr) 
 	{
@@ -283,7 +283,7 @@ void Player::hit(int attPower) {
 	m_HP -= attPower;
 	UI::getInstance()->updateHeartLogo(m_HP);
 	if (m_HP <= 0) {
-		UI::getInstance()->setGameOverSprite();
+		UI::getInstance()->setGameOverSprite(GAME_OVER_BACK_SPR);
 		EnemyController::getInstance()->allStopMove();
 	}
 }

@@ -27,9 +27,9 @@ GAME OVER
 =====================================================================================================
 */
 
-void UI::setGameOverSprite()
+void UI::setGameOverSprite(string name)
 {
-	gameOverSprite = Sprite::create(GAME_OVER_SPR);
+	gameOverSprite = Sprite::create(name);
 	gameOverSprite->setPosition(Vec2(CUST_OFFSET, -CAMERA_OFFSET_Y+CUST_OFFSET));
 	gameOverSprite->setScale(SCALE_FACTOR);
 	gameOverSprite->getTexture()->setAliasTexParameters();
@@ -117,13 +117,22 @@ void UI::addCitizenSelectIcons(Citizen* citizen) {
 
 void UI::addMark(Sprite* spr) {
 	Sprite* mark = Sprite::create(MARK_ICO_SPR);
-	mark->setPosition(spr->getContentSize().width / 2, spr->getPosition().y + (spr->getContentSize().height / 2) + MARKS_Y_SHIFT);
+	mark->setAnchorPoint(Vec2(0.5, 0));
+	mark->setPosition(spr->getContentSize().width / 2, spr->getContentSize().height / 2 + MARKS_Y_SHIFT);
 	spr->addChild(mark);
 }
 void UI::addHummer(Sprite* spr) {
 	Sprite* mark = Sprite::create(HUMMER_ICO_SPR);
-	mark->setPosition(spr->getContentSize().width / 2, spr->getPosition().y + (spr->getContentSize().height / 2) + MARKS_Y_SHIFT);
+	mark->setAnchorPoint(Vec2(0.5, 0));
+	mark->setPosition(spr->getContentSize().width / 2, spr->getContentSize().height / 2 + MARKS_Y_SHIFT);
 	spr->addChild(mark);
+}
+Sprite* UI::getSelector(Sprite* spr) {
+	Sprite* mark = Sprite::create(SELECTOR_ICO_SPR);
+	mark->setAnchorPoint(Vec2(0.5, 0));
+	mark->setPosition(spr->getContentSize().width / 2, spr->getContentSize().height / 2 + SELECTOR_Y_SHIFT);
+	spr->addChild(mark);
+	return mark;
 }
 
 

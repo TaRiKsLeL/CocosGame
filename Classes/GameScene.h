@@ -38,7 +38,7 @@ public:
 
 	void initContactListeners();
 
-	IPayable* getPayableByNode(Node*);
+	Payable* getPayableByNode(Node*);
 	IAttackable* getAttackableByNode(Node*);
 	//virtual void newMenuCallback(cocos2d::Ref* pSender);
 

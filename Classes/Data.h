@@ -162,9 +162,13 @@ const string BOW_SPR{ "UI/bowBtn.png" };
 
 const string BACKGROUND_SPR{ "UI/background.png" };
 const string GAME_OVER_SPR{ "UI/game_over2.png" };
+
 const string MARK_ICO_SPR{ "UI/mark.png" };
 const string HUMMER_ICO_SPR{ "UI/hummer.png" };
+const string SELECTOR_ICO_SPR{ "UI/selector.png" };
+
 const string GAME_OVER_BACK_SPR{ "UI/game_over_back.png" };
+const string VICTORY_BACK_SPR{ "UI/victory.png" };
 
 const int GAME_OVER_BACK_OPACITY{ 40 };
 
@@ -176,7 +180,8 @@ const double SELECT_SITIZEN_ROLE_RIGHT_X{ 16 * 7 / SCALE_FACTOR };
 const double SELECT_SITIZEN_ROLE_MIDDLE_X{ 0 };
 const double SELECT_SITIZEN_ROLE_LEFT_X{ -(16 * 7 / SCALE_FACTOR) };
 
-const double MARKS_Y_SHIFT{ 32 / SCALE_FACTOR };
+const double MARKS_Y_SHIFT{ 64 / SCALE_FACTOR };
+const double SELECTOR_Y_SHIFT{ MARKS_Y_SHIFT / 2 };
 
 //AMOUNT OF EACH BUILDING
 
@@ -304,6 +309,10 @@ const double ENEMY_JMP_LENGTH{ 256 / SCALE_FACTOR };
 const double ENEMY_JMP_HEIGTH{ 128 / SCALE_FACTOR};
 const int ENEMY_JMP_QUANTITY{ 1 };
 
+// enemy lastWave per second
+
+const int ENEMY_LAST_WAVE_QUANTITY_PER_SEC{ 3 };
+
 //shoot range && arrow
 
 const double WARRIOR_SHOOT_WIGTH{ 512 / SCALE_FACTOR };
@@ -317,3 +326,4 @@ const int ARROW_MISS_X{ static_cast<int>(48 / SCALE_FACTOR) };
 
 const int WALL_DIAPASON_WARRIORS_STAND{ static_cast<int>(64 / SCALE_FACTOR) };
 const int WALL_DISTANCE_TO_WARRIORS{ static_cast<int>(64 / SCALE_FACTOR) };
+

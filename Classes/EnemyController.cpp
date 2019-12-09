@@ -5,7 +5,7 @@ int EnemyController::enemNum = 0;
 
 EnemyController* EnemyController::enemyController{ nullptr };
 
-EnemyController::EnemyController() {
+EnemyController::EnemyController() : isInfinityWave(false) {
 	GameTime::addTimeDependedObject(DAY_DURATION / 2, this);
 }
 
@@ -51,9 +51,9 @@ void EnemyController::startSpawn(int numOfEnemys, Vec2 posToSpawn) {
 void EnemyController::timeDependedAction() {
 	
 	startSpawn(enemNum, Vec2(0, GENERAL_Y));
-	//startSpawn(enemNum, Vec2(Enviroment::getInstance()->getGroundWidth(), GENERAL_Y));
-	
-	enemNum++;
+	startSpawn(enemNum, Vec2(Enviroment::getInstance()->getGroundWidth(), GENERAL_Y));
+	if(!isInfinityWave)
+		enemNum++;
 }
 
 void EnemyController::allStopMove() {
@@ -66,6 +66,16 @@ bool EnemyController::enemiesAreAlive() {
 		return true;
 	}
 	return false;
+}
+
+void EnemyController::startInfinitySpawn() {
+	isInfinityWave = true;
+	
+	enemNum = ENEMY_LAST_WAVE_QUANTITY_PER_SEC;
+
+	GameTime::removeTimeDependedObject(this);
+	GameTime::addTimeDependedObject(-1, this);
+
 }
 
 

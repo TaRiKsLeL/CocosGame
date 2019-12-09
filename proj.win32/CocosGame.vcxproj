@@ -171,6 +171,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Mine.cpp" />
     <ClCompile Include="..\Classes\MoneyEarner.cpp" />
     <ClCompile Include="..\Classes\NPC.cpp" />
+    <ClCompile Include="..\Classes\Payable.cpp" />
     <ClCompile Include="..\Classes\Player.cpp" />
     <ClCompile Include="..\Classes\SettingsMenu.cpp" />
     <ClCompile Include="..\Classes\SlaveTraider.cpp" />
@@ -211,7 +212,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Shooter.h" />
     <ClInclude Include="..\Classes\MainMenu.h" />
     <ClInclude Include="..\Classes\IMoveable.h" />
-    <ClInclude Include="..\Classes\IPayable.h" />
+    <ClInclude Include="..\Classes\Payable.h" />
     <ClInclude Include="..\Classes\Player.h" />
     <ClInclude Include="..\Classes\SettingsMenu.h" />
     <ClInclude Include="..\Classes\ITimeDepended.h" />

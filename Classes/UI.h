@@ -49,6 +49,7 @@ public:
 
 	void addMark(Sprite*);
 	void addHummer(Sprite*);
+	Sprite* getSelector(Sprite*);
 
 	static UI* getInstance();
 
@@ -80,7 +81,7 @@ public:
 	//game over
 
 
-	void setGameOverSprite();
+	void setGameOverSprite(string);
 
 	EventListenerKeyboard* toMainSceneListener;
 	void initMainSceneListener();

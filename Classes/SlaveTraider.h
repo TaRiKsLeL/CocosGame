@@ -1,11 +1,11 @@
 #pragma once
 #include "CitizenController.h"
 #include "Player.h"
-#include "IPayable.h"
+#include "Payable.h"
 #include "Data.h"
 #include "Enviroment.h"
 
-class SlaveTraider : public IPayable{
+class SlaveTraider : public Payable{
 private:
 
 	Sprite* spr;
@@ -18,5 +18,6 @@ public:
 	
 	static SlaveTraider* getInstance();
 	virtual void pay(int&) override;
+	virtual void setSelector() override;
 
 };

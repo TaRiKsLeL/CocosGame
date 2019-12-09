@@ -17,6 +17,11 @@ void Castle::pay(int& sum) {
 
 		if (price <= sum && price != 0) {
 			sum -= price;
+
+			if (level == levelsImages->size() - 2) {
+				EnemyController::getInstance()->startInfinitySpawn();
+			}
+
 			upgrade();
 		}
 	}	
@@ -33,6 +38,16 @@ PhysicsBody* Castle::createPhysBody() {
 
 	return pb;
 }
+
+void Castle::specitalUpdateAction() {
+	if (level == levelsImages->size() - 1) {
+		log("victory");
+		UI::getInstance()->setGameOverSprite(VICTORY_BACK_SPR);
+		EnemyController::getInstance()->allStopMove();
+
+	}
+}
+
 /*
 =====================================================================================================
 Castle attacked
@@ -41,7 +56,7 @@ Castle attacked
 
 
 void Castle::hit(int attPower) {
-	UI::getInstance()->setGameOverSprite();
+	UI::getInstance()->setGameOverSprite(GAME_OVER_BACK_SPR);
 	EnemyController::getInstance()->allStopMove();
 }
 

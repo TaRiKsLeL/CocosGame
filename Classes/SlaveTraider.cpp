@@ -58,3 +58,7 @@ void SlaveTraider::createCitizen()
 	CitizenController::getInstance()->create(slaveTraider->spr->getPosition());
 }
 
+void SlaveTraider::setSelector()
+{
+	setSelectorSpr(spr);
+}

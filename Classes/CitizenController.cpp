@@ -41,7 +41,7 @@ Citizen* CitizenController::findByPosition(Vec2 pos) {
 	return controller.findByPosition(pos);
 }
 
-void CitizenController::setNewRole(SprTag tag, IPayable* citzenPayable) {
+void CitizenController::setNewRole(SprTag tag, Payable* citzenPayable) {
 	Citizen* citizenToChange = dynamic_cast<Citizen*>(citzenPayable);
 
 

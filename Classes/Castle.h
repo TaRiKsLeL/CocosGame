@@ -12,6 +12,7 @@ public:
 	
 	virtual PhysicsBody* createPhysBody();
 
+	virtual void specitalUpdateAction() override;
 	virtual bool canBeAttacked() override;
 	virtual void hit(int) override;
 };

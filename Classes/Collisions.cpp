@@ -75,11 +75,13 @@ bool GameScene::onPlayerContactBegin(PhysicsContact& contact)
 
 
 
-		IPayable* payable = getPayableByNode(nonPlayerNode);
+		Payable* payable = getPayableByNode(nonPlayerNode);
 
 		if (payable != nullptr) {
-			log("plyer payable");
-			player->setPayable(payable);
+			if (!player->focused()) {
+				player->setPayable(payable);
+				payable->setSelector();
+			}
 		}
 	}
 	return true;
@@ -119,41 +121,42 @@ bool GameScene::onPlayerContactSeparate(PhysicsContact& contact)
 		if ((nonPlayerNode->getPhysicsBody()->getCollisionBitmask() & PLAYER_CATEGORY_BM) == 0)
 			return false;
 
-		IPayable* payable = getPayableByNode(nonPlayerNode);
+		Payable* payable = getPayableByNode(nonPlayerNode);
 
 		if (player != nullptr && player->focused()) {
-			if (player->checkFocusedObj(payable))
+			if (player->checkFocusedObj(payable)) {
 				player->disableFocusBuyListener();
+				payable->removeSelector();
+			}
 		}
-
 	}
 	return true;
 }
 
 
 
-IPayable* GameScene::getPayableByNode(Node* nonPlayerNode) {
+Payable* GameScene::getPayableByNode(Node* nonPlayerNode) {
 
 	Building* building = nullptr;
 
-	IPayable* objToPay = nullptr;
+	Payable* objToPay = nullptr;
 
 	switch (nonPlayerNode->getTag()) {
 
 	case SprTag::SLAVE_TRAIDER:
-		objToPay = dynamic_cast<IPayable*>(SlaveTraider::getInstance());
+		objToPay = dynamic_cast<Payable*>(SlaveTraider::getInstance());
 		break;
 	case SprTag::CITIZEN:
-		objToPay = dynamic_cast<IPayable*>(CitizenController::getInstance()->findByPosition(nonPlayerNode->getPosition()));
+		objToPay = dynamic_cast<Payable*>(CitizenController::getInstance()->findByPosition(nonPlayerNode->getPosition()));
 		break;
 	case SprTag::BUILDER:
-		objToPay = dynamic_cast<IPayable*>(BuilderController::getInstance()->findByPosition(nonPlayerNode->getPosition()));
+		objToPay = dynamic_cast<Payable*>(BuilderController::getInstance()->findByPosition(nonPlayerNode->getPosition()));
 		break;
 	case SprTag::WARRIOR:
-		objToPay = dynamic_cast<IPayable*>(WarriorController::getInstance()->findByPosition(nonPlayerNode->getPosition()));
+		objToPay = dynamic_cast<Payable*>(WarriorController::getInstance()->findByPosition(nonPlayerNode->getPosition()));
 		break;
 	case SprTag::WORKER:
-		objToPay = dynamic_cast<IPayable*>(WorkerController::getInstance()->findByPosition(nonPlayerNode->getPosition()));
+		objToPay = dynamic_cast<Payable*>(WorkerController::getInstance()->findByPosition(nonPlayerNode->getPosition()));
 		break;
 
 	case SprTag::MINE:
@@ -162,10 +165,10 @@ IPayable* GameScene::getPayableByNode(Node* nonPlayerNode) {
 	case SprTag::WALL:
 		building = BuildingController::getInstance()->findBuildingByTagAndPosition(nonPlayerNode->getTag(), nonPlayerNode->getPosition());
 		if (Enviroment::getInstance()->getBorders()->isInKingdom(building->getSprite()->getPositionX())) {
-			objToPay = dynamic_cast<IPayable*>(building);
+			objToPay = dynamic_cast<Payable*>(building);
 		}
 		else if (Wall* wall = dynamic_cast<Wall*>(building)) {
-			objToPay = dynamic_cast<IPayable*>(building);
+			objToPay = dynamic_cast<Payable*>(building);
 		}
 		break;
 	}

@@ -28,9 +28,6 @@
     <Filter Include="src\GameObjects\Time">
       <UniqueIdentifier>{a1753b43-4b0d-49b0-a88b-8b76777c56b4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\GameObjects\Interfaces">
-      <UniqueIdentifier>{7dc01e1b-fe05-4142-964e-164740f7f8bb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\GameObjects\NPC">
       <UniqueIdentifier>{cbc82a54-899b-4a67-afc8-5206f24062b0}</UniqueIdentifier>
     </Filter>
@@ -75,6 +72,12 @@
     </Filter>
     <Filter Include="src\GameObjects\NPC\Enemy">
       <UniqueIdentifier>{3982b970-a39d-4f79-8a58-37ab1c5aa0c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\GameObjects\Interfaces and abstract">
+      <UniqueIdentifier>{7dc01e1b-fe05-4142-964e-164740f7f8bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\GameObjects\Interfaces and abstract\Payable">
+      <UniqueIdentifier>{acc7f404-e38a-4873-a6ab-1416c2c07426}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -177,6 +180,9 @@
     <ClCompile Include="..\Classes\MoneyEarner.cpp">
       <Filter>src\GameObjects</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Payable.cpp">
+      <Filter>src\GameObjects\Interfaces and abstract\Payable</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -201,10 +207,10 @@
       <Filter>src\GameObjects\Time</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\IMoveable.h">
-      <Filter>src\GameObjects\Interfaces</Filter>
+      <Filter>src\GameObjects\Interfaces and abstract</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\ITimeDepended.h">
-      <Filter>src\GameObjects\Interfaces</Filter>
+      <Filter>src\GameObjects\Interfaces and abstract</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\EnemyController.h">
       <Filter>src\GameObjects\NPC\Enemy</Filter>
@@ -223,9 +229,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\WorkerController.h">
       <Filter>src\GameObjects\NPC\Worker</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\IPayable.h">
-      <Filter>src\GameObjects\Interfaces</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Building.h">
       <Filter>src\GameObjects\Buildings</Filter>
@@ -285,13 +288,16 @@
       <Filter>src\GameObjects\NPC\NPCParent</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\IAttackable.h">
-      <Filter>src\GameObjects\Interfaces</Filter>
+      <Filter>src\GameObjects\Interfaces and abstract</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Shooter.h">
       <Filter>src\GameObjects\NPC\Shooter</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MoneyEarner.h">
       <Filter>src\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Payable.h">
+      <Filter>src\GameObjects\Interfaces and abstract\Payable</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "cocos2d.h"
-#include "IPayable.h"
+#include "Payable.h"
 #include "ITimeDepended.h"
 #include "Data.h"
 #include <vector>
@@ -10,7 +10,7 @@
 
 USING_NS_CC;
 
-class Building : public IPayable, public ITimeDepended
+class Building : public Payable, public ITimeDepended
 {
 private:
 
@@ -50,6 +50,7 @@ public:
 	void upgrade();
 	void setBuildingStatus(bool);
 	virtual void specitalUpdateAction();
+	virtual void setSelector() override;
 
 	Direction getDirrection();
 

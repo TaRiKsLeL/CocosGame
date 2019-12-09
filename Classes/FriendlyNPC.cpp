@@ -7,7 +7,7 @@ Init
 =====================================================================================================
 */
 
-FriendlyNPC::FriendlyNPC(Vec2 pos, std::string sprName) : NPC(pos, sprName) {
+FriendlyNPC::FriendlyNPC(Vec2 pos, std::string sprName) : NPC(pos, sprName), selectorSpr(nullptr) {
 	
 	setActive();
 	setMoveSpeed(FRIENDLY_NPC_MOVE_SPEED);
@@ -100,9 +100,18 @@ void FriendlyNPC::hit(int) {
 }
 
 void FriendlyNPC::pay(int& money) {
+
+
+
 	if (!isActive && money >= NPC_RERIVE) {
 		money -= NPC_RERIVE;
 		setActive();
 	}
 }
+
+void FriendlyNPC::setSelector()
+{
+	setSelectorSpr(spr);
+}
+
 
