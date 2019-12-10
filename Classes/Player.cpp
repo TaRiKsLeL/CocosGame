@@ -1,5 +1,7 @@
 #include "Player.h"
 #include "AnimationCreator.h"
+#include "EnvironmentUI.h"
+
 Player* Player::player{ nullptr };
 
 
@@ -74,6 +76,11 @@ Player* Player::getInstance() {
 Sprite* Player::getSprite()
 {
 	return spr;
+}
+
+void Player::moveBackground(int fatherSpeed)
+{
+	EnvironmentUI::getInstance()->getBaseNode()->setPosition(spr->getPosition());
 }
 
 

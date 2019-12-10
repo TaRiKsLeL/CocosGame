@@ -4,6 +4,10 @@ EnvironmentUI* EnvironmentUI::environmentUI{ nullptr };
 
 EnvironmentUI::EnvironmentUI() 
 {
+	baseNode = Node::create();
+	baseNode->setPosition(Player::getInstance()->getSprite()->getPosition());
+	Enviroment::getInstance()->getScene()->addChild(baseNode, -10);
+
 	setBackground();
 	generateTrees();
 }
@@ -112,6 +116,11 @@ bool EnvironmentUI::pointIntersectsTree(float xPos)
 	return false;
 }
 
+Node* EnvironmentUI::getBaseNode()
+{
+	return baseNode;
+}
+
 void EnvironmentUI::updateBackground()
 {
 	skySpr->setPosition(Vec2(Player::getInstance()->getSprite()->getPosition().x, Player::getInstance()->getSprite()->getPosition().y+ CAMERA_OFFSET_Y-100));
@@ -145,10 +154,10 @@ void EnvironmentUI::setBackground()
 {
 	Size size = Director::getInstance()->getWinSize();
 	skySpr = Sprite::create(SKY_SPR);
-	skySpr->setAnchorPoint(Player::getInstance()->getSprite()->getAnchorPoint());
+	//skySpr->setAnchorPoint(Player::getInstance()->getSprite()->getAnchorPoint());
 	skySpr->getTexture()->setAliasTexParameters();
 	//skySpr->setScale();
-	Enviroment::getInstance()->getScene()->addChild(skySpr, BACKGROUND_Z_ORDER);
+	baseNode->addChild(skySpr,-5);
 
 
 
