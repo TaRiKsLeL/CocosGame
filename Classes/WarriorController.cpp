@@ -2,7 +2,7 @@
 
 WarriorController* WarriorController::warriorController{ nullptr };
 
-WarriorController::WarriorController() : enemiesJustKilled(true) {
+WarriorController::WarriorController() : m_areFree(true) {
 	GameTime::addTimeDependedObject(-1, this);
 }
 
@@ -87,13 +87,20 @@ void WarriorController::removeTargetByTargetPosition(Vec2 pos) {
 }
 
 void WarriorController::timeDependedAction() {
-	if (EnemyController::getInstance()->enemiesAreAlive())
+	if (EnemyController::getInstance()->enemiesAreAlive()) {
+		m_areFree = false;
 		moveToWall();
+	}
 	else {
-		if (enemiesJustKilled == false) {
-			enemiesJustKilled = true;
+		if (m_areFree == false) {
+			m_areFree = true;
 			allMoveStop();
 			allMoveRand();
+			GameTime::removeTimeDependedObject(this);
 		}
 	}
+}
+
+bool WarriorController::areFree() {
+	return m_areFree;
 }

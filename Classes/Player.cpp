@@ -283,7 +283,7 @@ void Player::hit(int attPower) {
 	m_HP -= attPower;
 	UI::getInstance()->updateHeartLogo(m_HP);
 	if (m_HP <= 0) {
-		UI::getInstance()->setGameOverSprite(GAME_OVER_BACK_SPR);
+		UI::getInstance()->setGameOverSprite(GAME_OVER_SPR);
 		EnemyController::getInstance()->allStopMove();
 	}
 }

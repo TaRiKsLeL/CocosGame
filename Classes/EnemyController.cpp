@@ -52,6 +52,12 @@ void EnemyController::timeDependedAction() {
 	
 	startSpawn(enemNum, Vec2(0, GENERAL_Y));
 	startSpawn(enemNum, Vec2(Enviroment::getInstance()->getGroundWidth(), GENERAL_Y));
+	
+	if (WarriorController::getInstance()->areFree()) 
+	{
+		GameTime::addTimeDependedObject(-1, WarriorController::getInstance());
+	}
+	
 	if(!isInfinityWave)
 		enemNum++;
 }

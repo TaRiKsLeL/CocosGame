@@ -72,7 +72,11 @@ const int ARROW_COLLIDE_BM			{ ENEMY_CATEGORY_BM };
 
 
 const int DELTA_TIME{ 60 };
-const int DAY_DURATION{ 100 };
+const int DAY_DURATION{ 40 };
+const int SLAVE_TRAIDER_APPERANCE{ DAY_DURATION / 8 };
+const int SLAVE_TRAIDER_DISAPPERANCE{ (DAY_DURATION / 8) * 3 };
+
+
 const double SCALE_FACTOR{ 0.5 };
 
 //UI
@@ -168,7 +172,7 @@ const string HUMMER_ICO_SPR{ "UI/hummer.png" };
 const string SELECTOR_ICO_SPR{ "UI/selector.png" };
 
 const string GAME_OVER_BACK_SPR{ "UI/game_over_back.png" };
-const string VICTORY_BACK_SPR{ "UI/victory.png" };
+const string VICTORY_SPR{ "UI/victory.png" };
 
 const int GAME_OVER_BACK_OPACITY{ 40 };
 
@@ -327,3 +331,5 @@ const int ARROW_MISS_X{ static_cast<int>(48 / SCALE_FACTOR) };
 const int WALL_DIAPASON_WARRIORS_STAND{ static_cast<int>(64 / SCALE_FACTOR) };
 const int WALL_DISTANCE_TO_WARRIORS{ static_cast<int>(64 / SCALE_FACTOR) };
 
+// SLAVE TRAIDER SLAVES AMOUNT
+const int SLAVE_AMMOUNT_PER_DAY{ 6 };

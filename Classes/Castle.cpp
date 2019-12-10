@@ -42,7 +42,7 @@ PhysicsBody* Castle::createPhysBody() {
 void Castle::specitalUpdateAction() {
 	if (level == levelsImages->size() - 1) {
 		log("victory");
-		UI::getInstance()->setGameOverSprite(VICTORY_BACK_SPR);
+		UI::getInstance()->setGameOverSprite(VICTORY_SPR);
 		EnemyController::getInstance()->allStopMove();
 
 	}
@@ -56,7 +56,7 @@ Castle attacked
 
 
 void Castle::hit(int attPower) {
-	UI::getInstance()->setGameOverSprite(GAME_OVER_BACK_SPR);
+	UI::getInstance()->setGameOverSprite(GAME_OVER_SPR);
 	EnemyController::getInstance()->allStopMove();
 }
 
