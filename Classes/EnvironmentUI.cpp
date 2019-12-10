@@ -2,6 +2,12 @@
 
 EnvironmentUI* EnvironmentUI::environmentUI{ nullptr };
 
+EnvironmentUI::EnvironmentUI() 
+{
+	setBackground();
+	generateTrees();
+}
+
 EnvironmentUI* EnvironmentUI::getInstance()
 {
 	if (environmentUI)
@@ -104,5 +110,54 @@ bool EnvironmentUI::pointIntersectsTree(float xPos)
 	}
 
 	return false;
+}
+
+void EnvironmentUI::updateBackground()
+{
+	skySpr->setPosition(Vec2(Player::getInstance()->getSprite()->getPosition().x, Player::getInstance()->getSprite()->getPosition().y+ CAMERA_OFFSET_Y-100));
+
+	Point playerPosition = Player::getInstance()->getSprite()->getPosition();
+
+	Vec2 origin = Director::getInstance()->getVisibleOrigin();
+
+	if (cloudsSpr->getPositionX() < playerPosition.x) {
+		cloudsSpr->setPosition(Vec2(cloudsSpr->getPositionX() + CLOUDS_SPEED, cloudsSpr->getPositionY()));
+	}
+	if (cloudsSpr->getPositionX() > playerPosition.x) {
+		cloudsSpr->setPosition(Vec2(cloudsSpr->getPositionX() - CLOUDS_SPEED, cloudsSpr->getPositionY()));
+	}
+
+	Point rightBound = Vec2(playerPosition.x + DISTANCE_TO_ENDING_OF_SCREEN, 0);
+
+	Point leftBound = Vec2(playerPosition.x - DISTANCE_TO_ENDING_OF_SCREEN, 0);
+
+
+	if (cloudsSpr->getPositionX() > rightBound.x) {
+		cloudsSpr->setPosition(Vec2(cloudsSpr->getPositionX() - DISTANCE_TO_ENDING_OF_SCREEN * 2, cloudsSpr->getPositionY()));
+	}
+
+	if (cloudsSpr->getPositionX() < leftBound.x) {
+		cloudsSpr->setPosition(Vec2(cloudsSpr->getPositionX() + DISTANCE_TO_ENDING_OF_SCREEN * 2, cloudsSpr->getPositionY()));
+	}
+}
+
+void EnvironmentUI::setBackground()
+{
+	Size size = Director::getInstance()->getWinSize();
+	skySpr = Sprite::create(SKY_SPR);
+	skySpr->setAnchorPoint(Player::getInstance()->getSprite()->getAnchorPoint());
+	skySpr->getTexture()->setAliasTexParameters();
+	//skySpr->setScale();
+	Enviroment::getInstance()->getScene()->addChild(skySpr, BACKGROUND_Z_ORDER);
+
+
+
+	cloudsSpr = Sprite::create(CLOUDS_SPR);
+	cloudsSpr->getTexture()->setAliasTexParameters();
+	cloudsSpr->setAnchorPoint(Vec2(0.5, 0.5));
+	cloudsSpr->setPosition(Player::getInstance()->getSprite()->getPositionX(), Player::getInstance()->getSprite()->getPositionY() + CLOUDS_OFFSET_Y);
+	cloudsSpr->setScale(1.5f);
+	cloudsSpr->setScaleX(3);
+	Enviroment::getInstance()->getScene()->addChild(cloudsSpr, BACKGROUND_Z_ORDER);
 }
 

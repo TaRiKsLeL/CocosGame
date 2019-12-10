@@ -91,6 +91,15 @@ const float COIN_SCALE_FACTOR{ 1.0f / SCALE_FACTOR };
 
 const float HEART_SCALE_FACTOR{ 1.0f / SCALE_FACTOR };
 
+//-----paralax------
+
+const int BACKGROUND_Z_ORDER{ -5 };
+const int DISTANCE_TO_ENDING_OF_SCREEN{ 600 };
+const string SKY_SPR{ "Environment/Background/sky.png" };
+const string CLOUDS_SPR{ "Environment/Background/clouds.png" };
+const int CLOUDS_SPEED{ 5 };
+const int CLOUDS_OFFSET_Y{ 300 };
+
 
 // ANIMATION
 

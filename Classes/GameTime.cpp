@@ -1,4 +1,5 @@
 #include "GameTime.h"
+#include "EnvironmentUI.h"
 USING_NS_CC;
 
 
@@ -65,7 +66,7 @@ void GameTime::updateFrame() {
 
 	}
 
-	
+	EnvironmentUI::getInstance()->updateBackground();
 }
 
 const int GameTime::getCurrentTime() {

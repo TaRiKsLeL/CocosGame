@@ -71,6 +71,11 @@ Player* Player::getInstance() {
 	return player;
 }
 
+Sprite* Player::getSprite()
+{
+	return spr;
+}
+
 
 
 PhysicsBody* Player::createPhysBody() {

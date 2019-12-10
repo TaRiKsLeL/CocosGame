@@ -180,10 +180,11 @@
     <ClCompile Include="..\Classes\MoneyEarner.cpp">
       <Filter>src\GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\AnimationCreator.cpp">
-      <Filter>src\GameObjects</Filter>
     <ClCompile Include="..\Classes\Payable.cpp">
       <Filter>src\GameObjects\Interfaces and abstract\Payable</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\AnimationCreator.cpp">
+      <Filter>src\GameObjects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -298,10 +299,11 @@
     <ClInclude Include="..\Classes\MoneyEarner.h">
       <Filter>src\GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\AnimationCreator.h">
-      <Filter>src\GameObjects</Filter>
     <ClInclude Include="..\Classes\Payable.h">
       <Filter>src\GameObjects\Interfaces and abstract\Payable</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AnimationCreator.h">
+      <Filter>src\GameObjects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

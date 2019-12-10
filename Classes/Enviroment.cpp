@@ -37,7 +37,7 @@ Enviroment* Enviroment::getInstance() {
 void Enviroment::addComponents() {
 	setGroundSpr(GROUND_SPR);
 	setBorders(BuildingController::getInstance()->getKingdomBorders());
-	EnvironmentUI::getInstance()->generateTrees();
+	EnvironmentUI::getInstance();
 	Player::getInstance();
 }
 

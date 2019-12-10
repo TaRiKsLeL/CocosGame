@@ -55,7 +55,7 @@ private:
 	
 public:
 	static Player* getInstance();
-
+	Sprite* getSprite();
 	void addMoney(int);
 	int& getMoney();
 
