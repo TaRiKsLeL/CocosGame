@@ -95,6 +95,16 @@ const float COIN_SCALE_FACTOR{ 1.0f / SCALE_FACTOR };
 
 const float HEART_SCALE_FACTOR{ 1.0f / SCALE_FACTOR };
 
+//-----paralax------
+
+const int BACKGROUND_Z_ORDER{ -5 };
+const int DISTANCE_TO_ENDING_OF_SCREEN{ 600 };
+const string SKY_SPR{ "Environment/Background/sky.png" };
+const string SUN_SPR{ "Environment/Background/sun.png" };
+const string CLOUDS_SPR{ "Environment/Background/clouds.png" };
+const int CLOUDS_SPEED{ 5 };
+const int CLOUDS_OFFSET_Y{ 300 };
+
 
 // ANIMATION
 
@@ -113,7 +123,55 @@ const int HEART_IMAGES_AMOUNT{ 4 };
 const int HEART_IMAGE_SIZE{ static_cast<int>(32 / SCALE_FACTOR) };
 const float HEART_TIME_PER_FRAME{ 0.5f };
 
+//----Player Run----
+const std::string PLAYER_RUN_FRAMES{ "characters/player-run.png" };
+const std::string PLAYER_RUN_IMAGE{ "characters/player-run-image.png" };
+const int PLAYER_RUN_IMAGES_AMOUNT{6};
+const int PLAYER_RUN_IMAGE_WIDTH{ static_cast<int>(125 / SCALE_FACTOR) };
+const int PLAYER_RUN_IMAGE_HEIGHT{ static_cast<int>(96 / SCALE_FACTOR) };
+const float PLAYER_RUN_TIME_PER_FRAME{ 0.1f };
 
+//----Player Idle----
+const std::string PLAYER_IDLE_FRAMES{ "characters/player-idle.png" };
+const int PLAYER_IDLE_IMAGES_AMOUNT{ 2 };
+const int PLAYER_IDLE_IMAGE_WIDTH{ static_cast<int>(125 / SCALE_FACTOR) };
+const int PLAYER_IDLE_IMAGE_HEIGHT{ static_cast<int>(96 / SCALE_FACTOR) };
+const float PLAYER_IDLE_TIME_PER_FRAME{ 0.2f };
+
+//----Builder Walk----
+const std::string BUILDER_WORK_FRAMES{ "characters/nps/builder-work.png" };
+const int BUILDER_WORK_IMAGES_AMOUNT{ 4 };
+const int BUILDER_WORK_IMAGE_WIDTH{ static_cast<int>(39 / SCALE_FACTOR) };
+const int BUILDER_WORK_IMAGE_HEIGHT{ static_cast<int>(64 / SCALE_FACTOR) };
+const float BUILDER_WORK_TIME_PER_FRAME{ 0.2f };
+
+//----Builder Walk----
+const std::string BUILDER_WALK_FRAMES{ "characters/nps/builder-walk.png" };
+const int BUILDER_WALK_IMAGES_AMOUNT{ 4 };
+const int BUILDER_WALK_IMAGE_WIDTH{ static_cast<int>(39 / SCALE_FACTOR) };
+const int BUILDER_WALK_IMAGE_HEIGHT{ static_cast<int>(64 / SCALE_FACTOR) };
+const float BUILDER_WALK_TIME_PER_FRAME{ 0.2f };
+
+//----Worker Walk----
+const std::string WORKER_WALK_FRAMES{ "characters/nps/worker-walk.png" };
+const int WORKER_WALK_IMAGES_AMOUNT{ 4 };
+const int WORKER_WALK_IMAGE_WIDTH{ static_cast<int>(39 / SCALE_FACTOR) };
+const int WORKER_WALK_IMAGE_HEIGHT{ static_cast<int>(64 / SCALE_FACTOR) };
+const float WORKER_WALK_TIME_PER_FRAME{ 0.2f };
+
+//----Builder Walk----
+const std::string WARRIOR_WALK_FRAMES{ "characters/nps/warrior-walk.png" };
+const int WARRIOR_WALK_IMAGES_AMOUNT{ 4 };
+const int WARRIOR_WALK_IMAGE_WIDTH{ static_cast<int>(39 / SCALE_FACTOR) };
+const int WARRIOR_WALK_IMAGE_HEIGHT{ static_cast<int>(64 / SCALE_FACTOR) };
+const float WARRIOR_WALK_TIME_PER_FRAME{ 0.2f };
+
+//----Ghost Enemy----
+const std::string GHOST_ENEMY_FRAMES{ "characters/nps/ghost-enemy.png" };
+const int GHOST_ENEMY_IMAGES_AMOUNT{ 9 };
+const int GHOST_ENEMY_IMAGE_WIDTH{ static_cast<int>(48 / SCALE_FACTOR) };
+const int GHOST_ENEMY_IMAGE_HEIGHT{ static_cast<int>(96 / SCALE_FACTOR) };
+const float GHOST_ENEMY_TIME_PER_FRAME{ 0.2f };
 
 //Z-orders
 const int FENCE_Z_ORDER{ -3 };
@@ -152,6 +210,7 @@ const string WORKER_SPR{ "worker.png" };
 const string FENCE_SPR{ "Environment/fence2.png" };
 const string ENEMY_SPR{ "enemy.png" };
 const string ARROW_SPR{ "arrow.png" };
+const string NPS_BASE_SPR{ "characters/nps/nps-base-sprite.png" };
 
 // UI elements
 
@@ -260,7 +319,7 @@ const vector<std::string> TOWERS{
 	"buildings/towers/tower3.png",
 	"buildings/towers/tower4.png"
 };
-const vector<std::string> CASTLES{ "buildings/castles/castle0.png","buildings/castles/castle1.png"};
+const vector<std::string> CASTLES{ "buildings/castles/castle0.png"};
 const vector<std::string> MINES{ "buildings/mines/mine0.png","buildings/mines/mine1.png"};
 
 const vector<std::string> TREES{ "Environment/tree1.png","Environment/tree2.png","Environment/tree3.png",

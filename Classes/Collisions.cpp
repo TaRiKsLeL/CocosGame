@@ -327,10 +327,10 @@ bool GameScene::onWorkerContactBegin(PhysicsContact& contact)
 			mine->addWorker();
 			log("In mine: %d", mine->workersAmountInside());
 			//worker->removeAllComponents();
-			//WorkerController::getInstance()->deleteByPos(worker->getPosition());
+			WorkerController::getInstance()->deleteByPos(worker->getPosition());
 
-			WorkerController::getInstance()->getWorkersToPutInsideMine()->push(worker);
-			GameTime::addTimeDependedObject(-1, WorkerController::getInstance());
+			//WorkerController::getInstance()->getWorkersToPutInsideMine()->push(worker);
+			//if(WorkerController::getInstance()->getWorkersToPutInsideMine()->size==0) GameTime::addTimeDependedObject(-1, WorkerController::getInstance());
 
 			//building->setBuildingStatus(true);
 			return true;

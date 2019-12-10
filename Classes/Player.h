@@ -29,6 +29,12 @@ private:
 	EventListenerKeyboard* choseRoleListener;
 	
 	Sprite* spr;
+
+	//Animation
+	Animate* idle;
+	Animate* run;
+
+	//
 	
 	Payable* objInFocus;
 	//Direction direction;
@@ -49,7 +55,7 @@ private:
 	
 public:
 	static Player* getInstance();
-
+	Sprite* getSprite();
 	void addMoney(int);
 	int& getMoney();
 

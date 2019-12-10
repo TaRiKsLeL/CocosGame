@@ -8,12 +8,17 @@ class EnvironmentUI {
 private:
 
 	static EnvironmentUI* environmentUI;
-
-
-public:
+	Sprite* skySpr;
+	Sprite* cloudsSpr;
 	vector<Sprite*> trees;
 	stack<Sprite*>* deleteTreesStack;
 	bool pointIntersectsTree(float);
+	EnvironmentUI();
+public:
+	
+	void startRotateSun();
+	void updateBackground();
+	void setBackground();
 
 	void generateTrees();
 	void updateTrees();

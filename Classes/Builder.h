@@ -7,6 +7,7 @@ private:
 
 	bool m_isBuilding;
 	bool goToBuilding;
+	Animate* animBuild;
 
 public:
 	Builder(Vec2);

@@ -7,7 +7,8 @@ Init
 =====================================================================================================
 */
 
-FriendlyNPC::FriendlyNPC(Vec2 pos, std::string sprName) : NPC(pos, sprName), selectorSpr(nullptr) {
+FriendlyNPC::FriendlyNPC(Vec2 pos) : NPC(pos), selectorSpr(nullptr) {
+
 	
 	setActive();
 	setMoveSpeed(FRIENDLY_NPC_MOVE_SPEED);

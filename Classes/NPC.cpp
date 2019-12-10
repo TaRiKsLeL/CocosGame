@@ -1,4 +1,5 @@
 #include "NPC.h"
+#include "Player.h"
 
 /*
 =====================================================================================================
@@ -6,13 +7,12 @@ Init
 =====================================================================================================
 */
 
-NPC::NPC(Vec2 pos, std::string sprName) : m_isMoving(false), stop(true), goingToRemove(false), moveSpeed(DEFAULT_NPC_MOVE_SPEED), direction(Direction::RIGHT){
+NPC::NPC(Vec2 pos) : m_isMoving(false), stop(true), goingToRemove(false), moveSpeed(DEFAULT_NPC_MOVE_SPEED), direction(Direction::RIGHT){
 
-	spr = Sprite::create(sprName);
+	spr = Sprite::create(NPS_BASE_SPR);
 	spr->setPosition(pos);
 	spr->setAnchorPoint(Vec2(0.5, 0));
 	spr->addComponent(createPhysBody());
-	spr->getTexture()->setAliasTexParameters();
 
 	Director::getInstance()->getRunningScene()->addChild(spr, NPC_Z_ORDER);
 }
@@ -134,6 +134,11 @@ void NPC::removeAllChildren() {
 }
 
 void NPC::deleteObj() {
+	if (Payable* p = dynamic_cast<Payable*>(this)) {
+		if (Player::getInstance()->checkFocusedObj(p)) 
+			Player::getInstance()->setPayable(nullptr);
+		
+	}
 	goingToRemove = true;
 	GameTime::removeMoveableObject(this, true);
 	spr->removeAllComponents();
