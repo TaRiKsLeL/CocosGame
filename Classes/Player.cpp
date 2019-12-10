@@ -78,10 +78,7 @@ Sprite* Player::getSprite()
 	return spr;
 }
 
-void Player::moveBackground(int fatherSpeed)
-{
-	EnvironmentUI::getInstance()->getBaseNode()->setPosition(spr->getPosition());
-}
+
 
 
 
@@ -115,14 +112,20 @@ void Player::move() {
 	
 		if (direction.right && pos.x < Enviroment::getInstance()->getGroundWidth()) {
 			pos.x += PLAYER_SPEED;
+			moveBackground(PLAYER_SPEED);
 		}
 		if (direction.left && pos.x > 0) {
 			pos.x -= PLAYER_SPEED;
+			moveBackground(-PLAYER_SPEED);
 		}
 	spr->setPosition(pos);
 	
 }
 
+void Player::moveBackground(int speed)
+{
+	EnvironmentUI::getInstance()->getBaseNode()->setPosition(Vec2(spr->getPositionX(),spr->getPositionY()- CAMERA_OFFSET_Y));
+}
 
 void Player::changeMoveDirection(EventKeyboard::KeyCode keyCode, bool condition) {
 

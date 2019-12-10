@@ -5,7 +5,7 @@ EnvironmentUI* EnvironmentUI::environmentUI{ nullptr };
 EnvironmentUI::EnvironmentUI() 
 {
 	baseNode = Node::create();
-	baseNode->setPosition(Player::getInstance()->getSprite()->getPosition());
+	baseNode->setPosition(Vec2(Player::getInstance()->getSprite()->getPositionX(), Player::getInstance()->getSprite()->getPositionY() - CAMERA_OFFSET_Y));
 	Enviroment::getInstance()->getScene()->addChild(baseNode, -10);
 
 	setBackground();
@@ -152,21 +152,16 @@ void EnvironmentUI::updateBackground()
 
 void EnvironmentUI::setBackground()
 {
-	Size size = Director::getInstance()->getWinSize();
 	skySpr = Sprite::create(SKY_SPR);
-	//skySpr->setAnchorPoint(Player::getInstance()->getSprite()->getAnchorPoint());
 	skySpr->getTexture()->setAliasTexParameters();
-	//skySpr->setScale();
 	baseNode->addChild(skySpr,-5);
 
-
-
-	cloudsSpr = Sprite::create(CLOUDS_SPR);
-	cloudsSpr->getTexture()->setAliasTexParameters();
-	cloudsSpr->setAnchorPoint(Vec2(0.5, 0.5));
-	cloudsSpr->setPosition(Player::getInstance()->getSprite()->getPositionX(), Player::getInstance()->getSprite()->getPositionY() + CLOUDS_OFFSET_Y);
-	cloudsSpr->setScale(1.5f);
-	cloudsSpr->setScaleX(3);
-	Enviroment::getInstance()->getScene()->addChild(cloudsSpr, BACKGROUND_Z_ORDER);
+	//cloudsSpr = Sprite::create(CLOUDS_SPR);
+	//cloudsSpr->getTexture()->setAliasTexParameters();
+	//cloudsSpr->setAnchorPoint(Vec2(0.5, 0.5));
+	//cloudsSpr->setPosition(Player::getInstance()->getSprite()->getPositionX(), Player::getInstance()->getSprite()->getPositionY() + CLOUDS_OFFSET_Y);
+	//cloudsSpr->setScale(1.5f);
+	//cloudsSpr->setScaleX(3);
+	//Enviroment::getInstance()->getScene()->addChild(cloudsSpr, BACKGROUND_Z_ORDER);
 }
 
