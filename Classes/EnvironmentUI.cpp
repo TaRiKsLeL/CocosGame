@@ -187,7 +187,7 @@ void EnvironmentUI::setBackground()
 
 		Sprite* sp = Sprite::create(CLOUDS.at(random(0, static_cast<int>(CLOUDS.size())-1)));
 		sp->getTexture()->setAliasTexParameters();
-		sp->setPosition(Vec2(random(-Enviroment::getInstance()->getGroundWidth()/2, Enviroment::getInstance()->getGroundWidth()/2), random(0, 500)));
+		sp->setPosition(Vec2(random(-Enviroment::getInstance()->getGroundWidth()/2, Enviroment::getInstance()->getGroundWidth()/2), random(200, 700)));
 		sp->setScale(random(CLOUD_SIZE_RAND_FACTOR, 1 + CLOUD_SIZE_RAND_FACTOR));
 		sp->setTag(5);
 		if (windDirection.left) {
