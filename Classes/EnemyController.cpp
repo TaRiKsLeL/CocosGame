@@ -5,7 +5,7 @@ int EnemyController::enemNum = 0;
 
 EnemyController* EnemyController::enemyController{ nullptr };
 
-EnemyController::EnemyController() : isInfinityWave(false) {
+EnemyController::EnemyController() : isInfinityWave(false), difficulty(1) {
 	GameTime::addTimeDependedObject(DAY_DURATION / 2, this);
 }
 
@@ -59,7 +59,7 @@ void EnemyController::timeDependedAction() {
 	}
 	
 	if(!isInfinityWave)
-		enemNum++;
+		enemNum += difficulty;
 }
 
 void EnemyController::allStopMove() {

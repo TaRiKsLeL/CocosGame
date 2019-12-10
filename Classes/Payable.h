@@ -10,7 +10,7 @@ private:
 protected:
 	
 	void setSelectorSpr(Sprite*);
-
+	Payable();
 public:
 	virtual void pay(int&) {};
 	virtual void setSelector() = 0;

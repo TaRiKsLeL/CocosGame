@@ -72,7 +72,7 @@ const int ARROW_COLLIDE_BM			{ ENEMY_CATEGORY_BM };
 
 
 const int DELTA_TIME{ 60 };
-const int DAY_DURATION{ 40 };
+const int DAY_DURATION{ 120 };
 const int SLAVE_TRAIDER_APPERANCE{ DAY_DURATION / 8 };
 const int SLAVE_TRAIDER_DISAPPERANCE{ (DAY_DURATION / 8) * 3 };
 
@@ -193,7 +193,7 @@ const double SLAVE_TRAIDER_START_X{ 12 * 16 / SCALE_FACTOR };
 const double PLAYER_START_X{ 6 * 16 / SCALE_FACTOR };
 
 
-const int CAMERA_OFFSET_Y{ -220 };
+const int CAMERA_OFFSET_Y{ -300 };
 const int CUST_OFFSET{ 50 };
 
 

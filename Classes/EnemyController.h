@@ -7,7 +7,7 @@ private:
 
 	static int enemNum;
 	bool isInfinityWave;
-
+	int difficulty;
 	BaseController<Enemy> controller;
 	EnemyController();
 	static EnemyController* enemyController;

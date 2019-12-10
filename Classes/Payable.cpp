@@ -1,13 +1,23 @@
 #include "Payable.h"
 #include "UI.h"
 
+Payable::Payable() : selector(nullptr) {
+
+}
+
+
 void Payable::setSelectorSpr(Sprite* sprToAdd) {
-	selector = UI::getInstance()->getSelector(sprToAdd);
+	if (selector == nullptr) {
+		selector = UI::getInstance()->getSelector(sprToAdd);
+	}
+	else {
+		selector->setVisible(true);
+		selector->resume();
+
+	}
 }
 
 void Payable::removeSelector() {
-	if (selector == nullptr)
-		return;
-	selector->removeFromParentAndCleanup(true);
-	selector = nullptr;
+	selector->setVisible(false);
+	selector->pause();
 }

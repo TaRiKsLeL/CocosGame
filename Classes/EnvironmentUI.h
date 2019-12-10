@@ -8,6 +8,7 @@ class EnvironmentUI {
 private:
 
 	static EnvironmentUI* environmentUI;
+	Node* baseNode;
 	Sprite* skySpr;
 	Sprite* cloudsSpr;
 	vector<Sprite*> trees;
@@ -16,6 +17,8 @@ private:
 	EnvironmentUI();
 public:
 	
+	Node* getBaseNode();
+
 	void startRotateSun();
 	void updateBackground();
 	void setBackground();

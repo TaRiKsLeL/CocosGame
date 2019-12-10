@@ -4,6 +4,10 @@ EnvironmentUI* EnvironmentUI::environmentUI{ nullptr };
 
 EnvironmentUI::EnvironmentUI() 
 {
+	baseNode = Node::create();
+	baseNode->setPosition(Vec2(Player::getInstance()->getSprite()->getPositionX(), Player::getInstance()->getSprite()->getPositionY() - CAMERA_OFFSET_Y));
+	Enviroment::getInstance()->getScene()->addChild(baseNode, -10);
+
 	setBackground();
 	generateTrees();
 	startRotateSun();
@@ -113,6 +117,11 @@ bool EnvironmentUI::pointIntersectsTree(float xPos)
 	return false;
 }
 
+Node* EnvironmentUI::getBaseNode()
+{
+	return baseNode;
+}
+
 void EnvironmentUI::updateBackground()
 {
 	skySpr->setPosition(Vec2(Player::getInstance()->getSprite()->getPosition().x, Player::getInstance()->getSprite()->getPosition().y+ CAMERA_OFFSET_Y-100));
@@ -144,27 +153,23 @@ void EnvironmentUI::updateBackground()
 
 void EnvironmentUI::setBackground()
 {
-	Size size = Director::getInstance()->getWinSize();
 	skySpr = Sprite::create(SKY_SPR);
-	skySpr->setAnchorPoint(Player::getInstance()->getSprite()->getAnchorPoint());
 	skySpr->getTexture()->setAliasTexParameters();
-	//skySpr->setScale();
-	Enviroment::getInstance()->getScene()->addChild(skySpr, BACKGROUND_Z_ORDER);
+	baseNode->addChild(skySpr,-5);
 
-
-
-	cloudsSpr = Sprite::create(CLOUDS_SPR);
-	cloudsSpr->getTexture()->setAliasTexParameters();
-	cloudsSpr->setAnchorPoint(Vec2(0.5, 0.5));
-	cloudsSpr->setPosition(Player::getInstance()->getSprite()->getPositionX(), Player::getInstance()->getSprite()->getPositionY() + CLOUDS_OFFSET_Y);
-	cloudsSpr->setScale(1.5f);
-	cloudsSpr->setScaleX(3);
-	Enviroment::getInstance()->getScene()->addChild(cloudsSpr, BACKGROUND_Z_ORDER);
+	//cloudsSpr = Sprite::create(CLOUDS_SPR);
+	//cloudsSpr->getTexture()->setAliasTexParameters();
+	//cloudsSpr->setAnchorPoint(Vec2(0.5, 0.5));
+	//cloudsSpr->setPosition(Player::getInstance()->getSprite()->getPositionX(), Player::getInstance()->getSprite()->getPositionY() + CLOUDS_OFFSET_Y);
+	//cloudsSpr->setScale(1.5f);
+	//cloudsSpr->setScaleX(3);
+	//Enviroment::getInstance()->getScene()->addChild(cloudsSpr, BACKGROUND_Z_ORDER);
 }
 
 void EnvironmentUI::startRotateSun(){
 	Sprite* sunSpr = Sprite::create(SUN_SPR);
+	sunSpr->setPosition(0, -400);
 	RotateBy* sunRotation = RotateBy::create(1, 360 / DAY_DURATION);
 	sunSpr->runAction(RepeatForever::create(sunRotation));
-	Player::getInstance()->addChild(sunSpr);
+	baseNode->addChild(sunSpr);
 }

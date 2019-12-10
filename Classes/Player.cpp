@@ -1,5 +1,7 @@
 #include "Player.h"
 #include "AnimationCreator.h"
+#include "EnvironmentUI.h"
+
 Player* Player::player{ nullptr };
 
 
@@ -78,6 +80,8 @@ Sprite* Player::getSprite()
 
 
 
+
+
 PhysicsBody* Player::createPhysBody() {
 	PhysicsBody* pb = PhysicsBody::createBox(spr->getBoundingBox().size);
 	pb->setDynamic(false);
@@ -108,25 +112,41 @@ void Player::move() {
 	
 		if (direction.right && pos.x < Enviroment::getInstance()->getGroundWidth()) {
 			pos.x += PLAYER_SPEED;
+			spr->setFlipX(-1);
+			moveBackground(PLAYER_SPEED);
 		}
 		if (direction.left && pos.x > 0) {
 			pos.x -= PLAYER_SPEED;
+			spr->setFlipX(0);
+			moveBackground(-PLAYER_SPEED);
 		}
 	spr->setPosition(pos);
 	
 }
 
+void Player::moveBackground(int speed)
+{
+	EnvironmentUI::getInstance()->getBaseNode()->setPosition(Vec2(spr->getPositionX(),spr->getPositionY()- CAMERA_OFFSET_Y));
+}
 
 void Player::changeMoveDirection(EventKeyboard::KeyCode keyCode, bool condition) {
 
 	if (keyCode == EventKeyboard::KeyCode::KEY_RIGHT_ARROW) {
-		spr->setFlipX(-1);
 		direction.right = condition;
 	}
 
 	if (keyCode == EventKeyboard::KeyCode::KEY_LEFT_ARROW) {
-		spr->setFlipX(0);
 		direction.left = condition;
+	}
+
+	if (direction.left == direction.right) {
+		spr->stopAllActions();
+		spr->runAction(idle);
+	}
+	else {
+		spr->stopAllActions();
+		spr->runAction(run);
+
 	}
 }
 
@@ -136,14 +156,10 @@ void Player::initMoveListener() {
 
 	moveListener->onKeyPressed = [=](EventKeyboard::KeyCode keyCode, Event* event) {
 		changeMoveDirection(keyCode, true);
-		spr->stopAllActions();
-		spr->runAction(run);
 	};
 
 	moveListener->onKeyReleased = [=](EventKeyboard::KeyCode keyCode, Event* event) {
 		changeMoveDirection(keyCode, false);
-		spr->stopAllActions();
-		spr->runAction(idle);
 	};
 
 	dynamic_cast<GameScene*>(Enviroment::getInstance()->getScene())->setKeyEventListener(moveListener, spr);
