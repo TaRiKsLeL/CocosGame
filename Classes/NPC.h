@@ -23,7 +23,11 @@ protected:
 	Sprite* spr;
 	Vec2 currentPointToMove;
 
-	NPC(Vec2, std::string);
+	//Animation
+	//Animate* animIdle;
+	Animate* animWalk;
+
+	NPC(Vec2);
 	PhysicsBody* createPhysBody();
 	
 	void moveTo(Vec2);

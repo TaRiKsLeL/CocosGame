@@ -12,10 +12,14 @@ protected:
 
 	bool isActive;
 	bool isMovingRand;
+	FriendlyNPC(Vec2);
+
+	//Animation
+	Animate* idle;
+	Animate* run;
 
 	Sprite* selectorSpr;
 
-	FriendlyNPC(Vec2, string);
 public:
 
 	void setUnactive();

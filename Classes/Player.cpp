@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "AnimationCreator.h"
 Player* Player::player{ nullptr };
 
 
@@ -16,6 +17,27 @@ Player::Player(const std::string fileName) : money(PLAYER_START_MONEY) , objInFo
 	spr->getTexture()->setAliasTexParameters();
 	spr->addComponent(createPhysBody());
 	spr->setTag(SprTag::PLAYER);
+
+	idle = AnimationCreator::getInstance()->createAnimate
+	(
+		PLAYER_IDLE_FRAMES,
+		PLAYER_IDLE_IMAGES_AMOUNT,
+		PLAYER_IDLE_IMAGE_WIDTH,
+		PLAYER_IDLE_IMAGE_HEIGHT,
+		PLAYER_IDLE_TIME_PER_FRAME
+	);
+
+	run = AnimationCreator::getInstance()->createAnimate
+	(
+		PLAYER_RUN_FRAMES,
+		PLAYER_RUN_IMAGES_AMOUNT,
+		PLAYER_RUN_IMAGE_WIDTH,
+		PLAYER_RUN_IMAGE_HEIGHT,
+		PLAYER_RUN_TIME_PER_FRAME
+	);
+
+	spr->runAction(idle);
+
 	spr->setTextureRect(Rect(0, 0, spr->getContentSize().width, spr->getContentSize().height));
 	Enviroment::getInstance()->getScene()->addChild(spr, PLAYER_Z_ORDER);
 	
@@ -45,7 +67,7 @@ void Player::setCamera()
 Player* Player::getInstance() {
 	if (player)
 		return player;
-	player = new Player(PLAYER_SPR);
+	player = new Player(PLAYER_RUN_IMAGE);
 	return player;
 }
 
@@ -86,6 +108,7 @@ void Player::move() {
 			pos.x -= PLAYER_SPEED;
 		}
 	spr->setPosition(pos);
+	
 }
 
 
@@ -108,10 +131,14 @@ void Player::initMoveListener() {
 
 	moveListener->onKeyPressed = [=](EventKeyboard::KeyCode keyCode, Event* event) {
 		changeMoveDirection(keyCode, true);
+		spr->stopAllActions();
+		spr->runAction(run);
 	};
 
 	moveListener->onKeyReleased = [=](EventKeyboard::KeyCode keyCode, Event* event) {
 		changeMoveDirection(keyCode, false);
+		spr->stopAllActions();
+		spr->runAction(idle);
 	};
 
 	dynamic_cast<GameScene*>(Enviroment::getInstance()->getScene())->setKeyEventListener(moveListener, spr);

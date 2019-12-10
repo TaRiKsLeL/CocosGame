@@ -40,7 +40,6 @@ Worker* WorkerController::findClosest(Vec2 pos)
 						tmp->stopMoving();
 						tmp->moveStart(pos);
 						tmp->stopMoving();
-						tmp->setMovingToMine(false);
 						//WorkerController::getInstance()->getWorkersToPutInsideMine()->push(tmp);
 						return nullptr;
 					}
@@ -62,7 +61,6 @@ bool WorkerController::setPositionToWork(Vec2 pos)
 
 	if (worker) {
 		worker->stopMoving();
-		worker->setMovingToMine(true);
 		worker->moveStart(pos);
 		return true;
 	}
@@ -96,8 +94,8 @@ void WorkerController::timeDependedAction()
 		Worker* worker = workersToPutInsideMine.front();
 		//worker->removeAllComponents();
 		//Enviroment::getInstance()->getScene()->removeChild(worker->getSprite());
-		workersToPutInsideMine.pop();
 		deleteByPos(worker->getPosition());
+		workersToPutInsideMine.pop();
 	}
 
 	if (workersToPutInsideMine.size() == 0)

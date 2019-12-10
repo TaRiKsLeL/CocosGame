@@ -67,7 +67,7 @@ Citizen
 =====================================================================================================
 */
 
-Citizen::Citizen(Vec2 pos) : FriendlyNPC(pos, CITIZEN_SPR) { 
+Citizen::Citizen(Vec2 pos) : FriendlyNPC(pos) { 
 	isPayed = false;
 	spr->getPhysicsBody()->setCategoryBitmask(CITIZEN_CATEGORY_BM);
 	spr->getPhysicsBody()->setCollisionBitmask(CITIZEN_COLLIDE_BM);

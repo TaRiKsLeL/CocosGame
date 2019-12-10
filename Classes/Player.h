@@ -29,6 +29,12 @@ private:
 	EventListenerKeyboard* choseRoleListener;
 	
 	Sprite* spr;
+
+	//Animation
+	Animate* idle;
+	Animate* run;
+
+	//
 	
 	Payable* objInFocus;
 	//Direction direction;
