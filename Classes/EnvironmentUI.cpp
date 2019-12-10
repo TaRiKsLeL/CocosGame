@@ -5,8 +5,8 @@ EnvironmentUI* EnvironmentUI::environmentUI{ nullptr };
 EnvironmentUI::EnvironmentUI() 
 {
 	baseNode = Node::create();
-	baseNode->setPosition(Vec2(Player::getInstance()->getSprite()->getPositionX(), Player::getInstance()->getSprite()->getPositionY() - CAMERA_OFFSET_Y));
-	Enviroment::getInstance()->getScene()->addChild(baseNode, -10);
+	baseNode->setPosition(Vec2(Player::getInstance()->getSprite()->getPositionX(), Player::getInstance()->getSprite()->getPositionY()));
+	Enviroment::getInstance()->getScene()->addChild(baseNode, BACKGROUND_Z_ORDER);
 
 	setBackground();
 	generateTrees();
@@ -25,8 +25,6 @@ void EnvironmentUI::generateTrees()
 
 	for (int i = 0; i < TREES_AMOUNT; i++) {
 		int randTreeIndex = 0 + rand() % TREES.size();
-		double f = (double)rand() / RAND_MAX;
-		double scaleFactor = 1.7 + f * (2.4 - 1.7);
 		int color = 0 + rand() % 4;
 
 		int randXPosition;
@@ -38,7 +36,7 @@ void EnvironmentUI::generateTrees()
 		trees.push_back(Sprite::create(TREES.at(randTreeIndex)));
 		trees.at(i)->setAnchorPoint(Vec2(0.5, 0));
 		trees.at(i)->setPosition(randXPosition, GENERAL_Y);
-		trees.at(i)->setScale(scaleFactor);
+		trees.at(i)->setScale(random(1.8f,2.2f));
 		if (color == 0) {
 			trees.at(i)->setColor(Color3B(222, 198, 172));
 		}
@@ -121,9 +119,28 @@ Node* EnvironmentUI::getBaseNode()
 	return baseNode;
 }
 
+map<Sprite*, float>* EnvironmentUI::getParallaxMap()
+{
+	return &parallaxMap;
+}
+
+MoveDirection EnvironmentUI::getWindDir()
+{
+	return windDirection;
+}
+
+Action* EnvironmentUI::createMoveByActionCloud(int speed,int dist)
+{
+	auto moving = MoveBy::create(speed, Vec2(dist,0));
+	moving->setTag(1);
+	moving->retain();
+
+	return moving;
+}
+
 void EnvironmentUI::updateBackground()
 {
-	skySpr->setPosition(Vec2(Player::getInstance()->getSprite()->getPosition().x, Player::getInstance()->getSprite()->getPosition().y+ CAMERA_OFFSET_Y-100));
+	/*skySpr->setPosition(Vec2(Player::getInstance()->getSprite()->getPosition().x, Player::getInstance()->getSprite()->getPosition().y+ CAMERA_OFFSET_Y-100));
 
 	Point playerPosition = Player::getInstance()->getSprite()->getPosition();
 
@@ -147,21 +164,62 @@ void EnvironmentUI::updateBackground()
 
 	if (cloudsSpr->getPositionX() < leftBound.x) {
 		cloudsSpr->setPosition(Vec2(cloudsSpr->getPositionX() + DISTANCE_TO_ENDING_OF_SCREEN * 2, cloudsSpr->getPositionY()));
-	}
+	}*/
 }
 
 void EnvironmentUI::setBackground()
 {
 	skySpr = Sprite::create(SKY_SPR);
 	skySpr->getTexture()->setAliasTexParameters();
-	baseNode->addChild(skySpr,-5);
+	skySpr->setPositionY(-CAMERA_OFFSET_Y);
+	baseNode->addChild(skySpr,-7);
 
-	//cloudsSpr = Sprite::create(CLOUDS_SPR);
-	//cloudsSpr->getTexture()->setAliasTexParameters();
-	//cloudsSpr->setAnchorPoint(Vec2(0.5, 0.5));
-	//cloudsSpr->setPosition(Player::getInstance()->getSprite()->getPositionX(), Player::getInstance()->getSprite()->getPositionY() + CLOUDS_OFFSET_Y);
-	//cloudsSpr->setScale(1.5f);
-	//cloudsSpr->setScaleX(3);
-	//Enviroment::getInstance()->getScene()->addChild(cloudsSpr, BACKGROUND_Z_ORDER);
+	if (random(0, 2) == 0) {
+		windDirection.right = false;
+		windDirection.left = true;
+	}
+	else {
+		windDirection.left = false;
+		windDirection.right = true;
+	}
+
+	for (int i = 0; i < APPROX_CLOUDS_AMOUNT; i++) {
+
+		Sprite* sp = Sprite::create(CLOUDS.at(random(0, static_cast<int>(CLOUDS.size())-1)));
+		sp->getTexture()->setAliasTexParameters();
+		sp->setPosition(Vec2(random(-Enviroment::getInstance()->getGroundWidth()/2, Enviroment::getInstance()->getGroundWidth()/2), random(0, 500)));
+		sp->setScale(random(CLOUD_SIZE_RAND_FACTOR, 1 + CLOUD_SIZE_RAND_FACTOR));
+		sp->setTag(5);
+		if (windDirection.left) {
+			sp->runAction(createMoveByActionCloud(random(200, 300),-Enviroment::getInstance()->getGroundWidth() / 4));
+		}
+		else {
+			sp->runAction(createMoveByActionCloud(random(200,300),Enviroment::getInstance()->getGroundWidth() / 4));
+		}
+		baseNode->addChild(sp, -5);
+
+		parallaxMap.insert(pair<Sprite*, float>(sp, random(0.3f,0.5f)));
+
+	}
+
+	setSeamlessSprite(LAYER_FIRST_SPR,LAYER_FIRST_SPEED, BACK_LAYER_FIRST_OFFSET, BACK_LAYER_FIRST_Z_ORDER);
+	setSeamlessSprite(LAYER_SECOND_SPR,LAYER_SECOND_SPEED, BACK_LAYER_SECOND_OFFSET, BACK_LAYER_SECOND_Z_ORDER);
+	setSeamlessSprite(LAYER_TREES_BACK_SPR,LAYER_TREES_BACK_SPEED, BACK_TREES_BACK_OFFSET, BACK_TREES_Z_ORDER);
+	setSeamlessSprite(LAYER_TREES_SPR,LAYER_TREES_SPEED, BACK_TREES_OFFSET, BACK_TREES_BACK_Z_ORDER);
+
+}
+
+void EnvironmentUI::setSeamlessSprite(string path, float speed, int yOffset, int zOrder)
+{
+	float tempX = -DISTANCE_TO_ENDING_OF_SCREEN;
+	while (tempX < Enviroment::getInstance()->getGroundWidth() + DISTANCE_TO_ENDING_OF_SCREEN) {
+		auto layer = Sprite::create(path);
+		layer->setPosition(tempX, yOffset);
+		layer->setAnchorPoint(Vec2(0.5, 0));
+		layer->getTexture()->setAliasTexParameters();
+		baseNode->addChild(layer, zOrder);
+		tempX += layer->getContentSize().width;
+		parallaxMap.insert(pair<Sprite*, float>(layer, speed));
+	}
 }
 

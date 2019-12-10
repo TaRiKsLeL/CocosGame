@@ -72,7 +72,7 @@ const int ARROW_COLLIDE_BM			{ ENEMY_CATEGORY_BM };
 
 
 const int DELTA_TIME{ 60 };
-const int DAY_DURATION{ 20};
+const int DAY_DURATION{ 100};
 const double SCALE_FACTOR{ 0.5 };
 
 //UI
@@ -83,7 +83,7 @@ const int LABEL_SCALE{ 4 };
 const int COINS_LABEL_SIZE{ 70* LABEL_SCALE };
 
 const int LABEL_X_SPACE_FROM_PLAYER{ 850 };
-const int LABEL_Y_SPACE_FROM_PLAYER{ 700 };
+const int LABEL_Y_SPACE_FROM_PLAYER{ 720 };
 
 const float COIN_SCALE_FACTOR{ 1.0f / SCALE_FACTOR };
 
@@ -96,10 +96,33 @@ const float HEART_SCALE_FACTOR{ 1.0f / SCALE_FACTOR };
 const int BACKGROUND_Z_ORDER{ -5 };
 const int DISTANCE_TO_ENDING_OF_SCREEN{ 600 };
 const string SKY_SPR{ "Environment/Background/sky.png" };
-const string CLOUDS_SPR{ "Environment/Background/clouds.png" };
-const int CLOUDS_SPEED{ 5 };
-const int CLOUDS_OFFSET_Y{ 300 };
+const string LAYER_FIRST_SPR{ "Environment/Background/far-mountains.png" };
+const string LAYER_TREES_SPR{ "Environment/Background/trees.png" };
+const string LAYER_TREES_BACK_SPR{ "Environment/Background/treesBack.png" };
+const string LAYER_SECOND_SPR{ "Environment/Background/far-grounds.png" };
 
+const float LAYER_FIRST_SPEED{ 0.1 };
+const float LAYER_SECOND_SPEED{ 0.2 };
+const float LAYER_TREES_SPEED{ 0.8 };
+const float LAYER_TREES_BACK_SPEED{ 0.7 };
+const float LAYER_SECOND_SPASING{ 500 };
+
+const int APPROX_CLOUDS_AMOUNT{ 200 };
+const float CLOUD_SIZE_RAND_FACTOR{ 0.5 };
+const vector<std::string> CLOUDS{
+	"Environment/Background/cloud.png",
+	"Environment/Background/cloud2.png",
+	"Environment/Background/cloud3.png",
+	"Environment/Background/cloud4.png",
+	"Environment/Background/cloud5.png"
+};
+
+//Parallax offsets
+
+const int BACK_TREES_BACK_OFFSET{ 16 };
+const int BACK_TREES_OFFSET{ 0 };
+const int BACK_LAYER_SECOND_OFFSET{ 212 };
+const int BACK_LAYER_FIRST_OFFSET{ 128 };
 
 // ANIMATION
 
@@ -179,6 +202,11 @@ const int ARROW_Z_ORDER{ 3 };
 const int GROUND_Z_ORDER{ 4 };
 const int GAMEOVER_Z_ORDER{ 5 };
 
+const int BACK_TREES_BACK_Z_ORDER{ -1 };
+const int BACK_TREES_Z_ORDER{ -2 };
+const int BACK_LAYER_SECOND_Z_ORDER{ -3 };
+const int BACK_LAYER_FIRST_Z_ORDER{ -6 };
+
 
 // start position
 
@@ -188,7 +216,7 @@ const double SLAVE_TRAIDER_START_X{ 12 * 16 / SCALE_FACTOR };
 const double PLAYER_START_X{ 6 * 16 / SCALE_FACTOR };
 
 
-const int CAMERA_OFFSET_Y{ -220 };
+const int CAMERA_OFFSET_Y{ -250 };
 const int CUST_OFFSET{ 50 };
 
 
@@ -252,19 +280,6 @@ const int MINES_AMOUNT = 10;
 const int TREES_AMOUNT = 50;
 
 //sprites texture size per picture
-
-
-const int WALL_WIDTH{ 64 };
-const int WALL_HEIGHT{ 120 };
-
-const int CASTLE_WIDTH{ 64 };
-const int CASTLE_HEIGHT{ 120 };
-
-const int TOWER_WIDTH{ 64 };
-const int TOWER_HEIGHT{ 120 };
-
-const int MINE_WIDTH{ 64 };
-const int MINE_HEIGHT{ 120 };
 
 
 const int MAX_BUILDING_WIDTH{ 200 };

@@ -6,21 +6,33 @@ USING_NS_CC;
 
 class EnvironmentUI {
 private:
+	EnvironmentUI();
 
 	static EnvironmentUI* environmentUI;
 	Node* baseNode;
 	Sprite* skySpr;
 	Sprite* cloudsSpr;
+
+	map<Sprite*, float> parallaxMap;
+
 	vector<Sprite*> trees;
 	stack<Sprite*>* deleteTreesStack;
 	bool pointIntersectsTree(float);
-	EnvironmentUI();
+
+	MoveDirection windDirection;
+
 public:
 	
 	Node* getBaseNode();
+	map<Sprite*, float>* getParallaxMap();
+	MoveDirection getWindDir();
+
+	Action* createMoveByActionCloud(int speed,int dist);
 
 	void updateBackground();
 	void setBackground();
+
+	void setSeamlessSprite(string path, float speed,int yOffset, int zOrder);
 
 	void generateTrees();
 	void updateTrees();
