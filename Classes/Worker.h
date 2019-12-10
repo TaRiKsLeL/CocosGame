@@ -6,5 +6,4 @@ class Worker : public FriendlyNPC
 public:
 	Worker(Vec2);
 	Sprite* getSprite();
-	void removeAllComponents();
 };

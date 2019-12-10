@@ -20,7 +20,15 @@ void WarriorController::create(Vec2 pos) {
 }
 
 void WarriorController::allMoveRand() {
-	controller.allMoveRand();
+
+	for (Warrior* tmp : *controller.getElems()) {
+
+		if (tmp->isOnTower())
+			continue;
+
+		tmp->moveRandStart();
+
+	}
 }
 
 void WarriorController::deleteByPos(Vec2 pos) {
@@ -58,8 +66,9 @@ void WarriorController::moveToWall() {
 
 	for (Warrior* tmp : *controller.getElems()) {
 
-		if (!tmp->isOnTower()) 
-		{
+		if (tmp->isOnTower())
+			continue;
+
 			tmp->stopMoving();
 
 			if (leftCount <= rightCount) {
@@ -71,7 +80,6 @@ void WarriorController::moveToWall() {
 				tmp->moveStart(Vec2(RandomHelper::random_int<int>(rightDiapason.y, rightDiapason.x), GENERAL_Y));
 				rightCount++;
 			}
-		}
 	}
 }
 

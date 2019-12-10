@@ -126,7 +126,27 @@ void Player::move() {
 
 void Player::moveBackground(int speed)
 {
-	EnvironmentUI::getInstance()->getBaseNode()->setPosition(Vec2(spr->getPositionX(),spr->getPositionY()- CAMERA_OFFSET_Y));
+	EnvironmentUI::getInstance()->getBaseNode()->setPosition(Vec2(spr->getPositionX(),spr->getPositionY()));
+	map<Sprite*, float>* mp = EnvironmentUI::getInstance()->getParallaxMap();
+
+	map<Sprite*, float>::iterator it;
+	for (it = mp->begin(); it != mp->end(); ++it) {
+		it->first->setPositionX(it->first->getPositionX()-(it->second * speed));
+
+		if (it->first->getTag() == 5) {
+			if (it->first->getActionByTag(1) == nullptr) {
+				it->first->setPosition(Vec2(random(-Enviroment::getInstance()->getGroundWidth() / 2, Enviroment::getInstance()->getGroundWidth() / 2), random(0, 500)));
+
+				if (EnvironmentUI::getInstance()->getWindDir().left) {
+
+					it->first->runAction(EnvironmentUI::getInstance()->createMoveByActionCloud(random(200, 300), -Enviroment::getInstance()->getGroundWidth() / 4));
+				}
+				else {
+					it->first->runAction(EnvironmentUI::getInstance()->createMoveByActionCloud(random(200, 300), Enviroment::getInstance()->getGroundWidth() / 4));
+				}
+			}
+		}
+	}
 }
 
 void Player::changeMoveDirection(EventKeyboard::KeyCode keyCode, bool condition) {

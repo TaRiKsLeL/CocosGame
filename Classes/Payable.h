@@ -16,4 +16,5 @@ public:
 	virtual void setSelector() = 0;
 	virtual void onChangeFocus() {};
 	virtual void removeSelector();
+	virtual bool selectorIsVisible();
 };

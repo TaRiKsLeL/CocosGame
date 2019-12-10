@@ -26,9 +26,4 @@ Sprite* Worker::getSprite()
 }
 
 
-void Worker::removeAllComponents()
-{
-	spr->removeAllComponents();
-}
-
 
