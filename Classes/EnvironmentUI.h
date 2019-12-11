@@ -32,7 +32,7 @@ public:
 	void startRotateSun();
 	void updateBackground();
 	void setBackground();
-
+	void setDarkness();	
 	void setSeamlessSprite(string path, float speed,int yOffset, int zOrder);
 
 	void generateTrees();
