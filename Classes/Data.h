@@ -76,7 +76,6 @@ const int DAY_DURATION{ 100};
 const double SCALE_FACTOR{ 0.5 };
 
 //UI
-
 //-----coin-----
 const std::string COINS_AMOUNT_FONT{ "fonts/PixelFont.ttf" };
 const int LABEL_SCALE{ 4 };
