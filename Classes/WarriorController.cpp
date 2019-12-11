@@ -2,7 +2,7 @@
 
 WarriorController* WarriorController::warriorController{ nullptr };
 
-WarriorController::WarriorController() : enemiesJustKilled(true) {
+WarriorController::WarriorController() : m_areFree(true) {
 	GameTime::addTimeDependedObject(-1, this);
 }
 
@@ -20,7 +20,15 @@ void WarriorController::create(Vec2 pos) {
 }
 
 void WarriorController::allMoveRand() {
-	controller.allMoveRand();
+
+	for (Warrior* tmp : *controller.getElems()) {
+
+		if (tmp->isOnTower())
+			continue;
+
+		tmp->moveRandStart();
+
+	}
 }
 
 void WarriorController::deleteByPos(Vec2 pos) {
@@ -58,8 +66,9 @@ void WarriorController::moveToWall() {
 
 	for (Warrior* tmp : *controller.getElems()) {
 
-		if (!tmp->isOnTower()) 
-		{
+		if (tmp->isOnTower())
+			continue;
+
 			tmp->stopMoving();
 
 			if (leftCount <= rightCount) {
@@ -71,7 +80,6 @@ void WarriorController::moveToWall() {
 				tmp->moveStart(Vec2(RandomHelper::random_int<int>(rightDiapason.y, rightDiapason.x), GENERAL_Y));
 				rightCount++;
 			}
-		}
 	}
 }
 
@@ -87,13 +95,20 @@ void WarriorController::removeTargetByTargetPosition(Vec2 pos) {
 }
 
 void WarriorController::timeDependedAction() {
-	if (EnemyController::getInstance()->enemiesAreAlive())
+	if (EnemyController::getInstance()->enemiesAreAlive()) {
+		m_areFree = false;
 		moveToWall();
+	}
 	else {
-		if (enemiesJustKilled == false) {
-			enemiesJustKilled = true;
+		if (m_areFree == false) {
+			m_areFree = true;
 			allMoveStop();
 			allMoveRand();
+			GameTime::removeTimeDependedObject(this);
 		}
 	}
+}
+
+bool WarriorController::areFree() {
+	return m_areFree;
 }

@@ -5,8 +5,10 @@
 #include "Data.h"
 #include "Enviroment.h"
 
-class SlaveTraider : public Payable{
+class SlaveTraider : public Payable, public ITimeDepended{
 private:
+
+	int saledSlaves;
 
 	Sprite* spr;
 	SlaveTraider();
@@ -18,6 +20,7 @@ public:
 	
 	static SlaveTraider* getInstance();
 	virtual void pay(int&) override;
+	virtual void timeDependedAction() override;
 	virtual void setSelector() override;
 
 };

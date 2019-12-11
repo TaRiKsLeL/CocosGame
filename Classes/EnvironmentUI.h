@@ -29,6 +29,7 @@ public:
 
 	Action* createMoveByActionCloud(int speed,int dist);
 
+	void startRotateSun();
 	void updateBackground();
 	void setBackground();
 

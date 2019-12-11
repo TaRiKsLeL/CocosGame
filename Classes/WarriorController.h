@@ -18,7 +18,7 @@ private:
 	BaseController<Warrior> controller;
 	WarriorController();
 	static WarriorController* warriorController;
-	bool enemiesJustKilled;
+	bool m_areFree;
 public:
 
 	static WarriorController* getInstance();
@@ -27,6 +27,7 @@ public:
 	void allMoveStop();
 	void deleteByPos(Vec2);
 	void removeTargetByTargetPosition(Vec2);
+	bool areFree();
 
 	Warrior* findByPosition(Vec2);
 	Warrior* findByNode(Node*);

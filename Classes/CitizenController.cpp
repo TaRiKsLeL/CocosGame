@@ -1,4 +1,5 @@
 #include "CitizenController.h"
+#include "AnimationCreator.h"
 
 
 /*
@@ -74,6 +75,16 @@ Citizen::Citizen(Vec2 pos) : FriendlyNPC(pos) {
 	spr->getPhysicsBody()->setContactTestBitmask(CITIZEN_COLLIDE_BM);
 
 	spr->setTag(SprTag::CITIZEN);
+
+	animWalk = AnimationCreator::getInstance()->createAnimate
+	(
+		CITIZEN_WALK_FRAMES,
+		CITIZEN_WALK_IMAGES_AMOUNT,
+		CITIZEN_WALK_IMAGE_WIDTH,
+		CITIZEN_WALK_IMAGE_HEIGHT,
+		CITIZEN_WALK_TIME_PER_FRAME
+	);
+	spr->runAction(animWalk);
 }
 
 

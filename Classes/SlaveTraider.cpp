@@ -10,7 +10,8 @@ init
 
 SlaveTraider* SlaveTraider::slaveTraider{ nullptr };
 
-SlaveTraider::SlaveTraider(){
+SlaveTraider::SlaveTraider() : saledSlaves(0)
+{
 	spr = Sprite::create(SLAVE_TRAIDER_SPR);
 	spr->setAnchorPoint(Vec2(0, 0));
 	spr->setPosition(Vec2(SLAVE_TRAIDER_START_X, GENERAL_Y));
@@ -18,7 +19,13 @@ SlaveTraider::SlaveTraider(){
 	spr->getTexture()->setAliasTexParameters();
 	spr->addComponent(createPhysBody());
 	
+	GameTime::addTimeDependedObject(SLAVE_TRAIDER_APPERANCE, this);
+	GameTime::addTimeDependedObject(SLAVE_TRAIDER_DISAPPERANCE, this);
+	
 	Enviroment::getInstance()->getScene()->addChild(spr, NPC_Z_ORDER);
+
+	spr->setVisible(false);
+	spr->pause();
 }
 
 SlaveTraider* SlaveTraider::getInstance() {
@@ -46,8 +53,9 @@ createCitizen and pay
 
 
 void SlaveTraider::pay(int &money) {
-	if (money >= SLAVE_PRICE) {
+	if (money >= SLAVE_PRICE && saledSlaves < SLAVE_AMMOUNT_PER_DAY) {
 		money -= SLAVE_PRICE;
+		saledSlaves++;
 		createCitizen();
 	}
 }
@@ -62,3 +70,18 @@ void SlaveTraider::setSelector()
 {
 	setSelectorSpr(spr);
 }
+
+
+
+void SlaveTraider::timeDependedAction() {
+	if (!spr->isVisible()) {
+		spr->setVisible(true);
+		spr->resume(); 
+	}
+	else {
+		spr->setVisible(false);
+		spr->pause();
+		saledSlaves = 0;
+	}
+}
+

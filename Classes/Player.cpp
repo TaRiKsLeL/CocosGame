@@ -112,10 +112,12 @@ void Player::move() {
 	
 		if (direction.right && pos.x < Enviroment::getInstance()->getGroundWidth()) {
 			pos.x += PLAYER_SPEED;
+			spr->setFlipX(-1);
 			moveBackground(PLAYER_SPEED);
 		}
 		if (direction.left && pos.x > 0) {
 			pos.x -= PLAYER_SPEED;
+			spr->setFlipX(0);
 			moveBackground(-PLAYER_SPEED);
 		}
 	spr->setPosition(pos);
@@ -150,13 +152,21 @@ void Player::moveBackground(int speed)
 void Player::changeMoveDirection(EventKeyboard::KeyCode keyCode, bool condition) {
 
 	if (keyCode == EventKeyboard::KeyCode::KEY_RIGHT_ARROW) {
-		spr->setFlipX(-1);
 		direction.right = condition;
 	}
 
 	if (keyCode == EventKeyboard::KeyCode::KEY_LEFT_ARROW) {
-		spr->setFlipX(0);
 		direction.left = condition;
+	}
+
+	if (direction.left == direction.right) {
+		spr->stopAllActions();
+		spr->runAction(idle);
+	}
+	else {
+		spr->stopAllActions();
+		spr->runAction(run);
+
 	}
 }
 
@@ -166,14 +176,10 @@ void Player::initMoveListener() {
 
 	moveListener->onKeyPressed = [=](EventKeyboard::KeyCode keyCode, Event* event) {
 		changeMoveDirection(keyCode, true);
-		spr->stopAllActions();
-		spr->runAction(run);
 	};
 
 	moveListener->onKeyReleased = [=](EventKeyboard::KeyCode keyCode, Event* event) {
 		changeMoveDirection(keyCode, false);
-		spr->stopAllActions();
-		spr->runAction(idle);
 	};
 
 	dynamic_cast<GameScene*>(Enviroment::getInstance()->getScene())->setKeyEventListener(moveListener, spr);
@@ -345,7 +351,7 @@ void Player::hit(int attPower) {
 	m_HP -= attPower;
 	UI::getInstance()->updateHeartLogo(m_HP);
 	if (m_HP <= 0) {
-		UI::getInstance()->setGameOverSprite(GAME_OVER_BACK_SPR);
+		UI::getInstance()->setGameOverSprite(GAME_OVER_SPR);
 		EnemyController::getInstance()->allStopMove();
 	}
 }

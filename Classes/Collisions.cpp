@@ -78,9 +78,9 @@ bool GameScene::onPlayerContactBegin(PhysicsContact& contact)
 		Payable* payable = getPayableByNode(nonPlayerNode);
 
 		if (payable != nullptr) {
-			if (!player->focused()) {
-				player->setPayable(payable);
+			if ( !(player->focused()) ) {
 				payable->setSelector();
+				player->setPayable(payable);
 			}
 		}
 	}

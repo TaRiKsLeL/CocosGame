@@ -10,10 +10,11 @@ private:
 protected:
 	
 	void setSelectorSpr(Sprite*);
-
+	Payable();
 public:
 	virtual void pay(int&) {};
 	virtual void setSelector() = 0;
 	virtual void onChangeFocus() {};
 	virtual void removeSelector();
+	virtual bool selectorIsVisible();
 };

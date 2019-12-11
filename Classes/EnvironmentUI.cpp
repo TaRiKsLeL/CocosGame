@@ -10,6 +10,7 @@ EnvironmentUI::EnvironmentUI()
 
 	setBackground();
 	generateTrees();
+	startRotateSun();
 }
 
 EnvironmentUI* EnvironmentUI::getInstance()
@@ -202,8 +203,8 @@ void EnvironmentUI::setBackground()
 
 	}
 
-	setSeamlessSprite(LAYER_FIRST_SPR,LAYER_FIRST_SPEED, BACK_LAYER_FIRST_OFFSET, BACK_LAYER_FIRST_Z_ORDER);
-	setSeamlessSprite(LAYER_SECOND_SPR,LAYER_SECOND_SPEED, BACK_LAYER_SECOND_OFFSET, BACK_LAYER_SECOND_Z_ORDER);
+	setSeamlessSprite(LAYER_MOUNTAINS_SPR,LAYER_FIRST_SPEED, BACK_LAYER_MOUNTAINS_OFFSET, BACK_LAYER_MOUNTAINS_Z_ORDER);
+	setSeamlessSprite(LAYER_FAR_LAND_SPR,LAYER_SECOND_SPEED, BACK_LAYER_FAR_LAND_OFFSET, BACK_LAYER_FAR_LAND_Z_ORDER);
 	setSeamlessSprite(LAYER_TREES_BACK_SPR,LAYER_TREES_BACK_SPEED, BACK_TREES_BACK_OFFSET, BACK_TREES_Z_ORDER);
 	setSeamlessSprite(LAYER_TREES_SPR,LAYER_TREES_SPEED, BACK_TREES_OFFSET, BACK_TREES_BACK_Z_ORDER);
 
@@ -223,3 +224,10 @@ void EnvironmentUI::setSeamlessSprite(string path, float speed, int yOffset, int
 	}
 }
 
+void EnvironmentUI::startRotateSun(){
+	Sprite* sunSpr = Sprite::create(SUN_SPR);
+	sunSpr->setPosition(0, SUN_Y_SHIFT);
+	RotateBy* sunRotation = RotateBy::create(1, 360 / DAY_DURATION);
+	sunSpr->runAction(RepeatForever::create(sunRotation));
+	baseNode->addChild(sunSpr, BACK_LAYER_SUN_Z_ORDER);
+}

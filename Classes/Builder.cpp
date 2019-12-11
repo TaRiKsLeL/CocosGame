@@ -58,6 +58,9 @@ void Builder::setMovingToBuild(bool isMoving) {
 	spr->removeAllChildren();
 	if (isMoving)
 		UI::getInstance()->addMark(spr);
-	
+
+	if (Player::getInstance()->checkFocusedObj(dynamic_cast<Payable*>(this)))
+		setSelectorSpr(spr);
+
 	goToBuilding = isMoving;
 }

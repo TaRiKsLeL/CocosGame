@@ -72,7 +72,11 @@ const int ARROW_COLLIDE_BM			{ ENEMY_CATEGORY_BM };
 
 
 const int DELTA_TIME{ 60 };
-const int DAY_DURATION{ 100};
+const int DAY_DURATION{ 20 };
+const int SLAVE_TRAIDER_APPERANCE{ DAY_DURATION / 8 };
+const int SLAVE_TRAIDER_DISAPPERANCE{ (DAY_DURATION / 8) * 3 };
+
+
 const double SCALE_FACTOR{ 0.5 };
 
 //UI
@@ -95,10 +99,10 @@ const float HEART_SCALE_FACTOR{ 1.0f / SCALE_FACTOR };
 const int BACKGROUND_Z_ORDER{ -5 };
 const int DISTANCE_TO_ENDING_OF_SCREEN{ 600 };
 const string SKY_SPR{ "Environment/Background/sky.png" };
-const string LAYER_FIRST_SPR{ "Environment/Background/far-mountains.png" };
+const string LAYER_MOUNTAINS_SPR{ "Environment/Background/far-mountains.png" };
 const string LAYER_TREES_SPR{ "Environment/Background/trees.png" };
 const string LAYER_TREES_BACK_SPR{ "Environment/Background/treesBack.png" };
-const string LAYER_SECOND_SPR{ "Environment/Background/far-grounds.png" };
+const string LAYER_FAR_LAND_SPR{ "Environment/Background/far-grounds.png" };
 
 const float LAYER_FIRST_SPEED{ 0.1 };
 const float LAYER_SECOND_SPEED{ 0.2 };
@@ -117,11 +121,15 @@ const vector<std::string> CLOUDS{
 };
 
 //Parallax offsets
+const string SUN_SPR{ "Environment/Background/sun.png" };
+const string CLOUDS_SPR{ "Environment/Background/clouds.png" };
+const int CLOUDS_SPEED{ 5 };
+const int CLOUDS_OFFSET_Y{ 300 };
 
 const int BACK_TREES_BACK_OFFSET{ 16 };
 const int BACK_TREES_OFFSET{ 0 };
-const int BACK_LAYER_SECOND_OFFSET{ 212 };
-const int BACK_LAYER_FIRST_OFFSET{ 128 };
+const int BACK_LAYER_FAR_LAND_OFFSET{ 212 };
+const int BACK_LAYER_MOUNTAINS_OFFSET{ 128 };
 
 // ANIMATION
 
@@ -183,6 +191,13 @@ const int WARRIOR_WALK_IMAGE_WIDTH{ static_cast<int>(39 / SCALE_FACTOR) };
 const int WARRIOR_WALK_IMAGE_HEIGHT{ static_cast<int>(64 / SCALE_FACTOR) };
 const float WARRIOR_WALK_TIME_PER_FRAME{ 0.2f };
 
+//----CITIZEN Walk----
+const std::string CITIZEN_WALK_FRAMES{ "characters/nps/citizen-walk.png" };
+const int CITIZEN_WALK_IMAGES_AMOUNT{ 4 };
+const int CITIZEN_WALK_IMAGE_WIDTH{ static_cast<int>(39 / SCALE_FACTOR) };
+const int CITIZEN_WALK_IMAGE_HEIGHT{ static_cast<int>(64 / SCALE_FACTOR) };
+const float CITIZEN_WALK_TIME_PER_FRAME{ 0.2f };
+
 //----Ghost Enemy----
 const std::string GHOST_ENEMY_FRAMES{ "characters/nps/ghost-enemy.png" };
 const int GHOST_ENEMY_IMAGES_AMOUNT{ 9 };
@@ -203,8 +218,9 @@ const int GAMEOVER_Z_ORDER{ 5 };
 
 const int BACK_TREES_BACK_Z_ORDER{ -1 };
 const int BACK_TREES_Z_ORDER{ -2 };
-const int BACK_LAYER_SECOND_Z_ORDER{ -3 };
-const int BACK_LAYER_FIRST_Z_ORDER{ -6 };
+const int BACK_LAYER_FAR_LAND_Z_ORDER{ -3 };
+const int BACK_LAYER_MOUNTAINS_Z_ORDER{ -4 };
+const int BACK_LAYER_SUN_Z_ORDER{ -5 };
 
 
 // start position
@@ -215,7 +231,7 @@ const double SLAVE_TRAIDER_START_X{ 12 * 16 / SCALE_FACTOR };
 const double PLAYER_START_X{ 6 * 16 / SCALE_FACTOR };
 
 
-const int CAMERA_OFFSET_Y{ -250 };
+const int CAMERA_OFFSET_Y{ -300 };
 const int CUST_OFFSET{ 50 };
 
 
@@ -253,7 +269,7 @@ const string HUMMER_ICO_SPR{ "UI/hummer.png" };
 const string SELECTOR_ICO_SPR{ "UI/selector.png" };
 
 const string GAME_OVER_BACK_SPR{ "UI/game_over_back.png" };
-const string VICTORY_BACK_SPR{ "UI/victory.png" };
+const string VICTORY_SPR{ "UI/victory.png" };
 
 const int GAME_OVER_BACK_OPACITY{ 40 };
 
@@ -267,6 +283,7 @@ const double SELECT_SITIZEN_ROLE_LEFT_X{ -(16 * 7 / SCALE_FACTOR) };
 
 const double MARKS_Y_SHIFT{ 64 / SCALE_FACTOR };
 const double SELECTOR_Y_SHIFT{ MARKS_Y_SHIFT / 2 };
+const double SUN_Y_SHIFT{ 128 / SCALE_FACTOR };
 
 //AMOUNT OF EACH BUILDING
 
@@ -276,7 +293,7 @@ const int MINES_AMOUNT = 10;
 
 //TREES
 
-const int TREES_AMOUNT = 50;
+const int TREES_AMOUNT{ 50 };
 
 //sprites texture size per picture
 
@@ -399,3 +416,5 @@ const int ARROW_MISS_X{ static_cast<int>(48 / SCALE_FACTOR) };
 const int WALL_DIAPASON_WARRIORS_STAND{ static_cast<int>(64 / SCALE_FACTOR) };
 const int WALL_DISTANCE_TO_WARRIORS{ static_cast<int>(64 / SCALE_FACTOR) };
 
+// SLAVE TRAIDER SLAVES AMOUNT
+const int SLAVE_AMMOUNT_PER_DAY{ 6 };
