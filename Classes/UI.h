@@ -62,6 +62,8 @@ public:
 
 	void createCoinsLabel(std::string, std::string,int);
 
+	void createVignette(string, int);
+
 	void setCoinsAmountLabel(int);
 
 	//heart

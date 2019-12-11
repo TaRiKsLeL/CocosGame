@@ -117,6 +117,7 @@ void UI::addCitizenSelectIcons(Citizen* citizen) {
 
 void UI::addMark(Sprite* spr) {
 	Sprite* mark = Sprite::create(MARK_ICO_SPR);
+	mark->getTexture()->setAliasTexParameters();
 	mark->setAnchorPoint(Vec2(0.5, 0));
 	mark->setPosition(spr->getContentSize().width / 2, spr->getContentSize().height / 2 + MARKS_Y_SHIFT);
 	spr->addChild(mark);
@@ -124,11 +125,13 @@ void UI::addMark(Sprite* spr) {
 void UI::addHummer(Sprite* spr) {
 	Sprite* mark = Sprite::create(HUMMER_ICO_SPR);
 	mark->setAnchorPoint(Vec2(0.5, 0));
+	mark->getTexture()->setAliasTexParameters();
 	mark->setPosition(spr->getContentSize().width / 2, spr->getContentSize().height / 2 + MARKS_Y_SHIFT);
 	spr->addChild(mark);
 }
 Sprite* UI::getSelector(Sprite* spr) {
 	Sprite* mark = Sprite::create(SELECTOR_ICO_SPR);
+	mark->getTexture()->setAliasTexParameters();
 	mark->setAnchorPoint(Vec2(0.5, 0));
 	mark->setPosition(spr->getContentSize().width / 2, spr->getContentSize().height / 2 + SELECTOR_Y_SHIFT);
 	spr->addChild(mark);
@@ -182,6 +185,16 @@ void UI::createCoinsLabel(std::string text, std::string font, int size)
 	coinsAmount->setPosition(Vec2(LABEL_X_SPACE_FROM_PLAYER +CUST_OFFSET*2, LABEL_Y_SPACE_FROM_PLAYER));
 	coinsAmount->getFontAtlas()->setAliasTexParameters();
 	Player::getInstance()->addChild(coinsAmount);
+}
+
+void UI::createVignette(string spr, int opacity)
+{
+	auto sp = Sprite::create(spr);
+	sp->setOpacity(opacity);
+	sp->setPositionY(-CAMERA_OFFSET_Y);
+	sp->setPositionX(CUST_OFFSET*2);
+	sp->setScale(SCALE_FACTOR*1.2);
+	Player::getInstance()->addChild(sp);
 }
 
 void UI::setCoinsAmountLabel(int sum)

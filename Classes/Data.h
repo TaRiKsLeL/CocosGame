@@ -72,7 +72,7 @@ const int ARROW_COLLIDE_BM			{ ENEMY_CATEGORY_BM };
 
 
 const int DELTA_TIME{ 60 };
-const int DAY_DURATION{ 20 };
+const int DAY_DURATION{ 120 };
 const int SLAVE_TRAIDER_APPERANCE{ DAY_DURATION / 8 };
 const int SLAVE_TRAIDER_DISAPPERANCE{ (DAY_DURATION / 8) * 3 };
 
@@ -99,10 +99,11 @@ const float HEART_SCALE_FACTOR{ 1.0f / SCALE_FACTOR };
 const int BACKGROUND_Z_ORDER{ -5 };
 const int DISTANCE_TO_ENDING_OF_SCREEN{ 600 };
 const string SKY_SPR{ "Environment/Background/sky.png" };
-const string LAYER_MOUNTAINS_SPR{ "Environment/Background/far-mountains.png" };
-const string LAYER_TREES_SPR{ "Environment/Background/trees.png" };
+const string NIGHT_SKY_SPR{ "Environment/Background/night-sky.png" };
+const string LAYER_MOUNTAINS_SPR{ "Environment/Background/far-mountains1.png" };
+const string LAYER_TREES_SPR{ "Environment/Background/trees1.png" };
 const string LAYER_TREES_BACK_SPR{ "Environment/Background/treesBack.png" };
-const string LAYER_FAR_LAND_SPR{ "Environment/Background/far-grounds.png" };
+const string LAYER_FAR_LAND_SPR{ "Environment/Background/far-grounds1.png" };
 
 const float LAYER_FIRST_SPEED{ 0.1 };
 const float LAYER_SECOND_SPEED{ 0.2 };
@@ -126,7 +127,7 @@ const string CLOUDS_SPR{ "Environment/Background/clouds.png" };
 const int CLOUDS_SPEED{ 5 };
 const int CLOUDS_OFFSET_Y{ 300 };
 
-const int BACK_TREES_BACK_OFFSET{ 16 };
+const int BACK_TREES_BACK_OFFSET{ 0 };
 const int BACK_TREES_OFFSET{ 0 };
 const int BACK_LAYER_FAR_LAND_OFFSET{ 212 };
 const int BACK_LAYER_MOUNTAINS_OFFSET{ 128 };
@@ -161,7 +162,7 @@ const std::string PLAYER_IDLE_FRAMES{ "characters/player-idle.png" };
 const int PLAYER_IDLE_IMAGES_AMOUNT{ 2 };
 const int PLAYER_IDLE_IMAGE_WIDTH{ static_cast<int>(125 / SCALE_FACTOR) };
 const int PLAYER_IDLE_IMAGE_HEIGHT{ static_cast<int>(96 / SCALE_FACTOR) };
-const float PLAYER_IDLE_TIME_PER_FRAME{ 0.2f };
+const float PLAYER_IDLE_TIME_PER_FRAME{ 0.5f };
 
 //----Builder Walk----
 const std::string BUILDER_WORK_FRAMES{ "characters/nps/builder-work.png" };
@@ -216,19 +217,21 @@ const int ARROW_Z_ORDER{ 3 };
 const int GROUND_Z_ORDER{ 4 };
 const int GAMEOVER_Z_ORDER{ 5 };
 
+const int SKY_Z_ORDER{ -7 };
+const int CLOUDS_Z_ORDER{ -5 };
 const int BACK_TREES_BACK_Z_ORDER{ -1 };
 const int BACK_TREES_Z_ORDER{ -2 };
 const int BACK_LAYER_FAR_LAND_Z_ORDER{ -3 };
 const int BACK_LAYER_MOUNTAINS_Z_ORDER{ -4 };
-const int BACK_LAYER_SUN_Z_ORDER{ -5 };
+const int BACK_LAYER_SUN_Z_ORDER{ -6 };
 
 
 // start position
 
 const double GENERAL_Y{ 6 * 16 / SCALE_FACTOR };
 
-const double SLAVE_TRAIDER_START_X{ 12 * 16 / SCALE_FACTOR };
-const double PLAYER_START_X{ 6 * 16 / SCALE_FACTOR };
+const double SLAVE_TRAIDER_START_X{ 320 * 16 / SCALE_FACTOR };
+const double PLAYER_START_X{ 200 * 16 / SCALE_FACTOR };
 
 
 const int CAMERA_OFFSET_Y{ -300 };
@@ -238,7 +241,7 @@ const int CUST_OFFSET{ 50 };
 
 //sprites name
 
-const string GROUND_SPR{ "ground.png" };
+const string GROUND_SPR{ "kalush_map.png" };
 const string PLAYER_SPR{ "player.png" };
 const string SLAVE_TRAIDER_SPR{ "slaveTraider.png" };
 const string CITIZEN_SPR{ "citizen.png" };
@@ -350,17 +353,16 @@ const vector<std::string> MINES{ "buildings/mines/mine0.png","buildings/mines/mi
 
 const vector<std::string> TREES{ "Environment/tree1.png","Environment/tree2.png","Environment/tree3.png",
 "Environment/tree4.png","Environment/tree5.png","Environment/tree6.png",
-"Environment/tree7.png",
+"Environment/plant1.png","Environment/plant2.png",
 "Environment/bush1.png","Environment/grass1.png","Environment/stick1.png" };
 
 
 //money
 
-
 const int SLAVE_PRICE{ 4 };
 const int NPC_RERIVE{ 2 };
 const int SET_ROLE_PRICE{ 1 };
-const int PLAYER_START_MONEY{ 1000 };
+const int PLAYER_START_MONEY{ 100 };
 const int PLAYER_MAX_HEALTH{ 10 };
 
 //speed

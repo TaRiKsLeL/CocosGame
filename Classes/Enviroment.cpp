@@ -12,7 +12,8 @@ Scene* Enviroment::getScene() {
 void Enviroment::setGroundSpr(const std::string fileName) {
 	groundSpr = Sprite::create(fileName);
 	groundSpr->getTexture()->setAliasTexParameters();
-	groundSpr->setAnchorPoint(Vec2(0, 0));
+	groundSpr->setPosition(0, GENERAL_Y + 32 / SCALE_FACTOR);
+	groundSpr->setAnchorPoint(Vec2(0, 1));
 	scene->addChild(groundSpr, GROUND_Z_ORDER);
 }
 
@@ -49,6 +50,7 @@ KingdomBorders* Enviroment::getBorders()
 }
 
 double Enviroment::getGroundWidth() {
+	log("%d", groundSpr->getBoundingBox().size.width);
 	return groundSpr->getBoundingBox().size.width;
 }
 

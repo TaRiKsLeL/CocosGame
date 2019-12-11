@@ -173,7 +173,7 @@ void EnvironmentUI::setBackground()
 	skySpr = Sprite::create(SKY_SPR);
 	skySpr->getTexture()->setAliasTexParameters();
 	skySpr->setPositionY(-CAMERA_OFFSET_Y);
-	baseNode->addChild(skySpr,-7);
+	baseNode->addChild(skySpr, SKY_Z_ORDER);
 
 	if (random(0, 2) == 0) {
 		windDirection.right = false;
@@ -197,7 +197,7 @@ void EnvironmentUI::setBackground()
 		else {
 			sp->runAction(createMoveByActionCloud(random(200,300),Enviroment::getInstance()->getGroundWidth() / 4));
 		}
-		baseNode->addChild(sp, -5);
+		baseNode->addChild(sp, CLOUDS_Z_ORDER);
 
 		parallaxMap.insert(pair<Sprite*, float>(sp, random(0.3f,0.5f)));
 
@@ -210,9 +210,20 @@ void EnvironmentUI::setBackground()
 
 }
 
+void EnvironmentUI::setDarkness()
+{
+	auto seq = Sequence::create
+	(
+		FadeIn::create(DAY_DURATION / 8),
+		DelayTime::create(DAY_DURATION / 8 * 2),
+		FadeOut::create(DAY_DURATION / 8),nullptr
+	);
+	//skySpr->runAction()
+}
+
 void EnvironmentUI::setSeamlessSprite(string path, float speed, int yOffset, int zOrder)
 {
-	float tempX = -DISTANCE_TO_ENDING_OF_SCREEN;
+	float tempX = -DISTANCE_TO_ENDING_OF_SCREEN*7;
 	while (tempX < Enviroment::getInstance()->getGroundWidth() + DISTANCE_TO_ENDING_OF_SCREEN) {
 		auto layer = Sprite::create(path);
 		layer->setPosition(tempX, yOffset);
@@ -226,6 +237,7 @@ void EnvironmentUI::setSeamlessSprite(string path, float speed, int yOffset, int
 
 void EnvironmentUI::startRotateSun(){
 	Sprite* sunSpr = Sprite::create(SUN_SPR);
+	sunSpr->getTexture()->setAliasTexParameters();
 	sunSpr->setPosition(0, SUN_Y_SHIFT);
 	RotateBy* sunRotation = RotateBy::create(1, 360 / DAY_DURATION);
 	sunSpr->runAction(RepeatForever::create(sunRotation));
