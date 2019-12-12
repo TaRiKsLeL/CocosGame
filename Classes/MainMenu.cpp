@@ -53,14 +53,14 @@ bool MainMenu::init()
 		SETTINGS_BTN
 	);
 	bufferBtmImage->setScale(SCALE_FACTOR);
-	btnImages->push_back(bufferBtmImage);
+	//btnImages->push_back(bufferBtmImage);
 	
 	bufferBtmImage = MenuItemImage::create(
 		CONTINUE_BTN,
 		CONTINUE_BTN
 	);
 	bufferBtmImage->setScale(SCALE_FACTOR);
-	btnImages->push_back(bufferBtmImage);
+	//btnImages->push_back(bufferBtmImage);
 
 
 	bufferBtmImage = MenuItemImage::create(
@@ -71,8 +71,8 @@ bool MainMenu::init()
 	btnImages->push_back(bufferBtmImage);
 	
 	btnCallbacks->push_back(&MainMenu::menuCloseCallback);
-	btnCallbacks->push_back(&MainMenu::settingsCallback);
-	btnCallbacks->push_back(&MainMenu::newGameCallback);
+	//btnCallbacks->push_back(&MainMenu::settingsCallback);
+	//btnCallbacks->push_back(&MainMenu::newGameCallback);
 	btnCallbacks->push_back(&MainMenu::newGameCallback);
 
 	menu = Menu::create();

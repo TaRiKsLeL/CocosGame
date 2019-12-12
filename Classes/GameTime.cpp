@@ -65,8 +65,6 @@ void GameTime::updateFrame() {
 		}
 
 	}
-
-	//EnvironmentUI::getInstance()->updateBackground();
 }
 
 const int GameTime::getCurrentTime() {

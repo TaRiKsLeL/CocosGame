@@ -9,6 +9,7 @@ EnvironmentUI::EnvironmentUI()
 	Enviroment::getInstance()->getScene()->addChild(baseNode, BACKGROUND_Z_ORDER);
 
 	setBackground();
+	createCliffs(CLIFF_SPR);
 	generateTrees();
 	startRotateSun();
 }
@@ -139,34 +140,6 @@ Action* EnvironmentUI::createMoveByActionCloud(int speed,int dist)
 	return moving;
 }
 
-void EnvironmentUI::updateBackground()
-{
-	/*skySpr->setPosition(Vec2(Player::getInstance()->getSprite()->getPosition().x, Player::getInstance()->getSprite()->getPosition().y+ CAMERA_OFFSET_Y-100));
-
-	Point playerPosition = Player::getInstance()->getSprite()->getPosition();
-
-	Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
-	if (cloudsSpr->getPositionX() < playerPosition.x) {
-		cloudsSpr->setPosition(Vec2(cloudsSpr->getPositionX() + CLOUDS_SPEED, cloudsSpr->getPositionY()));
-	}
-	if (cloudsSpr->getPositionX() > playerPosition.x) {
-		cloudsSpr->setPosition(Vec2(cloudsSpr->getPositionX() - CLOUDS_SPEED, cloudsSpr->getPositionY()));
-	}
-
-	Point rightBound = Vec2(playerPosition.x + DISTANCE_TO_ENDING_OF_SCREEN, 0);
-
-	Point leftBound = Vec2(playerPosition.x - DISTANCE_TO_ENDING_OF_SCREEN, 0);
-
-
-	if (cloudsSpr->getPositionX() > rightBound.x) {
-		cloudsSpr->setPosition(Vec2(cloudsSpr->getPositionX() - DISTANCE_TO_ENDING_OF_SCREEN * 2, cloudsSpr->getPositionY()));
-	}
-
-	if (cloudsSpr->getPositionX() < leftBound.x) {
-		cloudsSpr->setPosition(Vec2(cloudsSpr->getPositionX() + DISTANCE_TO_ENDING_OF_SCREEN * 2, cloudsSpr->getPositionY()));
-	}*/
-}
 
 void EnvironmentUI::setBackground()
 {
@@ -215,6 +188,23 @@ void EnvironmentUI::setBackground()
 
 
 
+}
+
+void EnvironmentUI::createCliffs(string path)
+{
+	auto spr = Sprite::create(path);
+	spr->setAnchorPoint(Vec2(0, 0));
+	spr->setPosition(Vec2(0,GENERAL_Y));
+	spr->getTexture()->setAliasTexParameters();
+
+	auto spr1 = Sprite::create(path);
+	spr1->setAnchorPoint(Vec2(1, 0));
+	spr1->setPosition(Vec2(Enviroment::getInstance()->getGroundWidth(), GENERAL_Y));
+	spr1->setFlipX(-1);
+	spr1->getTexture()->setAliasTexParameters();
+
+	Enviroment::getInstance()->getScene()->addChild(spr,GROUND_Z_ORDER+1);
+	Enviroment::getInstance()->getScene()->addChild(spr1,GROUND_Z_ORDER+1);
 }
 
 void EnvironmentUI::setDarkness()

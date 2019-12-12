@@ -110,12 +110,12 @@ void Player::move() {
 
 	Vec2 pos = spr->getPosition();
 	
-		if (direction.right && pos.x < Enviroment::getInstance()->getGroundWidth()) {
+		if (direction.right && pos.x < Enviroment::getInstance()->getGroundWidth()- 1400) {
 			pos.x += PLAYER_SPEED;
 			spr->setFlipX(-1);
 			moveBackground(PLAYER_SPEED);
 		}
-		if (direction.left && pos.x > 0) {
+		if (direction.left && pos.x > 1400) {
 			pos.x -= PLAYER_SPEED;
 			spr->setFlipX(0);
 			moveBackground(-PLAYER_SPEED);

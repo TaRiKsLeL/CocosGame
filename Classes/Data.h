@@ -241,7 +241,7 @@ const int CUST_OFFSET{ 50 };
 
 //sprites name
 
-const string GROUND_SPR{ "kalush_map.png" };
+const string GROUND_SPR{ "ground.png" };
 const string PLAYER_SPR{ "player.png" };
 const string SLAVE_TRAIDER_SPR{ "slaveTraider.png" };
 const string CITIZEN_SPR{ "citizen.png" };
@@ -252,6 +252,7 @@ const string FENCE_SPR{ "Environment/fence2.png" };
 const string ENEMY_SPR{ "enemy.png" };
 const string ARROW_SPR{ "arrow.png" };
 const string NPS_BASE_SPR{ "characters/nps/nps-base-sprite.png" };
+const string CLIFF_SPR{ "Environment/cliff.png" };
 
 // UI elements
 
@@ -348,7 +349,13 @@ const vector<std::string> TOWERS{
 	"buildings/towers/tower3.png",
 	"buildings/towers/tower4.png"
 };
-const vector<std::string> CASTLES{ "buildings/castles/castle0.png"};
+const vector<std::string> CASTLES
+{ 
+	"buildings/castles/castle1.png",
+	"buildings/castles/castle2.png",
+	"buildings/castles/castle3.png",
+	"buildings/castles/castle4.png" 
+};
 const vector<std::string> MINES{ "buildings/mines/mine0.png","buildings/mines/mine1.png"};
 
 const vector<std::string> TREES{ "Environment/tree1.png","Environment/tree2.png","Environment/tree3.png",

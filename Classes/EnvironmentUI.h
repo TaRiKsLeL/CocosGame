@@ -31,8 +31,8 @@ public:
 	Action* createMoveByActionCloud(int speed,int dist);
 
 	void startRotateSun();
-	void updateBackground();
 	void setBackground();
+	void createCliffs(string);
 	void setDarkness();	
 	void setSeamlessSprite(string path, float speed,int yOffset, int zOrder);
 

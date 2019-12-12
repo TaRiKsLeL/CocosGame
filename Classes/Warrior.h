@@ -12,6 +12,7 @@ public:
 	virtual void timeDependedAction() override;
 	virtual void removeTarget() override;
 	virtual void setTarget(Node*) override;
+	void setSprite(string);
 	void setFixedPosition(Vec2);
 	bool isOnTower();
 

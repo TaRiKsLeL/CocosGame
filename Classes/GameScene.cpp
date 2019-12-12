@@ -1,5 +1,5 @@
 #include "GameScene.h"
-
+#include "SimpleAudioEngine.h"
 
 USING_NS_CC;
 
@@ -36,6 +36,10 @@ bool GameScene::init() {
 
 	initContactListeners();
 	
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("Sounds/Best Friend.mp3");
+
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("Sounds/Best Friend.mp3", true, 1.0f, 0.0f, 0.04f);
+
 	this->scheduleUpdate();
 
 	return true;

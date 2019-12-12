@@ -57,11 +57,12 @@ void Tower::specitalUpdateAction() {
 }
 
 
-void Tower::addWarrior(Warrior* sprite) {
+void Tower::addWarrior(Warrior* warrior) {
 	if (warriorsInsideTower.size() < maxWarriorNum) {
-		sprite->setFixedPosition(this->getPosition() + towerSetWariorShift.at(level).at(warriorsInsideTower.size()));
-		sprite->setSprDirection(direction);
-		warriorsInsideTower.push_back(sprite);
+		warrior->setFixedPosition(this->getPosition() + towerSetWariorShift.at(level).at(warriorsInsideTower.size()));
+		warrior->setSprDirection(direction);
+		warriorsInsideTower.push_back(warrior);
+		warrior->setSprite(WARRIOR_SPR);
 	}
 }
 

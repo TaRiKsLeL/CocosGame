@@ -30,7 +30,7 @@ GAME OVER
 void UI::setGameOverSprite(string name)
 {
 	gameOverSprite = Sprite::create(name);
-	gameOverSprite->setPosition(Vec2(CUST_OFFSET, -CAMERA_OFFSET_Y+CUST_OFFSET));
+	gameOverSprite->setPosition(Vec2(CUST_OFFSET*3, -CAMERA_OFFSET_Y+CUST_OFFSET));
 	gameOverSprite->setScale(SCALE_FACTOR);
 	gameOverSprite->getTexture()->setAliasTexParameters();
 

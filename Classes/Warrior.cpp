@@ -38,6 +38,12 @@ void Warrior::setTarget(Node* node) {
 	}
 }
 
+void Warrior::setSprite(string path)
+{
+	spr->stopAllActions();
+	spr->setTexture(path);
+}
+
 void Warrior::setFixedPosition(Vec2 pos) {
 	inTower = true;
 	spr->removeAllComponents();
