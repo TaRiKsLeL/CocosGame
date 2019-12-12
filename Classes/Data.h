@@ -362,7 +362,7 @@ const vector<std::string> TREES{ "Environment/tree1.png","Environment/tree2.png"
 const int SLAVE_PRICE{ 4 };
 const int NPC_RERIVE{ 2 };
 const int SET_ROLE_PRICE{ 1 };
-const int PLAYER_START_MONEY{ 100 };
+const int PLAYER_START_MONEY{ 200 };
 const int PLAYER_MAX_HEALTH{ 10 };
 
 //speed
