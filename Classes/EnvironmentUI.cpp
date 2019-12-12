@@ -175,6 +175,11 @@ void EnvironmentUI::setBackground()
 	skySpr->setPositionY(-CAMERA_OFFSET_Y);
 	baseNode->addChild(skySpr, SKY_Z_ORDER);
 
+	nightSkySpr = Sprite::create(NIGHT_SKY_SPR);
+	nightSkySpr->setPositionY(-CAMERA_OFFSET_Y);
+	nightSkySpr->setOpacity(0);
+	baseNode->addChild(nightSkySpr, SKY_Z_ORDER);
+
 	if (random(0, 2) == 0) {
 		windDirection.right = false;
 		windDirection.left = true;
@@ -208,17 +213,19 @@ void EnvironmentUI::setBackground()
 	setSeamlessSprite(LAYER_TREES_BACK_SPR,LAYER_TREES_BACK_SPEED, BACK_TREES_BACK_OFFSET, BACK_TREES_Z_ORDER);
 	setSeamlessSprite(LAYER_TREES_SPR,LAYER_TREES_SPEED, BACK_TREES_OFFSET, BACK_TREES_BACK_Z_ORDER);
 
+
+
 }
 
 void EnvironmentUI::setDarkness()
 {
-	auto seq = Sequence::create
+
+	nightSkySpr->runAction(Sequence::create
 	(
 		FadeIn::create(DAY_DURATION / 8),
 		DelayTime::create(DAY_DURATION / 8 * 2),
-		FadeOut::create(DAY_DURATION / 8),nullptr
-	);
-	//skySpr->runAction()
+		FadeOut::create(DAY_DURATION / 8), nullptr
+	));
 }
 
 void EnvironmentUI::setSeamlessSprite(string path, float speed, int yOffset, int zOrder)

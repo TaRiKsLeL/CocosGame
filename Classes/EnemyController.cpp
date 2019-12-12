@@ -1,5 +1,6 @@
 #include "EnemyController.h"
 #include "BuildingController.h"
+#include "EnvironmentUI.h"
 
 int EnemyController::enemNum = 0;
 
@@ -50,6 +51,8 @@ void EnemyController::startSpawn(int numOfEnemys, Vec2 posToSpawn) {
 
 void EnemyController::timeDependedAction() {
 	
+	EnvironmentUI::getInstance()->setDarkness();
+
 	startSpawn(enemNum, Vec2(0, GENERAL_Y));
 	startSpawn(enemNum, Vec2(Enviroment::getInstance()->getGroundWidth(), GENERAL_Y));
 	

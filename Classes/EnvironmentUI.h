@@ -11,6 +11,7 @@ private:
 	static EnvironmentUI* environmentUI;
 	Node* baseNode;
 	Sprite* skySpr;
+	Sprite* nightSkySpr;
 	Sprite* cloudsSpr;
 
 	map<Sprite*, float> parallaxMap;
